@@ -1,11 +1,13 @@
 import {Avatar, AvatarFallback} from '@/components/ui/avatar.tsx';
 import {Separator} from '@/components/ui/separator.tsx';
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
-import {ArrowDownRight, ArrowUpRight, RotateCw} from 'lucide-react';
+import { ArrowDownRight, ArrowUpRight, PlusIcon, RotateCw } from 'lucide-react'
 import {Bar, BarChart, ResponsiveContainer, XAxis, YAxis} from 'recharts';
 import {useMemo, useState} from 'react';
 import {cn} from '@/lib/utils.ts';
 import {FinanceButton} from '@/FinanceButton.tsx';
+import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from '@/components/ui/select.tsx';
+import { Button } from '@/components/ui/button.tsx'
 
 const initialCategories = [
 	{type: 'income', name: 'Salary', icon: '💰', color: '#10B981', id: 1},
@@ -135,97 +137,117 @@ function App() {
 	}), [transactions, categories, filter]);
 
 	return (
-		<div className='p-4 space-y-4'>
-			<ToggleGroup.Root
-				type='single'
-				className='flex space-x-2'
-				value={filter}
-				onValueChange={f => {
-					setFilter(f ? f : 'all');
-				}}
-			>
-				<ToggleGroup.Item value='income' asChild>
-					<FinanceButton colorClass='bg-green-500/30 text-green-500' icon={<ArrowUpRight size={24}/>}
-						label='Income' amount={totalIncome}/>
-				</ToggleGroup.Item>
-				<ToggleGroup.Item value='expense' asChild>
-					<FinanceButton colorClass='bg-red-500/30 text-red-500' icon={<ArrowDownRight size={24}/>}
-						label='Expenses' amount={totalExpenses}/>
-				</ToggleGroup.Item>
-			</ToggleGroup.Root>
-			<ResponsiveContainer width='100%' height={200}>
-				<BarChart data={chartData}>
-					<XAxis
-						dataKey='name'
-						stroke='#888888'
-						fontSize={12}
-						tickLine={false}
-						axisLine={false}
-						tickCount={30}
-						minTickGap={20}
-					/>
-					<YAxis
-						stroke='#888888'
-						fontSize={12}
-						tickLine={false}
-						axisLine={false}
-						tickFormatter={(value: number) => (value >= 1000 ? `${value / 1000}K` : value).toLocaleString('fr-CH')}
-						tickCount={3}
-					/>
-					<Bar dataKey='total' fill='#adfa1d' radius={[4, 4, 0, 0]}/>
-				</BarChart>
-			</ResponsiveContainer>
-			<div className='flex items-center justify-between'>
-				<span className='font-bold text-2xl'>October 2023</span>
-				<span className='font-bold text-2xl'>
-					{(totalIncome - totalExpenses).toLocaleString('fr-CH', {
-						style: 'currency',
-						currency: 'CHF',
-					})}
-				</span>
-			</div>
-			<Separator className='my-4'/>
-			<ul className='space-y-2'>
-				{transactions.map(transaction => {
-					const category = categories.find(
-						category => category.id === transaction.categoryId,
-					);
-					return (
-						<li
-							key={transaction.id}
-							className='flex items-center space-x-2 rounded-md border p-2'
-						>
-							<Avatar>
-								<AvatarFallback style={{backgroundColor: category?.color}} className='text-xl'>
-									{category?.icon}
-								</AvatarFallback>
-								{transaction.recurrence && (
-									<div
-										className='absolute bottom-0 right-0 text-xs rounded-xl p-1 transform translate-x-1/4 translate-y-1/4 backdrop-blur-sm border bg-background/50'>
-										<RotateCw size={12}/>
-									</div>
-								)}
-							</Avatar>
-							<div className='flex flex-col'>
-								<h3 className='font-bold'>{transaction.name}</h3>
-								<time className='text-sm text-zinc-400'>
-									{transaction.date}
-								</time>
-							</div>
-							<span
-								className={cn('font-bold flex-grow text-right', category?.type === 'income' && 'text-green-500')}
+		<>
+			<nav className='sticky top-0 z-10 flex items-center justify-between p-4 bg-background shadow-md portrait:standalone:pt-14'>
+				<h1 className='font-bold text-2xl'>Insights</h1>
+				<Select defaultValue='monthly'>
+					<SelectTrigger className='w-[180px]'>
+						<SelectValue placeholder='Select period'/>
+					</SelectTrigger>
+					<SelectContent>
+						<SelectItem value='weekly'>Weekly</SelectItem>
+						<SelectItem value='monthly'>Monthly</SelectItem>
+						<SelectItem value='yearly'>Yearly</SelectItem>
+					</SelectContent>
+				</Select>
+			</nav>
+			<div className='p-4 space-y-4'>
+				<ToggleGroup.Root
+					type='single'
+					className='flex space-x-2'
+					value={filter}
+					onValueChange={f => {
+						setFilter(f ? f : 'all');
+					}}
+				>
+					<ToggleGroup.Item value='income' asChild>
+						<FinanceButton colorClass='bg-green-500/30 text-green-500' icon={<ArrowUpRight size={24}/>}
+							label='Income' amount={totalIncome}/>
+					</ToggleGroup.Item>
+					<ToggleGroup.Item value='expense' asChild>
+						<FinanceButton colorClass='bg-red-500/30 text-red-500' icon={<ArrowDownRight size={24}/>}
+							label='Expenses' amount={totalExpenses}/>
+					</ToggleGroup.Item>
+				</ToggleGroup.Root>
+				<ResponsiveContainer width='100%' height={200}>
+					<BarChart data={chartData}>
+						<XAxis
+							dataKey='name'
+							stroke='#888888'
+							fontSize={12}
+							tickLine={false}
+							axisLine={false}
+							tickCount={30}
+							minTickGap={20}
+						/>
+						<YAxis
+							stroke='#888888'
+							fontSize={12}
+							tickLine={false}
+							axisLine={false}
+							tickFormatter={(value: number) => (value >= 1000 ? `${value / 1000}K` : value).toLocaleString('fr-CH')}
+							tickCount={3}
+						/>
+						<Bar dataKey='total' fill='#adfa1d' radius={[4, 4, 0, 0]}/>
+					</BarChart>
+				</ResponsiveContainer>
+				<div className='flex items-center justify-between'>
+					<span className='font-bold text-2xl'>October 2023</span>
+					<span className='font-bold text-2xl'>
+						{(totalIncome - totalExpenses).toLocaleString('fr-CH', {
+							style: 'currency',
+							currency: 'CHF',
+						})}
+					</span>
+				</div>
+				<Separator className='my-4'/>
+				<ul className='space-y-2'>
+					{transactions.map(transaction => {
+						const category = categories.find(
+							category => category.id === transaction.categoryId,
+						);
+						return (
+							<li
+								key={transaction.id}
+								className='flex items-center space-x-2 rounded-md border p-2'
 							>
-								{(transaction.amount * (category?.type === 'expense' ? -1 : 1)).toLocaleString('fr-CH', {
-									style: 'currency',
-									currency: 'CHF',
-									signDisplay: 'always',
-								})}
-							</span>
-						</li>
-					);
-				})}
-			</ul>
-		</div>
+								<Avatar>
+									<AvatarFallback style={{backgroundColor: category?.color}} className='text-xl'>
+										{category?.icon}
+									</AvatarFallback>
+									{transaction.recurrence && (
+										<div
+											className='absolute bottom-0 right-0 text-xs rounded-xl p-1 transform translate-x-1/4 translate-y-1/4 backdrop-blur-sm border bg-background/50'>
+											<RotateCw size={12}/>
+										</div>
+									)}
+								</Avatar>
+								<div className='flex flex-col'>
+									<h3 className='font-bold'>{transaction.name}</h3>
+									<time className='text-sm text-zinc-400'>
+										{transaction.date}
+									</time>
+								</div>
+								<span
+									className={cn('font-bold flex-grow text-right', category?.type === 'income' && 'text-green-500')}
+								>
+									{(transaction.amount * (category?.type === 'expense' ? -1 : 1)).toLocaleString('fr-CH', {
+										style: 'currency',
+										currency: 'CHF',
+										signDisplay: 'always',
+									})}
+								</span>
+							</li>
+						);
+					})}
+				</ul>
+			</div>
+			<nav className='sticky bottom-0 z-10 flex items-center p-4 bg-background shadow-md justify-center portrait:standalone:pb-14'>
+				<Button>
+					<PlusIcon size={24}/>
+				</Button>
+			</nav>
+		</>
 	);
 }
 
