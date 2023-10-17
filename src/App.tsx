@@ -1,102 +1,23 @@
 import {Avatar, AvatarFallback} from '@/components/ui/avatar.tsx';
 import {Separator} from '@/components/ui/separator.tsx';
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
-import { ArrowDownRight, ArrowUpRight, PlusIcon, RotateCw } from 'lucide-react'
+import {ArrowDownRight, ArrowUpRight, PlusIcon, RotateCw} from 'lucide-react';
 import {Bar, BarChart, ResponsiveContainer, XAxis, YAxis} from 'recharts';
-import {useMemo, useState} from 'react';
+import {useCallback, useMemo, useState} from 'react';
 import {cn} from '@/lib/utils.ts';
-import {FinanceButton} from '@/FinanceButton.tsx';
+import {FinanceButton} from '@/components/FinanceButton.tsx';
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from '@/components/ui/select.tsx';
-import { Button } from '@/components/ui/button.tsx'
-
-const initialCategories = [
-	{type: 'income', name: 'Salary', icon: '💰', color: '#10B981', id: 1},
-	{type: 'expense', name: 'Rent', icon: '🏠', color: '#F87171', id: 2},
-	{type: 'expense', name: 'Groceries', icon: '🍎', color: '#bb2cb9', id: 3},
-	{type: 'expense', name: 'Entertainment', icon: '🎉', color: '#FBBF24', id: 4},
-	{type: 'expense', name: 'Travel', icon: '✈️', color: '#FBBF24', id: 5},
-	{type: 'expense', name: 'Health', icon: '🏥', color: '#F87171', id: 6},
-	{type: 'expense', name: 'Other', icon: '📦', color: '#F87171', id: 7},
-	{type: 'expense', name: 'Transport', icon: '🚗', color: '#5A61F6', id: 8},
-];
-
-const initialTransactions = [
-	{
-		id: 1,
-		name: 'Salary',
-		amount: 5707,
-		date: '2023-10-01',
-		categoryId: 1,
-		recurrence: 'monthly',
-	},
-	{
-		id: 2,
-		name: 'Rent',
-		amount: 1200,
-		date: '2023-10-05',
-		categoryId: 2,
-		recurrence: 'monthly',
-	},
-	{
-		id: 3,
-		name: 'Groceries',
-		amount: 300,
-		date: '2023-10-06',
-		categoryId: 3,
-	},
-	{
-		id: 4,
-		name: 'Entertainment',
-		amount: 200,
-		date: '2023-10-10',
-		categoryId: 4,
-	},
-	{
-		id: 5,
-		name: 'Travel',
-		amount: 100,
-		date: '2023-10-15',
-		categoryId: 5,
-	},
-	{
-		id: 6,
-		name: 'Health',
-		amount: 200,
-		date: '2023-10-15',
-		categoryId: 6,
-		recurrence: 'monthly',
-	},
-	{
-		id: 7,
-		name: 'Other',
-		amount: 200,
-		date: '2023-10-17',
-		categoryId: 7,
-	},
-	{
-		id: 8,
-		name: 'Transport',
-		amount: 110,
-		date: '2023-10-20',
-		categoryId: 8,
-		recurrence: 'weekly',
-	},
-];
-
-function useCategories() {
-	const [categories, setCategories] = useState(initialCategories);
-	const getCategoryById = (id: number) => categories.find(category => category.id === id);
-	return {categories, setCategories, getCategoryById};
-}
-
-function useTransactions() {
-	const [transactions, setTransactions] = useState(initialTransactions);
-	return {transactions, setTransactions};
-}
+import {Button} from '@/components/ui/button.tsx';
+import {useTransactionService} from '@/stores/transactionService.tsx';
+import {useCategoryService} from '@/stores/categoryService.tsx';
+import {type Transaction} from '@/stores/models.ts';
 
 function App() {
-	const {categories, getCategoryById} = useCategories();
-	const {transactions} = useTransactions();
+	const {getTransactionsForPeriod, addTransaction} = useTransactionService();
+	const {categories, getCategoryById} = useCategoryService();
+
+	const period = new Date(2023, 9);
+	const transactions = getTransactionsForPeriod(period, new Date(2023, 10));
 
 	const [filter, setFilter] = useState<'income' | 'expense' | 'all' | string>('all');
 
@@ -111,6 +32,14 @@ function App() {
 		},
 		{totalIncome: 0, totalExpenses: 0},
 	), [transactions, getCategoryById]);
+
+	const totalTransactions = useCallback((transactions: Transaction[]) => transactions.reduce(
+		(acc, transaction) => {
+			const transactionType = categories.find(category => category.id === transaction.categoryId)?.type;
+			return acc + (transactionType === 'expense' ? -transaction.amount : transaction.amount);
+		},
+		0,
+	), [categories]);
 
 	const chartData = useMemo(() => Array.from({length: 31}, (_, dayIndex) => {
 		const date = new Date(2023, 9, dayIndex + 1);
@@ -136,6 +65,29 @@ function App() {
 		};
 	}), [transactions, categories, filter]);
 
+	const handleTransaction = () => {
+		const category = categories[Math.floor(Math.random() * categories.length)];
+		addTransaction({
+			name: category.name,
+			amount: Math.random() * 1000,
+			categoryId: category.id,
+			date: new Date(period.getFullYear(), period.getMonth(), Math.floor(Math.random() * 30) + 1).toISOString(),
+			recurrence: 'once',
+		});
+	};
+
+	const groupedTransactions = useMemo(() => {
+		const groupedTransactions = new Map<string, Transaction[]>();
+		transactions.forEach(transaction => {
+			const key = new Date(transaction.date).toDateString();
+			const transactionsForThisMonth = groupedTransactions.get(key) ?? [];
+			transactionsForThisMonth.push(transaction);
+			groupedTransactions.set(key, transactionsForThisMonth);
+		});
+
+		return Array.from(groupedTransactions.entries());
+	}, [transactions]);
+
 	return (
 		<>
 			<nav className='sticky top-0 z-10 flex items-center justify-between p-4 bg-background shadow-md portrait:standalone:pt-14'>
@@ -157,7 +109,7 @@ function App() {
 					className='flex space-x-2'
 					value={filter}
 					onValueChange={f => {
-						setFilter(f ? f : 'all');
+						setFilter(f || 'all');
 					}}
 				>
 					<ToggleGroup.Item value='income' asChild>
@@ -192,7 +144,9 @@ function App() {
 					</BarChart>
 				</ResponsiveContainer>
 				<div className='flex items-center justify-between'>
-					<span className='font-bold text-2xl'>October 2023</span>
+					<span className='font-bold text-2xl'>{period.toLocaleDateString('fr-CH', {
+						dateStyle: 'long',
+					})}</span>
 					<span className='font-bold text-2xl'>
 						{(totalIncome - totalExpenses).toLocaleString('fr-CH', {
 							style: 'currency',
@@ -201,49 +155,69 @@ function App() {
 					</span>
 				</div>
 				<Separator className='my-4'/>
-				<ul className='space-y-2'>
-					{transactions.map(transaction => {
-						const category = categories.find(
-							category => category.id === transaction.categoryId,
-						);
-						return (
-							<li
-								key={transaction.id}
-								className='flex items-center space-x-2 rounded-md border p-2'
-							>
-								<Avatar>
-									<AvatarFallback style={{backgroundColor: category?.color}} className='text-xl'>
-										{category?.icon}
-									</AvatarFallback>
-									{transaction.recurrence && (
-										<div
-											className='absolute bottom-0 right-0 text-xs rounded-xl p-1 transform translate-x-1/4 translate-y-1/4 backdrop-blur-sm border bg-background/50'>
-											<RotateCw size={12}/>
-										</div>
-									)}
-								</Avatar>
-								<div className='flex flex-col'>
-									<h3 className='font-bold'>{transaction.name}</h3>
-									<time className='text-sm text-zinc-400'>
-										{transaction.date}
-									</time>
-								</div>
-								<span
-									className={cn('font-bold flex-grow text-right', category?.type === 'income' && 'text-green-500')}
-								>
-									{(transaction.amount * (category?.type === 'expense' ? -1 : 1)).toLocaleString('fr-CH', {
-										style: 'currency',
-										currency: 'CHF',
-										signDisplay: 'always',
-									})}
-								</span>
-							</li>
-						);
-					})}
+				<ul className='space-y-8'>
+					{groupedTransactions.map(([key, transactions]) => (
+						<li key={key}>
+							<h2 className='font-bold text-lg flex items-center justify-between space-x-2 mb-2'>
+								<span>{new Date(key).toLocaleDateString('fr-CH', {
+									dateStyle: 'long',
+								})}</span>
+								<span>{totalTransactions(transactions).toLocaleString('fr-CH', {
+									style: 'currency',
+									currency: 'CHF',
+									signDisplay: 'always',
+								})}</span>
+							</h2>
+							<Separator className='my-2'/>
+							<ul className='space-y-2'>
+								{transactions.map(transaction => {
+									const category = categories.find(
+										category => category.id === transaction.categoryId,
+									);
+									return (
+										<li
+											key={transaction.id}
+											className='flex items-center space-x-2'
+										>
+											<Avatar>
+												<AvatarFallback style={{backgroundColor: category?.color}} className='text-xl'>
+													{category?.icon}
+												</AvatarFallback>
+												{transaction.recurrence !== 'once' && (
+													<div
+														className='absolute bottom-0 right-0 text-xs rounded-xl p-1 transform translate-x-1/4 translate-y-1/4 backdrop-blur-sm border bg-background/50'>
+														<RotateCw size={12}/>
+													</div>
+												)}
+											</Avatar>
+											<div className='flex flex-col'>
+												<h3 className='font-bold'>{transaction.name}</h3>
+												<time className='text-sm text-zinc-400'>
+													{new Date(transaction.date).toLocaleString('fr-CH', {
+														timeStyle: 'short',
+														dateStyle: 'medium',
+													})}
+												</time>
+											</div>
+											<span
+												className={cn('font-bold flex-grow text-right', category?.type === 'income' && 'text-green-500')}
+											>
+												{(transaction.amount * (category?.type === 'expense' ? -1 : 1)).toLocaleString('fr-CH', {
+													style: 'currency',
+													currency: 'CHF',
+													signDisplay: 'always',
+												})}
+											</span>
+										</li>
+									);
+								})}
+							</ul>
+						</li>
+					))}
 				</ul>
 			</div>
 			<nav className='sticky bottom-0 z-10 flex items-center p-4 bg-background shadow-md justify-center portrait:standalone:pb-14'>
-				<Button>
+				<Button onClick={handleTransaction}>
 					<PlusIcon size={24}/>
 				</Button>
 			</nav>
