@@ -1,5 +1,6 @@
 import React, {forwardRef} from 'react';
 import {Avatar, AvatarFallback} from '@/components/ui/avatar.tsx';
+import Currency from '@/components/Currency.tsx';
 
 export type FinanceButtonProps = {
 	colorClass: string;
@@ -16,14 +17,9 @@ export const FinanceButton = forwardRef<HTMLButtonElement, React.ComponentPropsW
 					{icon}
 				</AvatarFallback>
 			</Avatar>
-			<div className='flex flex-col flex-grow items-start truncate'>
+			<div className='flex flex-col flex-grow text-left overflow-hidden'>
 				<span className='truncate text-zinc-400'>{label}</span>
-				<span className={'font-bold text-xl truncate'}>
-					{amount.toLocaleString('fr-CH', {
-						style: 'currency',
-						currency: 'CHF',
-					})}
-				</span>
+				<Currency className='font-bold text-xl truncate' amount={amount}/>
 			</div>
 		</button>,
 );

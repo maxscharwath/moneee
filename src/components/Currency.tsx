@@ -1,0 +1,56 @@
+import React, {type HTMLAttributes, type PropsWithoutRef, useEffect} from 'react';
+import {
+	type MotionValue,
+	motion,
+	useMotionValue,
+	useSpring,
+	useTransform,
+	type MotionProps,
+} from 'framer-motion';
+
+type HTMLAttributesWithoutMotionProps<Element extends HTMLElement, Attributes extends HTMLAttributes<Element> = HTMLAttributes<Element>> = {
+	[K in Exclude<keyof Attributes, keyof MotionProps>]?: Attributes[K];
+};
+
+type CurrencyProps = {
+	amount: number;
+	locale?: string;
+	currency?: string;
+	signDisplay?: 'auto' | 'never' | 'always' | 'exceptZero';
+} & PropsWithoutRef<HTMLAttributesWithoutMotionProps<HTMLSpanElement>>;
+
+const Currency: React.FC<CurrencyProps> = ({
+	amount,
+	locale = 'fr-CH',
+	currency = 'CHF',
+	signDisplay,
+	...props
+}) => {
+	const motionValue = useMotionValue(amount);
+
+	const springValue = useSpring(motionValue, {
+		damping: 20,
+		stiffness: 500,
+	}) as MotionValue<number>;
+
+	const formattedValue = useTransform(
+		springValue,
+		value => value.toLocaleString(locale, {
+			style: 'currency',
+			signDisplay,
+			currency,
+		}),
+	);
+
+	useEffect(() => {
+		motionValue.set(amount);
+	}, [amount, motionValue]);
+
+	return (
+		<motion.span {...props}>
+			{formattedValue}
+		</motion.span>
+	);
+};
+
+export default Currency;

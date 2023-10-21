@@ -17,7 +17,7 @@ export const useTransactionService = () => {
 
 	const addTransaction = (newTransaction: Omit<Transaction, 'id'>) => {
 		const validatedTransaction = TransactionSchema.parse(newTransaction);
-		setTransactions(prev => [...prev, validatedTransaction]);
+		setTransactions(prev => [...prev, validatedTransaction].sort((a, b) => b.date.localeCompare(a.date)));
 	};
 
 	return {

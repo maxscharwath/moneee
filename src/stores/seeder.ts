@@ -14,4 +14,4 @@ export const seedTransactions: Transaction[] = [
 	create(TransactionSchema, {name: 'Rent', amount: 1500, date: new Date(2023, 9, 5).toISOString(), recurrence: 'monthly', categoryId: seedCategories[1].id}),
 	create(TransactionSchema, {name: 'Groceries', amount: 200, date: new Date(2023, 9, 6).toISOString(), recurrence: 'daily', categoryId: seedCategories[2].id}),
 	create(TransactionSchema, {name: 'Entertainment', amount: 100, date: new Date(2023, 9, 7).toISOString(), recurrence: 'once', categoryId: seedCategories[3].id}),
-];
+].sort((a, b) => b.date.localeCompare(a.date));
