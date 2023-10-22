@@ -107,7 +107,7 @@ function App() {
 					))}
 				</ul>
 			</div>
-			<nav className='sticky bottom-0 z-10 flex items-center p-4 bg-background shadow-md justify-center portrait:standalone:pb-14'>
+			<nav className='fixed bottom-0 z-10 flex items-center p-4 bg-background shadow-md justify-center portrait:standalone:pb-14 w-full'>
 				<Button onClick={handleTransaction}>
 					<PlusIcon size={24}/>
 				</Button>
