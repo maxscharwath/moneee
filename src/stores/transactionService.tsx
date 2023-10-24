@@ -1,7 +1,7 @@
 import {selector, useRecoilValue, useSetRecoilState} from 'recoil';
-import {TransactionSchema, type Transaction} from './models';
-import {transactionState} from './atoms';
 import {useMemo} from 'react';
+import {type Transaction, TransactionSchema} from './models';
+import {transactionState} from './atoms';
 
 const getTransactionById = selector({
 	key: 'getTransactionById',

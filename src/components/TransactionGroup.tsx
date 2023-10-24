@@ -1,6 +1,6 @@
+import {memo, useCallback, useMemo} from 'react';
 import {TransactionItem} from '@/components/TransactionItem.tsx';
 import {Separator} from '@/components/ui/separator.tsx';
-import {memo, useCallback, useMemo} from 'react';
 import {type Category, type Transaction} from '@/stores/models.ts';
 import Currency from '@/components/Currency.tsx';
 
@@ -10,21 +10,24 @@ type TransactionGroupProps = {
 	categories: Category[];
 };
 
-export const TransactionGroup = memo(({date, transactions, categories}: TransactionGroupProps) => {
+export const TransactionGroup = memo(({
+	date,
+	transactions,
+	categories,
+}: TransactionGroupProps) => {
 	const totalTransactions = useCallback(
-		(transactions: Transaction[]) =>
-			transactions.reduce(
-				(acc, transaction) => {
-					const transactionType = categories.find(
-						category => category.id === transaction.categoryId,
-					)?.type;
-					return (
-						acc
-						+ (transactionType === 'expense' ? -transaction.amount : transaction.amount)
-					);
-				},
-				0,
-			),
+		(transactions: Transaction[]) => transactions.reduce(
+			(acc, transaction) => {
+				const transactionType = categories.find(
+					category => category.id === transaction.categoryId,
+				)?.type;
+				return (
+					acc
+          + (transactionType === 'expense' ? -transaction.amount : transaction.amount)
+				);
+			},
+			0,
+		),
 		[categories],
 	);
 
@@ -35,7 +38,7 @@ export const TransactionGroup = memo(({date, transactions, categories}: Transact
 
 	return (
 		<>
-			<h2 className='font-bold text-lg flex items-center justify-between space-x-2 mb-2'>
+			<h2 className='mb-2 flex items-center justify-between space-x-2 text-lg font-bold'>
 				<span>
 					{new Date(date).toLocaleDateString('fr-CH', {
 						dateStyle: 'long',
@@ -45,7 +48,10 @@ export const TransactionGroup = memo(({date, transactions, categories}: Transact
 			</h2>
 			<Separator className='my-2'/>
 			<ul className='space-y-2'>
-				{transactionsWithCategory.map(({transaction, category}) => (
+				{transactionsWithCategory.map(({
+					transaction,
+					category,
+				}) => (
 					<li key={transaction.id}>
 						<TransactionItem transaction={transaction} category={category}/>
 					</li>

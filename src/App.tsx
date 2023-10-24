@@ -1,7 +1,7 @@
-import {Separator} from '@/components/ui/separator.tsx';
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
 import {ArrowDownRight, ArrowUpRight, PlusIcon} from 'lucide-react';
 import {useMemo, useState} from 'react';
+import {Separator} from '@/components/ui/separator.tsx';
 import {FinanceButton} from '@/components/FinanceButton.tsx';
 import {Button} from '@/components/ui/button.tsx';
 import {useTransactionService} from '@/stores/transactionService.tsx';
@@ -13,15 +13,24 @@ import {groupBy} from '@/lib/utils.ts';
 import Currency from '@/components/Currency.tsx';
 
 function App() {
-	const {getTransactionsForPeriod, addTransaction} = useTransactionService();
-	const {categories, getCategoryById} = useCategoryService();
+	const {
+		getTransactionsForPeriod,
+		addTransaction,
+	} = useTransactionService();
+	const {
+		categories,
+		getCategoryById,
+	} = useCategoryService();
 
 	const period = new Date(2023, 9);
 	const transactions = getTransactionsForPeriod(period, new Date(2023, 10));
 
 	const [filter, setFilter] = useState<'income' | 'expense' | 'all' | string>('all');
 
-	const {totalIncome, totalExpenses} = useMemo(() => transactions.reduce(
+	const {
+		totalIncome,
+		totalExpenses,
+	} = useMemo(() => transactions.reduce(
 		(acc, transaction) => {
 			const category = getCategoryById(transaction.categoryId);
 			const amount = category?.type === 'expense' ? -transaction.amount : transaction.amount;
@@ -30,7 +39,10 @@ function App() {
 				totalExpenses: acc.totalExpenses + (amount < 0 ? -amount : 0),
 			};
 		},
-		{totalIncome: 0, totalExpenses: 0},
+		{
+			totalIncome: 0,
+			totalExpenses: 0,
+		},
 	), [transactions, getCategoryById]);
 
 	const chartData = useMemo(() => Array.from({length: 31}, (_, dayIndex) => {
@@ -72,8 +84,8 @@ function App() {
 
 	return (
 		<>
-			<Header title='Insights' defaultValue='monthly' />
-			<div className='p-4 space-y-4'>
+			<Header title='Insights' defaultValue='monthly'/>
+			<div className='space-y-4 p-4'>
 				<ToggleGroup.Root
 					type='single'
 					className='flex space-x-2'
@@ -83,20 +95,30 @@ function App() {
 					}}
 				>
 					<ToggleGroup.Item value='income' asChild>
-						<FinanceButton colorClass='bg-green-500/30 text-green-500' icon={<ArrowUpRight size={24}/>}
-							label='Income' amount={totalIncome}/>
+						<FinanceButton
+							colorClass='bg-green-500/30 text-green-500'
+							icon={<ArrowUpRight size={24}/>}
+							label='Income'
+							amount={totalIncome}
+						/>
 					</ToggleGroup.Item>
 					<ToggleGroup.Item value='expense' asChild>
-						<FinanceButton colorClass='bg-red-500/30 text-red-500' icon={<ArrowDownRight size={24}/>}
-							label='Expenses' amount={totalExpenses}/>
+						<FinanceButton
+							colorClass='bg-red-500/30 text-red-500'
+							icon={<ArrowDownRight size={24}/>}
+							label='Expenses'
+							amount={totalExpenses}
+						/>
 					</ToggleGroup.Item>
 				</ToggleGroup.Root>
-				<Chart data={chartData} />
+				<Chart data={chartData}/>
 				<div className='flex items-center justify-between'>
-					<span className='font-bold text-2xl'>{period.toLocaleDateString('fr-CH', {
-						dateStyle: 'long',
-					})}</span>
-					<Currency amount={(totalIncome - totalExpenses)} className='font-bold text-2xl'/>
+					<span className='text-2xl font-bold'>
+						{period.toLocaleDateString('fr-CH', {
+							dateStyle: 'long',
+						})}
+					</span>
+					<Currency amount={(totalIncome - totalExpenses)} className='text-2xl font-bold'/>
 				</div>
 				<Separator className='my-4'/>
 				<ul className='space-y-8'>
@@ -107,7 +129,8 @@ function App() {
 					))}
 				</ul>
 			</div>
-			<nav className='fixed bottom-0 z-10 flex items-center p-4 bg-background shadow-md justify-center portrait:standalone:pb-14 w-full'>
+			<nav
+				className='fixed bottom-0 z-10 flex w-full items-center justify-center bg-background p-4 shadow-md portrait:standalone:pb-14'>
 				<Button onClick={handleTransaction}>
 					<PlusIcon size={24}/>
 				</Button>

@@ -1,11 +1,12 @@
-import React, {type HTMLAttributes, type PropsWithoutRef, useEffect} from 'react';
+import type React from 'react';
+import {type HTMLAttributes, type PropsWithoutRef, useEffect} from 'react';
 import {
-	type MotionValue,
 	motion,
+	type MotionProps,
+	type MotionValue,
 	useMotionValue,
 	useSpring,
 	useTransform,
-	type MotionProps,
 } from 'framer-motion';
 
 type HTMLAttributesWithoutMotionProps<Element extends HTMLElement, Attributes extends HTMLAttributes<Element> = HTMLAttributes<Element>> = {

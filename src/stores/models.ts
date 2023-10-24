@@ -1,7 +1,8 @@
 import {z} from 'zod';
 
 export const CategorySchema = z.object({
-	id: z.string().default(() => crypto.randomUUID()),
+	id: z.string()
+		.default(() => crypto.randomUUID()),
 	type: z.union([z.literal('income'), z.literal('expense')]),
 	name: z.string(),
 	icon: z.string(),
@@ -9,7 +10,8 @@ export const CategorySchema = z.object({
 });
 
 export const TransactionSchema = z.object({
-	id: z.string().default(() => crypto.randomUUID()),
+	id: z.string()
+		.default(() => crypto.randomUUID()),
 	categoryId: z.string(),
 	name: z.string(),
 	amount: z.number(),

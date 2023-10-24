@@ -1,5 +1,5 @@
 import {selector, useRecoilValue, useSetRecoilState} from 'recoil';
-import {CategorySchema, type Category} from './models';
+import {type Category, CategorySchema} from './models';
 import {categoryState} from './atoms';
 
 const getCategoryById = selector({

@@ -1,7 +1,7 @@
-import {cn} from '@/lib/utils';
 import {RotateCw} from 'lucide-react';
+import type React from 'react';
+import {cn} from '@/lib/utils';
 import {Avatar, AvatarFallback} from '@/components/ui/avatar.tsx';
-import React from 'react';
 import {type Category, type Transaction} from '@/stores/models.ts';
 import Currency from '@/components/Currency.tsx';
 
@@ -10,7 +10,10 @@ type TransactionItemProps = {
 	category: Category;
 };
 
-export const TransactionItem: React.FC<TransactionItemProps> = ({transaction, category}) => (
+export const TransactionItem: React.FC<TransactionItemProps> = ({
+	transaction,
+	category,
+}) => (
 	<div className='flex items-center space-x-2'>
 		<Avatar>
 			<AvatarFallback style={{backgroundColor: category?.color}} className='text-xl'>
@@ -18,7 +21,8 @@ export const TransactionItem: React.FC<TransactionItemProps> = ({transaction, ca
 			</AvatarFallback>
 			{transaction.recurrence !== 'once' && (
 				<div
-					className='absolute bottom-0 right-0 text-xs rounded-xl p-1 transform translate-x-1/4 translate-y-1/4 backdrop-blur-sm border bg-background/50'>
+					className='absolute bottom-0 right-0 translate-x-1/4 translate-y-1/4 rounded-xl border bg-background/50 p-1 text-xs backdrop-blur-sm'
+				>
 					<RotateCw size={12}/>
 				</div>
 			)}

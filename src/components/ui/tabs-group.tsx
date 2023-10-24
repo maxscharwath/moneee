@@ -6,7 +6,11 @@ import {cn} from '@/lib/utils';
 export const Root = React.forwardRef<
 React.ElementRef<typeof TabsPrimitive.Root>,
 React.ComponentPropsWithoutRef<typeof TabsPrimitive.Root>
->(({className, children, ...props}, ref) => (
+>(({
+	className,
+	children,
+	...props
+}, ref) => (
 	<TabsPrimitive.Root
 		ref={ref}
 		className={cn(
@@ -25,11 +29,14 @@ Root.displayName = TabsPrimitive.Root.displayName;
 export const Item = React.forwardRef<
 React.ElementRef<typeof TabsPrimitive.Trigger>,
 React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
->(({className, ...props}, ref) => (
+>(({
+	className,
+	...props
+}, ref) => (
 	<TabsPrimitive.Trigger
 		ref={ref}
 		className={cn(
-			'active:scale-90 transition pointer h-10 px-4 py-2 inline-flex items-center justify-center text-md font-medium flex-grow relative',
+			'active:scale-95 transition pointer h-10 px-4 py-2 inline-flex items-center justify-center text-md font-medium flex-grow relative',
 			className,
 		)}
 		{...props}
@@ -38,7 +45,7 @@ React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
 		<TabsPrimitive.Content value={props.value} asChild>
 			<motion.div
 				layoutId='underline'
-				className='absolute inset-0 w-full h-full bg-accent rounded-full'
+				className='absolute inset-0 h-full w-full rounded-full bg-accent'
 			/>
 		</TabsPrimitive.Content>
 	</TabsPrimitive.Trigger>

@@ -22,9 +22,7 @@ export const Chart = memo(({data}: ChartProps) => (
 				fontSize={12}
 				tickLine={false}
 				axisLine={false}
-				tickFormatter={(value: number) =>
-					(value >= 1000 ? `${value / 1000}K` : value).toLocaleString('fr-CH')
-				}
+				tickFormatter={(value: number) => (value >= 1000 ? `${value / 1000}K` : value).toLocaleString('fr-CH')}
 				tickCount={3}
 			/>
 			<Bar dataKey='total' fill='#adfa1d' radius={[4, 4, 0, 0]}/>
