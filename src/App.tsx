@@ -2,15 +2,15 @@ import * as ToggleGroup from '@radix-ui/react-toggle-group';
 import {ArrowDownRight, ArrowUpRight, PlusIcon} from 'lucide-react';
 import {useMemo, useState} from 'react';
 import {Separator} from '@/components/ui/separator.tsx';
-import {FinanceButton} from '@/components/FinanceButton.tsx';
+import {FinanceButton} from '@/components/finance-button.tsx';
 import {Button} from '@/components/ui/button.tsx';
 import {useTransactionService} from '@/stores/transactionService.tsx';
 import {useCategoryService} from '@/stores/categoryService.tsx';
-import {Header} from '@/components/Header.tsx';
-import {Chart} from '@/components/Chart.tsx';
-import {TransactionGroup} from '@/components/TransactionGroup.tsx';
+import {Header} from '@/components/header.tsx';
+import {Chart} from '@/components/chart.tsx';
+import {TransactionGroup} from '@/components/transaction-group.tsx';
 import {groupBy} from '@/lib/utils.ts';
-import Currency from '@/components/Currency.tsx';
+import Currency from '@/components/currency.tsx';
 
 function App() {
 	const {

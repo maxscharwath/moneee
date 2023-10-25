@@ -1,5 +1,5 @@
 import React, {useEffect, useMemo} from 'react';
-import {CalendarIcon, Check, Delete, LayoutGrid} from 'lucide-react';
+import {Check, Delete, LayoutGrid} from 'lucide-react';
 import {Button} from '@/components/ui/button.tsx';
 import * as TabsGroup from '@/components/ui/tabs-group.tsx';
 import {
@@ -10,31 +10,8 @@ import {
 	SelectValue,
 } from '@/components/ui/select.tsx';
 import {useCategoryService} from '@/stores/categoryService.tsx';
-import {Popover, PopoverContent, PopoverTrigger} from '@/components/ui/popover.tsx';
-import {Calendar} from '@/components/ui/calendar.tsx';
-
-function NumericButton({
-	value,
-	hasDecimal,
-	appendToAmount,
-}: {
-	value: string;
-	hasDecimal: boolean;
-	appendToAmount: (value: string) => void;
-}) {
-	return (
-		<Button
-			size='xl'
-			key={value}
-			onClick={() => {
-				appendToAmount(value);
-			}}
-			disabled={value === '.' && hasDecimal}
-		>
-			{value}
-		</Button>
-	);
-}
+import {CalendarInput} from '@/components/calendar-input.tsx';
+import {NumericButton} from '@/components/numeric-button.tsx';
 
 const parseNumberFromString = (str: string): number | null => {
 	const normalizedString = str
@@ -45,7 +22,7 @@ const parseNumberFromString = (str: string): number | null => {
 	return matched ? parseFloat(matched[0]) : null;
 };
 
-export default function AddTransactionModal() {
+export default function TransactionModal() {
 	const [amount, setAmount] = React.useState('0');
 	const {categories} = useCategoryService();
 	const hasDecimal = useMemo(() => amount.includes('.'), [amount]);
@@ -117,7 +94,7 @@ export default function AddTransactionModal() {
 		};
 	}, [amount, hasDecimal]);
 
-	const [type, setType] = React.useState('expense');
+	const [type, setType] = React.useState('income');
 	const [date, setDate] = React.useState(new Date());
 	return (
 		<div className='flex h-[100svh] flex-col space-y-4 p-4'>
@@ -125,11 +102,7 @@ export default function AddTransactionModal() {
 				className='sticky top-0 z-10 flex items-center justify-center bg-background p-4 shadow-md portrait:standalone:pt-14'>
 				<TabsGroup.Root
 					value={type}
-					onValueChange={value => {
-						if (value) {
-							setType(value);
-						}
-					}}
+					onValueChange={setType}
 				>
 					<TabsGroup.Item value='income'>
             Income
@@ -154,26 +127,7 @@ export default function AddTransactionModal() {
 			</div>
 
 			<div className='flex space-x-2'>
-				<Popover>
-					<PopoverTrigger asChild>
-						<Button variant='outline' className='grow overflow-hidden'>
-							<CalendarIcon className='mr-2 h-4 w-4'/>
-							<span className='truncate'>
-								{date.toLocaleDateString('fr-CH', {
-									dateStyle: 'medium',
-								})}
-							</span>
-						</Button>
-					</PopoverTrigger>
-					<PopoverContent align='start'>
-						<Calendar
-							mode='single'
-							selected={date}
-							onSelect={date => date && setDate(date)}
-							initialFocus
-						/>
-					</PopoverContent>
-				</Popover>
+				<CalendarInput date={date} setDate={setDate}/>
 				<Select>
 					<SelectTrigger>
 						<SelectValue

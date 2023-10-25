@@ -3,7 +3,7 @@ import type React from 'react';
 import {cn} from '@/lib/utils';
 import {Avatar, AvatarFallback} from '@/components/ui/avatar.tsx';
 import {type Category, type Transaction} from '@/stores/models.ts';
-import Currency from '@/components/Currency.tsx';
+import Currency from '@/components/currency.tsx';
 
 type TransactionItemProps = {
 	transaction: Transaction;

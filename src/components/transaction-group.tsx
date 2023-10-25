@@ -1,8 +1,8 @@
 import {memo, useCallback, useMemo} from 'react';
-import {TransactionItem} from '@/components/TransactionItem.tsx';
+import {TransactionItem} from '@/components/transaction-item.tsx';
 import {Separator} from '@/components/ui/separator.tsx';
 import {type Category, type Transaction} from '@/stores/models.ts';
-import Currency from '@/components/Currency.tsx';
+import Currency from '@/components/currency.tsx';
 
 type TransactionGroupProps = {
 	date: string;
