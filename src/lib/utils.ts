@@ -12,3 +12,12 @@ export function groupBy<T>(xs: T[], key: keyof T | ((x: T) => string)) {
 		return rv;
 	}, {});
 }
+
+export const parseNumberFromString = (str: string): number | null => {
+	const normalizedString = str
+		.replace(/[^0-9.,']/g, '')
+		.replace(/'/g, '')
+		.replace(',', '.');
+	const matched = /(\d+(\.\d)?)/.exec(normalizedString);
+	return matched ? parseFloat(matched[0]) : null;
+};

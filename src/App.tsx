@@ -1,5 +1,6 @@
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
 import {ArrowDownRight, ArrowUpRight, PlusIcon} from 'lucide-react';
+import * as Dialog from '@radix-ui/react-dialog';
 import {useMemo, useState} from 'react';
 import {Separator} from '@/components/ui/separator.tsx';
 import {FinanceButton} from '@/components/finance-button.tsx';
@@ -11,6 +12,7 @@ import {Chart} from '@/components/chart.tsx';
 import {TransactionGroup} from '@/components/transaction-group.tsx';
 import {groupBy} from '@/lib/utils.ts';
 import Currency from '@/components/currency.tsx';
+import TransactionModal from '@/components/transaction-modal.tsx';
 
 function App() {
 	const {
@@ -69,19 +71,25 @@ function App() {
 		};
 	}), [transactions, categories, filter]);
 
-	const handleTransaction = () => {
-		const category = categories[Math.floor(Math.random() * categories.length)];
+	const handleTransaction = (amount: number, date: Date, categoryId: string) => {
+		const category = getCategoryById(categoryId);
+		if (!category) {
+			return;
+		}
+
 		addTransaction({
 			name: category.name,
-			amount: Math.random() * 1000,
-			categoryId: category.id,
-			date: new Date(period.getFullYear(), period.getMonth(), Math.floor(Math.random() * 30) + 1).toISOString(),
+			amount,
+			categoryId,
+			date: date.toISOString(),
 			recurrence: 'once',
 		});
+
+		setShowModal(false);
 	};
 
 	const groupedTransactions = useMemo(() => Object.entries(groupBy(transactions, transaction => new Date(transaction.date).toDateString())), [transactions]);
-
+	const [showModal, setShowModal] = useState(false);
 	return (
 		<>
 			<Header title='Insights' defaultValue='monthly'/>
@@ -131,10 +139,16 @@ function App() {
 			</div>
 			<nav
 				className='fixed bottom-0 z-10 flex w-full items-center justify-center bg-background p-4 shadow-md portrait:standalone:pb-14'>
-				<Button onClick={handleTransaction}>
+				<Button onClick={() => setShowModal(true)}>
 					<PlusIcon size={24}/>
 				</Button>
 			</nav>
+			<Dialog.Root open={showModal} onOpenChange={setShowModal}>
+				<Dialog.Overlay className='fixed inset-0 z-10 bg-background/90 backdrop-blur-lg'/>
+				<Dialog.Content className='fixed inset-0 z-10'>
+					<TransactionModal onTransaction={handleTransaction}/>
+				</Dialog.Content>
+			</Dialog.Root>
 		</>
 	);
 }

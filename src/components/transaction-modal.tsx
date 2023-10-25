@@ -12,17 +12,13 @@ import {
 import {useCategoryService} from '@/stores/categoryService.tsx';
 import {CalendarInput} from '@/components/calendar-input.tsx';
 import {NumericButton} from '@/components/numeric-button.tsx';
+import {parseNumberFromString} from '@/lib/utils.ts';
 
-const parseNumberFromString = (str: string): number | null => {
-	const normalizedString = str
-		.replace(/[^0-9.,']/g, '')
-		.replace(/'/g, '')
-		.replace(',', '.');
-	const matched = /(\d+(\.\d)?)/.exec(normalizedString);
-	return matched ? parseFloat(matched[0]) : null;
+type TransactionModalProps = {
+	onTransaction: (amount: number, date: Date, categoryId: string) => void;
 };
 
-export default function TransactionModal() {
+export default function TransactionModal({onTransaction}: TransactionModalProps) {
 	const [amount, setAmount] = React.useState('0');
 	const {categories} = useCategoryService();
 	const hasDecimal = useMemo(() => amount.includes('.'), [amount]);
@@ -96,6 +92,15 @@ export default function TransactionModal() {
 
 	const [type, setType] = React.useState('income');
 	const [date, setDate] = React.useState(new Date());
+	const [categoryId, setCategoryId] = React.useState('');
+
+	const handleTransaction = () => {
+		const parsedAmount = parseNumberFromString(amount);
+		if (parsedAmount !== null && categoryId !== '') {
+			onTransaction(parsedAmount, date, categoryId);
+		}
+	};
+
 	return (
 		<div className='flex h-[100svh] flex-col space-y-4 p-4'>
 			<nav
@@ -128,7 +133,7 @@ export default function TransactionModal() {
 
 			<div className='flex space-x-2'>
 				<CalendarInput date={date} setDate={setDate}/>
-				<Select>
+				<Select onValueChange={setCategoryId} value={categoryId}>
 					<SelectTrigger>
 						<SelectValue
 							placeholder={(
@@ -161,7 +166,7 @@ export default function TransactionModal() {
 						appendToAmount={appendToAmount}
 					/>
 				))}
-				<Button disabled={!isValidAmount()} size='xl'>
+				<Button disabled={!isValidAmount()} size='xl' onClick={handleTransaction}>
 					<Check/>
 				</Button>
 			</div>
