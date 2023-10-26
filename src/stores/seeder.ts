@@ -43,6 +43,84 @@ export const seedCategories: Category[] = [
 		icon: '🏥',
 		color: '#EF4444',
 	}),
+	create(CategorySchema, {
+		type: 'expense',
+		name: 'Utilities',
+		icon: '💡',
+		color: '#3B82F6',
+	}),
+	create(CategorySchema, {
+		type: 'expense',
+		name: 'Dining Out',
+		icon: '🍔',
+		color: '#9333EA',
+	}),
+	create(CategorySchema, {
+		type: 'expense',
+		name: 'Clothing',
+		icon: '👚',
+		color: '#EC4899',
+	}),
+	create(CategorySchema, {
+		type: 'expense',
+		name: 'Travel',
+		icon: '✈️',
+		color: '#2563EB',
+	}),
+	create(CategorySchema, {
+		type: 'expense',
+		name: 'Electronics',
+		icon: '📱',
+		color: '#7C3AED',
+	}),
+	create(CategorySchema, {
+		type: 'expense',
+		name: 'Gifts',
+		icon: '🎁',
+		color: '#F43F5E',
+	}),
+	create(CategorySchema, {
+		type: 'expense',
+		name: 'Subscriptions',
+		icon: '📺',
+		color: '#9333EA',
+	}),
+	create(CategorySchema, {
+		type: 'expense',
+		name: 'Fitness',
+		icon: '🏋️',
+		color: '#F59E0B',
+	}),
+	create(CategorySchema, {
+		type: 'expense',
+		name: 'Education',
+		icon: '📚',
+		color: '#15803D',
+	}),
+	create(CategorySchema, {
+		type: 'expense',
+		name: 'Pets',
+		icon: '🐾',
+		color: '#4B5563',
+	}),
+	create(CategorySchema, {
+		type: 'income',
+		name: 'Investments',
+		icon: '📈',
+		color: '#F43F5E',
+	}),
+	create(CategorySchema, {
+		type: 'income',
+		name: 'Freelancing',
+		icon: '💼',
+		color: '#2A4365',
+	}),
+	create(CategorySchema, {
+		type: 'income',
+		name: 'Gifts Received',
+		icon: '🎁',
+		color: '#2F855A',
+	}),
 ];
 
 export const seedTransactions: Transaction[] = [

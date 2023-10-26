@@ -20,7 +20,7 @@ type TransactionModalProps = {
 
 export default function TransactionModal({onTransaction}: TransactionModalProps) {
 	const [amount, setAmount] = React.useState('0');
-	const {categories} = useCategoryService();
+	const {getCategoriesByType} = useCategoryService();
 	const hasDecimal = useMemo(() => amount.includes('.'), [amount]);
 	const decimalPlaces = useMemo(() => {
 		const parts = amount.split('.');
@@ -90,9 +90,11 @@ export default function TransactionModal({onTransaction}: TransactionModalProps)
 		};
 	}, [amount, hasDecimal]);
 
-	const [type, setType] = React.useState('income');
+	const [type, setType] = React.useState<'income' | 'expense'>('expense');
 	const [date, setDate] = React.useState(new Date());
 	const [categoryId, setCategoryId] = React.useState('');
+
+	const categories = getCategoriesByType(type);
 
 	const handleTransaction = () => {
 		const parsedAmount = parseNumberFromString(amount);
@@ -107,7 +109,10 @@ export default function TransactionModal({onTransaction}: TransactionModalProps)
 				className='sticky top-0 z-10 flex items-center justify-center bg-background p-4 shadow-md portrait:standalone:pt-14'>
 				<TabsGroup.Root
 					value={type}
-					onValueChange={setType}
+					onValueChange={t => {
+						setCategoryId('');
+						setType(t as 'income' | 'expense');
+					}}
 				>
 					<TabsGroup.Item value='income'>
             Income

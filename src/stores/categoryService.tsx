@@ -10,6 +10,14 @@ const getCategoryById = selector({
 	},
 });
 
+const getCategoriesByType = selector({
+	key: 'getCategoriesByType',
+	get: ({get}) => (type: Category['type']) => {
+		const categories = get(categoryState);
+		return categories.filter(category => category.type === type);
+	},
+});
+
 export const useCategoryService = () => {
 	const categories = useRecoilValue(categoryState);
 	const setCategories = useSetRecoilState(categoryState);
@@ -21,6 +29,7 @@ export const useCategoryService = () => {
 
 	return {
 		getCategoryById: useRecoilValue(getCategoryById),
+		getCategoriesByType: useRecoilValue(getCategoriesByType),
 		addCategory,
 		categories,
 	};
