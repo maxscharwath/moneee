@@ -32,7 +32,6 @@ export const TransactionItem: React.FC<TransactionItemProps> = ({
 			<time className='text-sm text-zinc-400'>
 				{new Date(transaction.date).toLocaleString('fr-CH', {
 					timeStyle: 'short',
-					dateStyle: 'medium',
 				})}
 			</time>
 		</div>

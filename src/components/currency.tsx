@@ -30,8 +30,7 @@ const Currency: React.FC<CurrencyProps> = ({
 	const motionValue = useMotionValue(amount);
 
 	const springValue = useSpring(motionValue, {
-		damping: 20,
-		stiffness: 500,
+		duration: 250,
 	}) as MotionValue<number>;
 
 	const formattedValue = useTransform(

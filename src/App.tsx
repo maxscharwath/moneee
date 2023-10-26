@@ -2,7 +2,6 @@ import * as ToggleGroup from '@radix-ui/react-toggle-group';
 import {ArrowDownRight, ArrowUpRight, PlusIcon} from 'lucide-react';
 import * as Dialog from '@radix-ui/react-dialog';
 import {useMemo, useState} from 'react';
-import {Separator} from '@/components/ui/separator.tsx';
 import {FinanceButton} from '@/components/finance-button.tsx';
 import {Button} from '@/components/ui/button.tsx';
 import {useTransactionService} from '@/stores/transactionService.tsx';
@@ -13,6 +12,10 @@ import {TransactionGroup} from '@/components/transaction-group.tsx';
 import {groupBy} from '@/lib/utils.ts';
 import Currency from '@/components/currency.tsx';
 import TransactionModal from '@/components/transaction-modal.tsx';
+import {usePeriod, usePeriodTitle} from '@/hooks/usePeriod.ts';
+import {type Transaction} from '@/stores/models.ts';
+
+type Filter = 'income' | 'expense' | 'all';
 
 function App() {
 	const {
@@ -24,10 +27,18 @@ function App() {
 		getCategoryById,
 	} = useCategoryService();
 
-	const period = new Date(2023, 9);
-	const transactions = getTransactionsForPeriod(period, new Date(2023, 10));
+	const [filter, setFilter] = useState<Filter>('all');
 
-	const [filter, setFilter] = useState<'income' | 'expense' | 'all' | string>('all');
+	const {
+		currentPeriod,
+		periodType,
+		setPeriodType,
+		nextPeriod,
+		previousPeriod,
+		getPeriodDates: [startDate, endDate],
+	} = usePeriod();
+
+	const transactions = getTransactionsForPeriod(startDate, endDate);
 
 	const {
 		totalIncome,
@@ -47,29 +58,68 @@ function App() {
 		},
 	), [transactions, getCategoryById]);
 
-	const chartData = useMemo(() => Array.from({length: 31}, (_, dayIndex) => {
-		const date = new Date(2023, 9, dayIndex + 1);
-		const transactionsOnThisDay = transactions.filter(
-			transaction => new Date(transaction.date).getDate() === date.getDate(),
-		);
+	const getDaysInPeriod = (periodType: string, date: Date): number => {
+		switch (periodType) {
+			case 'weekly':
+				return 7;
+			case 'yearly':
+				return 365 + (date.getFullYear() % 4 === 0 ? 1 : 0); // Accounting for leap year
+			case 'monthly':
+			default:
+				return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate(); // Getting the last day of the month
+		}
+	};
 
-		const total = transactionsOnThisDay.reduce(
-			(acc, transaction) => {
-				const transactionType = categories.find(category => category.id === transaction.categoryId)?.type;
-				if (filter === 'all' || filter === transactionType) {
-					return acc + transaction.amount;
-				}
+	const filterTransactionAmount = (transaction: Transaction): number => {
+		const transactionType = categories.find(category => category.id === transaction.categoryId)?.type;
+		return (filter === 'all' || filter === transactionType) ? transaction.amount : 0;
+	};
 
-				return acc;
-			},
-			0,
-		);
+	const generateDateForDayIndex = (dayIndex: number, periodType: string, currentPeriod: Date): Date => {
+		switch (periodType) {
+			case 'weekly': {
+				const startOfWeek = new Date(currentPeriod);
+				startOfWeek.setDate(currentPeriod.getDate() - currentPeriod.getDay());
+				return new Date(startOfWeek.getFullYear(), startOfWeek.getMonth(), startOfWeek.getDate() + dayIndex);
+			}
 
-		return {
-			name: date.toLocaleDateString('fr-CH', {day: '2-digit'}),
-			total,
-		};
-	}), [transactions, categories, filter]);
+			case 'yearly':
+				return new Date(currentPeriod.getFullYear(), dayIndex, 1); // Returns first day of each month for the current year
+			case 'monthly':
+			default:
+				return new Date(currentPeriod.getFullYear(), currentPeriod.getMonth(), dayIndex + 1);
+		}
+	};
+
+	const chartData = useMemo(() => {
+		if (periodType === 'yearly') {
+			return Array.from({length: 12}, (_, monthIndex) => { // 12 months in a year
+				const transactionsInThisMonth = transactions.filter(t => {
+					const transactionDate = new Date(t.date);
+					return transactionDate.getFullYear() === currentPeriod.getFullYear() && transactionDate.getMonth() === monthIndex;
+				});
+				const total = transactionsInThisMonth.reduce((acc, transaction) => acc + filterTransactionAmount(transaction), 0);
+
+				return {
+					name: new Date(currentPeriod.getFullYear(), monthIndex).toLocaleDateString('fr-CH', {month: 'short'}), // Jan, Feb, ...
+					total,
+				};
+			});
+		}
+
+		const daysInPeriod = getDaysInPeriod(periodType, currentPeriod);
+
+		return Array.from({length: daysInPeriod}, (_, dayIndex) => {
+			const date = generateDateForDayIndex(dayIndex, periodType, currentPeriod);
+			const transactionsOnThisDay = transactions.filter(t => new Date(t.date).getDate() === date.getDate());
+			const total = transactionsOnThisDay.reduce((acc, transaction) => acc + filterTransactionAmount(transaction), 0);
+
+			return {
+				name: date.toLocaleDateString('fr-CH', {day: '2-digit'}),
+				total,
+			};
+		});
+	}, [transactions, categories, filter, periodType, currentPeriod]);
 
 	const handleTransaction = (amount: number, date: Date, categoryId: string) => {
 		const category = getCategoryById(categoryId);
@@ -91,14 +141,26 @@ function App() {
 	const groupedTransactions = useMemo(() => Object.entries(groupBy(transactions, transaction => new Date(transaction.date).toDateString())), [transactions]);
 	const [showModal, setShowModal] = useState(false);
 	return (
-		<>
-			<Header title='Insights' defaultValue='monthly'/>
-			<div className='space-y-4 p-4'>
+		<div className='flex h-screen flex-col'>
+			<Header
+				title='Insights'
+				defaultValue={periodType}
+				onNextPeriod={nextPeriod}
+				onPreviousPeriod={previousPeriod}
+				onPeriodChange={setPeriodType}
+			/>
+			<div className='flex-1 space-y-4 p-4'>
+				<div className='flex items-center justify-between'>
+					<span className='text-2xl font-bold'>
+						{usePeriodTitle(periodType, currentPeriod)}
+					</span>
+					<Currency amount={(totalIncome - totalExpenses)} className='text-2xl font-bold'/>
+				</div>
 				<ToggleGroup.Root
 					type='single'
 					className='flex space-x-2'
 					value={filter}
-					onValueChange={f => {
+					onValueChange={(f: Filter) => {
 						setFilter(f || 'all');
 					}}
 				>
@@ -120,15 +182,6 @@ function App() {
 					</ToggleGroup.Item>
 				</ToggleGroup.Root>
 				<Chart data={chartData}/>
-				<div className='flex items-center justify-between'>
-					<span className='text-2xl font-bold'>
-						{period.toLocaleDateString('fr-CH', {
-							dateStyle: 'long',
-						})}
-					</span>
-					<Currency amount={(totalIncome - totalExpenses)} className='text-2xl font-bold'/>
-				</div>
-				<Separator className='my-4'/>
 				<ul className='space-y-8'>
 					{groupedTransactions.map(([key, transactions]) => (
 						<li key={key}>
@@ -138,18 +191,17 @@ function App() {
 				</ul>
 			</div>
 			<nav
-				className='fixed bottom-0 z-10 flex w-full items-center justify-center bg-background p-4 shadow-md portrait:standalone:pb-14'>
+				className='sticky bottom-0 z-50 flex w-full items-center justify-center bg-background p-4 shadow-md portrait:standalone:pb-14'>
 				<Button onClick={() => setShowModal(true)}>
 					<PlusIcon size={24}/>
 				</Button>
 			</nav>
 			<Dialog.Root open={showModal} onOpenChange={setShowModal}>
-				<Dialog.Overlay className='fixed inset-0 z-10 bg-background/90 backdrop-blur-lg'/>
-				<Dialog.Content className='fixed inset-0 z-10'>
+				<Dialog.Content className='fixed inset-0 z-50 bg-background/90 backdrop-blur-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:slide-out-to-bottom-[48%] data-[state=open]:slide-in-from-bottom-[48%]'>
 					<TransactionModal onTransaction={handleTransaction}/>
 				</Dialog.Content>
 			</Dialog.Root>
-		</>
+		</div>
 	);
 }
 

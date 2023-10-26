@@ -38,10 +38,12 @@ export const TransactionGroup = memo(({
 
 	return (
 		<>
-			<h2 className='mb-2 flex items-center justify-between space-x-2 text-lg font-bold'>
+			<h2 className='mb-2 flex items-center justify-between space-x-2 text-sm font-bold text-muted-foreground'>
 				<span>
 					{new Date(date).toLocaleDateString('fr-CH', {
-						dateStyle: 'long',
+						weekday: 'short',
+						day: 'numeric',
+						month: 'short',
 					})}
 				</span>
 				<Currency amount={totalTransactions(transactions)} signDisplay='always'/>

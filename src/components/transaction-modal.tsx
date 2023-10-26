@@ -102,7 +102,7 @@ export default function TransactionModal({onTransaction}: TransactionModalProps)
 	};
 
 	return (
-		<div className='flex h-[100svh] flex-col space-y-4 p-4'>
+		<div className='flex h-full flex-col'>
 			<nav
 				className='sticky top-0 z-10 flex items-center justify-center bg-background p-4 shadow-md portrait:standalone:pt-14'>
 				<TabsGroup.Root
@@ -117,58 +117,59 @@ export default function TransactionModal({onTransaction}: TransactionModalProps)
 					</TabsGroup.Item>
 				</TabsGroup.Root>
 			</nav>
-			<div className='grid grow grid-cols-[1fr,auto,1fr] items-center gap-4'>
-				<div/>
-				<button className='truncate text-center text-4xl font-extrabold' onClick={handlePaste}>
-					{formatAmount}
-				</button>
-				<div className='flex flex-col items-end'>
-					{amount !== '0' && (
-						<Button onClick={clearLastDigit} size='icon' variant='ghost'>
-							<Delete/>
-						</Button>
-					)}
+			<div className='flex grow flex-col space-y-4 p-4'>
+				<div className='grid grow grid-cols-[1fr,auto,1fr] items-center gap-4'>
+					<div/>
+					<button className='truncate text-center text-4xl font-extrabold' onClick={handlePaste}>
+						{formatAmount}
+					</button>
+					<div className='flex flex-col items-end'>
+						{amount !== '0' && (
+							<Button onClick={clearLastDigit} size='icon' variant='ghost'>
+								<Delete/>
+							</Button>
+						)}
+					</div>
 				</div>
-			</div>
-
-			<div className='flex space-x-2'>
-				<CalendarInput date={date} setDate={setDate}/>
-				<Select onValueChange={setCategoryId} value={categoryId}>
-					<SelectTrigger>
-						<SelectValue
-							placeholder={(
-								<div className='inline-flex items-center justify-center'>
-									<LayoutGrid className='mr-2 h-4 w-4'/>
-									{' '}
-                  Select category
-								</div>
-							)}
+				<div className='flex space-x-2'>
+					<CalendarInput date={date} setDate={setDate}/>
+					<Select onValueChange={setCategoryId} value={categoryId}>
+						<SelectTrigger>
+							<SelectValue
+								placeholder={(
+									<div className='inline-flex items-center justify-center'>
+										<LayoutGrid className='mr-2 h-4 w-4'/>
+										{' '}
+										Select category
+									</div>
+								)}
+							/>
+						</SelectTrigger>
+						<SelectContent position='item-aligned'>
+							{categories.map(category => (
+								<SelectItem key={category.id} value={category.id}>
+									<div className='flex items-center space-x-2'>
+										<span>{category.icon}</span>
+										<span>{category.name}</span>
+									</div>
+								</SelectItem>
+							))}
+						</SelectContent>
+					</Select>
+				</div>
+				<div className='grid w-full max-w-lg grid-cols-3 gap-4 place-self-center'>
+					{['1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '0'].map(value => (
+						<NumericButton
+							key={value}
+							value={value}
+							hasDecimal={hasDecimal}
+							appendToAmount={appendToAmount}
 						/>
-					</SelectTrigger>
-					<SelectContent position='item-aligned'>
-						{categories.map(category => (
-							<SelectItem key={category.id} value={category.id}>
-								<div className='flex items-center space-x-2'>
-									<span>{category.icon}</span>
-									<span>{category.name}</span>
-								</div>
-							</SelectItem>
-						))}
-					</SelectContent>
-				</Select>
-			</div>
-			<div className='grid w-full max-w-lg grid-cols-3 gap-4 place-self-center'>
-				{['1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '0'].map(value => (
-					<NumericButton
-						key={value}
-						value={value}
-						hasDecimal={hasDecimal}
-						appendToAmount={appendToAmount}
-					/>
-				))}
-				<Button disabled={!isValidAmount()} size='xl' onClick={handleTransaction}>
-					<Check/>
-				</Button>
+					))}
+					<Button disabled={!isValidAmount()} size='xl' onClick={handleTransaction}>
+						<Check/>
+					</Button>
+				</div>
 			</div>
 		</div>
 	);
