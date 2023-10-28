@@ -9,20 +9,11 @@ import {useCategoryService} from '@/stores/categoryService.tsx';
 import {Header} from '@/components/header.tsx';
 import {Chart} from '@/components/chart.tsx';
 import {TransactionGroup} from '@/components/transaction-group.tsx';
-import {groupBy} from '@/lib/utils.ts';
+import {cn, groupBy} from '@/lib/utils.ts';
 import Currency from '@/components/currency.tsx';
 import TransactionModal from '@/components/transaction-modal.tsx';
 import {usePeriod, usePeriodTitle} from '@/hooks/usePeriod.ts';
-import {type Transaction} from '@/stores/models.ts';
-import {
-	Bar,
-	BarChart,
-	LabelList,
-	Legend,
-	ResponsiveContainer,
-	XAxis,
-	YAxis,
-} from 'recharts';
+import {type Category, type Transaction} from '@/stores/models.ts';
 
 type Filter = 'income' | 'expense' | 'all';
 
@@ -37,6 +28,7 @@ function App() {
 	} = useCategoryService();
 
 	const [filter, setFilter] = useState<Filter>('all');
+	const [categoryFilter, setCategoryFilter] = useState('');
 
 	const {
 		currentPeriod,
@@ -48,6 +40,10 @@ function App() {
 	} = usePeriod();
 
 	const transactions = getTransactionsForPeriod(startDate, endDate);
+
+	const filteredTransactions = useMemo(() =>
+		transactions.filter(transaction => categoryFilter === '' || transaction.categoryId === categoryFilter),
+	[transactions, categoryFilter]);
 
 	const {
 		totalIncome,
@@ -103,7 +99,7 @@ function App() {
 	const chartData = useMemo(() => {
 		if (periodType === 'yearly') {
 			return Array.from({length: 12}, (_, monthIndex) => { // 12 months in a year
-				const transactionsInThisMonth = transactions.filter(t => {
+				const transactionsInThisMonth = filteredTransactions.filter(t => {
 					const transactionDate = new Date(t.date);
 					return transactionDate.getFullYear() === currentPeriod.getFullYear() && transactionDate.getMonth() === monthIndex;
 				});
@@ -120,7 +116,7 @@ function App() {
 
 		return Array.from({length: daysInPeriod}, (_, dayIndex) => {
 			const date = generateDateForDayIndex(dayIndex, periodType, currentPeriod);
-			const transactionsOnThisDay = transactions.filter(t => new Date(t.date).getDate() === date.getDate());
+			const transactionsOnThisDay = filteredTransactions.filter(t => new Date(t.date).getDate() === date.getDate());
 			const total = transactionsOnThisDay.reduce((acc, transaction) => acc + filterTransactionAmount(transaction), 0);
 
 			return {
@@ -128,7 +124,7 @@ function App() {
 				total,
 			};
 		});
-	}, [transactions, categories, filter, periodType, currentPeriod]);
+	}, [filteredTransactions, categories, filter, periodType, currentPeriod]);
 
 	const handleTransaction = (amount: number, date: Date, categoryId: string) => {
 		const category = getCategoryById(categoryId);
@@ -147,29 +143,22 @@ function App() {
 	};
 
 	const categorySpendDetails = useMemo(() => {
-		const categorySpend: Record<string, {totalSpend: number; color: string; name: string}> = {};
+		const categorySpend: Record<string, {category: Category; total: number}> = {};
 
 		transactions.forEach(transaction => {
 			const category = getCategoryById(transaction.categoryId);
 			if (filter === category?.type) {
 				categorySpend[category.id] = {
-					totalSpend: (categorySpend[category.id]?.totalSpend || 0) + transaction.amount,
-					color: category.color,
-					name: category.name,
+					total: (categorySpend[category.id]?.total || 0) + transaction.amount,
+					category,
 				};
 			}
 		});
 
-		return {
-			name: 'Categories',
-			...Object.fromEntries(Object.entries(categorySpend)
-				.map(([_categoryId, details]) => [details.name, details.totalSpend]),
-			),
-			categoryDetails: Object.values(categorySpend),
-		};
+		return Object.values(categorySpend);
 	}, [transactions, getCategoryById]);
 
-	const groupedTransactions = useMemo(() => Object.entries(groupBy(transactions, transaction => new Date(transaction.date).toDateString())), [transactions]);
+	const groupedTransactions = useMemo(() => Object.entries(groupBy(filteredTransactions, transaction => new Date(transaction.date).toDateString())), [transactions]);
 	const [showModal, setShowModal] = useState(false);
 	return (
 		<div className='flex h-screen flex-col'>
@@ -214,35 +203,11 @@ function App() {
 				</ToggleGroup.Root>
 				<Chart data={chartData}/>
 				{ filter !== 'all' && (
-					<ResponsiveContainer width='100%' height={100}>
-						<BarChart data={[categorySpendDetails]} layout='vertical'>
-							<XAxis type='number' domain={['dataMin', 'dataMax']} hide/>
-							<YAxis type='category' dataKey='name' hide/>
-							<Legend
-								iconType='circle'
-								iconSize={12}
-							/>
-							{
-								categorySpendDetails?.categoryDetails.map((detail, index) => (
-									<Bar
-										key={crypto.randomUUID()}
-										dataKey={detail.name}
-										stackId='a'
-										fill={detail.color}
-										radius={4}
-										barSize={40}
-										animationBegin={index * 100}
-									>
-										<LabelList
-											dataKey={detail.name}
-											position='right'
-											formatter={(value: number) => value.toLocaleString('fr-CH', {style: 'currency', currency: 'CHF'})}
-										/>
-									</Bar>
-								))
-							}
-						</BarChart>
-					</ResponsiveContainer>
+					<CategoryChart
+						data={categorySpendDetails}
+						selected={categoryFilter}
+						onSelect={setCategoryFilter}
+					/>
 				)}
 				<ul className='space-y-8'>
 					{groupedTransactions.map(([key, transactions]) => (
@@ -268,3 +233,61 @@ function App() {
 }
 
 export default App;
+
+type CategoryChartProps = {
+	data: Array<{category: Category; total: number}>;
+	selected?: string;
+	onSelect?: (category: string) => void;
+};
+
+export const CategoryChart = ({data, selected, onSelect}: CategoryChartProps) => {
+	const totalValue = data.reduce((acc, item) => acc + item.total, 0);
+
+	return (
+		<div className='space-y-2'>
+			<div className='flex h-10 w-full gap-1'>
+				{data.map(({category, total}) => (
+					<div
+						key={category.id}
+						style={{
+							width: `${(total / totalValue) * 100}%`,
+							backgroundColor: category.color,
+						}}
+						className={cn(
+							'flex items-center justify-center rounded-md transition-all duration-200',
+							selected === category.id && 'ring-2 ring-primary',
+							selected && selected !== category.id && 'opacity-50 scale-y-95',
+						)}
+					/>
+				))}
+			</div>
+
+			<ToggleGroup.Root
+				type='single'
+				className='no-scrollbar flex gap-1 overflow-x-auto p-2'
+				value={selected}
+				onValueChange={onSelect}
+			>
+				{data.map(({category, total}) => (
+					<ToggleGroup.Item key={category.id} value={category.id} asChild>
+						<Button
+							variant='ghost'
+							size='sm'
+							className={cn(
+								'flex items-center space-x-2',
+								'ring-primary/50 data-[state=on]:ring data-[state=on]:bg-secondary',
+							)}
+						>
+							<div style={{backgroundColor: category.color}} className='h-4 w-4 rounded-md'></div>
+							<span className='font-semibold'>{category.name}</span>
+							<span className='text-sm text-zinc-400'>
+								{Math.round((total / totalValue) * 100)}%
+							</span>
+						</Button>
+					</ToggleGroup.Item>
+				))}
+			</ToggleGroup.Root>
+		</div>
+	);
+};
+
