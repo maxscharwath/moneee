@@ -1,94 +1,42 @@
-import React, {useEffect, useMemo} from 'react';
-import {Check, Delete, LayoutGrid} from 'lucide-react';
+import React, {useCallback, useEffect, useMemo} from 'react';
+import {Check, Delete} from 'lucide-react';
 import {Button} from '@/components/ui/button.tsx';
 import * as TabsGroup from '@/components/ui/tabs-group.tsx';
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from '@/components/ui/select.tsx';
 import {useCategoryService} from '@/stores/categoryService.tsx';
 import {CalendarInput} from '@/components/calendar-input.tsx';
 import {NumericButton} from '@/components/numeric-button.tsx';
 import {parseNumberFromString} from '@/lib/utils.ts';
+import {CategorySelect} from '@/components/category-select.tsx';
 
 type TransactionModalProps = {
 	onTransaction: (amount: number, date: Date, categoryId: string) => void;
 };
 
 export default function TransactionModal({onTransaction}: TransactionModalProps) {
-	const [amount, setAmount] = React.useState('0');
+	const {
+		value,
+		valueString,
+		setValue,
+		hasDecimal,
+		decimalPlaces,
+		isValid,
+		appendToValue,
+		clearLastDigit,
+	} = useNumericInput();
+	const handlePaste = usePaste(value, setValue);
+	useKeyboard(valueString, appendToValue, clearLastDigit, hasDecimal);
 	const {getCategoriesByType} = useCategoryService();
-	const hasDecimal = useMemo(() => amount.includes('.'), [amount]);
-	const decimalPlaces = useMemo(() => {
-		const parts = amount.split('.');
-		return parts.length > 1 ? parts[1].length : 0;
-	}, [amount]);
-
-	const isValidAmount = () => {
-		const decimalCount = (amount.match(/\./g) ?? []).length;
-		return decimalCount <= 1 && !amount.includes('..') && decimalPlaces <= 2;
-	};
-
-	const appendToAmount = (value: string) => {
-		if (value === '.' && hasDecimal) {
-			return;
-		}
-
-		if (decimalPlaces === 2 && !Number.isNaN(Number(value))) {
-			return;
-		}
-
-		setAmount(prev => (prev === '0' && value !== '.' ? value : prev + value));
-	};
-
-	const clearLastDigit = (): void => {
-		setAmount(prev => (prev.length > 1 ? prev.slice(0, -1) : '0'));
-	};
-
-	const handlePaste = async () => {
-		const text = await navigator.clipboard.readText();
-		const number = parseNumberFromString(text);
-		if (number !== null) {
-			setAmount(number.toString());
-		}
-	};
 
 	const formatAmount = useMemo(() => {
-		const fractionDigits = hasDecimal ? 2 : 0;
-		return Number(amount)
+		const fractionDigits = Math.min(decimalPlaces, 2);
+		return value
 			.toLocaleString('fr-CH', {
 				style: 'currency',
 				currency: 'CHF',
 				minimumFractionDigits: fractionDigits,
 				maximumFractionDigits: fractionDigits,
 			});
-	}, [amount, hasDecimal]);
-
-	const allowedNumbers = new Set(['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']);
-	const decimalSymbols = new Set(['.', ',']);
-
-	const handleKeyDown = (e: KeyboardEvent) => {
-		if (allowedNumbers.has(e.key)) {
-			appendToAmount(e.key);
-		} else if (!hasDecimal && decimalSymbols.has(e.key)) {
-			appendToAmount('.');
-		} else if (e.key === 'Backspace') {
-			clearLastDigit();
-		}
-	};
-
-	useEffect(() => {
-		window.addEventListener('keydown', handleKeyDown);
-		window.addEventListener('paste', handlePaste);
-
-		return () => {
-			window.removeEventListener('keydown', handleKeyDown);
-			window.removeEventListener('paste', handlePaste);
-		};
-	}, [amount, hasDecimal]);
+	}, [value, decimalPlaces]);
 
 	const [type, setType] = React.useState<'income' | 'expense'>('expense');
 	const [date, setDate] = React.useState(new Date());
@@ -97,9 +45,8 @@ export default function TransactionModal({onTransaction}: TransactionModalProps)
 	const categories = getCategoriesByType(type);
 
 	const handleTransaction = () => {
-		const parsedAmount = parseNumberFromString(amount);
-		if (parsedAmount !== null && categoryId !== '') {
-			onTransaction(parsedAmount, date, categoryId);
+		if (value > 0 && categoryId !== '') {
+			onTransaction(value, date, categoryId);
 		}
 	};
 
@@ -129,7 +76,7 @@ export default function TransactionModal({onTransaction}: TransactionModalProps)
 						{formatAmount}
 					</button>
 					<div className='flex flex-col items-end'>
-						{amount !== '0' && (
+						{valueString !== '0' && (
 							<Button onClick={clearLastDigit} size='icon' variant='ghost'>
 								<Delete/>
 							</Button>
@@ -138,29 +85,7 @@ export default function TransactionModal({onTransaction}: TransactionModalProps)
 				</div>
 				<div className='flex space-x-2'>
 					<CalendarInput date={date} setDate={setDate}/>
-					<Select onValueChange={setCategoryId} value={categoryId}>
-						<SelectTrigger>
-							<SelectValue
-								placeholder={(
-									<div className='inline-flex items-center justify-center'>
-										<LayoutGrid className='mr-2 h-4 w-4'/>
-										{' '}
-										Select category
-									</div>
-								)}
-							/>
-						</SelectTrigger>
-						<SelectContent position='item-aligned'>
-							{categories.map(category => (
-								<SelectItem key={category.id} value={category.id}>
-									<div className='flex items-center space-x-2'>
-										<span>{category.icon}</span>
-										<span>{category.name}</span>
-									</div>
-								</SelectItem>
-							))}
-						</SelectContent>
-					</Select>
+					<CategorySelect value={categoryId} onValueChange={setCategoryId} categories={categories}/>
 				</div>
 				<div className='grid w-full max-w-lg grid-cols-3 gap-4 place-self-center'>
 					{['1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '0'].map(value => (
@@ -168,14 +93,95 @@ export default function TransactionModal({onTransaction}: TransactionModalProps)
 							key={value}
 							value={value}
 							hasDecimal={hasDecimal}
-							appendToAmount={appendToAmount}
+							appendToAmount={appendToValue}
 						/>
 					))}
-					<Button disabled={!isValidAmount()} size='xl' onClick={handleTransaction}>
+					<Button disabled={!isValid} size='xl' onClick={handleTransaction}>
 						<Check/>
 					</Button>
 				</div>
 			</div>
 		</div>
 	);
+}
+
+function useNumericInput(initialValue = 0) {
+	const [valueString, setValueString] = React.useState(initialValue.toString());
+	const hasDecimal = useMemo(() => valueString.includes('.'), [valueString]);
+	const decimalPlaces = useMemo(() => {
+		const parts = valueString.split('.');
+		return parts.length > 1 ? parts[1].length : 0;
+	}, [valueString]);
+
+	const isValid = useMemo(() => {
+		const decimalCount = (valueString.match(/\./g) ?? []).length;
+		return decimalCount <= 1 && !valueString.includes('..') && decimalPlaces <= 2;
+	}, [valueString, decimalPlaces]);
+
+	const appendToValue = (char: string) => {
+		if (!(char === '.' && hasDecimal) && !(decimalPlaces === 2 && !Number.isNaN(Number(char)))) {
+			setValueString(prev => (prev === '0' && char !== '.' ? char : prev + char));
+		}
+	};
+
+	const clearLastDigit = () => {
+		setValueString(prev => (prev.length > 1 ? prev.slice(0, -1) : '0'));
+	};
+
+	const value = useMemo(() => Number(valueString), [valueString]);
+	const setValue = (value: number) => setValueString(value.toString());
+
+	return {
+		valueString,
+		value,
+		setValue,
+		hasDecimal,
+		decimalPlaces,
+		isValid,
+		appendToValue,
+		clearLastDigit,
+	};
+}
+
+function usePaste(value: number, setValue: (value: number) => void) {
+	const handlePaste = () => {
+		void navigator.clipboard.readText().then(text => {
+			const num = parseNumberFromString(text);
+			if (num !== null) {
+				setValue(num);
+			}
+		});
+	};
+
+	useEffect(() => {
+		window.addEventListener('paste', handlePaste);
+
+		return () => {
+			window.removeEventListener('paste', handlePaste);
+		};
+	}, [value]);
+
+	return handlePaste;
+}
+
+function useKeyboard(valueString: string, appendToValue: (char: string) => void, clearLastDigit: () => void, hasDecimal: boolean) {
+	const handleKeyDown = useCallback((e: KeyboardEvent) => {
+		const allowedNumbers = new Set(['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']);
+		const decimalSymbols = new Set(['.', ',']);
+		if (allowedNumbers.has(e.key)) {
+			appendToValue(e.key);
+		} else if (!hasDecimal && decimalSymbols.has(e.key)) {
+			appendToValue('.');
+		} else if (e.key === 'Backspace') {
+			clearLastDigit();
+		}
+	}, [appendToValue, clearLastDigit, hasDecimal]);
+
+	useEffect(() => {
+		window.addEventListener('keydown', handleKeyDown);
+
+		return () => {
+			window.removeEventListener('keydown', handleKeyDown);
+		};
+	}, [valueString]);
 }

@@ -14,6 +14,15 @@ import Currency from '@/components/currency.tsx';
 import TransactionModal from '@/components/transaction-modal.tsx';
 import {usePeriod, usePeriodTitle} from '@/hooks/usePeriod.ts';
 import {type Transaction} from '@/stores/models.ts';
+import {
+	Bar,
+	BarChart,
+	LabelList,
+	Legend,
+	ResponsiveContainer,
+	XAxis,
+	YAxis,
+} from 'recharts';
 
 type Filter = 'income' | 'expense' | 'all';
 
@@ -132,11 +141,33 @@ function App() {
 			amount,
 			categoryId,
 			date: date.toISOString(),
-			recurrence: 'once',
 		});
 
 		setShowModal(false);
 	};
+
+	const categorySpendDetails = useMemo(() => {
+		const categorySpend: Record<string, {totalSpend: number; color: string; name: string}> = {};
+
+		transactions.forEach(transaction => {
+			const category = getCategoryById(transaction.categoryId);
+			if (filter === category?.type) {
+				categorySpend[category.id] = {
+					totalSpend: (categorySpend[category.id]?.totalSpend || 0) + transaction.amount,
+					color: category.color,
+					name: category.name,
+				};
+			}
+		});
+
+		return {
+			name: 'Categories',
+			...Object.fromEntries(Object.entries(categorySpend)
+				.map(([_categoryId, details]) => [details.name, details.totalSpend]),
+			),
+			categoryDetails: Object.values(categorySpend),
+		};
+	}, [transactions, getCategoryById]);
 
 	const groupedTransactions = useMemo(() => Object.entries(groupBy(transactions, transaction => new Date(transaction.date).toDateString())), [transactions]);
 	const [showModal, setShowModal] = useState(false);
@@ -182,6 +213,37 @@ function App() {
 					</ToggleGroup.Item>
 				</ToggleGroup.Root>
 				<Chart data={chartData}/>
+				{ filter !== 'all' && (
+					<ResponsiveContainer width='100%' height={100}>
+						<BarChart data={[categorySpendDetails]} layout='vertical'>
+							<XAxis type='number' domain={['dataMin', 'dataMax']} hide/>
+							<YAxis type='category' dataKey='name' hide/>
+							<Legend
+								iconType='circle'
+								iconSize={12}
+							/>
+							{
+								categorySpendDetails?.categoryDetails.map((detail, index) => (
+									<Bar
+										key={crypto.randomUUID()}
+										dataKey={detail.name}
+										stackId='a'
+										fill={detail.color}
+										radius={4}
+										barSize={40}
+										animationBegin={index * 100}
+									>
+										<LabelList
+											dataKey={detail.name}
+											position='right'
+											formatter={(value: number) => value.toLocaleString('fr-CH', {style: 'currency', currency: 'CHF'})}
+										/>
+									</Bar>
+								))
+							}
+						</BarChart>
+					</ResponsiveContainer>
+				)}
 				<ul className='space-y-8'>
 					{groupedTransactions.map(([key, transactions]) => (
 						<li key={key}>

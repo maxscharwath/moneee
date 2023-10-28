@@ -19,7 +19,7 @@ export const TransactionItem: React.FC<TransactionItemProps> = ({
 			<AvatarFallback style={{backgroundColor: category?.color}} className='text-xl'>
 				{category?.icon}
 			</AvatarFallback>
-			{transaction.recurrence !== 'once' && (
+			{transaction.recurrence && (
 				<div
 					className='absolute bottom-0 right-0 translate-x-1/4 translate-y-1/4 rounded-xl border bg-background/50 p-1 text-xs backdrop-blur-sm'
 				>

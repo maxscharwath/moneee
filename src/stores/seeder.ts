@@ -15,6 +15,12 @@ export const seedCategories: Category[] = [
 	}),
 	create(CategorySchema, {
 		type: 'expense',
+		name: 'Taxes',
+		icon: '📝',
+		color: '#EF4444',
+	}),
+	create(CategorySchema, {
+		type: 'expense',
 		name: 'Rent',
 		icon: '🏠',
 		color: '#F87171',
@@ -126,30 +132,101 @@ export const seedCategories: Category[] = [
 export const seedTransactions: Transaction[] = [
 	create(TransactionSchema, {
 		name: 'Salary',
-		amount: 5707,
+		amount: 5707.05,
 		date: new Date(2023, 9, 1).toISOString(),
-		recurrence: 'monthly',
+		recurrence: {
+			frequency: 'monthly',
+			interval: 1,
+		},
 		categoryId: seedCategories[0].id,
 	}),
 	create(TransactionSchema, {
-		name: 'Rent',
-		amount: 1500,
-		date: new Date(2023, 9, 5).toISOString(),
-		recurrence: 'monthly',
+		name: 'Taxes',
+		amount: 1000,
+		date: new Date(2023, 9, 1).toISOString(),
+		recurrence: {
+			frequency: 'monthly',
+			interval: 1,
+		},
 		categoryId: seedCategories[1].id,
 	}),
 	create(TransactionSchema, {
-		name: 'Groceries',
-		amount: 200,
-		date: new Date(2023, 9, 6).toISOString(),
-		recurrence: 'daily',
+		name: 'Rent',
+		amount: 500,
+		date: new Date(2023, 9, 5).toISOString(),
+		recurrence: {
+			frequency: 'monthly',
+			interval: 1,
+		},
 		categoryId: seedCategories[2].id,
 	}),
 	create(TransactionSchema, {
-		name: 'Entertainment',
-		amount: 100,
-		date: new Date(2023, 9, 7).toISOString(),
-		recurrence: 'once',
+		name: 'Telephone Bill',
+		amount: 130,
+		date: new Date(2023, 9, 5).toISOString(),
+		recurrence: {
+			frequency: 'monthly',
+			interval: 2,
+		},
+		categoryId: seedCategories[7].id,
+	}),
+	create(TransactionSchema, {
+		name: 'Health Insurance',
+		amount: 495,
+		date: new Date(2023, 9, 5).toISOString(),
+		recurrence: {
+			frequency: 'monthly',
+			interval: 1,
+		},
+		categoryId: seedCategories[6].id,
+	}),
+	create(TransactionSchema, {
+		name: 'Groceries',
+		amount: 20,
+		date: new Date(2023, 9, 5).toISOString(),
+		recurrence: {
+			frequency: 'daily',
+			interval: 1,
+			days: {
+				Monday: true,
+				Tuesday: true,
+				Wednesday: true,
+				Thursday: true,
+				Friday: true,
+				Saturday: false,
+				Sunday: false,
+			},
+		},
 		categoryId: seedCategories[3].id,
+	}),
+	create(TransactionSchema, {
+		name: 'Netflix',
+		amount: 29,
+		date: new Date(2023, 9, 5).toISOString(),
+		recurrence: {
+			frequency: 'monthly',
+			interval: 1,
+		},
+		categoryId: seedCategories[13].id,
+	}),
+	create(TransactionSchema, {
+		name: 'Spotify',
+		amount: 10,
+		date: new Date(2023, 9, 5).toISOString(),
+		recurrence: {
+			frequency: 'monthly',
+			interval: 1,
+		},
+		categoryId: seedCategories[13].id,
+	}),
+	create(TransactionSchema, {
+		name: 'Haircut',
+		amount: 20,
+		date: new Date(2023, 9, 5).toISOString(),
+		recurrence: {
+			frequency: 'weekly',
+			interval: 3,
+		},
+		categoryId: seedCategories[9].id,
 	}),
 ].sort((a, b) => b.date.localeCompare(a.date));
