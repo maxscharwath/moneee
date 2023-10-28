@@ -1,5 +1,5 @@
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
-import {ArrowDownRight, ArrowUpRight, PlusIcon} from 'lucide-react';
+import {ArrowDownRight, ArrowUpRight, Coins, PlusIcon} from 'lucide-react';
 import * as Dialog from '@radix-ui/react-dialog';
 import {useMemo, useState} from 'react';
 import {FinanceButton} from '@/components/finance-button.tsx';
@@ -14,6 +14,8 @@ import Currency from '@/components/currency.tsx';
 import TransactionModal from '@/components/transaction-modal.tsx';
 import {usePeriod, usePeriodTitle} from '@/hooks/usePeriod.ts';
 import {type Category, type Transaction} from '@/stores/models.ts';
+import {Alert, AlertDescription, AlertTitle} from '@/components/ui/alert.tsx';
+import {motion, AnimatePresence} from 'framer-motion';
 
 type Filter = 'income' | 'expense' | 'all';
 
@@ -42,7 +44,9 @@ function App() {
 	const transactions = getTransactionsForPeriod(startDate, endDate);
 
 	const filteredTransactions = useMemo(() =>
-		transactions.filter(transaction => categoryFilter === '' || transaction.categoryId === categoryFilter),
+		transactions
+			.filter(transaction => filter === 'all' || categories.find(category => category.id === transaction.categoryId)?.type === filter)
+			.filter(transaction => categoryFilter === '' || transaction.categoryId === categoryFilter),
 	[transactions, categoryFilter]);
 
 	const {
@@ -182,6 +186,7 @@ function App() {
 					value={filter}
 					onValueChange={(f: Filter) => {
 						setFilter(f || 'all');
+						setCategoryFilter('');
 					}}
 				>
 					<ToggleGroup.Item value='income' asChild>
@@ -201,21 +206,39 @@ function App() {
 						/>
 					</ToggleGroup.Item>
 				</ToggleGroup.Root>
-				<Chart data={chartData}/>
-				{ filter !== 'all' && (
-					<CategoryChart
-						data={categorySpendDetails}
-						selected={categoryFilter}
-						onSelect={setCategoryFilter}
-					/>
+				<AnimatePresence>
+					{filter !== 'all' && filteredTransactions.length > 0 && (
+						<motion.div
+							initial={{opacity: 0, height: 0}}
+							animate={{opacity: 1, height: 'auto'}}
+							exit={{opacity: 0, height: 0}}
+						>
+							<Chart data={chartData}/>
+							<CategoryChart
+								data={categorySpendDetails}
+								selected={categoryFilter}
+								onSelect={setCategoryFilter}
+							/>
+						</motion.div>
+					)}
+				</AnimatePresence>
+				{groupedTransactions.length > 0 ? (
+					<ul className='space-y-8'>
+						{groupedTransactions.map(([key, transactions]) => (
+							<li key={key}>
+								<TransactionGroup date={key} transactions={transactions} categories={categories}/>
+							</li>
+						))}
+					</ul>
+				) : (
+					<Alert align='center'>
+						<Coins className='h-4 w-4' />
+						<AlertTitle>No transactions</AlertTitle>
+						<AlertDescription>
+							You don't have any transactions for this period.
+						</AlertDescription>
+					</Alert>
 				)}
-				<ul className='space-y-8'>
-					{groupedTransactions.map(([key, transactions]) => (
-						<li key={key}>
-							<TransactionGroup date={key} transactions={transactions} categories={categories}/>
-						</li>
-					))}
-				</ul>
 			</div>
 			<nav
 				className='sticky bottom-0 z-50 flex w-full items-center justify-center bg-background p-4 shadow-md portrait:standalone:pb-14'>
@@ -244,30 +267,30 @@ export const CategoryChart = ({data, selected, onSelect}: CategoryChartProps) =>
 	const totalValue = data.reduce((acc, item) => acc + item.total, 0);
 
 	return (
-		<div className='space-y-2'>
-			<div className='flex h-10 w-full gap-1'>
+		<ToggleGroup.Root
+			type='single'
+			value={selected}
+			onValueChange={onSelect}
+			className='space-y-2'
+		>
+			<div className='flex h-6 w-full gap-1'>
 				{data.map(({category, total}) => (
-					<div
+					<ToggleGroup.Item
 						key={category.id}
+						value={category.id}
 						style={{
 							width: `${(total / totalValue) * 100}%`,
 							backgroundColor: category.color,
 						}}
 						className={cn(
 							'flex items-center justify-center rounded-md transition-all duration-200',
-							selected === category.id && 'ring-2 ring-primary',
-							selected && selected !== category.id && 'opacity-50 scale-y-95',
+							'data-[state=on]:ring-2 data-[state=on]:ring-primary',
+							selected && 'data-[state=off]:opacity-50',
 						)}
 					/>
 				))}
 			</div>
-
-			<ToggleGroup.Root
-				type='single'
-				className='no-scrollbar flex gap-1 overflow-x-auto p-2'
-				value={selected}
-				onValueChange={onSelect}
-			>
+			<div className='no-scrollbar flex gap-1 overflow-x-auto p-2'>
 				{data.map(({category, total}) => (
 					<ToggleGroup.Item key={category.id} value={category.id} asChild>
 						<Button
@@ -286,8 +309,8 @@ export const CategoryChart = ({data, selected, onSelect}: CategoryChartProps) =>
 						</Button>
 					</ToggleGroup.Item>
 				))}
-			</ToggleGroup.Root>
-		</div>
+			</div>
+		</ToggleGroup.Root>
 	);
 };
 

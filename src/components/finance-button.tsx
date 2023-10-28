@@ -22,7 +22,7 @@ export const FinanceButton = forwardRef<HTMLButtonElement, React.ComponentPropsW
 			{...props}
 			className='flex grow items-center space-x-2 overflow-hidden rounded-md border bg-secondary p-2 ring-primary/50 data-[state=on]:ring'
 		>
-			<Avatar>
+			<Avatar className='h-8 w-8'>
 				<AvatarFallback className={colorClass}>
 					{icon}
 				</AvatarFallback>

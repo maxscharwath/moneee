@@ -27,7 +27,7 @@ export const FinanceToggle: React.FC<FinanceToggleProps> = ({
 		<ToggleGroup.Item value='income' asChild>
 			<FinanceButton
 				colorClass='bg-green-500/30 text-green-500'
-				icon={<ArrowUpRight size={24}/>}
+				icon={<ArrowUpRight/>}
 				label='Income'
 				amount={totalIncome}
 			/>
@@ -35,7 +35,7 @@ export const FinanceToggle: React.FC<FinanceToggleProps> = ({
 		<ToggleGroup.Item value='expense' asChild>
 			<FinanceButton
 				colorClass='bg-red-500/30 text-red-500'
-				icon={<ArrowDownRight size={24}/>}
+				icon={<ArrowDownRight/>}
 				label='Expenses'
 				amount={totalExpenses}
 			/>
