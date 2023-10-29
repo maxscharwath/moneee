@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useMemo} from 'react';
-import {Check, Delete} from 'lucide-react';
+import {Check, Delete, ScrollText} from 'lucide-react';
 import {Button} from '@/components/ui/button.tsx';
 import * as TabsGroup from '@/components/ui/tabs-group.tsx';
 import {useCategoryService} from '@/stores/categoryService.tsx';
@@ -8,6 +8,7 @@ import {NumericButton} from '@/components/numeric-button.tsx';
 import {parseNumberFromString} from '@/lib/utils.ts';
 import {CategorySelect} from '@/components/category-select.tsx';
 import {useTranslation} from 'react-i18next';
+import {Input} from '@/components/ui/input.tsx';
 
 type TransactionModalProps = {
 	onTransaction: (amount: number, date: Date, categoryId: string) => void;
@@ -75,9 +76,12 @@ export default function TransactionModal({onTransaction}: TransactionModalProps)
 			<div className='flex grow flex-col space-y-4 p-4'>
 				<div className='grid grow grid-cols-[1fr,auto,1fr] items-center gap-4'>
 					<div/>
-					<button className='truncate text-center text-4xl font-extrabold' onClick={handlePaste}>
-						{formatAmount}
-					</button>
+					<div className='flex flex-col items-center space-y-2'>
+						<button className='truncate text-center text-4xl font-extrabold' onClick={handlePaste}>
+							{formatAmount}
+						</button>
+						<Input type='text' placeholder='Add note' icon={<ScrollText/>} />
+					</div>
 					<div className='flex flex-col items-end'>
 						{valueString !== '0' && (
 							<Button onClick={clearLastDigit} size='icon' variant='ghost'>
