@@ -9,13 +9,15 @@ import {useCategoryService} from '@/stores/categoryService.tsx';
 import {Header} from '@/components/header.tsx';
 import {Chart} from '@/components/chart.tsx';
 import {TransactionGroup} from '@/components/transaction-group.tsx';
-import {cn, groupBy} from '@/lib/utils.ts';
+import {groupBy} from '@/lib/utils.ts';
 import Currency from '@/components/currency.tsx';
 import TransactionModal from '@/components/transaction-modal.tsx';
 import {usePeriod, usePeriodTitle} from '@/hooks/usePeriod.ts';
 import {type Category, type Transaction} from '@/stores/models.ts';
 import {Alert, AlertDescription, AlertTitle} from '@/components/ui/alert.tsx';
 import {motion, AnimatePresence} from 'framer-motion';
+import {CategoryChart} from '@/components/category-chart.tsx';
+import {useTranslation} from 'react-i18next';
 
 type Filter = 'income' | 'expense' | 'all';
 
@@ -102,7 +104,7 @@ function App() {
 
 	const chartData = useMemo(() => {
 		if (periodType === 'yearly') {
-			return Array.from({length: 12}, (_, monthIndex) => { // 12 months in a year
+			return Array.from({length: 12}, (_, monthIndex) => {
 				const transactionsInThisMonth = filteredTransactions.filter(t => {
 					const transactionDate = new Date(t.date);
 					return transactionDate.getFullYear() === currentPeriod.getFullYear() && transactionDate.getMonth() === monthIndex;
@@ -110,7 +112,7 @@ function App() {
 				const total = transactionsInThisMonth.reduce((acc, transaction) => acc + filterTransactionAmount(transaction), 0);
 
 				return {
-					name: new Date(currentPeriod.getFullYear(), monthIndex).toLocaleDateString('fr-CH', {month: 'short'}), // Jan, Feb, ...
+					name: new Date(currentPeriod.getFullYear(), monthIndex).toLocaleDateString('fr-CH', {month: 'short'}),
 					total,
 				};
 			});
@@ -161,13 +163,14 @@ function App() {
 
 		return Object.values(categorySpend);
 	}, [transactions, getCategoryById]);
+	const {t} = useTranslation();
 
 	const groupedTransactions = useMemo(() => Object.entries(groupBy(filteredTransactions, transaction => new Date(transaction.date).toDateString())), [transactions]);
 	const [showModal, setShowModal] = useState(false);
 	return (
-		<div className='flex h-screen flex-col'>
+		<div className='flex min-h-screen flex-col'>
 			<Header
-				title='Insights'
+				title={t('insights.title')}
 				defaultValue={periodType}
 				onNextPeriod={nextPeriod}
 				onPreviousPeriod={previousPeriod}
@@ -193,7 +196,7 @@ function App() {
 						<FinanceButton
 							colorClass='bg-green-500/30 text-green-500'
 							icon={<ArrowUpRight size={24}/>}
-							label='Income'
+							label={t('transaction.income')}
 							amount={totalIncome}
 						/>
 					</ToggleGroup.Item>
@@ -201,7 +204,7 @@ function App() {
 						<FinanceButton
 							colorClass='bg-red-500/30 text-red-500'
 							icon={<ArrowDownRight size={24}/>}
-							label='Expenses'
+							label={t('transaction.expense')}
 							amount={totalExpenses}
 						/>
 					</ToggleGroup.Item>
@@ -233,10 +236,8 @@ function App() {
 				) : (
 					<Alert align='center'>
 						<Coins className='h-4 w-4' />
-						<AlertTitle>No transactions</AlertTitle>
-						<AlertDescription>
-							You don't have any transactions for this period.
-						</AlertDescription>
+						<AlertTitle>{t('transaction.noTransactions.title')}</AlertTitle>
+						<AlertDescription>{t('transaction.noTransactions.description')}</AlertDescription>
 					</Alert>
 				)}
 			</div>
@@ -256,61 +257,3 @@ function App() {
 }
 
 export default App;
-
-type CategoryChartProps = {
-	data: Array<{category: Category; total: number}>;
-	selected?: string;
-	onSelect?: (category: string) => void;
-};
-
-export const CategoryChart = ({data, selected, onSelect}: CategoryChartProps) => {
-	const totalValue = data.reduce((acc, item) => acc + item.total, 0);
-
-	return (
-		<ToggleGroup.Root
-			type='single'
-			value={selected}
-			onValueChange={onSelect}
-			className='space-y-2'
-		>
-			<div className='flex h-6 w-full gap-1'>
-				{data.map(({category, total}) => (
-					<ToggleGroup.Item
-						key={category.id}
-						value={category.id}
-						style={{
-							width: `${(total / totalValue) * 100}%`,
-							backgroundColor: category.color,
-						}}
-						className={cn(
-							'flex items-center justify-center rounded-md transition-all duration-200',
-							'data-[state=on]:ring-2 data-[state=on]:ring-primary',
-							selected && 'data-[state=off]:opacity-50',
-						)}
-					/>
-				))}
-			</div>
-			<div className='no-scrollbar flex gap-1 overflow-x-auto p-2'>
-				{data.map(({category, total}) => (
-					<ToggleGroup.Item key={category.id} value={category.id} asChild>
-						<Button
-							variant='ghost'
-							size='sm'
-							className={cn(
-								'flex items-center space-x-2',
-								'ring-primary/50 data-[state=on]:ring data-[state=on]:bg-secondary',
-							)}
-						>
-							<div style={{backgroundColor: category.color}} className='h-4 w-4 rounded-md'></div>
-							<span className='font-semibold'>{category.name}</span>
-							<span className='text-sm text-zinc-400'>
-								{Math.round((total / totalValue) * 100)}%
-							</span>
-						</Button>
-					</ToggleGroup.Item>
-				))}
-			</div>
-		</ToggleGroup.Root>
-	);
-};
-

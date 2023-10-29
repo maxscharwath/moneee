@@ -1,0 +1,24 @@
+{
+  "insights": {
+    "title": "Insights"
+  },
+  "period": {
+    "placeholder": "Select period",
+    "monthly": "Monthly",
+    "weekly": "Weekly",
+    "yearly": "Yearly"
+  },
+  "transaction": {
+    "title": "Transactions",
+    "income": "Income",
+    "expense": "Expense",
+    "balance": "Balance",
+    "noTransactions": {
+      "title": "No entries",
+      "description": "You have no transactions for this period."
+    }
+  },
+  "category": {
+    "select": "Category"
+  }
+}

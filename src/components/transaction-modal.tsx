@@ -7,6 +7,7 @@ import {CalendarInput} from '@/components/calendar-input.tsx';
 import {NumericButton} from '@/components/numeric-button.tsx';
 import {parseNumberFromString} from '@/lib/utils.ts';
 import {CategorySelect} from '@/components/category-select.tsx';
+import {useTranslation} from 'react-i18next';
 
 type TransactionModalProps = {
 	onTransaction: (amount: number, date: Date, categoryId: string) => void;
@@ -50,6 +51,8 @@ export default function TransactionModal({onTransaction}: TransactionModalProps)
 		}
 	};
 
+	const {t} = useTranslation();
+
 	return (
 		<div className='flex h-full flex-col'>
 			<nav
@@ -62,10 +65,10 @@ export default function TransactionModal({onTransaction}: TransactionModalProps)
 					}}
 				>
 					<TabsGroup.Item value='income'>
-            Income
+						{t('transaction.income')}
 					</TabsGroup.Item>
 					<TabsGroup.Item value='expense'>
-            Expense
+						{t('transaction.expense')}
 					</TabsGroup.Item>
 				</TabsGroup.Root>
 			</nav>

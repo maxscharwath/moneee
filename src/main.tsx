@@ -4,6 +4,7 @@ import './index.css';
 import {RecoilRoot} from 'recoil';
 import {ThemeProvider} from '@/components/theme-provider.tsx';
 import App from '@/App.tsx';
+import '@/i18n.ts';
 
 ReactDOM.createRoot(document.getElementById('root')!)
 	.render(
