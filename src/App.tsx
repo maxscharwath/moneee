@@ -167,6 +167,7 @@ function App() {
 
 	const groupedTransactions = useMemo(() => Object.entries(groupBy(filteredTransactions, transaction => new Date(transaction.date).toDateString())), [transactions]);
 	const [showModal, setShowModal] = useState(false);
+
 	return (
 		<div className='flex min-h-screen flex-col'>
 			<Header
@@ -177,38 +178,54 @@ function App() {
 				onPeriodChange={setPeriodType}
 			/>
 			<div className='flex-1 space-y-4 p-4'>
-				<div className='flex items-center justify-between'>
-					<span className='text-2xl font-bold'>
-						{usePeriodTitle(periodType, currentPeriod)}
-					</span>
-					<Currency amount={(totalIncome - totalExpenses)} className='text-2xl font-bold'/>
-				</div>
-				<ToggleGroup.Root
-					type='single'
-					className='flex space-x-2'
-					value={filter}
-					onValueChange={(f: Filter) => {
-						setFilter(f || 'all');
-						setCategoryFilter('');
+				<motion.div
+					className='space-y-4'
+					drag='x'
+					dragConstraints={{left: 0, right: 0}}
+					dragElastic={0.1}
+					onDragEnd={(_event, {offset, velocity}) => {
+						const swipe = Math.abs(offset.x) * velocity.x;
+						const swipeThreshold = 10000;
+						if (swipe < -swipeThreshold) {
+							nextPeriod();
+						} else if (swipe > swipeThreshold) {
+							previousPeriod();
+						}
 					}}
 				>
-					<ToggleGroup.Item value='income' asChild>
-						<FinanceButton
-							colorClass='bg-green-500/30 text-green-500'
-							icon={<ArrowUpRight size={24}/>}
-							label={t('transaction.income')}
-							amount={totalIncome}
-						/>
-					</ToggleGroup.Item>
-					<ToggleGroup.Item value='expense' asChild>
-						<FinanceButton
-							colorClass='bg-red-500/30 text-red-500'
-							icon={<ArrowDownRight size={24}/>}
-							label={t('transaction.expense')}
-							amount={totalExpenses}
-						/>
-					</ToggleGroup.Item>
-				</ToggleGroup.Root>
+					<div className='flex items-center justify-between'>
+						<span className='text-2xl font-bold'>
+							{usePeriodTitle(periodType, currentPeriod)}
+						</span>
+						<Currency amount={(totalIncome - totalExpenses)} className='text-2xl font-bold'/>
+					</div>
+					<ToggleGroup.Root
+						type='single'
+						className='flex space-x-2'
+						value={filter}
+						onValueChange={(f: Filter) => {
+							setFilter(f || 'all');
+							setCategoryFilter('');
+						}}
+					>
+						<ToggleGroup.Item value='income' asChild>
+							<FinanceButton
+								colorClass='bg-green-500/30 text-green-500'
+								icon={<ArrowUpRight size={24}/>}
+								label={t('transaction.income')}
+								amount={totalIncome}
+							/>
+						</ToggleGroup.Item>
+						<ToggleGroup.Item value='expense' asChild>
+							<FinanceButton
+								colorClass='bg-red-500/30 text-red-500'
+								icon={<ArrowDownRight size={24}/>}
+								label={t('transaction.expense')}
+								amount={totalExpenses}
+							/>
+						</ToggleGroup.Item>
+					</ToggleGroup.Root>
+				</motion.div>
 				<AnimatePresence>
 					{filter !== 'all' && filteredTransactions.length > 0 && (
 						<motion.div

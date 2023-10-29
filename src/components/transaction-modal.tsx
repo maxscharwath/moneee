@@ -11,7 +11,7 @@ import {useTranslation} from 'react-i18next';
 import {Input} from '@/components/ui/input.tsx';
 
 type TransactionModalProps = {
-	onTransaction: (amount: number, date: Date, categoryId: string) => void;
+	onTransaction: (amount: number, date: Date, categoryId: string, note: string) => void;
 };
 
 export default function TransactionModal({onTransaction}: TransactionModalProps) {
@@ -43,12 +43,12 @@ export default function TransactionModal({onTransaction}: TransactionModalProps)
 	const [type, setType] = React.useState<'income' | 'expense'>('expense');
 	const [date, setDate] = React.useState(new Date());
 	const [categoryId, setCategoryId] = React.useState('');
-
+	const [note, setNote] = React.useState('');
 	const categories = getCategoriesByType(type);
 
 	const handleTransaction = () => {
 		if (value > 0 && categoryId !== '') {
-			onTransaction(value, date, categoryId);
+			onTransaction(value, date, categoryId, note);
 		}
 	};
 
@@ -76,11 +76,17 @@ export default function TransactionModal({onTransaction}: TransactionModalProps)
 			<div className='flex grow flex-col space-y-4 p-4'>
 				<div className='grid grow grid-cols-[1fr,auto,1fr] items-center gap-4'>
 					<div/>
-					<div className='flex flex-col items-center space-y-2'>
+					<div className='flex flex-col items-center space-y-4'>
 						<button className='truncate text-center text-4xl font-extrabold' onClick={handlePaste}>
 							{formatAmount}
 						</button>
-						<Input type='text' placeholder='Add note' icon={<ScrollText/>} />
+						<Input
+							type='text'
+							placeholder='Add note'
+							icon={<ScrollText/>}
+							value={note}
+							onChange={e => setNote(e.target.value)}
+						/>
 					</div>
 					<div className='flex flex-col items-end'>
 						{valueString !== '0' && (
@@ -172,9 +178,14 @@ function usePaste(value: number, setValue: (value: number) => void) {
 }
 
 function useKeyboard(valueString: string, appendToValue: (char: string) => void, clearLastDigit: () => void, hasDecimal: boolean) {
+	const allowedNumbers = new Set(['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']);
+	const decimalSymbols = new Set(['.', ',']);
+
 	const handleKeyDown = useCallback((e: KeyboardEvent) => {
-		const allowedNumbers = new Set(['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']);
-		const decimalSymbols = new Set(['.', ',']);
+		if (e.target instanceof HTMLInputElement) {
+			return;
+		}
+
 		if (allowedNumbers.has(e.key)) {
 			appendToValue(e.key);
 		} else if (!hasDecimal && decimalSymbols.has(e.key)) {
