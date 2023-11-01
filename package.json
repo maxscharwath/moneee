@@ -25,6 +25,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "date-fns": "^2.30.0",
+    "dexie": "^3.2.4",
     "framer-motion": "^10.16.4",
     "i18next": "^23.6.0",
     "i18next-browser-languagedetector": "^7.1.0",
@@ -35,6 +36,7 @@
     "react-i18next": "^13.3.1",
     "recharts": "^2.9.0",
     "recoil": "^0.7.7",
+    "rxdb": "^14.17.1",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.22.4"
