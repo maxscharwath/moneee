@@ -25,7 +25,6 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "date-fns": "^2.30.0",
-    "dexie": "^3.2.4",
     "framer-motion": "^10.16.4",
     "i18next": "^23.6.0",
     "i18next-browser-languagedetector": "^7.1.0",
@@ -37,9 +36,9 @@
     "recharts": "^2.9.0",
     "recoil": "^0.7.7",
     "rxdb": "^14.17.1",
+    "rxdb-hooks": "^5.0.2",
     "tailwind-merge": "^1.14.0",
-    "tailwindcss-animate": "^1.0.7",
-    "zod": "^3.22.4"
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@types/node": "^20.8.9",

@@ -2,13 +2,13 @@ import React, {useCallback, useEffect, useMemo} from 'react';
 import {Check, Delete, ScrollText} from 'lucide-react';
 import {Button} from '@/components/ui/button.tsx';
 import * as TabsGroup from '@/components/ui/tabs-group.tsx';
-import {useCategoryService} from '@/stores/categoryService.tsx';
 import {CalendarInput} from '@/components/calendar-input.tsx';
 import {NumericButton} from '@/components/numeric-button.tsx';
 import {parseNumberFromString} from '@/lib/utils.ts';
 import {CategorySelect} from '@/components/category-select.tsx';
 import {useTranslation} from 'react-i18next';
 import {Input} from '@/components/ui/input.tsx';
+import {getCategoriesByType} from '@/stores/db.ts';
 
 type TransactionModalProps = {
 	onTransaction: (amount: number, date: Date, categoryId: string, note: string) => void;
@@ -27,7 +27,6 @@ export default function TransactionModal({onTransaction}: TransactionModalProps)
 	} = useNumericInput();
 	const handlePaste = usePaste(value, setValue);
 	useKeyboard(valueString, appendToValue, clearLastDigit, hasDecimal);
-	const {getCategoriesByType} = useCategoryService();
 
 	const formatAmount = useMemo(() => {
 		const fractionDigits = Math.min(decimalPlaces, 2);
@@ -44,7 +43,7 @@ export default function TransactionModal({onTransaction}: TransactionModalProps)
 	const [date, setDate] = React.useState(new Date());
 	const [categoryId, setCategoryId] = React.useState('');
 	const [note, setNote] = React.useState('');
-	const categories = getCategoriesByType(type);
+	const {result: categories} = getCategoriesByType(type);
 
 	const handleTransaction = () => {
 		if (value > 0 && categoryId !== '') {

@@ -41,9 +41,6 @@ dependencies:
   date-fns:
     specifier: ^2.30.0
     version: 2.30.0
-  dexie:
-    specifier: ^3.2.4
-    version: 3.2.4
   framer-motion:
     specifier: ^10.16.4
     version: 10.16.4(react-dom@18.2.0)(react@18.2.0)
@@ -77,15 +74,15 @@ dependencies:
   rxdb:
     specifier: ^14.17.1
     version: 14.17.1(rxjs@7.8.1)
+  rxdb-hooks:
+    specifier: ^5.0.2
+    version: 5.0.2(react-dom@18.2.0)(react@18.2.0)(rxdb@14.17.1)(rxjs@7.8.1)
   tailwind-merge:
     specifier: ^1.14.0
     version: 1.14.0
   tailwindcss-animate:
     specifier: ^1.0.7
     version: 1.0.7(tailwindcss@3.3.5)
-  zod:
-    specifier: ^3.22.4
-    version: 3.22.4
 
 devDependencies:
   '@types/node':
@@ -4390,11 +4387,6 @@ packages:
     resolution: {integrity: sha512-0cuGS8+jhR67Fy7qG3i3Pc7Aw494sb9yG9QgpG97SFVWwolgYjlhJg7n+UaHxOQT30d1TYu/EYe9k01ivLErIg==}
     dev: true
 
-  /dexie@3.2.4:
-    resolution: {integrity: sha512-VKoTQRSv7+RnffpOJ3Dh6ozknBqzWw/F3iqMdsZg958R0AS8AnY9x9d1lbwENr0gzeGJHXKcGhAMRaqys6SxqA==}
-    engines: {node: '>=6.0'}
-    dev: false
-
   /dexie@4.0.0-alpha.4:
     resolution: {integrity: sha512-xYABeT5ctG7WAJtyr/6gKhWXD6NY8ydZieQlvLQkFV6KXY33I+ShE39pToGzQw+3/xs760rW+opxhoVZ/yzVxQ==}
     engines: {node: '>=6.0'}
@@ -7006,6 +6998,20 @@ packages:
     dependencies:
       queue-microtask: 1.2.3
 
+  /rxdb-hooks@5.0.2(react-dom@18.2.0)(react@18.2.0)(rxdb@14.17.1)(rxjs@7.8.1):
+    resolution: {integrity: sha512-ID+moqoAYCc7u0zQwPLRZKeaKK3G+WVhRMTHddbvOBWSTuIA+7q22Xma40TPi5asrPyJiiwd2TZ8qxwdlHXNmw==}
+    peerDependencies:
+      react: '>=16.8'
+      react-dom: '>=16.8'
+      rxdb: '>=14'
+      rxjs: '>=7.5.4'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      rxdb: 14.17.1(rxjs@7.8.1)
+      rxjs: 7.8.1
+    dev: false
+
   /rxdb@14.17.1(rxjs@7.8.1):
     resolution: {integrity: sha512-uJEkJn2RS3OTXdVKAKsqiVmnnObugqoZOqzW/zN2qzVqqMkuvhypuFgOWCfGuYijY2MN7vIB+1BHdUJ637/VrA==}
     requiresBuild: true
@@ -8221,8 +8227,4 @@ packages:
       validator: 13.11.0
     optionalDependencies:
       commander: 10.0.1
-    dev: false
-
-  /zod@3.22.4:
-    resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
     dev: false

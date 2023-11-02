@@ -4,8 +4,6 @@ import * as Dialog from '@radix-ui/react-dialog';
 import {useMemo, useState} from 'react';
 import {FinanceButton} from '@/components/finance-button.tsx';
 import {Button} from '@/components/ui/button.tsx';
-import {useTransactionService} from '@/stores/transactionService.tsx';
-import {useCategoryService} from '@/stores/categoryService.tsx';
 import {Header} from '@/components/header.tsx';
 import {Chart} from '@/components/chart.tsx';
 import {TransactionGroup} from '@/components/transaction-group.tsx';
@@ -13,24 +11,19 @@ import {groupBy} from '@/lib/utils.ts';
 import Currency from '@/components/currency.tsx';
 import TransactionModal from '@/components/transaction-modal.tsx';
 import {usePeriod, usePeriodTitle} from '@/hooks/usePeriod.ts';
-import {type Category, type Transaction} from '@/stores/models.ts';
 import {Alert, AlertDescription, AlertTitle} from '@/components/ui/alert.tsx';
 import {motion, AnimatePresence} from 'framer-motion';
 import {CategoryChart} from '@/components/category-chart.tsx';
 import {useTranslation} from 'react-i18next';
+import {
+	addTransaction, type Category, getFilteredTransactions,
+	type Transaction,
+	useCategories,
+} from '@/stores/db.ts';
 
 type Filter = 'income' | 'expense' | 'all';
 
 function App() {
-	const {
-		getTransactionsForPeriod,
-		addTransaction,
-	} = useTransactionService();
-	const {
-		categories,
-		getCategoryById,
-	} = useCategoryService();
-
 	const [filter, setFilter] = useState<Filter>('all');
 	const [categoryFilter, setCategoryFilter] = useState('');
 
@@ -43,20 +36,30 @@ function App() {
 		getPeriodDates: [startDate, endDate],
 	} = usePeriod();
 
-	const transactions = getTransactionsForPeriod(startDate, endDate);
+	const {result: transactions} = getFilteredTransactions(collection => collection.find({
+		selector: {
+			date: {
+				$gte: startDate.toISOString(),
+				$lte: endDate.toISOString(),
+			},
+		},
+		sort: [{date: 'desc'}],
+	}));
+
+	const {result: categories} = useCategories();
 
 	const filteredTransactions = useMemo(() =>
 		transactions
-			.filter(transaction => filter === 'all' || categories.find(category => category.id === transaction.categoryId)?.type === filter)
-			.filter(transaction => categoryFilter === '' || transaction.categoryId === categoryFilter),
-	[transactions, categoryFilter]);
+			.filter(transaction => filter === 'all' || categories.find(category => category.uuid === transaction.category_id)?.type === filter)
+			.filter(transaction => categoryFilter === '' || transaction.category_id === categoryFilter),
+	[transactions, categories, filter, categoryFilter]);
 
 	const {
 		totalIncome,
 		totalExpenses,
 	} = useMemo(() => transactions.reduce(
 		(acc, transaction) => {
-			const category = getCategoryById(transaction.categoryId);
+			const category = categories.find(category => category.uuid === transaction.category_id);
 			const amount = category?.type === 'expense' ? -transaction.amount : transaction.amount;
 			return {
 				totalIncome: acc.totalIncome + (amount > 0 ? amount : 0),
@@ -67,7 +70,7 @@ function App() {
 			totalIncome: 0,
 			totalExpenses: 0,
 		},
-	), [transactions, getCategoryById]);
+	), [transactions, categories]);
 
 	const getDaysInPeriod = (periodType: string, date: Date): number => {
 		switch (periodType) {
@@ -82,7 +85,7 @@ function App() {
 	};
 
 	const filterTransactionAmount = (transaction: Transaction): number => {
-		const transactionType = categories.find(category => category.id === transaction.categoryId)?.type;
+		const transactionType = categories.find(category => category.uuid === transaction.category_id)?.type;
 		return (filter === 'all' || filter === transactionType) ? transaction.amount : 0;
 	};
 
@@ -132,16 +135,11 @@ function App() {
 		});
 	}, [filteredTransactions, categories, filter, periodType, currentPeriod]);
 
-	const handleTransaction = (amount: number, date: Date, categoryId: string) => {
-		const category = getCategoryById(categoryId);
-		if (!category) {
-			return;
-		}
-
-		addTransaction({
-			name: category.name,
+	const handleTransaction = (amount: number, date: Date, categoryId: string, note: string) => {
+		void addTransaction({
+			note,
 			amount,
-			categoryId,
+			category_id: categoryId,
 			date: date.toISOString(),
 		});
 
@@ -152,20 +150,20 @@ function App() {
 		const categorySpend: Record<string, {category: Category; total: number}> = {};
 
 		transactions.forEach(transaction => {
-			const category = getCategoryById(transaction.categoryId);
+			const category = categories.find(category => category.uuid === transaction.category_id);
 			if (filter === category?.type) {
-				categorySpend[category.id] = {
-					total: (categorySpend[category.id]?.total || 0) + transaction.amount,
+				categorySpend[category.uuid] = {
+					total: (categorySpend[category.uuid]?.total || 0) + transaction.amount,
 					category,
 				};
 			}
 		});
 
 		return Object.values(categorySpend);
-	}, [transactions, getCategoryById]);
+	}, [transactions, categories, filter]);
 	const {t} = useTranslation();
 
-	const groupedTransactions = useMemo(() => Object.entries(groupBy(filteredTransactions, transaction => new Date(transaction.date).toDateString())), [transactions]);
+	const groupedTransactions = useMemo(() => Object.entries(groupBy(filteredTransactions, transaction => new Date(transaction.date).toDateString())), [transactions, categories, filter, categoryFilter]);
 	const [showModal, setShowModal] = useState(false);
 
 	return (

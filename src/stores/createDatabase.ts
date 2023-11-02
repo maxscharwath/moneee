@@ -5,6 +5,11 @@ import {
 	type RxJsonSchema,
 } from 'rxdb';
 
+export const lazyInitialize = <A extends any[], R>(fn: (...args: A) => R) => {
+	let value: R;
+	return (...args: A) => value ?? (value = fn(...args));
+};
+
 export const createDatabase = async <Schemas extends Record<string, RxJsonSchema<any>>> ({
 	schemas,
 	...config

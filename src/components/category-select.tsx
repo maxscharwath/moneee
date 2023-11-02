@@ -6,7 +6,7 @@ import {
 	SelectValue,
 } from '@/components/ui/select.tsx';
 import {LayoutGrid} from 'lucide-react';
-import {type Category} from '@/stores/models.ts';
+import {type Category} from '@/stores/db.ts';
 import {memo} from 'react';
 import {useTranslation} from 'react-i18next';
 
@@ -36,7 +36,7 @@ export const CategorySelect = memo(({
 			</SelectTrigger>
 			<SelectContent position='item-aligned'>
 				{categories.map(category => (
-					<SelectItem key={category.id} value={category.id}>
+					<SelectItem key={category.uuid} value={category.uuid}>
 						<div className='flex items-center space-x-2'>
 							<span>{category.icon}</span>
 							<span>{category.name}</span>
