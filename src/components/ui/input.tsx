@@ -9,7 +9,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 	({className, type, icon, ...props}, ref) => (
 		<label className='relative flex items-center'>
 			{/* Render icon if provided */}
-			{icon && <div className='absolute inset-y-0 left-3 flex items-center text-muted-foreground'>{icon}</div>}
+			{icon && <div
+				className='absolute inset-y-0 left-3 flex items-center text-muted-foreground'>{icon}</div>}
 
 			<input
 				type={type}

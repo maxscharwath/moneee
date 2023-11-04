@@ -1,6 +1,6 @@
 import {Button} from '@/components/ui/button.tsx';
-import {type ComponentProps} from 'react';
 import * as React from 'react';
+import {type ComponentProps} from 'react';
 
 type NumericButtonProps = {
 	value: string;

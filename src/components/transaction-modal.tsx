@@ -157,12 +157,13 @@ function useNumericInput(initialValue = 0) {
 
 function usePaste(value: number, setValue: (value: number) => void) {
 	const handlePaste = () => {
-		void navigator.clipboard.readText().then(text => {
-			const num = parseNumberFromString(text);
-			if (num !== null) {
-				setValue(num);
-			}
-		});
+		void navigator.clipboard.readText()
+			.then(text => {
+				const num = parseNumberFromString(text);
+				if (num !== null) {
+					setValue(num);
+				}
+			});
 	};
 
 	useEffect(() => {

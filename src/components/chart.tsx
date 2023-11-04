@@ -2,7 +2,10 @@ import {Bar, BarChart, ResponsiveContainer, XAxis, YAxis} from 'recharts';
 import {memo} from 'react';
 
 type ChartProps = {
-	data: Array<{name: string; total: number}>;
+	data: Array<{
+		name: string;
+		total: number;
+	}>;
 };
 
 export const Chart = memo(({data}: ChartProps) => (

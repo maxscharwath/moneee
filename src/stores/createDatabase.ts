@@ -5,7 +5,7 @@ import {
 	type RxJsonSchema,
 } from 'rxdb';
 
-export const lazyInitialize = <A extends any[], R>(fn: (...args: A) => R) => {
+export const lazyInitialize = <A extends any[], R> (fn: (...args: A) => R) => {
 	let value: R;
 	return (...args: A) => value ?? (value = fn(...args));
 };
@@ -13,7 +13,9 @@ export const lazyInitialize = <A extends any[], R>(fn: (...args: A) => R) => {
 export const createDatabase = async <Schemas extends Record<string, RxJsonSchema<any>>> ({
 	schemas,
 	...config
-}: {schemas: Schemas} & Parameters<typeof createRxDatabase>[0]) => {
+}: {
+	schemas: Schemas;
+} & Parameters<typeof createRxDatabase>[0]) => {
 	const db = await createRxDatabase<{
 		[key in keyof Schemas]: RxCollection<ExtractDocumentTypeFromTypedRxJsonSchema<Schemas[key]>>;
 	}>(config);

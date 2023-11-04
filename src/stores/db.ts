@@ -1,4 +1,8 @@
-import {addRxPlugin, type ExtractDocumentTypeFromTypedRxJsonSchema, toTypedRxJsonSchema} from 'rxdb';
+import {
+	addRxPlugin,
+	type ExtractDocumentTypeFromTypedRxJsonSchema,
+	toTypedRxJsonSchema,
+} from 'rxdb';
 import {getRxStorageDexie} from 'rxdb/plugins/storage-dexie';
 import {RxDBQueryBuilderPlugin} from 'rxdb/plugins/query-builder';
 import {RxDBUpdatePlugin} from 'rxdb/plugins/update';
@@ -137,10 +141,11 @@ export function getFilteredTransactions(query: QueryConstructor<Transaction>) {
 }
 
 export async function addTransaction(transaction: Omit<Transaction, 'uuid'>) {
-	return initializeDb().then(async db => db.collections.transactions.insert({
-		...transaction,
-		uuid: crypto.randomUUID(),
-	}));
+	return initializeDb()
+		.then(async db => db.collections.transactions.insert({
+			...transaction,
+			uuid: crypto.randomUUID(),
+		}));
 }
 
 export function useCategories() {

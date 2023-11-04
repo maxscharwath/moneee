@@ -5,7 +5,10 @@ import {cn} from '@/lib/utils.ts';
 import {Button} from '@/components/ui/button.tsx';
 
 type CategoryChartProps = {
-	data: Array<{category: Category; total: number}>;
+	data: Array<{
+		category: Category;
+		total: number;
+	}>;
 	selected?: string;
 	onSelect?: (category: string) => void;
 };

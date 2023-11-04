@@ -1,29 +1,28 @@
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
-import {ArrowDownRight, ArrowUpRight, Coins, PlusIcon} from 'lucide-react';
-import * as Dialog from '@radix-ui/react-dialog';
+import {ArrowDownRight, ArrowUpRight, Coins} from 'lucide-react';
 import {useMemo, useState} from 'react';
 import {FinanceButton} from '@/components/finance-button.tsx';
-import {Button} from '@/components/ui/button.tsx';
-import {Header} from '@/components/header.tsx';
+import {Header, HeaderTitle} from '@/components/header.tsx';
 import {Chart} from '@/components/chart.tsx';
 import {TransactionGroup} from '@/components/transaction-group.tsx';
 import {groupBy} from '@/lib/utils.ts';
 import Currency from '@/components/currency.tsx';
-import TransactionModal from '@/components/transaction-modal.tsx';
 import {usePeriod, usePeriodTitle} from '@/hooks/usePeriod.ts';
 import {Alert, AlertDescription, AlertTitle} from '@/components/ui/alert.tsx';
-import {motion, AnimatePresence} from 'framer-motion';
+import {AnimatePresence, motion} from 'framer-motion';
 import {CategoryChart} from '@/components/category-chart.tsx';
+import {PeriodNavigation} from '@/components/PeriodNavigation.tsx';
 import {useTranslation} from 'react-i18next';
 import {
-	addTransaction, type Category, getFilteredTransactions,
+	type Category,
+	getFilteredTransactions,
 	type Transaction,
 	useCategories,
 } from '@/stores/db.ts';
 
 type Filter = 'income' | 'expense' | 'all';
 
-function App() {
+export function Component() {
 	const [filter, setFilter] = useState<Filter>('all');
 	const [categoryFilter, setCategoryFilter] = useState('');
 
@@ -135,19 +134,11 @@ function App() {
 		});
 	}, [filteredTransactions, categories, filter, periodType, currentPeriod]);
 
-	const handleTransaction = (amount: number, date: Date, categoryId: string, note: string) => {
-		void addTransaction({
-			note,
-			amount,
-			category_id: categoryId,
-			date: date.toISOString(),
-		});
-
-		setShowModal(false);
-	};
-
 	const categorySpendDetails = useMemo(() => {
-		const categorySpend: Record<string, {category: Category; total: number}> = {};
+		const categorySpend: Record<string, {
+			category: Category;
+			total: number;
+		}> = {};
 
 		transactions.forEach(transaction => {
 			const category = categories.find(category => category.uuid === transaction.category_id);
@@ -164,17 +155,18 @@ function App() {
 	const {t} = useTranslation();
 
 	const groupedTransactions = useMemo(() => Object.entries(groupBy(filteredTransactions, transaction => new Date(transaction.date).toDateString())), [transactions, categories, filter, categoryFilter]);
-	const [showModal, setShowModal] = useState(false);
 
 	return (
-		<div className='flex h-[100dvh] flex-col'>
-			<Header
-				title={t('insights.title')}
-				defaultValue={periodType}
-				onNextPeriod={nextPeriod}
-				onPreviousPeriod={previousPeriod}
-				onPeriodChange={setPeriodType}
-			/>
+		<>
+			<Header>
+				<HeaderTitle>{t('insights.title')}</HeaderTitle>
+				<PeriodNavigation
+					defaultValue={periodType}
+					onNextPeriod={nextPeriod}
+					onPreviousPeriod={previousPeriod}
+					onPeriodChange={setPeriodType}
+				/>
+			</Header>
 			<div className='flex-1 space-y-4 overflow-y-auto p-4'>
 				<motion.div
 					className='space-y-4'
@@ -250,25 +242,14 @@ function App() {
 					</ul>
 				) : (
 					<Alert align='center'>
-						<Coins className='h-4 w-4' />
+						<Coins className='h-4 w-4'/>
 						<AlertTitle>{t('transaction.noTransactions.title')}</AlertTitle>
 						<AlertDescription>{t('transaction.noTransactions.description')}</AlertDescription>
 					</Alert>
 				)}
 			</div>
-			<nav
-				className='flex w-full items-center justify-center bg-background p-4 shadow-md'>
-				<Button onClick={() => setShowModal(true)}>
-					<PlusIcon size={24}/>
-				</Button>
-			</nav>
-			<Dialog.Root open={showModal} onOpenChange={setShowModal}>
-				<Dialog.Content className='fixed inset-0 z-50 bg-background/90 backdrop-blur-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:slide-out-to-bottom-[48%] data-[state=open]:slide-in-from-bottom-[48%]'>
-					<TransactionModal onTransaction={handleTransaction}/>
-				</Dialog.Content>
-			</Dialog.Root>
-		</div>
+		</>
 	);
 }
 
-export default App;
+Component.displayName = 'Insights';

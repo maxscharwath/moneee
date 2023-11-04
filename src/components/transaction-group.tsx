@@ -38,7 +38,8 @@ export const TransactionGroup = memo(({
 
 	return (
 		<>
-			<h2 className='mb-2 flex items-center justify-between space-x-2 text-sm font-bold text-muted-foreground'>
+			<h2
+				className='mb-2 flex items-center justify-between space-x-2 text-sm font-bold text-muted-foreground'>
 				<span>
 					{new Date(date).toLocaleDateString('fr-CH', {
 						weekday: 'short',

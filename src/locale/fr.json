@@ -1,24 +1,25 @@
 {
+  "category": {
+    "select": "Catégorie"
+  },
   "insights": {
     "title": "Aperçus"
   },
   "period": {
-    "placeholder": "Sélectionnez la période",
     "monthly": "Mensuel",
+    "placeholder": "Sélectionnez la période",
     "weekly": "Hebdomadaire",
     "yearly": "Annuel"
   },
+  "settings.title": "Réglages",
   "transaction": {
-    "title": "Transactions",
-    "income": "Revenu",
-    "expense": "Dépense",
     "balance": "Solde",
+    "expense": "Dépense",
+    "income": "Revenu",
     "noTransactions": {
-      "title": "Pas d'entrées",
-      "description": "Vous n'avez aucune transaction pour cette période."
-    }
-  },
-  "category": {
-    "select": "Catégorie"
+      "description": "Vous n'avez aucune transaction pour cette période.",
+      "title": "Pas d'entrées"
+    },
+    "title": "Transactions"
   }
 }
