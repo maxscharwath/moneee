@@ -257,7 +257,7 @@ function App() {
 				)}
 			</div>
 			<nav
-				className='flex w-full items-center justify-center bg-background p-4 shadow-md portrait:standalone:pb-14'>
+				className='flex w-full items-center justify-center bg-background p-4 shadow-md'>
 				<Button onClick={() => setShowModal(true)}>
 					<PlusIcon size={24}/>
 				</Button>
