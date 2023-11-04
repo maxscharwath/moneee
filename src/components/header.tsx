@@ -29,7 +29,7 @@ export const Header: React.FC<HeaderProps> = ({
 	const {t} = useTranslation();
 	return (
 		<nav
-			className='sticky top-0 z-10 flex items-center justify-between bg-background p-4 shadow-md portrait:standalone:pt-14'>
+			className='flex items-center justify-between bg-background p-4 shadow-md portrait:standalone:pt-14'>
 			<h1 className='text-2xl font-bold'>{title}</h1>
 			<div className='flex items-center space-x-2'>
 				<Button size='icon' variant='ghost' onClick={onPreviousPeriod}>

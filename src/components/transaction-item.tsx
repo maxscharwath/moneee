@@ -2,8 +2,8 @@ import {RotateCw} from 'lucide-react';
 import type React from 'react';
 import {cn} from '@/lib/utils';
 import {Avatar, AvatarFallback} from '@/components/ui/avatar.tsx';
-import {type Category, type Transaction} from '@/stores/models.ts';
 import Currency from '@/components/currency.tsx';
+import {type Category, type Transaction} from '@/stores/db.ts';
 
 type TransactionItemProps = {
 	transaction: Transaction;
@@ -19,7 +19,7 @@ export const TransactionItem: React.FC<TransactionItemProps> = ({
 			<AvatarFallback style={{backgroundColor: category?.color}} className='text-xl'>
 				{category?.icon}
 			</AvatarFallback>
-			{transaction.recurrence && (
+			{(
 				<div
 					className='absolute bottom-0 right-0 translate-x-1/4 translate-y-1/4 rounded-xl border bg-background/50 p-1 text-xs backdrop-blur-sm'
 				>
@@ -28,7 +28,7 @@ export const TransactionItem: React.FC<TransactionItemProps> = ({
 			)}
 		</Avatar>
 		<div className='flex flex-col'>
-			<h3 className='font-bold'>{transaction.name}</h3>
+			<h3 className='font-bold'>{transaction.note}</h3>
 			<time className='text-sm text-zinc-400'>
 				{new Date(transaction.date).toLocaleString('fr-CH', {
 					timeStyle: 'short',

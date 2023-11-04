@@ -1,4 +1,4 @@
-import {type Category} from '@/stores/models.ts';
+import {type Category} from '@/stores/db.ts';
 import {memo} from 'react';
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
 import {cn} from '@/lib/utils.ts';
@@ -30,8 +30,8 @@ export const CategoryChart = memo(({
 					total,
 				}) => (
 					<ToggleGroup.Item
-						key={category.id}
-						value={category.id}
+						key={category.uuid}
+						value={category.uuid}
 						style={{
 							width: `${(total / totalValue) * 100}%`,
 							backgroundColor: category.color,
@@ -49,7 +49,7 @@ export const CategoryChart = memo(({
 					category,
 					total,
 				}) => (
-					<ToggleGroup.Item key={category.id} value={category.id} asChild>
+					<ToggleGroup.Item key={category.uuid} value={category.uuid} asChild>
 						<Button
 							variant='ghost'
 							size='sm'
@@ -59,7 +59,7 @@ export const CategoryChart = memo(({
 							)}
 						>
 							<div style={{backgroundColor: category.color}} className='h-4 w-4 rounded-md'></div>
-							<span className='font-semibold'>{category.name}</span>
+							<span className='truncate font-semibold'>{category.name}</span>
 							<span className='text-sm text-zinc-400'>
 								{Math.round((total / totalValue) * 100)}%
 							</span>

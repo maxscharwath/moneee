@@ -1,7 +1,7 @@
 import {memo, useCallback, useMemo} from 'react';
 import {TransactionItem} from '@/components/transaction-item.tsx';
 import {Separator} from '@/components/ui/separator.tsx';
-import {type Category, type Transaction} from '@/stores/models.ts';
+import {type Category, type Transaction} from '@/stores/db.ts';
 import Currency from '@/components/currency.tsx';
 
 type TransactionGroupProps = {
@@ -19,7 +19,7 @@ export const TransactionGroup = memo(({
 		(transactions: Transaction[]) => transactions.reduce(
 			(acc, transaction) => {
 				const transactionType = categories.find(
-					category => category.id === transaction.categoryId,
+					category => category.uuid === transaction.category_id,
 				)?.type;
 				return (
 					acc
@@ -33,7 +33,7 @@ export const TransactionGroup = memo(({
 
 	const transactionsWithCategory = useMemo(() => transactions.map(transaction => ({
 		transaction,
-		category: categories.find(category => category.id === transaction.categoryId)!,
+		category: categories.find(category => category.uuid === transaction.category_id)!,
 	})), [transactions, categories]);
 
 	return (
@@ -54,7 +54,7 @@ export const TransactionGroup = memo(({
 					transaction,
 					category,
 				}) => (
-					<li key={transaction.id}>
+					<li key={transaction.uuid}>
 						<TransactionItem transaction={transaction} category={category}/>
 					</li>
 				))}
