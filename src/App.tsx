@@ -167,7 +167,7 @@ function App() {
 	const [showModal, setShowModal] = useState(false);
 
 	return (
-		<div className='flex min-h-screen flex-col'>
+		<div className='flex h-[100dvh] flex-col'>
 			<Header
 				title={t('insights.title')}
 				defaultValue={periodType}
@@ -175,7 +175,7 @@ function App() {
 				onPreviousPeriod={previousPeriod}
 				onPeriodChange={setPeriodType}
 			/>
-			<div className='flex-1 space-y-4 p-4'>
+			<div className='flex-1 space-y-4 overflow-y-auto p-4'>
 				<motion.div
 					className='space-y-4'
 					drag='x'
@@ -257,7 +257,7 @@ function App() {
 				)}
 			</div>
 			<nav
-				className='sticky bottom-0 z-50 flex w-full items-center justify-center bg-background p-4 shadow-md portrait:standalone:pb-14'>
+				className='flex w-full items-center justify-center bg-background p-4 shadow-md portrait:standalone:pb-14'>
 				<Button onClick={() => setShowModal(true)}>
 					<PlusIcon size={24}/>
 				</Button>
