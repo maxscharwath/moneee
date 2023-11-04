@@ -11,7 +11,6 @@
     "weekly": "Hebdomadaire",
     "yearly": "Annuel"
   },
-  "settings.title": "Réglages",
   "transaction": {
     "balance": "Solde",
     "expense": "Dépense",
@@ -21,5 +20,17 @@
       "title": "Pas d'entrées"
     },
     "title": "Transactions"
+  },
+  "settings": {
+    "title": "Réglages",
+    "general": "Général",
+    "appearance": "Apparence",
+    "currency": "Devise",
+    "categories": "Catégories",
+    "data": "Données",
+    "export": "Exporter",
+    "import": "Importer",
+    "erase": "Formatage",
+    "refreshCache": "Rafraîchir le cache"
   }
 }

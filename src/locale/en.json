@@ -11,7 +11,6 @@
     "weekly": "Weekly",
     "yearly": "Yearly"
   },
-  "settings.title": "Settings",
   "transaction": {
     "balance": "Balance",
     "expense": "Expense",
@@ -21,5 +20,17 @@
       "title": "No entries"
     },
     "title": "Transactions"
+  },
+  "settings": {
+    "title": "Settings",
+    "general": "General",
+    "appearance": "Appearance",
+    "currency": "Currency",
+    "categories": "Categories",
+    "data": "Data",
+    "export": "Export Data",
+    "import": "Import Data",
+    "erase": "Erase Data",
+    "refreshCache": "Refresh Cache"
   }
 }

@@ -23,7 +23,7 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
   },
   "include": ["src","vite.config.ts", ".eslintrc.cjs"],
 }
