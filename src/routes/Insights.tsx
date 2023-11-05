@@ -14,11 +14,11 @@ import {CategoryChart} from '@/components/category-chart.tsx';
 import {PeriodNavigation} from '@/components/PeriodNavigation.tsx';
 import {useTranslation} from 'react-i18next';
 import {
-	type Category,
 	getFilteredTransactions,
-	type Transaction,
 	useCategories,
 } from '@/stores/db.ts';
+import {type Transaction} from '@/stores/schemas/transaction.ts';
+import {type Category} from '@/stores/schemas/category.ts';
 
 type Filter = 'income' | 'expense' | 'all';
 

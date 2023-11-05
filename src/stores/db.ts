@@ -1,75 +1,13 @@
-import {
-	addRxPlugin,
-	type ExtractDocumentTypeFromTypedRxJsonSchema,
-	toTypedRxJsonSchema,
-} from 'rxdb';
+import {addRxPlugin} from 'rxdb';
 import {getRxStorageDexie} from 'rxdb/plugins/storage-dexie';
 import {RxDBQueryBuilderPlugin} from 'rxdb/plugins/query-builder';
 import {RxDBUpdatePlugin} from 'rxdb/plugins/update';
-import {createDatabase, lazyInitialize} from '@/stores/createDatabase.ts';
+import {createDatabase, lazyInitialize} from '@/stores/utils/createDatabase.ts';
 import {useRxData} from 'rxdb-hooks';
 import {type QueryConstructor} from 'rxdb-hooks/dist/useRxData';
-
-export const TransactionSchemaTyped = toTypedRxJsonSchema({
-	title: 'transaction',
-	version: 0,
-	type: 'object',
-	primaryKey: 'uuid',
-	properties: {
-		uuid: {
-			type: 'string',
-			final: true,
-		},
-		note: {
-			type: 'string',
-		},
-		amount: {
-			type: 'number',
-		},
-		date: {
-			type: 'string',
-			format: 'date-time',
-		},
-		category_id: {
-			type: 'string',
-			ref: 'categories',
-		},
-	},
-	required: ['uuid', 'note', 'amount', 'date', 'category_id'],
-} as const);
-
-export type Transaction = ExtractDocumentTypeFromTypedRxJsonSchema<typeof TransactionSchemaTyped>;
-
-export const CategorySchemaTyped = toTypedRxJsonSchema({
-	title: 'category',
-	version: 0,
-	type: 'object',
-	primaryKey: 'uuid',
-	properties: {
-		uuid: {
-			type: 'string',
-			final: true,
-		},
-		name: {
-			type: 'string',
-		},
-		color: {
-			type: 'string',
-		},
-		icon: {
-			type: 'string',
-		},
-		type: {
-			type: 'string',
-			enum: ['expense', 'income'],
-			final: true,
-		},
-	},
-	required: ['uuid', 'name', 'color', 'icon', 'type'],
-	indexes: [['type', 'name']],
-} as const);
-
-export type Category = ExtractDocumentTypeFromTypedRxJsonSchema<typeof CategorySchemaTyped>;
+import {type Transaction, TransactionSchema} from '@/stores/schemas/transaction.ts';
+import {type Category, CategorySchema} from '@/stores/schemas/category.ts';
+import {type Settings, SettingsSchema} from '@/stores/schemas/settings.ts';
 
 export const initializeDb = lazyInitialize(async () => {
 	addRxPlugin(RxDBUpdatePlugin);
@@ -80,10 +18,16 @@ export const initializeDb = lazyInitialize(async () => {
 		multiInstance: true,
 		ignoreDuplicate: true,
 		schemas: {
-			transactions: TransactionSchemaTyped,
-			categories: CategorySchemaTyped,
+			transactions: TransactionSchema,
+			categories: CategorySchema,
+			settings: SettingsSchema,
 		},
 	});
+
+	await db.settings.bulkInsert([{
+		appearance: 'system',
+		currency: 'USD',
+	}]);
 
 	const categories = [
 		{uuid: '1e9c9877-bca3-4679-8121-6583d8def483', name: 'Food', color: '#FAD02E', icon: '🍔', type: 'expense'},
@@ -162,4 +106,16 @@ export function getCategoriesByType(type: 'expense' | 'income') {
 			type,
 		},
 	}));
+}
+
+export function useSettings(): [Settings | null, (settings: Partial<Settings>) => void] {
+	const {result} = useRxData<Settings>('settings', settings => settings.findOne('settings'));
+	return [
+		result[0],
+		(settings: Partial<Settings>) => {
+			console.log('settings', settings);
+			void initializeDb()
+				.then(async db => db.collections.settings.upsert({...settings, id: 'settings'}));
+		},
+	];
 }

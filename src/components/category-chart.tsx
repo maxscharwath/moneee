@@ -1,8 +1,8 @@
-import {type Category} from '@/stores/db.ts';
 import {memo} from 'react';
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
 import {cn} from '@/lib/utils.ts';
 import {Button} from '@/components/ui/button.tsx';
+import {type Category} from '@/stores/schemas/category.ts';
 
 type CategoryChartProps = {
 	data: Array<{

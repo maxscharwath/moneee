@@ -6,9 +6,9 @@ import {
 	SelectValue,
 } from '@/components/ui/select.tsx';
 import {LayoutGrid} from 'lucide-react';
-import {type Category} from '@/stores/db.ts';
 import {memo} from 'react';
 import {useTranslation} from 'react-i18next';
+import {type Category} from '@/stores/schemas/category.ts';
 
 type CategorySelectProps = {
 	value: string;

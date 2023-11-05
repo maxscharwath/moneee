@@ -32,6 +32,7 @@
       "description": "Vous n'avez aucune transaction pour cette période.",
       "title": "Pas d'entrées"
     },
-    "title": "Transactions"
+    "title": "Transactions",
+    "add_note": "Ajouter une note"
   }
 }

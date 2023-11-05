@@ -8,7 +8,7 @@ import {parseNumberFromString} from '@/lib/utils.ts';
 import {CategorySelect} from '@/components/category-select.tsx';
 import {useTranslation} from 'react-i18next';
 import {Input} from '@/components/ui/input.tsx';
-import {getCategoriesByType} from '@/stores/db.ts';
+import {getCategoriesByType, useSettings} from '@/stores/db.ts';
 import * as Dialog from '@radix-ui/react-dialog';
 import {type DialogProps} from '@radix-ui/react-dialog';
 import {Header} from '@/components/header.tsx';
@@ -31,16 +31,19 @@ export default function TransactionModal({onTransaction, ...props}: TransactionM
 	const handlePaste = usePaste(value, setValue);
 	useKeyboard(valueString, appendToValue, clearLastDigit, hasDecimal);
 
+	const [settings] = useSettings();
+	const currency = settings?.currency ?? 'USD';
+
 	const formatAmount = useMemo(() => {
 		const fractionDigits = Math.min(decimalPlaces, 2);
 		return value
 			.toLocaleString('fr-CH', {
 				style: 'currency',
-				currency: 'CHF',
+				currency,
 				minimumFractionDigits: fractionDigits,
 				maximumFractionDigits: fractionDigits,
 			});
-	}, [value, decimalPlaces]);
+	}, [currency, value, decimalPlaces]);
 
 	const [type, setType] = React.useState<'income' | 'expense'>('expense');
 	const [date, setDate] = React.useState(new Date());
@@ -94,7 +97,7 @@ export default function TransactionModal({onTransaction, ...props}: TransactionM
 								</button>
 								<Input
 									type='text'
-									placeholder='Add note'
+									placeholder={t('transaction.add_note')}
 									icon={<ScrollText/>}
 									value={note}
 									onChange={e => setNote(e.target.value)}

@@ -8,6 +8,7 @@ import {
 	useSpring,
 	useTransform,
 } from 'framer-motion';
+import {useSettings} from '@/stores/db.ts';
 
 type HTMLAttributesWithoutMotionProps<Element extends HTMLElement, Attributes extends HTMLAttributes<Element> = HTMLAttributes<Element>> = {
 	[K in Exclude<keyof Attributes, keyof MotionProps>]?: Attributes[K];
@@ -22,11 +23,12 @@ type CurrencyProps = {
 
 const Currency: React.FC<CurrencyProps> = ({
 	amount,
-	locale = 'fr-CH',
-	currency = 'CHF',
+	locale = 'en-US',
 	signDisplay,
 	...props
 }) => {
+	const [settings] = useSettings();
+	const currency = settings?.currency ?? 'USD';
 	const motionValue = useMotionValue(amount);
 
 	const springValue = useSpring(motionValue, {

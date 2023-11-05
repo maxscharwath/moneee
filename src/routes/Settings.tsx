@@ -1,10 +1,8 @@
 import {Header, HeaderTitle} from '@/components/header.tsx';
 import {useTranslation} from 'react-i18next';
 import {
-	type Category,
-	initializeDb,
-	type Transaction,
-	TransactionSchemaTyped,
+	initializeDb, useSettings,
+
 } from '@/stores/db.ts';
 import * as List from '@/components/ui/list.tsx';
 import {
@@ -16,6 +14,8 @@ import {
 	CoinsIcon, LayoutGridIcon,
 } from 'lucide-react';
 import {NavLink} from 'react-router-dom';
+import {type Transaction, TransactionSchema} from '@/stores/schemas/transaction.ts';
+import {type Category} from '@/stores/schemas/category.ts';
 
 export function Component() {
 	const {t} = useTranslation();
@@ -74,10 +74,12 @@ export function Component() {
 		await db.transactions.remove();
 		await db.addCollections({
 			transactions: {
-				schema: TransactionSchemaTyped,
+				schema: TransactionSchema,
 			},
 		});
 	};
+
+	const [settings] = useSettings();
 
 	return (
 		<>
@@ -102,7 +104,9 @@ export function Component() {
 								</List.ItemIcon>
 								<span className='truncate'>{t('settings.currency')}</span>
 								<Spacing/>
-								<span className='truncate text-muted-foreground'>CHF</span>
+								<span className='truncate text-muted-foreground'>
+									{settings?.currency}
+								</span>
 								<ChevronRight/>
 							</NavLink>
 						</List.ItemButton>
