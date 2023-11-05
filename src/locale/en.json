@@ -11,6 +11,19 @@
     "weekly": "Weekly",
     "yearly": "Yearly"
   },
+  "settings": {
+    "appearance": "Appearance",
+    "categories": "Categories",
+    "currency": "Currency",
+    "data": "Data",
+    "erase": "Erase Data",
+    "export": "Export Data",
+    "general": "General",
+    "import": "Import Data",
+    "refreshCache": "Refresh Cache",
+    "title": "Settings"
+  },
+  "settings.currency.title": "Currencies",
   "transaction": {
     "balance": "Balance",
     "expense": "Expense",
@@ -20,17 +33,5 @@
       "title": "No entries"
     },
     "title": "Transactions"
-  },
-  "settings": {
-    "title": "Settings",
-    "general": "General",
-    "appearance": "Appearance",
-    "currency": "Currency",
-    "categories": "Categories",
-    "data": "Data",
-    "export": "Export Data",
-    "import": "Import Data",
-    "erase": "Erase Data",
-    "refreshCache": "Refresh Cache"
   }
 }

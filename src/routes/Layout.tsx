@@ -1,7 +1,6 @@
 import {BarChartBig, PlusIcon, Settings2} from 'lucide-react';
 import {Button} from '@/components/ui/button.tsx';
 import {NavLink, Outlet} from 'react-router-dom';
-import * as Dialog from '@radix-ui/react-dialog';
 import TransactionModal from '@/components/transaction-modal.tsx';
 import {useState} from 'react';
 import {addTransaction} from '@/stores/db.ts';
@@ -42,12 +41,7 @@ export default function Layout() {
 					</Button>
 				</div>
 			</nav>
-			<Dialog.Root open={showModal} onOpenChange={setShowModal}>
-				<Dialog.Content
-					className='fixed inset-0 z-50 bg-background/90 backdrop-blur-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:slide-out-to-bottom-[48%] data-[state=open]:slide-in-from-bottom-[48%]'>
-					<TransactionModal onTransaction={handleTransaction}/>
-				</Dialog.Content>
-			</Dialog.Root>
+			<TransactionModal open={showModal} onOpenChange={setShowModal} onTransaction={handleTransaction}/>
 		</div>
 	);
 }

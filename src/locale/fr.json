@@ -11,6 +11,19 @@
     "weekly": "Hebdomadaire",
     "yearly": "Annuel"
   },
+  "settings": {
+    "appearance": "Apparence",
+    "categories": "Catégories",
+    "currency": "Devise",
+    "data": "Données",
+    "erase": "Formatage",
+    "export": "Exporter",
+    "general": "Général",
+    "import": "Importer",
+    "refreshCache": "Rafraîchir le cache",
+    "title": "Réglages"
+  },
+  "settings.currency.title": "Devises",
   "transaction": {
     "balance": "Solde",
     "expense": "Dépense",
@@ -20,17 +33,5 @@
       "title": "Pas d'entrées"
     },
     "title": "Transactions"
-  },
-  "settings": {
-    "title": "Réglages",
-    "general": "Général",
-    "appearance": "Apparence",
-    "currency": "Devise",
-    "categories": "Catégories",
-    "data": "Données",
-    "export": "Exporter",
-    "import": "Importer",
-    "erase": "Formatage",
-    "refreshCache": "Rafraîchir le cache"
   }
 }

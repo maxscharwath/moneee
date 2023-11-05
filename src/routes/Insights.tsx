@@ -158,7 +158,7 @@ export function Component() {
 
 	return (
 		<>
-			<Header>
+			<Header className='justify-between'>
 				<HeaderTitle>{t('insights.title')}</HeaderTitle>
 				<PeriodNavigation
 					defaultValue={periodType}

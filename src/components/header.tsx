@@ -1,11 +1,13 @@
 import type React from 'react';
 import type {PropsWithChildren} from 'react';
+import {cn} from '@/lib/utils.ts';
 
-export const Header: React.FC<PropsWithChildren> = ({
+export const Header: React.FC<PropsWithChildren<React.HTMLAttributes<HTMLElement>>> = ({
 	children,
+	className,
 }) => (
 	<nav
-		className='flex items-center justify-between bg-background p-4 portrait:standalone:pt-14'>
+		className={cn('flex items-center gap-4 bg-background p-4 portrait:standalone:pt-14', className)}>
 		{children}
 	</nav>
 );

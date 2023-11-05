@@ -13,7 +13,10 @@ import Layout from '@/routes/Layout.tsx';
 const router = createBrowserRouter(createRoutesFromElements(
 	<Route element={<Layout/>}>
 		<Route path='/' lazy={async () => import('@/routes/Insights.tsx')}/>
-		<Route path='/settings' lazy={async () => import('@/routes/Settings.tsx')}/>
+		<Route path='/settings'>
+			<Route path='' lazy={async () => import('@/routes/Settings.tsx')}/>
+			<Route path='currency' lazy={async () => import('@/routes/Currency.tsx')}/>
+		</Route>
 	</Route>,
 ));
 

@@ -15,6 +15,7 @@ import {
 	ContrastIcon,
 	CoinsIcon, LayoutGridIcon,
 } from 'lucide-react';
+import {NavLink} from 'react-router-dom';
 
 export function Component() {
 	const {t} = useTranslation();
@@ -85,52 +86,61 @@ export function Component() {
 			</Header>
 			<div className='flex-1 space-y-4 overflow-y-auto p-4'>
 				<List.Root>
-					<List.Group heading={t('settings.general')}>
+					<List.List heading={t('settings.general')}>
 						<List.Item>
 							<List.ItemIcon className='bg-[#89cff0]'>
 								<ContrastIcon />
 							</List.ItemIcon>
 							<span className='truncate'>{t('settings.appearance')}</span>
-							<ChevronRight className='ml-auto'/>
+							<Spacing/>
+							<ChevronRight/>
 						</List.Item>
-						<List.Item>
-							<List.ItemIcon className='bg-[#ffb6c1]'>
-								<CoinsIcon />
-							</List.ItemIcon>
-							<span className='truncate'>{t('settings.currency')}</span>
-							<ChevronRight className='ml-auto'/>
-						</List.Item>
+						<List.ItemButton asChild>
+							<NavLink to='/settings/currency'>
+								<List.ItemIcon className='bg-[#ffb6c1]'>
+									<CoinsIcon />
+								</List.ItemIcon>
+								<span className='truncate'>{t('settings.currency')}</span>
+								<Spacing/>
+								<span className='truncate text-muted-foreground'>CHF</span>
+								<ChevronRight/>
+							</NavLink>
+						</List.ItemButton>
 						<List.Item>
 							<List.ItemIcon className='bg-[#c3aed6]'>
 								<LayoutGridIcon />
 							</List.ItemIcon>
 							<span className='truncate'>{t('settings.categories')}</span>
-							<ChevronRight className='ml-auto'/>
+							<Spacing/>
+							<ChevronRight/>
 						</List.Item>
-					</List.Group>
-					<List.Group heading={t('settings.data')}>
-						<List.Item onClick={exportToCsv}>
+					</List.List>
+					<List.List heading={t('settings.data')}>
+						<List.ItemButton onClick={exportToCsv}>
 							<List.ItemIcon className='bg-[#77dd77]'>
 								<UploadIcon />
 							</List.ItemIcon>
 							<span className='truncate'>{t('settings.export')}</span>
-							<ChevronRight className='ml-auto'/>
-						</List.Item>
+							<Spacing/>
+							<ChevronRight/>
+						</List.ItemButton>
 						<List.Item>
 							<List.ItemIcon className='bg-[#ffcc5c]'>
 								<DownloadIcon />
 							</List.ItemIcon>
 							<span className='truncate'>{t('settings.import')}</span>
-							<ChevronRight className='ml-auto'/>
+							<Spacing/>
+							<ChevronRight/>
 						</List.Item>
-						<List.Item onClick={resetDb}>
+						<List.ItemButton onClick={resetDb}>
 							<List.ItemIcon className='bg-[#ff6961]'>
 								<Trash2Icon />
 							</List.ItemIcon>
 							<span className='truncate'>{t('settings.erase')}</span>
-							<ChevronRight className='ml-auto'/>
-						</List.Item>
-					</List.Group>
+							<Spacing/>
+							<ChevronRight/>
+						</List.ItemButton>
+					</List.List>
 				</List.Root>
 			</div>
 		</>
@@ -138,3 +148,5 @@ export function Component() {
 }
 
 Component.displayName = 'Settings';
+
+const Spacing = () => <div className='ml-auto'/>;
