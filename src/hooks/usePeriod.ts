@@ -1,4 +1,5 @@
 import {useMemo, useState} from 'react';
+import {useLocale} from '@/i18n.ts';
 
 export type PeriodType = 'weekly' | 'monthly' | 'yearly';
 
@@ -72,21 +73,21 @@ export function usePeriod(initialPeriod: PeriodType = 'monthly') {
 }
 
 export const usePeriodTitle = (periodType: PeriodType, currentPeriod: Date) => {
+	const {formater} = useLocale();
 	switch (periodType) {
 		case 'weekly': {
 			const startOfWeek = new Date(currentPeriod);
 			startOfWeek.setDate(currentPeriod.getDate() - currentPeriod.getDay());
 			const endOfWeek = new Date(startOfWeek);
 			endOfWeek.setDate(startOfWeek.getDate() + 6);
-			return `${startOfWeek.toLocaleDateString('fr-CH', {day: 'numeric', month: 'short'})} - ${endOfWeek.toLocaleDateString('fr-CH', {day: 'numeric', month: 'short'})}`;
+			return `${formater.date(startOfWeek, {day: 'numeric', month: 'short'})} - ${formater.date(endOfWeek, {day: 'numeric', month: 'short'})}`;
 		}
 
-		case 'monthly':
-			return currentPeriod.toLocaleDateString('fr-CH', {month: 'long', year: 'numeric'});
-
 		case 'yearly':
-			return currentPeriod.toLocaleDateString('fr-CH', {year: 'numeric'});
+			return formater.date(currentPeriod, {year: 'numeric'});
+
+		case 'monthly':
 		default:
-			return currentPeriod.toLocaleDateString('fr-CH', {year: 'numeric', month: 'long'});
+			return formater.date(currentPeriod, {month: 'long', year: 'numeric'});
 	}
 };

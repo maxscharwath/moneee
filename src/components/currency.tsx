@@ -8,7 +8,7 @@ import {
 	useSpring,
 	useTransform,
 } from 'framer-motion';
-import {useSettings} from '@/stores/db.ts';
+import {useLocale} from '@/i18n.ts';
 
 type HTMLAttributesWithoutMotionProps<Element extends HTMLElement, Attributes extends HTMLAttributes<Element> = HTMLAttributes<Element>> = {
 	[K in Exclude<keyof Attributes, keyof MotionProps>]?: Attributes[K];
@@ -16,19 +16,15 @@ type HTMLAttributesWithoutMotionProps<Element extends HTMLElement, Attributes ex
 
 type CurrencyProps = {
 	amount: number;
-	locale?: string;
-	currency?: string;
 	signDisplay?: 'auto' | 'never' | 'always' | 'exceptZero';
 } & PropsWithoutRef<HTMLAttributesWithoutMotionProps<HTMLSpanElement>>;
 
 const Currency: React.FC<CurrencyProps> = ({
 	amount,
-	locale = 'en-US',
 	signDisplay,
 	...props
 }) => {
-	const [settings] = useSettings();
-	const currency = settings?.currency ?? 'USD';
+	const {formater} = useLocale();
 	const motionValue = useMotionValue(amount);
 
 	const springValue = useSpring(motionValue, {
@@ -37,10 +33,8 @@ const Currency: React.FC<CurrencyProps> = ({
 
 	const formattedValue = useTransform(
 		springValue,
-		value => value.toLocaleString(locale, {
-			style: 'currency',
+		value => formater.currency(value, {
 			signDisplay,
-			currency,
 		}),
 	);
 

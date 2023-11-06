@@ -1,0 +1,46 @@
+{
+  "category": {
+    "select": "Category"
+  },
+  "insights": {
+    "title": "Insights"
+  },
+  "period": {
+    "monthly": "Monthly",
+    "placeholder": "Select period",
+    "weekly": "Weekly",
+    "yearly": "Yearly"
+  },
+  "settings": {
+    "root": {
+      "title": "Settings",
+      "appearance": "Appearance",
+      "categories": "Categories",
+      "currency": "Currency",
+      "data": "Data",
+      "erase": "Erase Data",
+      "export": "Export Data",
+      "general": "General",
+      "import": "Import Data",
+      "refreshCache": "Refresh Cache",
+      "language": "Language"
+    },
+    "currency": {
+      "title": "Currencies"
+    },
+    "language": {
+      "title": "Language"
+    }
+  },
+  "transaction": {
+    "add_note": "Add note",
+    "balance": "Balance",
+    "expense": "Expense",
+    "income": "Income",
+    "noTransactions": {
+      "description": "You have no transactions for this period.",
+      "title": "No entries"
+    },
+    "title": "Transactions"
+  }
+}

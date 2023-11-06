@@ -12,17 +12,18 @@ import {Alert, AlertDescription, AlertTitle} from '@/components/ui/alert.tsx';
 import {AnimatePresence, motion} from 'framer-motion';
 import {CategoryChart} from '@/components/category-chart.tsx';
 import {PeriodNavigation} from '@/components/PeriodNavigation.tsx';
-import {useTranslation} from 'react-i18next';
 import {
 	getFilteredTransactions,
 	useCategories,
 } from '@/stores/db.ts';
 import {type Transaction} from '@/stores/schemas/transaction.ts';
 import {type Category} from '@/stores/schemas/category.ts';
+import {useLocale} from '@/i18n.ts';
 
 type Filter = 'income' | 'expense' | 'all';
 
 export function Component() {
+	const {t, formater} = useLocale();
 	const [filter, setFilter] = useState<Filter>('all');
 	const [categoryFilter, setCategoryFilter] = useState('');
 
@@ -114,7 +115,7 @@ export function Component() {
 				const total = transactionsInThisMonth.reduce((acc, transaction) => acc + filterTransactionAmount(transaction), 0);
 
 				return {
-					name: new Date(currentPeriod.getFullYear(), monthIndex).toLocaleDateString('fr-CH', {month: 'short'}),
+					name: formater.date(new Date(currentPeriod.getFullYear(), monthIndex), {month: 'short'}),
 					total,
 				};
 			});
@@ -128,11 +129,11 @@ export function Component() {
 			const total = transactionsOnThisDay.reduce((acc, transaction) => acc + filterTransactionAmount(transaction), 0);
 
 			return {
-				name: date.toLocaleDateString('fr-CH', {day: '2-digit'}),
+				name: formater.date(date, {day: '2-digit'}),
 				total,
 			};
 		});
-	}, [filteredTransactions, categories, filter, periodType, currentPeriod]);
+	}, [filteredTransactions, categories, filter, periodType, currentPeriod, formater]);
 
 	const categorySpendDetails = useMemo(() => {
 		const categorySpend: Record<string, {
@@ -152,7 +153,6 @@ export function Component() {
 
 		return Object.values(categorySpend);
 	}, [transactions, categories, filter]);
-	const {t} = useTranslation();
 
 	const groupedTransactions = useMemo(() => Object.entries(groupBy(filteredTransactions, transaction => new Date(transaction.date).toDateString())), [transactions, categories, filter, categoryFilter]);
 

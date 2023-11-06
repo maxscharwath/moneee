@@ -14,8 +14,9 @@ const router = createBrowserRouter(createRoutesFromElements(
 	<Route element={<Layout/>}>
 		<Route path='/' lazy={async () => import('@/routes/Insights.tsx')}/>
 		<Route path='/settings'>
-			<Route path='' lazy={async () => import('@/routes/Settings.tsx')}/>
-			<Route path='currency' lazy={async () => import('@/routes/Currency.tsx')}/>
+			<Route path='' lazy={async () => import('@/routes/settings/Settings.tsx')}/>
+			<Route path='currency' lazy={async () => import('@/routes/settings/Currency.tsx')}/>
+			<Route path='language' lazy={async () => import('@/routes/settings/Language.tsx')}/>
 		</Route>
 	</Route>,
 ));

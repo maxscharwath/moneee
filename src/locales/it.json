@@ -1,0 +1,46 @@
+{
+  "category": {
+    "select": "Categoria"
+  },
+  "insights": {
+    "title": "Approfondimenti"
+  },
+  "period": {
+    "monthly": "Mensile",
+    "placeholder": "Seleziona periodo",
+    "weekly": "Settimanale",
+    "yearly": "Annuale"
+  },
+  "settings": {
+    "root": {
+      "title": "Impostazioni",
+      "appearance": "Aspetto",
+      "categories": "Categorie",
+      "currency": "Valuta",
+      "data": "Dati",
+      "erase": "Cancella Dati",
+      "export": "Esporta Dati",
+      "general": "Generale",
+      "import": "Importa Dati",
+      "refreshCache": "Aggiorna Cache",
+      "language": "Lingua"
+    },
+    "currency": {
+      "title": "Valute"
+    },
+    "language": {
+      "title": "Lingua"
+    }
+  },
+  "transaction": {
+    "add_note": "Aggiungi nota",
+    "balance": "Saldo",
+    "expense": "Spesa",
+    "income": "Reddito",
+    "noTransactions": {
+      "description": "Non ci sono transazioni per questo periodo.",
+      "title": "Nessuna voce"
+    },
+    "title": "Transazioni"
+  }
+}

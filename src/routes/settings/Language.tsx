@@ -1,27 +1,16 @@
 import {Header, HeaderTitle} from '@/components/header.tsx';
-import {useTranslation} from 'react-i18next';
 import * as List from '@/components/ui/list.tsx';
 import {CheckIcon, ChevronLeft} from 'lucide-react';
 import * as RadioGroup from '@radix-ui/react-radio-group';
-import {type LoaderFunction, NavLink, useLoaderData} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import {Button} from '@/components/ui/button.tsx';
-import {useSettings} from '@/stores/db.ts';
-
-export const loader: LoaderFunction = async () => (await import('../assets/currencies.json')).default;
-
-type Currency = {
-	code: string;
-	name: string;
-};
+import {useLocale} from '@/i18n.ts';
 
 export function Component() {
-	const {t} = useTranslation();
-	const currencies = useLoaderData() as Currency[];
-	const [settings, setSettings] = useSettings();
+	const {t, i18n, language, languages} = useLocale();
 
-	const handleCurrencyChange = (currency: string) => {
-		console.log(currency);
-		setSettings({currency});
+	const handleLanguageChange = (lang: string) => {
+		void i18n.changeLanguage(lang);
 	};
 
 	return (
@@ -32,19 +21,18 @@ export function Component() {
 						<ChevronLeft/>
 					</NavLink>
 				</Button>
-				<HeaderTitle>{t('settings.currency.title')}</HeaderTitle>
+				<HeaderTitle>{t('settings.language.title')}</HeaderTitle>
 			</Header>
 			<div className='flex-1 space-y-4 overflow-y-auto p-4'>
 				<RadioGroup.Root
-					value={settings?.currency}
-					onValueChange={handleCurrencyChange}>
+					value={language?.code}
+					onValueChange={handleLanguageChange}>
 					<List.Root>
 						<List.List>
-							{currencies.map(({code, name}) => (
+							{languages.map(({code, name}) => (
 								<RadioGroup.Item asChild value={code} key={code}>
 									<List.ItemButton>
-										<span className='font-bold text-muted-foreground'>{code}</span>
-										<span className='truncate'>{name}</span>
+										<span className='font-bold text-muted-foreground'>{name}</span>
 										<RadioGroup.Indicator asChild>
 											<CheckIcon className='ml-auto'/>
 										</RadioGroup.Indicator>
@@ -59,4 +47,4 @@ export function Component() {
 	);
 }
 
-Component.displayName = 'Settings.Currency';
+Component.displayName = 'Settings.Language';

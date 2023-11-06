@@ -4,6 +4,7 @@ import {Separator} from '@/components/ui/separator.tsx';
 import Currency from '@/components/currency.tsx';
 import {type Transaction} from '@/stores/schemas/transaction.ts';
 import {type Category} from '@/stores/schemas/category.ts';
+import {useLocale} from '@/i18n.ts';
 
 type TransactionGroupProps = {
 	date: string;
@@ -16,6 +17,7 @@ export const TransactionGroup = memo(({
 	transactions,
 	categories,
 }: TransactionGroupProps) => {
+	const {formater} = useLocale();
 	const totalTransactions = useCallback(
 		(transactions: Transaction[]) => transactions.reduce(
 			(acc, transaction) => {
@@ -42,7 +44,7 @@ export const TransactionGroup = memo(({
 			<h2
 				className='mb-2 flex items-center justify-between space-x-2 text-sm font-bold text-muted-foreground'>
 				<span>
-					{new Date(date).toLocaleDateString('fr-CH', {
+					{formater.date(new Date(date), {
 						weekday: 'short',
 						day: 'numeric',
 						month: 'short',

@@ -1,0 +1,46 @@
+{
+  "category": {
+    "select": "Catégorie"
+  },
+  "insights": {
+    "title": "Aperçus"
+  },
+  "period": {
+    "monthly": "Mensuel",
+    "placeholder": "Sélectionnez la période",
+    "weekly": "Hebdomadaire",
+    "yearly": "Annuel"
+  },
+  "settings": {
+    "root": {
+      "title": "Paramètres",
+      "appearance": "Apparence",
+      "categories": "Catégories",
+      "currency": "Devise",
+      "data": "Données",
+      "erase": "Effacer les données",
+      "export": "Exporter les données",
+      "general": "Général",
+      "import": "Importer des données",
+      "refreshCache": "Rafraîchir le cache",
+      "language": "Langue"
+    },
+    "currency": {
+      "title": "Devises"
+    },
+    "language": {
+      "title": "Langue"
+    }
+  },
+  "transaction": {
+    "add_note": "Ajouter une note",
+    "balance": "Solde",
+    "expense": "Dépense",
+    "income": "Revenu",
+    "noTransactions": {
+      "description": "Vous n'avez aucune transaction pour cette période.",
+      "title": "Aucune entrée"
+    },
+    "title": "Transactions"
+  }
+}

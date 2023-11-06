@@ -9,8 +9,8 @@ import {
 import {Button} from '@/components/ui/button';
 import {ChevronLeft, ChevronRight} from 'lucide-react';
 import {type PeriodType} from '@/hooks/usePeriod';
-import {useTranslation} from 'react-i18next';
 import type React from 'react';
+import {useLocale} from '@/i18n.ts';
 
 type PeriodNavigationProps = {
 	defaultValue?: PeriodType;
@@ -25,7 +25,7 @@ export const PeriodNavigation: React.FC<PeriodNavigationProps> = ({
 	onPreviousPeriod,
 	onNextPeriod,
 }) => {
-	const {t} = useTranslation();
+	const {t} = useLocale();
 	return (
 		<div className='flex items-center space-x-2'>
 			<Button size='icon' variant='ghost' onClick={onPreviousPeriod}>
