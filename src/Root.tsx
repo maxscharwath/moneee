@@ -31,7 +31,7 @@ export default function Root() {
 
 	return (
 		<Provider db={db}>
-			<ThemeProvider defaultTheme='system' storageKey='vite-ui-theme'>
+			<ThemeProvider defaultTheme='system'>
 				<RouterProvider router={router}/>
 			</ThemeProvider>
 		</Provider>

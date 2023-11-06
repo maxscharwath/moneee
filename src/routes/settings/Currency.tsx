@@ -20,7 +20,6 @@ export function Component() {
 	const [settings, setSettings] = useSettings();
 
 	const handleCurrencyChange = (currency: string) => {
-		console.log(currency);
 		setSettings({currency});
 	};
 

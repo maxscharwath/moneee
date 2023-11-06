@@ -9,12 +9,13 @@ import {
 	UploadIcon,
 	Trash2Icon,
 	ContrastIcon,
-	CoinsIcon, LayoutGridIcon, LanguagesIcon,
+	CoinsIcon, LayoutGridIcon, LanguagesIcon, MoonIcon, SunIcon, MonitorIcon,
 } from 'lucide-react';
 import {NavLink} from 'react-router-dom';
 import {type Transaction, TransactionSchema} from '@/stores/schemas/transaction.ts';
 import {type Category} from '@/stores/schemas/category.ts';
 import {useLocale} from '@/i18n.ts';
+import * as TabsGroup from '@/components/ui/tabs-group.tsx';
 
 export function Component() {
 	const {t, language} = useLocale();
@@ -78,7 +79,7 @@ export function Component() {
 		});
 	};
 
-	const [settings] = useSettings();
+	const [settings, setSettings] = useSettings();
 
 	return (
 		<>
@@ -94,7 +95,21 @@ export function Component() {
 							</List.ItemIcon>
 							<span className='truncate'>{t('settings.root.appearance')}</span>
 							<Spacing/>
-							<ChevronRight/>
+							<TabsGroup.Root
+								size='sm'
+								value={settings?.appearance ?? 'system'}
+								onValueChange={value => setSettings({appearance: value as 'light' | 'dark' | 'system'})}
+							>
+								<TabsGroup.Item value='light'>
+									<SunIcon />
+								</TabsGroup.Item>
+								<TabsGroup.Item value='dark'>
+									<MoonIcon />
+								</TabsGroup.Item>
+								<TabsGroup.Item value='system'>
+									<MonitorIcon />
+								</TabsGroup.Item>
+							</TabsGroup.Root>
 						</List.Item>
 						<List.ItemButton asChild>
 							<NavLink to='/settings/currency'>

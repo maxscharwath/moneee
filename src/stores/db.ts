@@ -113,9 +113,7 @@ export function useSettings(): [Settings | null, (settings: Partial<Settings>) =
 	return [
 		result[0],
 		(settings: Partial<Settings>) => {
-			console.log('settings', settings);
-			void initializeDb()
-				.then(async db => db.collections.settings.upsert({...settings, id: 'settings'}));
+			void result[0]?.incrementalPatch(settings);
 		},
 	];
 }
