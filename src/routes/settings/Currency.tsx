@@ -49,7 +49,7 @@ export function Component() {
 		<>
 			<Header>
 				<Button variant='ghost' size='icon' asChild>
-					<NavLink to='/settings' className='flex items-center gap-2'>
+					<NavLink to='/settings' className='flex items-center gap-2' state={{direction: 'left'}}>
 						<ChevronLeft/>
 					</NavLink>
 				</Button>

@@ -113,7 +113,7 @@ export function Component() {
 							</TabsGroup.Root>
 						</List.Item>
 						<List.ItemButton asChild>
-							<NavLink to='/settings/currency'>
+							<NavLink to='/settings/currency' state={{direction: 'right'}}>
 								<List.ItemIcon className='bg-[#ffb6c1]'>
 									<CoinsIcon />
 								</List.ItemIcon>
@@ -126,7 +126,7 @@ export function Component() {
 							</NavLink>
 						</List.ItemButton>
 						<List.ItemButton asChild>
-							<NavLink to='/settings/language'>
+							<NavLink to='/settings/language' state={{direction: 'right'}}>
 								<List.ItemIcon className='bg-[#ffdead]'>
 									<LanguagesIcon />
 								</List.ItemIcon>

@@ -1,8 +1,9 @@
 import {BarChartBig, PlusIcon, Settings2} from 'lucide-react';
 import {Button} from '@/components/ui/button.tsx';
-import {NavLink, useLocation, useOutlet} from 'react-router-dom';
+import {NavLink, useLocation, useOutlet, type Location} from 'react-router-dom';
 import TransactionModal from '@/components/transaction-modal.tsx';
-import React, {useState} from 'react';
+import type React from 'react';
+import {useState} from 'react';
 import {addTransaction} from '@/stores/db.ts';
 import {AnimatePresence, motion} from 'framer-motion';
 
@@ -19,21 +20,16 @@ export default function Layout() {
 		setShowModal(false);
 	};
 
-	const location = useLocation();
+	const location = useLocation() as Location<{direction: Direction}>;
 	const outlet = useOutlet();
+
+	const direction = location.state?.direction ?? 'none';
+
 	return (
 		<div className='flex h-[100dvh] flex-col'>
-			<AnimatePresence mode='popLayout' initial={false}>
-				<motion.main className='flex grow flex-col overflow-hidden bg-background'
-					key={location.pathname}
-					initial={{x: '80vw', scale: 0.9, opacity: 0}}
-					animate={{x: 0, scale: 1, opacity: 1}}
-					exit={{x: '-80vw', scale: 0.9, opacity: 0}}
-					transition={{ease: 'easeInOut', duration: 0.2}}
-				>
-					{outlet && React.cloneElement(outlet, {key: location.pathname})}
-				</motion.main>
-			</AnimatePresence>
+			<DirectionalTransition classname='flex grow flex-col overflow-hidden bg-background' direction={direction} value={location.pathname}>
+				{outlet}
+			</DirectionalTransition>
 			<nav
 				className='grid w-full grid-cols-[1fr,auto,1fr] bg-background p-4'>
 				<div className='flex justify-evenly'>
@@ -58,3 +54,39 @@ export default function Layout() {
 		</div>
 	);
 }
+
+type Direction = 'left' | 'right' | 'none';
+
+const DirectionalTransition: React.FC<React.PropsWithChildren<{classname: string;direction: Direction;value: string}>> = ({children, classname, direction, value}) => {
+	const variants = {
+		enter: (direction: Direction) => direction === 'none' ? {} : {
+			x: direction === 'left' ? '-80vw' : '80vw',
+			opacity: 0,
+		},
+		center: {
+			x: 0,
+			opacity: 1,
+		},
+		exit: (direction: Direction) => direction === 'none' ? {} : {
+			x: direction === 'left' ? '80vw' : '-80vw',
+			opacity: 0,
+		},
+	};
+
+	return (
+		<AnimatePresence mode='popLayout' initial={false} custom={direction}>
+			<motion.main
+				className={classname}
+				key={value}
+				custom={direction}
+				variants={variants}
+				initial='enter'
+				animate='center'
+				exit='exit'
+				transition={{ease: 'easeInOut', duration: 0.2}}
+			>
+				{children}
+			</motion.main>
+		</AnimatePresence>
+	);
+};

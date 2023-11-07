@@ -5,7 +5,6 @@ import {cn} from '@/lib/utils';
 import {cva, type VariantProps} from 'class-variance-authority';
 import {Slot} from '@radix-ui/react-slot';
 
-// Define your variants with cva for the Root
 const rootVariants = cva(
 	'relative flex gap-x-1 rounded-full border bg-background p-1',
 	{
@@ -22,7 +21,6 @@ const rootVariants = cva(
 	},
 );
 
-// Define your variants with cva for the Item
 const itemVariants = cva(
 	'group relative flex h-10 grow cursor-pointer items-center justify-center rounded-full px-4 py-2 text-base font-medium outline-none transition active:scale-95',
 	{
