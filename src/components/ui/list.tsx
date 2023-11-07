@@ -25,7 +25,7 @@ export const List = React.forwardRef<HTMLUListElement, PropsWithChildren<ListPro
 List.displayName = 'List';
 
 export const Item = React.forwardRef<HTMLLIElement, HTMLProps<HTMLLIElement>>(({children, ...props}, ref) => (
-	<li ref={ref} {...props} className='flex select-none items-center gap-2 rounded-lg p-3'>
+	<li ref={ref} {...props} className='flex select-none items-center gap-2 overflow-hidden rounded-lg p-3'>
 		{children}
 	</li>
 ));
@@ -44,7 +44,7 @@ export const ItemButton = React.forwardRef<HTMLButtonElement, ItemButtonProps>(
 		return (
 			<li className='flex'>
 				<Comp ref={ref} {...props}
-					className='flex flex-1 cursor-pointer select-none items-center gap-2 rounded-lg p-3 hover:bg-muted-foreground/20 active:bg-muted-foreground/40'>
+					className='flex flex-1 cursor-pointer select-none items-center gap-2 overflow-hidden rounded-lg p-3 ring-offset-background transition hover:bg-muted-foreground/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 active:bg-muted-foreground/30'>
 					{children}
 				</Comp>
 			</li>

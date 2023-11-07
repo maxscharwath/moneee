@@ -28,7 +28,7 @@ export const CalendarInput = ({date, setDate}: CalendarInputProps) => {
 		<Dialog open={isOpen} onOpenChange={setIsOpen}>
 			<DialogTrigger asChild>
 				<Button variant='outline' className='grow overflow-hidden'>
-					<CalendarIcon className='mr-2 h-4 w-4'/>
+					<CalendarIcon className='mr-2 h-4 w-4 shrink-0'/>
 					<span className='truncate'>
 						{formater.date(date, {
 							dateStyle: 'medium',

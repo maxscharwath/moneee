@@ -16,6 +16,7 @@ import {type Transaction, TransactionSchema} from '@/stores/schemas/transaction.
 import {type Category} from '@/stores/schemas/category.ts';
 import {useLocale} from '@/i18n.ts';
 import * as TabsGroup from '@/components/ui/tabs-group.tsx';
+import {Container} from '@/components/Container.tsx';
 
 export function Component() {
 	const {t, language} = useLocale();
@@ -86,7 +87,7 @@ export function Component() {
 			<Header>
 				<HeaderTitle>{t('settings.root.title')}</HeaderTitle>
 			</Header>
-			<div className='flex-1 space-y-4 overflow-y-auto p-4'>
+			<Container>
 				<List.Root>
 					<List.List heading={t('settings.root.general')}>
 						<List.Item>
@@ -100,13 +101,13 @@ export function Component() {
 								value={settings?.appearance ?? 'system'}
 								onValueChange={value => setSettings({appearance: value as 'light' | 'dark' | 'system'})}
 							>
-								<TabsGroup.Item value='light'>
+								<TabsGroup.Item value='light' asChild>
 									<SunIcon />
 								</TabsGroup.Item>
-								<TabsGroup.Item value='dark'>
+								<TabsGroup.Item value='dark' asChild>
 									<MoonIcon />
 								</TabsGroup.Item>
-								<TabsGroup.Item value='system'>
+								<TabsGroup.Item value='system' asChild>
 									<MonitorIcon />
 								</TabsGroup.Item>
 							</TabsGroup.Root>
@@ -121,7 +122,7 @@ export function Component() {
 								<span className='truncate text-muted-foreground'>
 									{settings?.currency}
 								</span>
-								<ChevronRight/>
+								<ChevronRight className='shrink-0'/>
 							</NavLink>
 						</List.ItemButton>
 						<List.ItemButton asChild>
@@ -134,7 +135,7 @@ export function Component() {
 								<span className='truncate text-muted-foreground'>
 									{language?.name}
 								</span>
-								<ChevronRight/>
+								<ChevronRight className='shrink-0'/>
 							</NavLink>
 						</List.ItemButton>
 						<List.Item>
@@ -143,7 +144,7 @@ export function Component() {
 							</List.ItemIcon>
 							<span className='truncate'>{t('settings.root.categories')}</span>
 							<Spacing/>
-							<ChevronRight/>
+							<ChevronRight className='shrink-0'/>
 						</List.Item>
 					</List.List>
 					<List.List heading={t('settings.root.data')}>
@@ -153,7 +154,7 @@ export function Component() {
 							</List.ItemIcon>
 							<span className='truncate'>{t('settings.root.export')}</span>
 							<Spacing/>
-							<ChevronRight/>
+							<ChevronRight className='shrink-0'/>
 						</List.ItemButton>
 						<List.Item>
 							<List.ItemIcon className='bg-[#ffcc5c]'>
@@ -161,7 +162,7 @@ export function Component() {
 							</List.ItemIcon>
 							<span className='truncate'>{t('settings.root.import')}</span>
 							<Spacing/>
-							<ChevronRight/>
+							<ChevronRight className='shrink-0'/>
 						</List.Item>
 						<List.ItemButton onClick={resetDb}>
 							<List.ItemIcon className='bg-[#ff6961]'>
@@ -169,15 +170,15 @@ export function Component() {
 							</List.ItemIcon>
 							<span className='truncate'>{t('settings.root.erase')}</span>
 							<Spacing/>
-							<ChevronRight/>
+							<ChevronRight className='shrink-0'/>
 						</List.ItemButton>
 					</List.List>
 				</List.Root>
-			</div>
+			</Container>
 		</>
 	);
 }
 
-Component.displayName = 'Settings';
+Component.displayName = 'Settings.Root';
 
 const Spacing = () => <div className='ml-auto'/>;

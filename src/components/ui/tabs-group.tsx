@@ -1,12 +1,13 @@
-import * as TabsPrimitive from '@radix-ui/react-tabs';
-import {motion} from 'framer-motion';
-import React from 'react';
+import * as RadioGroup from '@radix-ui/react-radio-group';
+import {LayoutGroup, motion} from 'framer-motion';
+import React, {useId} from 'react';
 import {cn} from '@/lib/utils';
 import {cva, type VariantProps} from 'class-variance-authority';
+import {Slot} from '@radix-ui/react-slot';
 
 // Define your variants with cva for the Root
 const rootVariants = cva(
-	'relative flex space-x-2 rounded-full border bg-background p-1',
+	'relative flex gap-x-1 rounded-full border bg-background p-1',
 	{
 		variants: {
 			size: {
@@ -23,7 +24,7 @@ const rootVariants = cva(
 
 // Define your variants with cva for the Item
 const itemVariants = cva(
-	'relative inline-flex h-10 grow cursor-pointer items-center justify-center px-4 py-2 text-base font-medium transition active:scale-95',
+	'group relative flex h-10 grow cursor-pointer items-center justify-center rounded-full px-4 py-2 text-base font-medium outline-none transition active:scale-95',
 	{
 		variants: {
 			size: {
@@ -38,54 +39,52 @@ const itemVariants = cva(
 	},
 );
 
-type TabsContextType = VariantProps<typeof rootVariants> & {
-	uniqueId: string;
-};
+type TabsContextType = VariantProps<typeof rootVariants>;
 
-const TabsContext = React.createContext<TabsContextType>({size: 'md', uniqueId: ''});
+const TabsContext = React.createContext<TabsContextType>({size: 'md'});
 
-function useUUID() {
-	return React.useMemo(() => crypto.randomUUID(), []);
-}
+type RootProps = React.ComponentPropsWithoutRef<typeof RadioGroup.Root> & VariantProps<typeof rootVariants>;
 
-type RootProps = React.ComponentPropsWithoutRef<typeof TabsPrimitive.Root> & VariantProps<typeof rootVariants>;
-
-export const Root = React.forwardRef<React.ElementRef<typeof TabsPrimitive.Root>, RootProps>(
+export const Root = React.forwardRef<React.ElementRef<typeof RadioGroup.Root>, RootProps>(
 	({className, size, children, ...props}, ref) => {
-		const uniqueId = useUUID();
+		const id = useId();
 		return (
-			<TabsPrimitive.Root ref={ref} className={cn(rootVariants({size}), className)} {...props}>
-				<TabsContext.Provider value={{size, uniqueId}}>
-					<TabsPrimitive.List>{children}</TabsPrimitive.List>
+			<RadioGroup.Root ref={ref} className={cn(rootVariants({size}), className)} {...props}>
+				<TabsContext.Provider value={{size}}>
+					<LayoutGroup id={id}>
+						{children}
+					</LayoutGroup>
 				</TabsContext.Provider>
-			</TabsPrimitive.Root>
+			</RadioGroup.Root>
 		);
 	},
 );
 Root.displayName = 'TabsRoot';
 
-type ItemProps = React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger> & VariantProps<typeof itemVariants>;
+type ItemProps = React.ComponentPropsWithoutRef<typeof RadioGroup.Item> & VariantProps<typeof itemVariants>;
 
 export const Item = React.forwardRef<
-React.ElementRef<typeof TabsPrimitive.Trigger>,
+React.ElementRef<typeof RadioGroup.Item>,
 ItemProps
->(({className, ...props}, ref) => {
-	const {size, uniqueId} = React.useContext(TabsContext);
-
+>(({className, asChild, ...props}, ref) => {
+	const {size} = React.useContext(TabsContext);
+	const Comp = asChild ? Slot : 'span';
 	return (
-		<TabsPrimitive.Trigger
+		<RadioGroup.Item
 			ref={ref}
 			className={cn(itemVariants({size}), className)}
 			{...props}
 		>
-			<span className='z-10'>{props.children}</span>
-			<TabsPrimitive.Content value={props.value} asChild>
+			<RadioGroup.RadioGroupIndicator asChild>
 				<motion.div
-					layoutId={`tab-indicator-${uniqueId}`}
-					className='absolute inset-0 h-full w-full rounded-full bg-accent'
+					layoutId='tab-indicator'
+					className='absolute inset-0 h-full w-full rounded-full bg-accent ring-offset-background group-focus-visible:outline-none group-focus-visible:ring-2 group-focus-visible:ring-ring group-focus-visible:ring-offset-2'
 				/>
-			</TabsPrimitive.Content>
-		</TabsPrimitive.Trigger>
+			</RadioGroup.RadioGroupIndicator>
+			<Comp className='z-10'>
+				{props.children}
+			</Comp>
+		</RadioGroup.Item>
 	);
 },
 );

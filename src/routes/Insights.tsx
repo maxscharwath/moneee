@@ -19,6 +19,7 @@ import {
 import {type Transaction} from '@/stores/schemas/transaction.ts';
 import {type Category} from '@/stores/schemas/category.ts';
 import {useLocale} from '@/i18n.ts';
+import {Container} from '@/components/Container.tsx';
 
 type Filter = 'income' | 'expense' | 'all';
 
@@ -167,7 +168,7 @@ export function Component() {
 					onPeriodChange={setPeriodType}
 				/>
 			</Header>
-			<div className='flex-1 space-y-4 overflow-y-auto p-4'>
+			<Container>
 				<motion.div
 					className='space-y-4'
 					drag='x'
@@ -247,7 +248,7 @@ export function Component() {
 						<AlertDescription>{t('transaction.noTransactions.description')}</AlertDescription>
 					</Alert>
 				)}
-			</div>
+			</Container>
 		</>
 	);
 }
