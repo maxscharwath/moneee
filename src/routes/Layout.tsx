@@ -27,11 +27,11 @@ export default function Layout() {
 
 	return (
 		<div className='flex h-[100dvh] flex-col'>
-			<DirectionalTransition classname='flex grow flex-col overflow-hidden bg-background' direction={direction} value={location.pathname}>
+			<DirectionalTransition classname='flex grow flex-col overflow-hidden bg-background px-safe' direction={direction} value={location.pathname}>
 				{outlet}
 			</DirectionalTransition>
-			<nav
-				className='grid w-full grid-cols-[1fr,auto,1fr] bg-background p-4'>
+			<footer
+				className='grid h-16 w-full grid-cols-[1fr,auto,1fr] items-center gap-4 bg-background pb-safe'>
 				<div className='flex justify-evenly'>
 					<Button variant='navlink' size='icon' asChild>
 						<NavLink to='/'>
@@ -49,7 +49,7 @@ export default function Layout() {
 						</NavLink>
 					</Button>
 				</div>
-			</nav>
+			</footer>
 			<TransactionModal open={showModal} onOpenChange={setShowModal} onTransaction={handleTransaction}/>
 		</div>
 	);

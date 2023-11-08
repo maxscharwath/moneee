@@ -73,6 +73,7 @@
 
     html {
         @apply bg-background text-foreground overscroll-y-none;
+        -webkit-tap-highlight-color: transparent;
     }
 }
 
