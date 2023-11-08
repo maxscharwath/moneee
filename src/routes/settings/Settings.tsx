@@ -138,14 +138,16 @@ export function Component() {
 								<ChevronRight className='shrink-0'/>
 							</NavLink>
 						</List.ItemButton>
-						<List.Item>
-							<List.ItemIcon className='bg-[#c3aed6]'>
-								<LayoutGridIcon />
-							</List.ItemIcon>
-							<span className='truncate'>{t('settings.root.categories')}</span>
-							<Spacing/>
-							<ChevronRight className='shrink-0'/>
-						</List.Item>
+						<List.ItemButton asChild>
+							<NavLink to='/settings/categories' state={{direction: 'right'}}>
+								<List.ItemIcon className='bg-[#c3aed6]'>
+									<LayoutGridIcon />
+								</List.ItemIcon>
+								<span className='truncate'>{t('settings.root.categories')}</span>
+								<Spacing/>
+								<ChevronRight className='shrink-0'/>
+							</NavLink>
+						</List.ItemButton>
 					</List.List>
 					<List.List heading={t('settings.root.data')}>
 						<List.ItemButton onClick={exportToCsv}>

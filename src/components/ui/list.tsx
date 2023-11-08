@@ -54,11 +54,12 @@ ItemButton.displayName = 'List.ItemButton';
 
 type ItemIconProps = {
 	className?: string;
+	style?: React.CSSProperties;
 };
 
-export const ItemIcon = forwardRef<HTMLDivElement, PropsWithChildren<ItemIconProps>>(({children, className}, ref) => (
+export const ItemIcon = forwardRef<HTMLDivElement, PropsWithChildren<ItemIconProps>>(({children, className, style}, ref) => (
 	<Avatar className='h-8 w-8' ref={ref}>
-		<AvatarFallback className={cn('p-1 text-primary', className)}>
+		<AvatarFallback className={cn('p-1 text-primary', className)} style={style}>
 			{children}
 		</AvatarFallback>
 	</Avatar>
