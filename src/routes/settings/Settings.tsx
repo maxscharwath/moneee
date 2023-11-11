@@ -1,22 +1,27 @@
 import {Header, HeaderTitle} from '@/components/header.tsx';
-import {
-	initializeDb, useSettings,
-} from '@/stores/db.ts';
+import {initializeDb, useSettings} from '@/stores/db.ts';
 import * as List from '@/components/ui/list.tsx';
 import {
 	ChevronRight,
-	DownloadIcon,
-	UploadIcon,
-	Trash2Icon,
+	CoinsIcon,
 	ContrastIcon,
-	CoinsIcon, LayoutGridIcon, LanguagesIcon, MoonIcon, SunIcon, MonitorIcon,
+	DownloadIcon,
+	LanguagesIcon,
+	LayoutGridIcon,
+	MonitorIcon,
+	MoonIcon,
+	SunIcon,
+	Trash2Icon,
+	UploadIcon,
 } from 'lucide-react';
 import {NavLink} from 'react-router-dom';
 import {type Transaction, TransactionSchema} from '@/stores/schemas/transaction.ts';
 import {type Category} from '@/stores/schemas/category.ts';
 import {useLocale} from '@/i18n.ts';
 import * as TabsGroup from '@/components/ui/tabs-group.tsx';
-import {Container} from '@/components/Container.tsx';
+import {Container} from '@/components/container.tsx';
+import * as Alert from '@/components/ui/alert-dialog';
+import {Spacing} from '@/components/spacing.tsx';
 
 export function Component() {
 	const {t, language} = useLocale();
@@ -127,7 +132,7 @@ export function Component() {
 						</List.ItemButton>
 						<List.ItemButton asChild>
 							<NavLink to='/settings/language' state={{direction: 'right'}}>
-								<List.ItemIcon className='bg-[#ffdead]'>
+								<List.ItemIcon className='bg-[#5a96ee]'>
 									<LanguagesIcon />
 								</List.ItemIcon>
 								<span className='truncate'>{t('settings.root.language')}</span>
@@ -166,14 +171,32 @@ export function Component() {
 							<Spacing/>
 							<ChevronRight className='shrink-0'/>
 						</List.Item>
-						<List.ItemButton onClick={resetDb}>
-							<List.ItemIcon className='bg-[#ff6961]'>
-								<Trash2Icon />
-							</List.ItemIcon>
-							<span className='truncate'>{t('settings.root.erase')}</span>
-							<Spacing/>
-							<ChevronRight className='shrink-0'/>
-						</List.ItemButton>
+						<Alert.AlertDialog>
+							<Alert.AlertDialogTrigger asChild>
+								<List.ItemButton>
+									<List.ItemIcon className='bg-[#ff6961]'>
+										<Trash2Icon />
+									</List.ItemIcon>
+									<span className='truncate'>{t('settings.root.erase.title')}</span>
+									<Spacing/>
+									<ChevronRight className='shrink-0'/>
+								</List.ItemButton>
+							</Alert.AlertDialogTrigger>
+							<Alert.AlertDialogContent>
+								<Alert.AlertDialogHeader>
+									<Alert.AlertDialogTitle>{t('settings.root.erase.alert.title')}</Alert.AlertDialogTitle>
+									<Alert.AlertDialogDescription>{t('settings.root.erase.alert.description')}</Alert.AlertDialogDescription>
+								</Alert.AlertDialogHeader>
+								<Alert.AlertDialogFooter>
+									<Alert.AlertDialogCancel>
+										{t('settings.root.erase.alert.cancel')}
+									</Alert.AlertDialogCancel>
+									<Alert.AlertDialogAction onClick={resetDb}>
+										{t('settings.root.erase.alert.confirm')}
+									</Alert.AlertDialogAction>
+								</Alert.AlertDialogFooter>
+							</Alert.AlertDialogContent>
+						</Alert.AlertDialog>
 					</List.List>
 				</List.Root>
 			</Container>
@@ -182,5 +205,3 @@ export function Component() {
 }
 
 Component.displayName = 'Settings.Root';
-
-const Spacing = () => <div className='ml-auto'/>;

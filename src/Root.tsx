@@ -22,13 +22,19 @@ const router = createBrowserRouter(createRoutesFromElements(
 	</Route>,
 ));
 
-export default function Root() {
+const useDb = () => {
 	const [db, setDb] = useState<Database>();
 
 	useEffect(() => {
 		void initializeDb()
 			.then(setDb);
 	}, []);
+
+	return db;
+};
+
+export default function Root() {
+	const db = useDb();
 
 	return (
 		<Provider db={db}>

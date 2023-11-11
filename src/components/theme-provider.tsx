@@ -1,6 +1,7 @@
 import type React from 'react';
-import {type ReactNode, useEffect, useState} from 'react';
+import {type ReactNode, useEffect} from 'react';
 import {useSettings} from '@/stores/db.ts';
+import {useSystemTheme} from '@/hooks/use-system-theme.ts';
 
 export type Theme = 'dark' | 'light' | 'system';
 
@@ -8,24 +9,6 @@ type ThemeProviderProps = {
 	children: ReactNode;
 	defaultTheme?: Theme;
 };
-
-export function useSystemTheme(): Theme {
-	const [systemTheme, setSystemTheme] = useState<Theme>(
-		window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light',
-	);
-
-	useEffect(() => {
-		const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-		const handleThemeChange = (event: MediaQueryListEvent) => {
-			setSystemTheme(event.matches ? 'dark' : 'light');
-		};
-
-		mediaQuery.addEventListener('change', handleThemeChange);
-		return () => mediaQuery.removeEventListener('change', handleThemeChange);
-	}, []);
-
-	return systemTheme;
-}
 
 export const ThemeProvider: React.FC<ThemeProviderProps>
 	= ({children, defaultTheme = 'system'}) => {

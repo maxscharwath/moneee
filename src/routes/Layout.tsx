@@ -6,6 +6,7 @@ import type React from 'react';
 import {useState} from 'react';
 import {addTransaction} from '@/stores/db.ts';
 import {AnimatePresence, motion} from 'framer-motion';
+import {Footer} from '@/components/footer.tsx';
 
 export default function Layout() {
 	const [showModal, setShowModal] = useState(false);
@@ -27,29 +28,31 @@ export default function Layout() {
 
 	return (
 		<div className='flex h-[100dvh] flex-col'>
-			<DirectionalTransition classname='flex grow flex-col overflow-hidden bg-background px-safe' direction={direction} value={location.pathname}>
+			<DirectionalTransition classname='flex flex-1 flex-col overflow-hidden bg-background px-safe' direction={direction} value={location.pathname}>
 				{outlet}
 			</DirectionalTransition>
-			<footer
-				className='grid h-16 w-full grid-cols-[1fr,auto,1fr] items-center gap-4 bg-background pb-safe'>
-				<div className='flex justify-evenly'>
-					<Button variant='navlink' size='icon' asChild>
-						<NavLink to='/'>
-							<BarChartBig size={24}/>
-						</NavLink>
+			<Footer>
+				<div
+					className='grid w-full grid-cols-[1fr,auto,1fr] items-center gap-4'>
+					<div className='flex justify-evenly'>
+						<Button variant='navlink' size='icon' asChild>
+							<NavLink to='/'>
+								<BarChartBig size={24}/>
+							</NavLink>
+						</Button>
+					</div>
+					<Button onClick={() => setShowModal(true)}>
+						<PlusIcon size={24}/>
 					</Button>
+					<div className='flex justify-evenly'>
+						<Button variant='navlink' size='icon' asChild>
+							<NavLink to='/settings'>
+								<Settings2 size={24}/>
+							</NavLink>
+						</Button>
+					</div>
 				</div>
-				<Button onClick={() => setShowModal(true)}>
-					<PlusIcon size={24}/>
-				</Button>
-				<div className='flex justify-evenly'>
-					<Button variant='navlink' size='icon' asChild>
-						<NavLink to='/settings'>
-							<Settings2 size={24}/>
-						</NavLink>
-					</Button>
-				</div>
-			</footer>
+			</Footer>
 			<TransactionModal open={showModal} onOpenChange={setShowModal} onTransaction={handleTransaction}/>
 		</div>
 	);

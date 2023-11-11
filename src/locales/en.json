@@ -12,24 +12,32 @@
     "yearly": "Yearly"
   },
   "settings": {
-    "root": {
-      "title": "Settings",
-      "appearance": "Appearance",
-      "categories": "Categories",
-      "currency": "Currency",
-      "data": "Data",
-      "erase": "Erase Data",
-      "export": "Export Data",
-      "general": "General",
-      "import": "Import Data",
-      "refreshCache": "Refresh Cache",
-      "language": "Language"
-    },
     "currency": {
       "title": "Currencies"
     },
     "language": {
       "title": "Language"
+    },
+    "root": {
+      "appearance": "Appearance",
+      "categories": "Categories",
+      "currency": "Currency",
+      "data": "Data",
+      "erase": {
+        "alert": {
+          "cancel": "Cancel",
+          "confirm": "Erase",
+          "description": "This action cannot be undone. This will permanently delete your transactions and remove the data from the app.",
+          "title": "Are you absolutely sure?"
+        },
+        "title": "Erase Data"
+      },
+      "export": "Export Data",
+      "general": "General",
+      "import": "Import Data",
+      "language": "Language",
+      "refreshCache": "Refresh Cache",
+      "title": "Settings"
     }
   },
   "transaction": {

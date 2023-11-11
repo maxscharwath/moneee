@@ -19,7 +19,7 @@ type CurrencyProps = {
 	signDisplay?: 'auto' | 'never' | 'always' | 'exceptZero';
 } & PropsWithoutRef<HTMLAttributesWithoutMotionProps<HTMLSpanElement>>;
 
-const Currency: React.FC<CurrencyProps> = ({
+export const Currency: React.FC<CurrencyProps> = ({
 	amount,
 	signDisplay,
 	...props
@@ -48,5 +48,3 @@ const Currency: React.FC<CurrencyProps> = ({
 		</motion.span>
 	);
 };
-
-export default Currency;

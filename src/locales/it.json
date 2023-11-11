@@ -12,24 +12,32 @@
     "yearly": "Annuale"
   },
   "settings": {
-    "root": {
-      "title": "Impostazioni",
-      "appearance": "Aspetto",
-      "categories": "Categorie",
-      "currency": "Valuta",
-      "data": "Dati",
-      "erase": "Cancella Dati",
-      "export": "Esporta Dati",
-      "general": "Generale",
-      "import": "Importa Dati",
-      "refreshCache": "Aggiorna Cache",
-      "language": "Lingua"
-    },
     "currency": {
       "title": "Valute"
     },
     "language": {
       "title": "Lingua"
+    },
+    "root": {
+      "appearance": "Aspetto",
+      "categories": "Categorie",
+      "currency": "Valuta",
+      "data": "Dati",
+      "erase": {
+        "alert": {
+          "cancel": "Annulla",
+          "confirm": "Cancella",
+          "description": "Questa azione non può essere annullata. Ciò eliminerà definitivamente le tue transazioni e rimuoverà i dati dall'app.",
+          "title": "Sei assolutamente sicuro?"
+        },
+        "title": "Cancella Dati"
+      },
+      "export": "Esporta Dati",
+      "general": "Generale",
+      "import": "Importa Dati",
+      "language": "Lingua",
+      "refreshCache": "Aggiorna Cache",
+      "title": "Impostazioni"
     }
   },
   "transaction": {

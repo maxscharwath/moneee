@@ -1,4 +1,3 @@
-// PeriodNavigation.tsx
 import {
 	Select,
 	SelectContent,

@@ -6,7 +6,7 @@ import * as RadioGroup from '@radix-ui/react-radio-group';
 import {NavLink} from 'react-router-dom';
 import {Button} from '@/components/ui/button.tsx';
 import {useSettings} from '@/stores/db.ts';
-import {Container} from '@/components/Container.tsx';
+import {Container} from '@/components/container.tsx';
 import {useEffect, useState} from 'react';
 
 type Currency = {

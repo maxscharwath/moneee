@@ -3,7 +3,7 @@ import {Button} from '@/components/ui/button.tsx';
 import {CalendarIcon} from 'lucide-react';
 import {Calendar} from '@/components/ui/calendar.tsx';
 import {useState} from 'react';
-import {useDelayFunction} from '@/hooks/use-delay-function.tsx';
+import {useDelayFunction} from '@/hooks/use-delay-function.ts';
 import {useLocale} from '@/i18n.ts';
 
 type CalendarInputProps = {

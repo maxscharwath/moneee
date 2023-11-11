@@ -6,12 +6,12 @@ import {Header, HeaderTitle} from '@/components/header.tsx';
 import {Chart} from '@/components/chart.tsx';
 import {TransactionGroup} from '@/components/transaction-group.tsx';
 import {groupBy} from '@/lib/utils.ts';
-import Currency from '@/components/currency.tsx';
+import {Currency} from '@/components/currency.tsx';
 import {usePeriod, usePeriodTitle} from '@/hooks/usePeriod.ts';
 import {Alert, AlertDescription, AlertTitle} from '@/components/ui/alert.tsx';
 import {AnimatePresence, motion} from 'framer-motion';
 import {CategoryChart} from '@/components/category-chart.tsx';
-import {PeriodNavigation} from '@/components/PeriodNavigation.tsx';
+import {PeriodNavigation} from '@/components/period-navigation.tsx';
 import {
 	getFilteredTransactions,
 	useCategories,
@@ -19,7 +19,7 @@ import {
 import {type Transaction} from '@/stores/schemas/transaction.ts';
 import {type Category} from '@/stores/schemas/category.ts';
 import {useLocale} from '@/i18n.ts';
-import {Container} from '@/components/Container.tsx';
+import {Container} from '@/components/container.tsx';
 
 type Filter = 'income' | 'expense' | 'all';
 
@@ -185,14 +185,14 @@ export function Component() {
 					}}
 				>
 					<div className='flex items-center justify-between'>
-						<span className='text-2xl font-bold'>
+						<span className='text-xl font-bold'>
 							{usePeriodTitle(periodType, currentPeriod)}
 						</span>
-						<Currency amount={(totalIncome - totalExpenses)} className='text-2xl font-bold'/>
+						<Currency amount={(totalIncome - totalExpenses)} className='text-xl font-bold'/>
 					</div>
 					<ToggleGroup.Root
 						type='single'
-						className='flex space-x-2'
+						className='grid grid-cols-2 gap-2'
 						value={filter}
 						onValueChange={(f: Filter) => {
 							setFilter(f || 'all');

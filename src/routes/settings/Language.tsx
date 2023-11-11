@@ -5,7 +5,7 @@ import * as RadioGroup from '@radix-ui/react-radio-group';
 import {NavLink} from 'react-router-dom';
 import {Button} from '@/components/ui/button.tsx';
 import {useLocale} from '@/i18n.ts';
-import {Container} from '@/components/Container.tsx';
+import {Container} from '@/components/container.tsx';
 
 export function Component() {
 	const {t, i18n, language, languages} = useLocale();

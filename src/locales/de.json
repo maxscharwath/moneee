@@ -12,24 +12,32 @@
     "yearly": "Jährlich"
   },
   "settings": {
-    "root": {
-      "title": "Einstellungen",
-      "appearance": "Erscheinungsbild",
-      "categories": "Kategorien",
-      "currency": "Währung",
-      "data": "Daten",
-      "erase": "Daten löschen",
-      "export": "Daten exportieren",
-      "general": "Allgemein",
-      "import": "Daten importieren",
-      "refreshCache": "Cache aktualisieren",
-      "language": "Sprache"
-    },
     "currency": {
       "title": "Währungen"
     },
     "language": {
       "title": "Sprache"
+    },
+    "root": {
+      "appearance": "Erscheinungsbild",
+      "categories": "Kategorien",
+      "currency": "Währung",
+      "data": "Daten",
+      "erase": {
+        "alert": {
+          "cancel": "Abbrechen",
+          "confirm": "Löschen",
+          "description": "Diese Aktion kann nicht rückgängig gemacht werden. Dies wird Ihre Transaktionen endgültig löschen und die Daten aus der App entfernen.",
+          "title": "Sind Sie sich absolut sicher?"
+        },
+        "title": "Daten löschen"
+      },
+      "export": "Daten exportieren",
+      "general": "Allgemein",
+      "import": "Daten importieren",
+      "language": "Sprache",
+      "refreshCache": "Cache aktualisieren",
+      "title": "Einstellungen"
     }
   },
   "transaction": {

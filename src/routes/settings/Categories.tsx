@@ -5,7 +5,7 @@ import {ChevronLeft} from 'lucide-react';
 import {NavLink} from 'react-router-dom';
 import {Button} from '@/components/ui/button.tsx';
 import {getCategoriesByType} from '@/stores/db.ts';
-import {Container} from '@/components/Container.tsx';
+import {Container} from '@/components/container.tsx';
 import * as TabsGroup from '@/components/ui/tabs-group.tsx';
 import React from 'react';
 

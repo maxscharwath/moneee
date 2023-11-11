@@ -12,24 +12,32 @@
     "yearly": "Anual"
   },
   "settings": {
-    "root": {
-      "title": "Ajustes",
-      "appearance": "Apariencia",
-      "categories": "Categorías",
-      "currency": "Moneda",
-      "data": "Datos",
-      "erase": "Borrar datos",
-      "export": "Exportar datos",
-      "general": "General",
-      "import": "Importar datos",
-      "refreshCache": "Actualizar caché",
-      "language": "Idioma"
-    },
     "currency": {
       "title": "Monedas"
     },
     "language": {
       "title": "Idioma"
+    },
+    "root": {
+      "appearance": "Apariencia",
+      "categories": "Categorías",
+      "currency": "Moneda",
+      "data": "Datos",
+      "erase": {
+        "alert": {
+          "cancel": "Cancelar",
+          "confirm": "Borrar",
+          "description": "Esta acción no se puede deshacer. Esto eliminará permanentemente tus transacciones y eliminará los datos de la aplicación.",
+          "title": "¿Estás absolutamente seguro?"
+        },
+        "title": "Borrar Datos"
+      },
+      "export": "Exportar datos",
+      "general": "General",
+      "import": "Importar datos",
+      "language": "Idioma",
+      "refreshCache": "Actualizar caché",
+      "title": "Ajustes"
     }
   },
   "transaction": {

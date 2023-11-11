@@ -12,24 +12,32 @@
     "yearly": "Annuel"
   },
   "settings": {
-    "root": {
-      "title": "Paramètres",
-      "appearance": "Apparence",
-      "categories": "Catégories",
-      "currency": "Devise",
-      "data": "Données",
-      "erase": "Effacer les données",
-      "export": "Exporter les données",
-      "general": "Général",
-      "import": "Importer des données",
-      "refreshCache": "Rafraîchir le cache",
-      "language": "Langue"
-    },
     "currency": {
       "title": "Devises"
     },
     "language": {
       "title": "Langue"
+    },
+    "root": {
+      "appearance": "Apparence",
+      "categories": "Catégories",
+      "currency": "Devise",
+      "data": "Données",
+      "erase": {
+        "alert": {
+          "cancel": "Annuler",
+          "confirm": "Effacer",
+          "description": "Cette action ne peut pas être annulée. Cela supprimera définitivement vos transactions et retirera les données de l'application.",
+          "title": "Êtes-vous absolument sûr?"
+        },
+        "title": "Effacer les données"
+      },
+      "export": "Exporter les données",
+      "general": "Général",
+      "import": "Importer des données",
+      "language": "Langue",
+      "refreshCache": "Rafraîchir le cache",
+      "title": "Paramètres"
     }
   },
   "transaction": {
