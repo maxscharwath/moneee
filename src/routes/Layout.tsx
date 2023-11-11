@@ -37,17 +37,17 @@ export default function Layout() {
 					<div className='flex justify-evenly'>
 						<Button variant='navlink' size='icon' asChild>
 							<NavLink to='/'>
-								<BarChartBig size={24}/>
+								<BarChartBig/>
 							</NavLink>
 						</Button>
 					</div>
 					<Button onClick={() => setShowModal(true)}>
-						<PlusIcon size={24}/>
+						<PlusIcon/>
 					</Button>
 					<div className='flex justify-evenly'>
 						<Button variant='navlink' size='icon' asChild>
 							<NavLink to='/settings'>
-								<Settings2 size={24}/>
+								<Settings2/>
 							</NavLink>
 						</Button>
 					</div>

@@ -7,7 +7,7 @@ export const Footer: React.FC<PropsWithChildren<React.HTMLAttributes<HTMLElement
 	className,
 }) => (
 	<footer
-		className={cn('flex items-center gap-4 bg-background box-content h-16 px-4 pb-safe', className)}>
+		className={cn('flex items-center gap-4 bg-background box-content h-16 px-4', className)}>
 		{children}
 	</footer>
 );
