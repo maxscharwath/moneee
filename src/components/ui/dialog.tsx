@@ -31,18 +31,19 @@ React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
 >(({className, children, ...props}, ref) => (
 	<DialogPortal>
 		<DialogOverlay/>
-		<div className='fixed inset-0 z-50 flex items-end justify-center'>
-			<DialogPrimitive.Content
-				ref={ref}
+		<DialogPrimitive.Content
+			ref={ref}
+			className='!pointer-events-none fixed inset-0 z-50 flex items-end justify-center duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-bottom-[48%] data-[state=open]:slide-in-from-bottom-[48%]'
+			{...props}
+		>
+			<div
 				className={cn(
-					'rounded-lg w-full m-5 max-w-lg grid gap-4 border bg-secondary/50 backdrop-blur-xl p-4 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-bottom-[48%] data-[state=open]:slide-in-from-bottom-[48%]',
+					'pointer-events-auto rounded-lg w-full m-5 max-w-lg grid gap-4 border bg-secondary/50 backdrop-blur-xl p-4 shadow-lg',
 					className,
-				)}
-				{...props}
-			>
+				)}>
 				{children}
-			</DialogPrimitive.Content>
-		</div>
+			</div>
+		</DialogPrimitive.Content>
 	</DialogPortal>
 ));
 DialogContent.displayName = DialogPrimitive.Content.displayName;

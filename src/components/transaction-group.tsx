@@ -10,12 +10,14 @@ type TransactionGroupProps = {
 	date: string;
 	transactions: Transaction[];
 	categories: Category[];
+	onTransactionLongPress?: (transaction: Transaction) => void;
 };
 
 export const TransactionGroup = memo(({
 	date,
 	transactions,
 	categories,
+	onTransactionLongPress,
 }: TransactionGroupProps) => {
 	const {formater} = useLocale();
 	const totalTransactions = useCallback(
@@ -59,7 +61,7 @@ export const TransactionGroup = memo(({
 					category,
 				}) => (
 					<li key={transaction.uuid}>
-						<TransactionItem transaction={transaction} category={category}/>
+						<TransactionItem transaction={transaction} category={category} onLongPress={onTransactionLongPress}/>
 					</li>
 				))}
 			</ul>

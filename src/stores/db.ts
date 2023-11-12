@@ -117,3 +117,7 @@ export function useSettings(): [Settings | null, (settings: Partial<Settings>) =
 		},
 	];
 }
+
+export async function deleteTransaction(...transactions: Array<{uuid: string}>) {
+	await (await initializeDb()).transactions.bulkRemove(transactions.map(({uuid}) => uuid));
+}

@@ -13,6 +13,7 @@ import {AnimatePresence, motion} from 'framer-motion';
 import {CategoryChart} from '@/components/category-chart.tsx';
 import {PeriodNavigation} from '@/components/period-navigation.tsx';
 import {
+	deleteTransaction,
 	getFilteredTransactions,
 	useCategories,
 } from '@/stores/db.ts';
@@ -157,6 +158,10 @@ export function Component() {
 
 	const groupedTransactions = useMemo(() => Object.entries(groupBy(filteredTransactions, transaction => new Date(transaction.date).toDateString())), [transactions, categories, filter, categoryFilter]);
 
+	const handleTransactionDelete = async (transaction: Transaction) => {
+		await deleteTransaction(transaction);
+	};
+
 	return (
 		<>
 			<Header className='justify-between'>
@@ -237,7 +242,7 @@ export function Component() {
 					<ul className='space-y-8'>
 						{groupedTransactions.map(([key, transactions]) => (
 							<li key={key}>
-								<TransactionGroup date={key} transactions={transactions} categories={categories}/>
+								<TransactionGroup date={key} transactions={transactions} categories={categories} onTransactionLongPress={handleTransactionDelete}/>
 							</li>
 						))}
 					</ul>
