@@ -49,6 +49,12 @@
       "description": "No tienes transacciones para este período.",
       "title": "Sin entradas"
     },
-    "title": "Transacciones"
+    "title": "Transacciones",
+    "spentPerDay": "gastado/día",
+    "spentPerMonth": "gastado/mes",
+    "averagePerDay": "prom/día",
+    "averagePerMonth": "prom/mes",
+    "incomePerDay": "ingreso/día",
+    "incomePerMonth": "ingreso/mes"
   }
 }

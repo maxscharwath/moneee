@@ -49,6 +49,12 @@
       "description": "Sie haben keine Transaktionen für diesen Zeitraum.",
       "title": "Keine Einträge"
     },
-    "title": "Transaktionen"
+    "title": "Transaktionen",
+    "spentPerDay": "Ausg./Tag",
+    "spentPerMonth": "Ausg./Monat",
+    "averagePerDay": "Durchschn./Tag",
+    "averagePerMonth": "Durchschn./Monat",
+    "incomePerDay": "Eink./Tag",
+    "incomePerMonth": "Eink./Monat"
   }
 }

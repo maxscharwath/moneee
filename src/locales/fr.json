@@ -49,6 +49,12 @@
       "description": "Vous n'avez aucune transaction pour cette période.",
       "title": "Aucune entrée"
     },
-    "title": "Transactions"
+    "title": "Transactions",
+    "spentPerDay": "dépensé/jour",
+    "spentPerMonth": "dépensé/mois",
+    "averagePerDay": "moy/jour",
+    "averagePerMonth": "moy/mois",
+    "incomePerDay": "revenu/jour",
+    "incomePerMonth": "revenu/mois"
   }
 }

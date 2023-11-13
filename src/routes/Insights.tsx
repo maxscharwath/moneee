@@ -162,6 +162,28 @@ export function Component() {
 		await deleteTransaction(transaction);
 	};
 
+	const {averagePerPeriodLabel, averagePerPeriod} = useMemo(() => {
+		const daysInPeriod = getDaysInPeriod(periodType, currentPeriod);
+
+		let total = 0;
+		let averagePerPeriodLabel = '';
+
+		if (filter === 'income') {
+			total = totalIncome;
+			averagePerPeriodLabel = periodType === 'yearly' ? t('transaction.incomePerMonth') : t('transaction.incomePerDay');
+		} else if (filter === 'expense') {
+			total = totalExpenses;
+			averagePerPeriodLabel = periodType === 'yearly' ? t('transaction.spentPerMonth') : t('transaction.spentPerDay');
+		} else {
+			total = totalIncome - totalExpenses;
+			averagePerPeriodLabel = periodType === 'yearly' ? t('transaction.averagePerMonth') : t('transaction.averagePerDay');
+		}
+
+		const averagePerPeriod = periodType === 'yearly' ? (total / 12) : (total / daysInPeriod);
+
+		return {averagePerPeriodLabel, averagePerPeriod};
+	}, [filter, periodType, totalIncome, totalExpenses, currentPeriod, t]);
+
 	return (
 		<>
 			<Header className='justify-between'>
@@ -189,11 +211,19 @@ export function Component() {
 						}
 					}}
 				>
-					<div className='flex items-center justify-between'>
-						<span className='text-xl font-bold'>
-							{usePeriodTitle(periodType, currentPeriod)}
-						</span>
-						<Currency amount={(totalIncome - totalExpenses)} className='text-xl font-bold'/>
+					<div className='flex items-center justify-between gap-2'>
+						<div className='flex flex-col'>
+							<span className='text-sm font-bold uppercase text-muted-foreground'>
+								{usePeriodTitle(periodType, currentPeriod)}
+							</span>
+							<Currency amount={(totalIncome - totalExpenses)} className='text-xl font-bold'/>
+						</div>
+						<div className='flex flex-col text-right'>
+							<span className='text-sm font-bold uppercase text-muted-foreground'>
+								{averagePerPeriodLabel}
+							</span>
+							<Currency amount={averagePerPeriod} className='text-xl font-bold'/>
+						</div>
 					</div>
 					<ToggleGroup.Root
 						type='single'

@@ -49,6 +49,12 @@
       "description": "Non ci sono transazioni per questo periodo.",
       "title": "Nessuna voce"
     },
-    "title": "Transazioni"
+    "title": "Transazioni",
+    "spentPerDay": "speso/giorno",
+    "spentPerMonth": "speso/mese",
+    "averagePerDay": "media/giorno",
+    "averagePerMonth": "media/mese",
+    "incomePerDay": "entrate/giorno",
+    "incomePerMonth": "entrate/mese"
   }
 }
