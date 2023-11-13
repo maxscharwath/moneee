@@ -18,7 +18,7 @@ type TransactionModalProps = {
 } & DialogProps;
 
 export default function TransactionModal({onTransaction, ...props}: TransactionModalProps) {
-	const {t, formater} = useLocale();
+	const {t, formatter} = useLocale();
 	const {
 		value,
 		valueString,
@@ -34,11 +34,11 @@ export default function TransactionModal({onTransaction, ...props}: TransactionM
 
 	const formatAmount = useMemo(() => {
 		const fractionDigits = Math.min(decimalPlaces, 2);
-		return formater.currency(value, {
+		return formatter.currency(value, {
 			minimumFractionDigits: fractionDigits,
 			maximumFractionDigits: fractionDigits,
 		});
-	}, [formater, value, decimalPlaces]);
+	}, [formatter, value, decimalPlaces]);
 
 	const [type, setType] = React.useState<'income' | 'expense'>('expense');
 	const [date, setDate] = React.useState(new Date());

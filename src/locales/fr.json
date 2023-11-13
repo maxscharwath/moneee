@@ -42,19 +42,19 @@
   },
   "transaction": {
     "add_note": "Ajouter une note",
+    "averagePerDay": "moy/jour",
+    "averagePerMonth": "moy/mois",
     "balance": "Solde",
     "expense": "Dépense",
     "income": "Revenu",
+    "incomePerDay": "revenu/jour",
+    "incomePerMonth": "revenu/mois",
     "noTransactions": {
       "description": "Vous n'avez aucune transaction pour cette période.",
       "title": "Aucune entrée"
     },
-    "title": "Transactions",
     "spentPerDay": "dépensé/jour",
     "spentPerMonth": "dépensé/mois",
-    "averagePerDay": "moy/jour",
-    "averagePerMonth": "moy/mois",
-    "incomePerDay": "revenu/jour",
-    "incomePerMonth": "revenu/mois"
+    "title": "Transactions"
   }
 }

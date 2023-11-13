@@ -12,7 +12,7 @@ type CalendarInputProps = {
 };
 
 export const CalendarInput = ({date, setDate}: CalendarInputProps) => {
-	const {formater, language} = useLocale();
+	const {formatter, language} = useLocale();
 	const [isOpen, setIsOpen] = useState(false);
 
 	const close = useDelayFunction(() => setIsOpen(false), 1000);
@@ -30,7 +30,7 @@ export const CalendarInput = ({date, setDate}: CalendarInputProps) => {
 				<Button variant='outline' className='grow overflow-hidden'>
 					<CalendarIcon className='mr-2 h-4 w-4 shrink-0'/>
 					<span className='truncate'>
-						{formater.date(date, {
+						{formatter.date(date, {
 							dateStyle: 'medium',
 						})}
 					</span>

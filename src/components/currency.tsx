@@ -24,7 +24,7 @@ export const Currency: React.FC<CurrencyProps> = ({
 	signDisplay,
 	...props
 }) => {
-	const {formater} = useLocale();
+	const {formatter} = useLocale();
 	const motionValue = useMotionValue(amount);
 
 	const springValue = useSpring(motionValue, {
@@ -33,7 +33,7 @@ export const Currency: React.FC<CurrencyProps> = ({
 
 	const formattedValue = useTransform(
 		springValue,
-		value => formater.currency(value, {
+		value => formatter.currency(value, {
 			signDisplay,
 		}),
 	);

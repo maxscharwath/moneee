@@ -3,63 +3,68 @@ import {useLocale} from '@/i18n.ts';
 
 export type PeriodType = 'weekly' | 'monthly' | 'yearly';
 
+// A utility function to calculate the start and end dates for a given date and period type
+const calculatePeriodDates = (date: Date, periodType: PeriodType): [Date, Date] => {
+	let start;
+	let end;
+	switch (periodType) {
+		case 'weekly':
+			start = new Date(date);
+			start.setDate(date.getDate() - date.getDay());
+			end = new Date(start);
+			end.setDate(start.getDate() + 6);
+			break;
+		case 'yearly':
+			start = new Date(date.getFullYear(), 0, 1);
+			end = new Date(date.getFullYear(), 11, 31);
+			break;
+		case 'monthly':
+		default:
+			start = new Date(date.getFullYear(), date.getMonth(), 1);
+			end = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+			break;
+	}
+
+	return [start, end];
+};
+
+// A utility function to shift the period based on the current period type
+const shiftPeriod = (date: Date, periodType: PeriodType, direction: 'next' | 'previous'): Date => {
+	const newDate = new Date(date);
+	switch (periodType) {
+		case 'weekly':
+			newDate.setDate(date.getDate() + (direction === 'next' ? 7 : -7));
+			break;
+		case 'yearly':
+			newDate.setFullYear(date.getFullYear() + (direction === 'next' ? 1 : -1));
+			break;
+		case 'monthly':
+		default:
+			newDate.setMonth(date.getMonth() + (direction === 'next' ? 1 : -1));
+			break;
+	}
+
+	return newDate;
+};
+
 export function usePeriod(initialPeriod: PeriodType = 'monthly') {
 	const [periodType, setPeriodType] = useState<PeriodType>(initialPeriod);
-	const [currentPeriod, setCurrentPeriod] = useState(new Date()); // Current reference date within the period
+	const [currentPeriod, setCurrentPeriod] = useState(new Date());
 
-	const getPeriodDates = useMemo<[Date, Date]>(() => {
-		switch (periodType) {
-			case 'weekly': {
-				const startOfWeek = new Date(currentPeriod);
-				startOfWeek.setDate(currentPeriod.getDate() - currentPeriod.getDay());
-				const endOfWeek = new Date(startOfWeek);
-				endOfWeek.setDate(startOfWeek.getDate() + 6);
-				return [startOfWeek, endOfWeek];
-			}
+	const getPeriodDates = useMemo(() => calculatePeriodDates(currentPeriod, periodType), [currentPeriod, periodType]);
 
-			case 'yearly':
-				return [new Date(currentPeriod.getFullYear(), 0, 1), new Date(currentPeriod.getFullYear(), 11, 31)];
-			case 'monthly':
-			default:
-				return [new Date(currentPeriod.getFullYear(), currentPeriod.getMonth(), 1), new Date(currentPeriod.getFullYear(), currentPeriod.getMonth() + 1, 0)];
-		}
+	const nextPeriod = () => setCurrentPeriod(prevDate => shiftPeriod(prevDate, periodType, 'next'));
+	const previousPeriod = () => setCurrentPeriod(prevDate => shiftPeriod(prevDate, periodType, 'previous'));
+
+	const getPreviousPeriodDates = useMemo(() => {
+		const previousPeriodDate = shiftPeriod(currentPeriod, periodType, 'previous');
+		return calculatePeriodDates(previousPeriodDate, periodType);
 	}, [currentPeriod, periodType]);
 
-	const nextPeriod = () => {
-		const newDate = new Date(currentPeriod);
-		switch (periodType) {
-			case 'weekly':
-				newDate.setDate(currentPeriod.getDate() + 7);
-				break;
-			case 'yearly':
-				newDate.setFullYear(currentPeriod.getFullYear() + 1);
-				break;
-			case 'monthly':
-			default:
-				newDate.setMonth(currentPeriod.getMonth() + 1);
-				break;
-		}
-
-		setCurrentPeriod(newDate);
-	};
-
-	const previousPeriod = () => {
-		const newDate = new Date(currentPeriod);
-		switch (periodType) {
-			case 'weekly':
-				newDate.setDate(currentPeriod.getDate() - 7);
-				break;
-			case 'yearly':
-				newDate.setFullYear(currentPeriod.getFullYear() - 1);
-				break;
-			case 'monthly':
-			default:
-				newDate.setMonth(currentPeriod.getMonth() - 1);
-				break;
-		}
-
-		setCurrentPeriod(newDate);
-	};
+	const getNextPeriodDates = useMemo(() => {
+		const nextPeriodDate = shiftPeriod(currentPeriod, periodType, 'next');
+		return calculatePeriodDates(nextPeriodDate, periodType);
+	}, [currentPeriod, periodType]);
 
 	return {
 		periodType,
@@ -69,25 +74,27 @@ export function usePeriod(initialPeriod: PeriodType = 'monthly') {
 		nextPeriod,
 		previousPeriod,
 		getPeriodDates,
+		getPreviousPeriodDates,
+		getNextPeriodDates,
 	};
 }
 
 export const usePeriodTitle = (periodType: PeriodType, currentPeriod: Date) => {
-	const {formater} = useLocale();
+	const {formatter} = useLocale();
 	switch (periodType) {
 		case 'weekly': {
 			const startOfWeek = new Date(currentPeriod);
 			startOfWeek.setDate(currentPeriod.getDate() - currentPeriod.getDay());
 			const endOfWeek = new Date(startOfWeek);
 			endOfWeek.setDate(startOfWeek.getDate() + 6);
-			return `${formater.date(startOfWeek, {day: 'numeric', month: 'short'})} - ${formater.date(endOfWeek, {day: 'numeric', month: 'short'})}`;
+			return `${formatter.date(startOfWeek, {day: 'numeric', month: 'short'})} - ${formatter.date(endOfWeek, {day: 'numeric', month: 'short'})}`;
 		}
 
 		case 'yearly':
-			return formater.date(currentPeriod, {year: 'numeric'});
+			return formatter.date(currentPeriod, {year: 'numeric'});
 
 		case 'monthly':
 		default:
-			return formater.date(currentPeriod, {month: 'long', year: 'numeric'});
+			return formatter.date(currentPeriod, {month: 'long', year: 'numeric'});
 	}
 };

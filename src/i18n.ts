@@ -36,15 +36,18 @@ export const useLocale = () => {
 
 	const date = useCallback((date: Date, options?: Intl.DateTimeFormatOptions) => date.toLocaleDateString(translation.i18n.language, options), [translation.i18n.language]);
 
+	const time = useCallback((date: Date, options?: Intl.DateTimeFormatOptions) => date.toLocaleTimeString(translation.i18n.language, options), [translation.i18n.language]);
+
 	const language = useMemo(() => languages.find(({code}) => code === translation.i18n.language), [translation.i18n.language]);
 
 	return {
 		...translation,
 		language,
 		languages,
-		formater: {
+		formatter: {
 			currency,
 			date,
+			time,
 		},
 	};
 };

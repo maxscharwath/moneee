@@ -19,7 +19,7 @@ export const TransactionGroup = memo(({
 	categories,
 	onTransactionLongPress,
 }: TransactionGroupProps) => {
-	const {formater} = useLocale();
+	const {formatter} = useLocale();
 	const totalTransactions = useCallback(
 		(transactions: Transaction[]) => transactions.reduce(
 			(acc, transaction) => {
@@ -46,7 +46,7 @@ export const TransactionGroup = memo(({
 			<h2
 				className='mb-2 flex items-center justify-between space-x-2 text-sm font-bold text-muted-foreground'>
 				<span>
-					{formater.date(new Date(date), {
+					{formatter.date(new Date(date), {
 						weekday: 'short',
 						day: 'numeric',
 						month: 'short',
@@ -55,7 +55,7 @@ export const TransactionGroup = memo(({
 				<Currency amount={totalTransactions(transactions)} signDisplay='always'/>
 			</h2>
 			<Separator className='my-2'/>
-			<ul className='space-y-2'>
+			<ul className='gap-1'>
 				{transactionsWithCategory.map(({
 					transaction,
 					category,

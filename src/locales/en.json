@@ -42,19 +42,19 @@
   },
   "transaction": {
     "add_note": "Add note",
+    "averagePerDay": "avg/day",
+    "averagePerMonth": "avg/mth",
     "balance": "Balance",
     "expense": "Expense",
     "income": "Income",
+    "incomePerDay": "income/day",
+    "incomePerMonth": "income/mth",
     "noTransactions": {
       "description": "You have no transactions for this period.",
       "title": "No entries"
     },
-    "title": "Transactions",
     "spentPerDay": "spent/day",
     "spentPerMonth": "spent/mth",
-    "averagePerDay": "avg/day",
-    "averagePerMonth": "avg/mth",
-    "incomePerDay": "income/day",
-    "incomePerMonth": "income/mth"
+    "title": "Transactions"
   }
 }

@@ -5,27 +5,24 @@ import {FinanceButton} from '@/components/finance-button.tsx';
 import {Header, HeaderTitle} from '@/components/header.tsx';
 import {Chart} from '@/components/chart.tsx';
 import {TransactionGroup} from '@/components/transaction-group.tsx';
-import {groupBy} from '@/lib/utils.ts';
+import {cn, groupBy} from '@/lib/utils.ts';
 import {Currency} from '@/components/currency.tsx';
 import {usePeriod, usePeriodTitle} from '@/hooks/usePeriod.ts';
 import {Alert, AlertDescription, AlertTitle} from '@/components/ui/alert.tsx';
 import {AnimatePresence, motion} from 'framer-motion';
 import {CategoryChart} from '@/components/category-chart.tsx';
 import {PeriodNavigation} from '@/components/period-navigation.tsx';
-import {
-	deleteTransaction,
-	getFilteredTransactions,
-	useCategories,
-} from '@/stores/db.ts';
+import {deleteTransaction} from '@/stores/db.ts';
 import {type Transaction} from '@/stores/schemas/transaction.ts';
 import {type Category} from '@/stores/schemas/category.ts';
 import {useLocale} from '@/i18n.ts';
 import {Container} from '@/components/container.tsx';
+import {useFinancialSummary} from '@/hooks/use-financial-summary.ts';
 
 type Filter = 'income' | 'expense' | 'all';
 
 export function Component() {
-	const {t, formater} = useLocale();
+	const {t, formatter} = useLocale();
 	const [filter, setFilter] = useState<Filter>('all');
 	const [categoryFilter, setCategoryFilter] = useState('');
 
@@ -36,43 +33,25 @@ export function Component() {
 		nextPeriod,
 		previousPeriod,
 		getPeriodDates: [startDate, endDate],
+		getPreviousPeriodDates: [previousStartDate, previousEndDate],
 	} = usePeriod();
 
-	const {result: transactions} = getFilteredTransactions(collection => collection.find({
-		selector: {
-			date: {
-				$gte: startDate.toISOString(),
-				$lte: endDate.toISOString(),
-			},
-		},
-		sort: [{date: 'desc'}],
-	}));
+	const {transactions, categories, totalIncome, totalExpenses, total} = useFinancialSummary(startDate, endDate);
+	const {total: previousTotal} = useFinancialSummary(previousStartDate, previousEndDate);
 
-	const {result: categories} = useCategories();
+	const percentageChange = useMemo(() => {
+		if (previousTotal === 0) {
+			return total === 0 ? 0 : 100;
+		}
+
+		return ((total - previousTotal) / Math.abs(previousTotal)) * 100;
+	}, [total, previousTotal]);
 
 	const filteredTransactions = useMemo(() =>
 		transactions
 			.filter(transaction => filter === 'all' || categories.find(category => category.uuid === transaction.category_id)?.type === filter)
 			.filter(transaction => categoryFilter === '' || transaction.category_id === categoryFilter),
 	[transactions, categories, filter, categoryFilter]);
-
-	const {
-		totalIncome,
-		totalExpenses,
-	} = useMemo(() => transactions.reduce(
-		(acc, transaction) => {
-			const category = categories.find(category => category.uuid === transaction.category_id);
-			const amount = category?.type === 'expense' ? -transaction.amount : transaction.amount;
-			return {
-				totalIncome: acc.totalIncome + (amount > 0 ? amount : 0),
-				totalExpenses: acc.totalExpenses + (amount < 0 ? -amount : 0),
-			};
-		},
-		{
-			totalIncome: 0,
-			totalExpenses: 0,
-		},
-	), [transactions, categories]);
 
 	const getDaysInPeriod = (periodType: string, date: Date): number => {
 		switch (periodType) {
@@ -117,7 +96,7 @@ export function Component() {
 				const total = transactionsInThisMonth.reduce((acc, transaction) => acc + filterTransactionAmount(transaction), 0);
 
 				return {
-					name: formater.date(new Date(currentPeriod.getFullYear(), monthIndex), {month: 'short'}),
+					name: formatter.date(new Date(currentPeriod.getFullYear(), monthIndex), {month: 'short'}),
 					total,
 				};
 			});
@@ -131,11 +110,11 @@ export function Component() {
 			const total = transactionsOnThisDay.reduce((acc, transaction) => acc + filterTransactionAmount(transaction), 0);
 
 			return {
-				name: formater.date(date, {day: '2-digit'}),
+				name: formatter.date(date, {day: '2-digit'}),
 				total,
 			};
 		});
-	}, [filteredTransactions, categories, filter, periodType, currentPeriod, formater]);
+	}, [filteredTransactions, categories, filter, periodType, currentPeriod, formatter]);
 
 	const categorySpendDetails = useMemo(() => {
 		const categorySpend: Record<string, {
@@ -197,7 +176,7 @@ export function Component() {
 			</Header>
 			<Container>
 				<motion.div
-					className='space-y-4'
+					className='flex flex-col gap-2'
 					drag='x'
 					dragConstraints={{left: 0, right: 0}}
 					dragElastic={0.1}
@@ -216,7 +195,21 @@ export function Component() {
 							<span className='text-sm font-bold uppercase text-muted-foreground'>
 								{usePeriodTitle(periodType, currentPeriod)}
 							</span>
-							<Currency amount={(totalIncome - totalExpenses)} className='text-xl font-bold'/>
+							<div className='flex items-center gap-2'>
+								<Currency amount={total} className='text-xl font-bold'/>
+								{percentageChange !== 0 && (
+									<span
+										className={cn(
+											'px-2 py-1 rounded-lg text-xs font-bold',
+											percentageChange < 0
+												? 'bg-red-500/30 text-red-500'
+												: 'bg-green-500/30 text-green-500',
+										)}
+									>
+										{percentageChange.toFixed()}%
+									</span>
+								)}
+							</div>
 						</div>
 						<div className='flex flex-col text-right'>
 							<span className='text-sm font-bold uppercase text-muted-foreground'>
@@ -289,3 +282,4 @@ export function Component() {
 }
 
 Component.displayName = 'Insights';
+

@@ -3,7 +3,7 @@
     "select": "Kategorie"
   },
   "insights": {
-    "title": "Einsichten"
+    "title": "Einblicke"
   },
   "period": {
     "monthly": "Monatlich",
@@ -42,19 +42,19 @@
   },
   "transaction": {
     "add_note": "Notiz hinzufügen",
+    "averagePerDay": "Durchschn./Tag",
+    "averagePerMonth": "Durchschn./Monat",
     "balance": "Saldo",
     "expense": "Ausgabe",
     "income": "Einkommen",
+    "incomePerDay": "Eink./Tag",
+    "incomePerMonth": "Eink./Monat",
     "noTransactions": {
       "description": "Sie haben keine Transaktionen für diesen Zeitraum.",
       "title": "Keine Einträge"
     },
-    "title": "Transaktionen",
     "spentPerDay": "Ausg./Tag",
     "spentPerMonth": "Ausg./Monat",
-    "averagePerDay": "Durchschn./Tag",
-    "averagePerMonth": "Durchschn./Monat",
-    "incomePerDay": "Eink./Tag",
-    "incomePerMonth": "Eink./Monat"
+    "title": "Transaktionen"
   }
 }

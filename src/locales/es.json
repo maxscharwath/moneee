@@ -42,19 +42,19 @@
   },
   "transaction": {
     "add_note": "Añadir nota",
+    "averagePerDay": "prom/día",
+    "averagePerMonth": "prom/mes",
     "balance": "Saldo",
     "expense": "Gasto",
     "income": "Ingreso",
+    "incomePerDay": "ingreso/día",
+    "incomePerMonth": "ingreso/mes",
     "noTransactions": {
       "description": "No tienes transacciones para este período.",
       "title": "Sin entradas"
     },
-    "title": "Transacciones",
     "spentPerDay": "gastado/día",
     "spentPerMonth": "gastado/mes",
-    "averagePerDay": "prom/día",
-    "averagePerMonth": "prom/mes",
-    "incomePerDay": "ingreso/día",
-    "incomePerMonth": "ingreso/mes"
+    "title": "Transacciones"
   }
 }
