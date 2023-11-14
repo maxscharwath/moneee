@@ -53,6 +53,7 @@
       "description": "Vous n'avez aucune transaction pour cette période.",
       "title": "Aucune entrée"
     },
+    "remove": "Supprimer la transaction",
     "spentPerDay": "dépensé/jour",
     "spentPerMonth": "dépensé/mois",
     "title": "Transactions"

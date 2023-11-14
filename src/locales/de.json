@@ -53,6 +53,7 @@
       "description": "Sie haben keine Transaktionen für diesen Zeitraum.",
       "title": "Keine Einträge"
     },
+    "remove": "Transaktion löschen",
     "spentPerDay": "Ausg./Tag",
     "spentPerMonth": "Ausg./Monat",
     "title": "Transaktionen"

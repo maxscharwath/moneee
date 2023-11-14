@@ -53,6 +53,7 @@
       "description": "Non ci sono transazioni per questo periodo.",
       "title": "Nessuna voce"
     },
+    "remove": "Elimina transazione",
     "spentPerDay": "speso/giorno",
     "spentPerMonth": "speso/mese",
     "title": "Transazioni"

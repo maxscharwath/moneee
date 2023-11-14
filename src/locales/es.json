@@ -53,6 +53,7 @@
       "description": "No tienes transacciones para este período.",
       "title": "Sin entradas"
     },
+    "remove": "Eliminar transacción",
     "spentPerDay": "gastado/día",
     "spentPerMonth": "gastado/mes",
     "title": "Transacciones"

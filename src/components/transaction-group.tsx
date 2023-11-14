@@ -5,6 +5,9 @@ import {Currency} from '@/components/currency.tsx';
 import {type Transaction} from '@/stores/schemas/transaction.ts';
 import {type Category} from '@/stores/schemas/category.ts';
 import {useLocale} from '@/i18n.ts';
+import * as LongPressDialog from '@/components/ui/longpress-dialog.tsx';
+import {Button} from '@/components/ui/button.tsx';
+import {Trash2Icon} from 'lucide-react';
 
 type TransactionGroupProps = {
 	date: string;
@@ -19,7 +22,7 @@ export const TransactionGroup = memo(({
 	categories,
 	onTransactionLongPress,
 }: TransactionGroupProps) => {
-	const {formatter} = useLocale();
+	const {formatter, t} = useLocale();
 	const totalTransactions = useCallback(
 		(transactions: Transaction[]) => transactions.reduce(
 			(acc, transaction) => {
@@ -61,7 +64,19 @@ export const TransactionGroup = memo(({
 					category,
 				}) => (
 					<li key={transaction.uuid}>
-						<TransactionItem transaction={transaction} category={category} onLongPress={onTransactionLongPress}/>
+						<LongPressDialog.Root>
+							<LongPressDialog.Trigger asChild>
+								<TransactionItem transaction={transaction} category={category}/>
+							</LongPressDialog.Trigger>
+							<LongPressDialog.Content>
+								<Button
+									className='gap-2'
+									onClick={() => {
+										onTransactionLongPress?.(transaction);
+									}}
+								>{t('transaction.remove')}<Trash2Icon className='ml-auto'/></Button>
+							</LongPressDialog.Content>
+						</LongPressDialog.Root>
 					</li>
 				))}
 			</ul>
