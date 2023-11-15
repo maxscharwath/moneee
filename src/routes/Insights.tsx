@@ -49,8 +49,8 @@ export function Component() {
 
 	const filteredTransactions = useMemo(() =>
 		transactions
-			.filter(transaction => filter === 'all' || categories.find(category => category.uuid === transaction.category_id)?.type === filter)
-			.filter(transaction => categoryFilter === '' || transaction.category_id === categoryFilter),
+			.filter(transaction => filter === 'all' || categories.find(category => category.uuid === transaction.categoryId)?.type === filter)
+			.filter(transaction => categoryFilter === '' || transaction.categoryId === categoryFilter),
 	[transactions, categories, filter, categoryFilter]);
 
 	const getDaysInPeriod = (periodType: string, date: Date): number => {
@@ -66,7 +66,7 @@ export function Component() {
 	};
 
 	const filterTransactionAmount = (transaction: Transaction): number => {
-		const transactionType = categories.find(category => category.uuid === transaction.category_id)?.type;
+		const transactionType = categories.find(category => category.uuid === transaction.categoryId)?.type;
 		return (filter === 'all' || filter === transactionType) ? transaction.amount : 0;
 	};
 
@@ -123,7 +123,7 @@ export function Component() {
 		}> = {};
 
 		transactions.forEach(transaction => {
-			const category = categories.find(category => category.uuid === transaction.category_id);
+			const category = categories.find(category => category.uuid === transaction.categoryId);
 			if (filter === category?.type) {
 				categorySpend[category.uuid] = {
 					total: (categorySpend[category.uuid]?.total || 0) + transaction.amount,

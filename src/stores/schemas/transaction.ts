@@ -20,12 +20,12 @@ export const TransactionSchema = toTypedRxJsonSchema({
 			type: 'string',
 			format: 'date-time',
 		},
-		category_id: {
+		categoryId: {
 			type: 'string',
 			ref: 'categories',
 		},
 	},
-	required: ['uuid', 'note', 'amount', 'date', 'category_id'],
+	required: ['uuid', 'note', 'amount', 'date', 'categoryId'],
 } as const);
 
 export type Transaction = ExtractDocumentTypeFromTypedRxJsonSchema<typeof TransactionSchema>;

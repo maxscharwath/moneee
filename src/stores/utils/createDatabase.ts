@@ -1,8 +1,7 @@
 import {
 	createRxDatabase,
 	type ExtractDocumentTypeFromTypedRxJsonSchema,
-	type RxCollection,
-	type RxJsonSchema,
+	type RxCollection, type RxCollectionCreator,
 } from 'rxdb';
 
 export const lazyInitialize = <A extends any[], R> (fn: (...args: A) => R) => {
@@ -10,20 +9,16 @@ export const lazyInitialize = <A extends any[], R> (fn: (...args: A) => R) => {
 	return (...args: A) => value ?? (value = fn(...args));
 };
 
-export const createDatabase = async <Schemas extends Record<string, RxJsonSchema<any>>> ({
-	schemas,
+export const createDatabase = async <Collections extends Record<string, RxCollectionCreator>> ({
+	collections,
 	...config
 }: {
-	schemas: Schemas;
+	collections: Collections;
 } & Parameters<typeof createRxDatabase>[0]) => {
 	const db = await createRxDatabase<{
-		[key in keyof Schemas]: RxCollection<ExtractDocumentTypeFromTypedRxJsonSchema<Schemas[key]>>;
+		[key in keyof Collections]: RxCollection<ExtractDocumentTypeFromTypedRxJsonSchema<Collections[key]['schema']>>;
 	}>(config);
-
-	await db.addCollections(Object.fromEntries(
-		Object.entries(schemas)
-			.map(([key, schema]) => [key, {schema}]),
-	));
+	await db.addCollections(collections);
 
 	return db;
 };

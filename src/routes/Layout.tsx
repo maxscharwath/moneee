@@ -2,22 +2,46 @@ import {BarChartBig, PlusIcon, Settings2} from 'lucide-react';
 import {Button} from '@/components/ui/button.tsx';
 import {NavLink, useLocation, useOutlet, type Location} from 'react-router-dom';
 import TransactionModal from '@/components/transaction-modal.tsx';
-import type React from 'react';
+import React from 'react';
 import {useState} from 'react';
 import {addTransaction} from '@/stores/db.ts';
 import {AnimatePresence, motion} from 'framer-motion';
 import {Footer} from '@/components/footer.tsx';
+import {type Optional} from '@/lib/utils.ts';
+import {type Transaction} from '@/stores/schemas/transaction.ts';
+
+const LayoutContext = React.createContext<{
+	openTransactionModal: (transaction?: Transaction) => void;
+} | null>(null);
+
+export const useLayout = () => {
+	const context = React.useContext(LayoutContext);
+	if (!context) {
+		throw new Error('useLayout must be used within a LayoutProvider');
+	}
+
+	return context;
+};
 
 export default function Layout() {
 	const [showModal, setShowModal] = useState(false);
-	const handleTransaction = (amount: number, date: Date, categoryId: string, note: string) => {
-		void addTransaction({
-			note,
-			amount,
-			category_id: categoryId,
-			date: date.toISOString(),
-		});
+	const [transaction, setTransaction] = useState<Transaction | undefined>(undefined);
 
+	const openTransactionModal = (transaction?: Transaction) => {
+		setTransaction(transaction);
+		setShowModal(true);
+	};
+
+	const toggleTransactionModal = (open: boolean) => {
+		if (!open) {
+			setTransaction(undefined);
+		}
+
+		setShowModal(open);
+	};
+
+	const handleTransaction = (transaction: Optional<Transaction, 'uuid'>) => {
+		void addTransaction(transaction);
 		setShowModal(false);
 	};
 
@@ -28,9 +52,11 @@ export default function Layout() {
 
 	return (
 		<div className='flex h-[100dvh] flex-col'>
-			<DirectionalTransition classname='flex flex-1 flex-col overflow-hidden bg-background px-safe' direction={direction} value={location.pathname}>
-				{outlet}
-			</DirectionalTransition>
+			<LayoutContext.Provider value={{openTransactionModal}}>
+				<DirectionalTransition classname='flex flex-1 flex-col overflow-hidden bg-background px-safe' direction={direction} value={location.pathname}>
+					{outlet}
+				</DirectionalTransition>
+			</LayoutContext.Provider>
 			<Footer>
 				<div
 					className='grid w-full grid-cols-[1fr,auto,1fr] items-center gap-4'>
@@ -41,7 +67,7 @@ export default function Layout() {
 							</NavLink>
 						</Button>
 					</div>
-					<Button onClick={() => setShowModal(true)}>
+					<Button onClick={() => openTransactionModal()}>
 						<PlusIcon/>
 					</Button>
 					<div className='flex justify-evenly'>
@@ -53,7 +79,7 @@ export default function Layout() {
 					</div>
 				</div>
 			</Footer>
-			<TransactionModal open={showModal} onOpenChange={setShowModal} onTransaction={handleTransaction}/>
+			<TransactionModal open={showModal} onOpenChange={toggleTransactionModal} onTransaction={handleTransaction} transaction={transaction} key={transaction?.uuid}/>
 		</div>
 	);
 }

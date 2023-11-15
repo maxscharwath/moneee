@@ -8,6 +8,7 @@ import {useLocale} from '@/i18n.ts';
 import * as LongPressDialog from '@/components/ui/longpress-dialog.tsx';
 import {Button} from '@/components/ui/button.tsx';
 import {Trash2Icon} from 'lucide-react';
+import {useLayout} from '@/routes/Layout.tsx';
 
 type TransactionGroupProps = {
 	date: string;
@@ -27,7 +28,7 @@ export const TransactionGroup = memo(({
 		(transactions: Transaction[]) => transactions.reduce(
 			(acc, transaction) => {
 				const transactionType = categories.find(
-					category => category.uuid === transaction.category_id,
+					category => category.uuid === transaction.categoryId,
 				)?.type;
 				return (
 					acc
@@ -41,8 +42,10 @@ export const TransactionGroup = memo(({
 
 	const transactionsWithCategory = useMemo(() => transactions.map(transaction => ({
 		transaction,
-		category: categories.find(category => category.uuid === transaction.category_id)!,
+		category: categories.find(category => category.uuid === transaction.categoryId)!,
 	})), [transactions, categories]);
+
+	const {openTransactionModal} = useLayout();
 
 	return (
 		<>
@@ -66,7 +69,9 @@ export const TransactionGroup = memo(({
 					<li key={transaction.uuid}>
 						<LongPressDialog.Root>
 							<LongPressDialog.Trigger asChild>
-								<TransactionItem transaction={transaction} category={category}/>
+								<TransactionItem transaction={transaction} category={category} onClick={() => {
+									openTransactionModal(transaction);
+								}}/>
 							</LongPressDialog.Trigger>
 							<LongPressDialog.Content>
 								<Button

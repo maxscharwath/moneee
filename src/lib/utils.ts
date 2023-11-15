@@ -21,3 +21,5 @@ export const parseNumberFromString = (str: string): number | null => {
 	const matched = /(\d+(\.\d)?)/.exec(normalizedString);
 	return matched ? parseFloat(matched[0]) : null;
 };
+
+export type Optional<T, K extends keyof T> = Omit<T, K> & Partial<T>;

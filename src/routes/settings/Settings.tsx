@@ -41,7 +41,7 @@ export function Component() {
 		};
 
 		const rows = transactions.map(transaction => {
-			const category = categories.find(cat => cat.uuid === transaction.category_id);
+			const category = categories.find(cat => cat.uuid === transaction.categoryId);
 			return [
 				transaction.amount,
 				new Date(transaction.date).toLocaleString(),

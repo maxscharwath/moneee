@@ -4,20 +4,22 @@ import {Button} from '@/components/ui/button.tsx';
 import * as TabsGroup from '@/components/ui/tabs-group.tsx';
 import {CalendarInput} from '@/components/calendar-input.tsx';
 import {NumericButton} from '@/components/numeric-button.tsx';
-import {parseNumberFromString} from '@/lib/utils.ts';
+import {type Optional, parseNumberFromString} from '@/lib/utils.ts';
 import {CategorySelect} from '@/components/category-select.tsx';
 import {Input} from '@/components/ui/input.tsx';
-import {getCategoriesByType} from '@/stores/db.ts';
+import {useCategories} from '@/stores/db.ts';
 import * as Dialog from '@radix-ui/react-dialog';
 import {type DialogProps} from '@radix-ui/react-dialog';
 import {Header} from '@/components/header.tsx';
 import {useLocale} from '@/i18n.ts';
+import {type Transaction} from '@/stores/schemas/transaction.ts';
 
 type TransactionModalProps = {
-	onTransaction: (amount: number, date: Date, categoryId: string, note: string) => void;
+	transaction?: Transaction;
+	onTransaction: (transaction: Optional<Transaction, 'uuid'>) => void;
 } & DialogProps;
 
-export default function TransactionModal({onTransaction, ...props}: TransactionModalProps) {
+export default function TransactionModal({transaction, onTransaction, ...props}: TransactionModalProps) {
 	const {t, formatter} = useLocale();
 	const {
 		value,
@@ -28,7 +30,8 @@ export default function TransactionModal({onTransaction, ...props}: TransactionM
 		isValid,
 		appendToValue,
 		clearLastDigit,
-	} = useNumericInput();
+	} = useNumericInput(transaction?.amount ?? 0);
+
 	const handlePaste = usePaste(value, setValue);
 	useKeyboard(valueString, appendToValue, clearLastDigit, hasDecimal);
 
@@ -40,15 +43,27 @@ export default function TransactionModal({onTransaction, ...props}: TransactionM
 		});
 	}, [formatter, value, decimalPlaces]);
 
-	const [type, setType] = React.useState<'income' | 'expense'>('expense');
-	const [date, setDate] = React.useState(new Date());
-	const [categoryId, setCategoryId] = React.useState('');
-	const [note, setNote] = React.useState('');
-	const {result: categories} = getCategoriesByType(type);
+	const [date, setDate] = React.useState(new Date(transaction?.date ?? Date.now()));
+	const [categoryId, setCategoryId] = React.useState(transaction?.categoryId ?? '');
+	const [note, setNote] = React.useState(transaction?.note ?? '');
+	const {result: categories} = useCategories();
+	const [type, setType] = React.useState<'income' | 'expense'>();
+
+	React.useEffect(() => {
+		setType(categories?.find(category => category.uuid === categoryId)?.type ?? 'expense');
+	}, [categories, transaction]);
+
+	const filteredCategories = useMemo(() => categories.filter(category => category.type === type), [categories, type]);
 
 	const handleTransaction = () => {
 		if (value > 0 && categoryId !== '') {
-			onTransaction(value, date, categoryId, note);
+			onTransaction({
+				uuid: transaction?.uuid,
+				amount: value,
+				categoryId,
+				date: date.toISOString(),
+				note,
+			});
 		}
 	};
 
@@ -106,7 +121,7 @@ export default function TransactionModal({onTransaction, ...props}: TransactionM
 						</div>
 						<div className='flex space-x-2'>
 							<CalendarInput date={date} setDate={setDate}/>
-							<CategorySelect value={categoryId} onValueChange={setCategoryId} categories={categories}/>
+							<CategorySelect value={categoryId} onValueChange={setCategoryId} categories={filteredCategories}/>
 						</div>
 						<div className='grid w-full max-w-lg grid-cols-3 gap-4 place-self-center'>
 							{['1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '0'].map(value => (

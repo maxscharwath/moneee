@@ -19,7 +19,7 @@ export function useFinancialSummary(startDate: Date, endDate: Date) {
 	return useMemo(() => {
 		const totalSummary = transactions.reduce(
 			(acc, transaction) => {
-				const category = categories.find(c => c.uuid === transaction.category_id);
+				const category = categories.find(c => c.uuid === transaction.categoryId);
 				const amount
 					= category?.type === 'expense' ? -transaction.amount : transaction.amount;
 				return {
