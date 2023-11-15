@@ -1,7 +1,7 @@
 import {
 	createRxDatabase,
 	type ExtractDocumentTypeFromTypedRxJsonSchema,
-	type RxCollection, type RxCollectionCreator,
+	type RxCollection, type RxCollectionCreator, type RxDatabase,
 } from 'rxdb';
 
 export const lazyInitialize = <A extends any[], R> (fn: (...args: A) => R) => {
@@ -14,11 +14,20 @@ export const createDatabase = async <Collections extends Record<string, RxCollec
 	...config
 }: {
 	collections: Collections;
-} & Parameters<typeof createRxDatabase>[0]) => {
+} & Parameters<typeof createRxDatabase>[0]): Promise<RxDatabase<{
+	[key in keyof Collections]: RxCollection<ExtractDocumentTypeFromTypedRxJsonSchema<Collections[key]['schema']>>;
+}>> => {
 	const db = await createRxDatabase<{
 		[key in keyof Collections]: RxCollection<ExtractDocumentTypeFromTypedRxJsonSchema<Collections[key]['schema']>>;
 	}>(config);
-	await db.addCollections(collections);
+	try {
+		await db.addCollections(collections);
+	} catch (e) {
+		// Todo: use migration strategy
+		console.error('Error while adding collections, trying to remove and recreate database', e);
+		await db.remove();
+		return createDatabase({collections, ...config});
+	}
 
 	return db;
 };
