@@ -18,7 +18,16 @@
     "language": {
       "title": "Lingua"
     },
+    "synchronisation": {
+      "title": "Sincronizzazione",
+      "register": "Registrati",
+      "login": "Accesso",
+      "authenticate": "Autenticare",
+      "authenticateWithDevice": "Autenticati con il tuo dispositivo",
+      "loginWithDevice": "Accedi con il tuo dispositivo"
+    },
     "root": {
+      "synchronisation": "Sincronizzazione",
       "appearance": "Aspetto",
       "categories": "Categorie",
       "currency": "Valuta",

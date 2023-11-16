@@ -2,7 +2,7 @@ import {Header, HeaderTitle} from '@/components/header.tsx';
 import {initializeDb, useSettings} from '@/stores/db.ts';
 import * as List from '@/components/ui/list.tsx';
 import {
-	ChevronRight,
+	ChevronRight, CloudIcon,
 	CoinsIcon,
 	ContrastIcon,
 	DownloadIcon,
@@ -200,6 +200,16 @@ export function Component() {
 									</Alert.AlertDialogFooter>
 								</Alert.AlertDialogContent>
 							</Alert.AlertDialog>
+							<List.ItemButton asChild>
+								<NavLink to='/settings/synchronisation' state={{direction: 'right'}}>
+									<List.ItemIcon className='bg-[#b19cd9]'>
+										<CloudIcon />
+									</List.ItemIcon>
+									<span className='truncate'>{t('settings.root.synchronisation')}</span>
+									<Spacing/>
+									<ChevronRight className='shrink-0'/>
+								</NavLink>
+							</List.ItemButton>
 						</List.List>
 					</List.Root>
 				</div>
