@@ -63,6 +63,7 @@
     "tailwindcss-safe-area": "^0.4.1",
     "typescript": "^5.2.2",
     "vite": "^4.5.0",
+    "vite-plugin-info": "^0.4.1",
     "vite-plugin-mkcert": "^1.16.0",
     "vite-plugin-pwa": "^0.16.7"
   }

@@ -1,9 +1,9 @@
-
 import path from 'path';
 import {defineConfig} from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import {VitePWA as vitePwa, type VitePWAOptions} from 'vite-plugin-pwa';
 import mkcert from 'vite-plugin-mkcert';
+import buildInfo from 'vite-plugin-info';
 
 const pwaConfig = {
 	registerType: 'autoUpdate',
@@ -40,7 +40,7 @@ const pwaConfig = {
 } satisfies Partial<VitePWAOptions>;
 
 export default defineConfig({
-	plugins: [react(), vitePwa(pwaConfig), mkcert()],
+	plugins: [react(), vitePwa(pwaConfig), mkcert(), buildInfo({prefix: '@build'})],
 	resolve: {
 		alias: {
 			'@': path.resolve(__dirname, './src'),
