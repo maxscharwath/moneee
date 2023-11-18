@@ -37,6 +37,9 @@ const pwaConfig = {
 			},
 		],
 	},
+	workbox: {
+		navigateFallbackDenylist: [/^\/api/],
+	},
 } satisfies Partial<VitePWAOptions>;
 
 export default defineConfig({
@@ -44,6 +47,15 @@ export default defineConfig({
 	resolve: {
 		alias: {
 			'@': path.resolve(__dirname, './src'),
+		},
+	},
+	server: {
+		proxy: {
+			'/api': {
+				target: 'http://localhost:3000',
+				changeOrigin: true,
+				secure: false,
+			},
 		},
 	},
 });
