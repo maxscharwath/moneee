@@ -6,7 +6,7 @@ import mkcert from 'vite-plugin-mkcert';
 import buildInfo from 'vite-plugin-info';
 
 const pwaConfig = {
-	registerType: 'autoUpdate',
+	registerType: 'prompt',
 	manifest: {
 		name: 'Moneee',
 		short_name: 'Moneee',
@@ -37,6 +37,7 @@ const pwaConfig = {
 			},
 		],
 	},
+	minify: true,
 	workbox: {
 		navigateFallbackDenylist: [/^\/api/],
 	},

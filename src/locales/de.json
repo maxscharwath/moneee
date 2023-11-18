@@ -12,22 +12,17 @@
     "yearly": "Jährlich"
   },
   "settings": {
+    "cache": {
+      "newVersionAvailable": "Neue Version verfügbar",
+      "upToDate": "Aktuell"
+    },
     "currency": {
       "title": "Währungen"
     },
     "language": {
       "title": "Sprache"
     },
-    "synchronisation": {
-      "title": "Synchronisation",
-      "register": "Registrieren",
-      "login": "Anmelden",
-      "authenticate": "Authentifizieren",
-      "authenticateWithDevice": "Mit Ihrem Gerät authentifizieren",
-      "loginWithDevice": "Mit Ihrem Gerät anmelden"
-    },
     "root": {
-      "synchronisation": "Synchronisation",
       "appearance": "Erscheinungsbild",
       "categories": "Kategorien",
       "currency": "Währung",
@@ -46,7 +41,16 @@
       "import": "Daten importieren",
       "language": "Sprache",
       "refreshCache": "Cache aktualisieren",
+      "synchronisation": "Synchronisation",
       "title": "Einstellungen"
+    },
+    "synchronisation": {
+      "authenticate": "Authentifizieren",
+      "authenticateWithDevice": "Mit Ihrem Gerät authentifizieren",
+      "login": "Anmelden",
+      "loginWithDevice": "Mit Ihrem Gerät anmelden",
+      "register": "Registrieren",
+      "title": "Synchronisation"
     }
   },
   "transaction": {

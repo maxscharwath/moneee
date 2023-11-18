@@ -12,22 +12,17 @@
     "yearly": "Annuale"
   },
   "settings": {
+    "cache": {
+      "newVersionAvailable": "Nuova versione disponibile",
+      "upToDate": "Aggiornato"
+    },
     "currency": {
       "title": "Valute"
     },
     "language": {
       "title": "Lingua"
     },
-    "synchronisation": {
-      "title": "Sincronizzazione",
-      "register": "Registrati",
-      "login": "Accesso",
-      "authenticate": "Autenticare",
-      "authenticateWithDevice": "Autenticati con il tuo dispositivo",
-      "loginWithDevice": "Accedi con il tuo dispositivo"
-    },
     "root": {
-      "synchronisation": "Sincronizzazione",
       "appearance": "Aspetto",
       "categories": "Categorie",
       "currency": "Valuta",
@@ -46,7 +41,16 @@
       "import": "Importa Dati",
       "language": "Lingua",
       "refreshCache": "Aggiorna Cache",
+      "synchronisation": "Sincronizzazione",
       "title": "Impostazioni"
+    },
+    "synchronisation": {
+      "authenticate": "Autenticare",
+      "authenticateWithDevice": "Autenticati con il tuo dispositivo",
+      "login": "Accesso",
+      "loginWithDevice": "Accedi con il tuo dispositivo",
+      "register": "Registrati",
+      "title": "Sincronizzazione"
     }
   },
   "transaction": {

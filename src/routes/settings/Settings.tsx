@@ -1,3 +1,4 @@
+import {useRegisterSW} from 'virtual:pwa-register/react';
 import {Header, HeaderTitle} from '@/components/header.tsx';
 import {initializeDb, useSettings} from '@/stores/db.ts';
 import * as List from '@/components/ui/list.tsx';
@@ -9,7 +10,7 @@ import {
 	LanguagesIcon,
 	LayoutGridIcon,
 	MonitorIcon,
-	MoonIcon,
+	MoonIcon, SaveIcon,
 	SunIcon,
 	Trash2Icon,
 	UploadIcon,
@@ -27,6 +28,11 @@ import {Spacing} from '@/components/spacing.tsx';
 
 export function Component() {
 	const {t, language} = useLocale();
+
+	const {
+		needRefresh: [needRefresh],
+		updateServiceWorker,
+	} = useRegisterSW();
 	const formatCSV = (transactions: Transaction[], categories: Category[]) => {
 		const headers = ['Amount', 'Date', 'Note', 'Category Name', 'Category Type'];
 
@@ -209,6 +215,20 @@ export function Component() {
 									<Spacing/>
 									<ChevronRight className='shrink-0'/>
 								</NavLink>
+							</List.ItemButton>
+							<List.ItemButton onClick={async () => updateServiceWorker(true)}>
+								<List.ItemIcon className='bg-[#ffb347]'>
+									<SaveIcon />
+								</List.ItemIcon>
+								<span className='truncate'>{t('settings.root.refreshCache')}</span>
+								<Spacing/>
+								<span className='truncate text-muted-foreground'>
+									{needRefresh
+										? t('settings.cache.newVersionAvailable')
+										: t('settings.cache.upToDate')
+									}
+								</span>
+								<ChevronRight className='shrink-0'/>
 							</List.ItemButton>
 						</List.List>
 					</List.Root>

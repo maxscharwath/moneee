@@ -12,22 +12,17 @@
     "yearly": "Annuel"
   },
   "settings": {
+    "cache": {
+      "newVersionAvailable": "Nouvelle version disponible",
+      "upToDate": "À jour"
+    },
     "currency": {
       "title": "Devises"
     },
     "language": {
       "title": "Langue"
     },
-    "synchronisation": {
-      "title": "Synchronisation",
-      "register": "S'inscrire",
-      "login": "Connexion",
-      "authenticate": "Authentifier",
-      "authenticateWithDevice": "Authentifier avec votre appareil",
-      "loginWithDevice": "Connexion avec votre appareil"
-    },
     "root": {
-      "synchronisation": "Synchronisation",
       "appearance": "Apparence",
       "categories": "Catégories",
       "currency": "Devise",
@@ -46,7 +41,16 @@
       "import": "Importer des données",
       "language": "Langue",
       "refreshCache": "Rafraîchir le cache",
+      "synchronisation": "Synchronisation",
       "title": "Paramètres"
+    },
+    "synchronisation": {
+      "authenticate": "Authentifier",
+      "authenticateWithDevice": "Authentifier avec votre appareil",
+      "login": "Connexion",
+      "loginWithDevice": "Connexion avec votre appareil",
+      "register": "S'inscrire",
+      "title": "Synchronisation"
     }
   },
   "transaction": {

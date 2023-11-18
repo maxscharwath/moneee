@@ -24,6 +24,7 @@
       "@/*": ["./src/*"]
     },
     "allowSyntheticDefaultImports": true,
+    "types": ["vite-plugin-pwa/react"]
   },
   "include": ["src","vite.config.ts", ".eslintrc.cjs"],
 }
