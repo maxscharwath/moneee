@@ -59,7 +59,7 @@ type ItemIconProps = {
 
 export const ItemIcon = forwardRef<HTMLDivElement, PropsWithChildren<ItemIconProps>>(({children, className, style}, ref) => (
 	<Avatar className='h-8 w-8' ref={ref}>
-		<AvatarFallback className={cn('p-1 text-primary', className)} style={style}>
+		<AvatarFallback className={cn('p-1 text-white', className)} style={style}>
 			{children}
 		</AvatarFallback>
 	</Avatar>
