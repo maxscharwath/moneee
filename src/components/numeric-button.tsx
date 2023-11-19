@@ -1,4 +1,4 @@
-import {Button} from '@/components/ui/button.tsx';
+import {Button} from '@/components/ui/button';
 import * as React from 'react';
 import {type ComponentProps} from 'react';
 

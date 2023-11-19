@@ -1,6 +1,6 @@
 import type React from 'react';
 import type {PropsWithChildren} from 'react';
-import {cn} from '@/lib/utils.ts';
+import {cn} from '@/lib/utils';
 
 export const Footer: React.FC<PropsWithChildren<React.HTMLAttributes<HTMLElement>>> = ({
 	children,

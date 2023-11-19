@@ -6,7 +6,12 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-	({className, type, icon, ...props}, ref) => (
+	({
+		className,
+		type,
+		icon,
+		...props
+	}, ref) => (
 		<label className='relative flex items-center'>
 			{/* Render icon if provided */}
 			{icon && <div

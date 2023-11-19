@@ -1,4 +1,4 @@
-import {getFilteredTransactions, useCategories} from '@/stores/db.ts';
+import {getFilteredTransactions, useCategories} from '@/stores/db';
 import {useMemo} from 'react';
 
 export function useFinancialSummary(startDate: Date, endDate: Date) {
@@ -21,7 +21,7 @@ export function useFinancialSummary(startDate: Date, endDate: Date) {
 			(acc, transaction) => {
 				const category = categories.find(c => c.uuid === transaction.categoryId);
 				const amount
-					= category?.type === 'expense' ? -transaction.amount : transaction.amount;
+          = category?.type === 'expense' ? -transaction.amount : transaction.amount;
 				return {
 					totalIncome: acc.totalIncome + (amount > 0 ? amount : 0),
 					totalExpenses: acc.totalExpenses + (amount < 0 ? -amount : 0),

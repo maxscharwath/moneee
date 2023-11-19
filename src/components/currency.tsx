@@ -8,7 +8,7 @@ import {
 	useSpring,
 	useTransform,
 } from 'framer-motion';
-import {useLocale} from '@/i18n.ts';
+import {useLocale} from '@/i18n';
 
 type HTMLAttributesWithoutMotionProps<Element extends HTMLElement, Attributes extends HTMLAttributes<Element> = HTMLAttributes<Element>> = {
 	[K in Exclude<keyof Attributes, keyof MotionProps>]?: Attributes[K];

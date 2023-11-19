@@ -1,5 +1,5 @@
 import {useMemo, useState} from 'react';
-import {useLocale} from '@/i18n.ts';
+import {useLocale} from '@/i18n';
 
 export type PeriodType = 'weekly' | 'monthly' | 'yearly';
 
@@ -87,7 +87,13 @@ export const usePeriodTitle = (periodType: PeriodType, currentPeriod: Date) => {
 			startOfWeek.setDate(currentPeriod.getDate() - currentPeriod.getDay());
 			const endOfWeek = new Date(startOfWeek);
 			endOfWeek.setDate(startOfWeek.getDate() + 6);
-			return `${formatter.date(startOfWeek, {day: 'numeric', month: 'short'})} - ${formatter.date(endOfWeek, {day: 'numeric', month: 'short'})}`;
+			return `${formatter.date(startOfWeek, {
+				day: 'numeric',
+				month: 'short',
+			})} - ${formatter.date(endOfWeek, {
+				day: 'numeric',
+				month: 'short',
+			})}`;
 		}
 
 		case 'yearly':
@@ -95,6 +101,9 @@ export const usePeriodTitle = (periodType: PeriodType, currentPeriod: Date) => {
 
 		case 'monthly':
 		default:
-			return formatter.date(currentPeriod, {month: 'long', year: 'numeric'});
+			return formatter.date(currentPeriod, {
+				month: 'long',
+				year: 'numeric',
+			});
 	}
 };

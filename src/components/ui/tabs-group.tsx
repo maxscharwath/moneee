@@ -41,10 +41,17 @@ type TabsContextType = VariantProps<typeof rootVariants>;
 
 const TabsContext = React.createContext<TabsContextType>({size: 'md'});
 
-type RootProps = React.ComponentPropsWithoutRef<typeof RadioGroup.Root> & VariantProps<typeof rootVariants>;
+type RootProps =
+  React.ComponentPropsWithoutRef<typeof RadioGroup.Root>
+  & VariantProps<typeof rootVariants>;
 
 export const Root = React.forwardRef<React.ElementRef<typeof RadioGroup.Root>, RootProps>(
-	({className, size, children, ...props}, ref) => {
+	({
+		className,
+		size,
+		children,
+		...props
+	}, ref) => {
 		const id = useId();
 		return (
 			<RadioGroup.Root ref={ref} className={cn(rootVariants({size}), className)} {...props}>
@@ -59,12 +66,18 @@ export const Root = React.forwardRef<React.ElementRef<typeof RadioGroup.Root>, R
 );
 Root.displayName = 'TabsRoot';
 
-type ItemProps = React.ComponentPropsWithoutRef<typeof RadioGroup.Item> & VariantProps<typeof itemVariants>;
+type ItemProps =
+  React.ComponentPropsWithoutRef<typeof RadioGroup.Item>
+  & VariantProps<typeof itemVariants>;
 
 export const Item = React.forwardRef<
 React.ElementRef<typeof RadioGroup.Item>,
 ItemProps
->(({className, asChild, ...props}, ref) => {
+>(({
+	className,
+	asChild,
+	...props
+}, ref) => {
 	const {size} = React.useContext(TabsContext);
 	const Comp = asChild ? Slot : 'span';
 	return (

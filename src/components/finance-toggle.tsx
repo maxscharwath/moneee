@@ -1,7 +1,7 @@
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
 import type React from 'react';
 import {ArrowDownRight, ArrowUpRight} from 'lucide-react';
-import {FinanceButton} from '@/components/finance-button.tsx';
+import {FinanceButton} from '@/components/finance-button';
 
 type FinanceToggleProps = {
 	totalIncome: number;

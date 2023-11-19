@@ -1,14 +1,14 @@
 import {memo, useCallback, useMemo} from 'react';
-import {TransactionItem} from '@/components/transaction-item.tsx';
-import {Separator} from '@/components/ui/separator.tsx';
-import {Currency} from '@/components/currency.tsx';
-import {type Transaction} from '@/stores/schemas/transaction.ts';
-import {type Category} from '@/stores/schemas/category.ts';
-import {useLocale} from '@/i18n.ts';
-import * as LongPressDialog from '@/components/ui/longpress-dialog.tsx';
-import {Button} from '@/components/ui/button.tsx';
+import {TransactionItem} from '@/components/transaction-item';
+import {Separator} from '@/components/ui/separator';
+import {Currency} from '@/components/currency';
+import {type Transaction} from '@/stores/schemas/transaction';
+import {type Category} from '@/stores/schemas/category';
+import {useLocale} from '@/i18n';
+import * as LongPressDialog from '@/components/ui/longpress-dialog';
+import {Button} from '@/components/ui/button';
 import {Trash2Icon} from 'lucide-react';
-import {useLayout} from '@/routes/Layout.tsx';
+import {useLayout} from '@/routes/Layout';
 
 type TransactionGroupProps = {
 	date: string;
@@ -23,7 +23,10 @@ export const TransactionGroup = memo(({
 	categories,
 	onTransactionLongPress,
 }: TransactionGroupProps) => {
-	const {formatter, t} = useLocale();
+	const {
+		formatter,
+		t,
+	} = useLocale();
 	const totalTransactions = useCallback(
 		(transactions: Transaction[]) => transactions.reduce(
 			(acc, transaction) => {

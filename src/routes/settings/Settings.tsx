@@ -1,97 +1,40 @@
 import {useRegisterSW} from 'virtual:pwa-register/react';
-import {Header, HeaderTitle} from '@/components/header.tsx';
-import {initializeDb, useSettings} from '@/stores/db.ts';
-import * as List from '@/components/ui/list.tsx';
+import {Header, HeaderTitle} from '@/components/header';
+import {initializeDb, useSettings} from '@/stores/db';
+import * as List from '@/components/ui/list';
 import {
-	ChevronRight, CloudIcon,
+	CloudIcon,
 	CoinsIcon,
 	ContrastIcon,
 	DownloadIcon,
 	LanguagesIcon,
 	LayoutGridIcon,
 	MonitorIcon,
-	MoonIcon, SaveIcon,
+	MoonIcon,
+	SaveIcon,
 	SunIcon,
 	Trash2Icon,
 	UploadIcon,
 } from 'lucide-react';
-import {NavLink} from 'react-router-dom';
 import {abbreviatedSha} from '@build/info';
 import {version} from '@build/package';
-import {type Transaction, TransactionSchema} from '@/stores/schemas/transaction.ts';
-import {type Category} from '@/stores/schemas/category.ts';
-import {useLocale} from '@/i18n.ts';
-import * as TabsGroup from '@/components/ui/tabs-group.tsx';
-import {Container} from '@/components/container.tsx';
-import * as Alert from '@/components/ui/alert-dialog';
-import {Spacing} from '@/components/spacing.tsx';
+import {type Transaction, TransactionSchema} from '@/stores/schemas/transaction';
+import {type Category} from '@/stores/schemas/category';
+import {useLocale} from '@/i18n';
+import * as TabsGroup from '@/components/ui/tabs-group';
+import {Container} from '@/components/container';
+import {SettingItem} from '@/components/settings-item';
 
 export function Component() {
-	const {t, language} = useLocale();
+	const {
+		t,
+		language,
+	} = useLocale();
 
 	const {
 		needRefresh: [needRefresh],
 		updateServiceWorker,
 	} = useRegisterSW();
-	const formatCSV = (transactions: Transaction[], categories: Category[]) => {
-		const headers = ['Amount', 'Date', 'Note', 'Category Name', 'Category Type'];
-
-		const escapeField = (field?: string) => {
-			if (!field) {
-				return '';
-			}
-
-			if (field.includes(',') || field.includes('\n') || field.includes('"')) {
-				return `"${field.replace(/"/g, '""')}"`; // Double up any double quotes and wrap field in double quotes
-			}
-
-			return field;
-		};
-
-		const rows = transactions.map(transaction => {
-			const category = categories.find(cat => cat.uuid === transaction.categoryId);
-			return [
-				transaction.amount,
-				new Date(transaction.date).toLocaleString(),
-				escapeField(transaction.note),
-				escapeField(category?.name),
-				escapeField(category?.type),
-			].join(',');
-		});
-
-		return [headers.join(','), ...rows].join('\n');
-	};
-
-	const exportToCsv = async () => {
-		try {
-			const db = await initializeDb();
-			const transactions = await db.transactions.find({
-				sort: [{date: 'desc'}],
-			}).exec();
-			const categories = await db.categories.find().exec();
-			const content = formatCSV(transactions, categories);
-
-			await navigator.share({
-				title: 'Transactions',
-				text: 'Transactions CSV',
-				files: [new File([content], 'transactions.csv', {type: 'text/csv'})],
-			});
-
-			console.log('Export successful!');
-		} catch (error) {
-			console.error('Export failed:', error);
-		}
-	};
-
-	const resetDb = async () => {
-		const db = await initializeDb();
-		await db.transactions.remove();
-		await db.addCollections({
-			transactions: {
-				schema: TransactionSchema,
-			},
-		});
-	};
 
 	const [settings, setSettings] = useSettings();
 
@@ -104,132 +47,106 @@ export function Component() {
 				<div className='min-h-full'>
 					<List.Root>
 						<List.List heading={t('settings.root.general')}>
-							<List.Item>
-								<List.ItemIcon className='bg-[#89cff0]'>
-									<ContrastIcon />
-								</List.ItemIcon>
-								<span className='truncate'>{t('settings.root.appearance')}</span>
-								<Spacing/>
+
+							<SettingItem
+								icon={ContrastIcon}
+								color='#89cff0'
+								title={t('settings.root.appearance')}
+							>
 								<TabsGroup.Root
 									size='sm'
 									value={settings?.appearance ?? 'system'}
 									onValueChange={value => setSettings({appearance: value as 'light' | 'dark' | 'system'})}
 								>
 									<TabsGroup.Item value='light' asChild>
-										<SunIcon />
+										<SunIcon/>
 									</TabsGroup.Item>
 									<TabsGroup.Item value='dark' asChild>
-										<MoonIcon />
+										<MoonIcon/>
 									</TabsGroup.Item>
 									<TabsGroup.Item value='system' asChild>
-										<MonitorIcon />
+										<MonitorIcon/>
 									</TabsGroup.Item>
 								</TabsGroup.Root>
-							</List.Item>
-							<List.ItemButton asChild>
-								<NavLink to='/settings/currency' state={{direction: 'right'}}>
-									<List.ItemIcon className='bg-[#ffb6c1]'>
-										<CoinsIcon />
-									</List.ItemIcon>
-									<span className='truncate'>{t('settings.root.currency')}</span>
-									<Spacing/>
-									<span className='truncate text-muted-foreground'>
-										{settings?.currency}
-									</span>
-									<ChevronRight className='shrink-0'/>
-								</NavLink>
-							</List.ItemButton>
-							<List.ItemButton asChild>
-								<NavLink to='/settings/language' state={{direction: 'right'}}>
-									<List.ItemIcon className='bg-[#5a96ee]'>
-										<LanguagesIcon />
-									</List.ItemIcon>
-									<span className='truncate'>{t('settings.root.language')}</span>
-									<Spacing/>
-									<span className='truncate text-muted-foreground'>
-										{language?.name}
-									</span>
-									<ChevronRight className='shrink-0'/>
-								</NavLink>
-							</List.ItemButton>
-							<List.ItemButton asChild>
-								<NavLink to='/settings/categories' state={{direction: 'right'}}>
-									<List.ItemIcon className='bg-[#c3aed6]'>
-										<LayoutGridIcon />
-									</List.ItemIcon>
-									<span className='truncate'>{t('settings.root.categories')}</span>
-									<Spacing/>
-									<ChevronRight className='shrink-0'/>
-								</NavLink>
-							</List.ItemButton>
+							</SettingItem>
+
+							<SettingItem
+								icon={CoinsIcon}
+								color='#ffb6c1'
+								title={t('settings.root.currency')}
+								href='/settings/currency'
+								value={settings?.currency}
+								chevron
+							/>
+
+							<SettingItem
+								icon={LanguagesIcon}
+								color='#5a96ee'
+								title={t('settings.root.language')}
+								href='/settings/language'
+								value={language?.name}
+								chevron
+							/>
+
+							<SettingItem
+								icon={LayoutGridIcon}
+								color='#c3aed6'
+								title={t('settings.root.categories')}
+								href='/settings/categories'
+								chevron
+							/>
+
 						</List.List>
 						<List.List heading={t('settings.root.data')}>
-							<List.ItemButton onClick={exportToCsv}>
-								<List.ItemIcon className='bg-[#77dd77]'>
-									<UploadIcon />
-								</List.ItemIcon>
-								<span className='truncate'>{t('settings.root.export')}</span>
-								<Spacing/>
-								<ChevronRight className='shrink-0'/>
-							</List.ItemButton>
-							<List.Item>
-								<List.ItemIcon className='bg-[#ffcc5c]'>
-									<DownloadIcon />
-								</List.ItemIcon>
-								<span className='truncate'>{t('settings.root.import')}</span>
-								<Spacing/>
-								<ChevronRight className='shrink-0'/>
-							</List.Item>
-							<Alert.AlertDialog>
-								<Alert.AlertDialogTrigger asChild>
-									<List.ItemButton>
-										<List.ItemIcon className='bg-[#ff6961]'>
-											<Trash2Icon />
-										</List.ItemIcon>
-										<span className='truncate'>{t('settings.root.erase.title')}</span>
-										<Spacing/>
-										<ChevronRight className='shrink-0'/>
-									</List.ItemButton>
-								</Alert.AlertDialogTrigger>
-								<Alert.AlertDialogContent>
-									<Alert.AlertDialogHeader>
-										<Alert.AlertDialogTitle>{t('settings.root.erase.alert.title')}</Alert.AlertDialogTitle>
-										<Alert.AlertDialogDescription>{t('settings.root.erase.alert.description')}</Alert.AlertDialogDescription>
-									</Alert.AlertDialogHeader>
-									<Alert.AlertDialogFooter>
-										<Alert.AlertDialogCancel>
-											{t('settings.root.erase.alert.cancel')}
-										</Alert.AlertDialogCancel>
-										<Alert.AlertDialogAction onClick={resetDb}>
-											{t('settings.root.erase.alert.confirm')}
-										</Alert.AlertDialogAction>
-									</Alert.AlertDialogFooter>
-								</Alert.AlertDialogContent>
-							</Alert.AlertDialog>
-							<List.ItemButton asChild>
-								<NavLink to='/settings/synchronisation' state={{direction: 'right'}}>
-									<List.ItemIcon className='bg-[#b19cd9]'>
-										<CloudIcon />
-									</List.ItemIcon>
-									<span className='truncate'>{t('settings.root.synchronisation')}</span>
-									<Spacing/>
-									<ChevronRight className='shrink-0'/>
-								</NavLink>
-							</List.ItemButton>
-							<List.ItemButton onClick={async () => updateServiceWorker(true)}>
-								<List.ItemIcon className='bg-[#ffb347]'>
-									<SaveIcon />
-								</List.ItemIcon>
-								<span className='truncate'>{t('settings.root.refreshCache')}</span>
-								<Spacing/>
-								<span className='truncate text-muted-foreground'>
-									{needRefresh
-										? t('settings.cache.newVersionAvailable')
-										: t('settings.cache.upToDate')
-									}
-								</span>
-								<ChevronRight className='shrink-0'/>
-							</List.ItemButton>
+							<SettingItem
+								icon={UploadIcon}
+								color='#77dd77'
+								title={t('settings.root.export')}
+								action={exportToCsv}
+								chevron
+							/>
+
+							<SettingItem
+								icon={DownloadIcon}
+								color='#ffcc5c'
+								title={t('settings.root.import')}
+								chevron
+							/>
+
+							<SettingItem
+								icon={Trash2Icon}
+								color='#ff6961'
+								title={t('settings.root.erase.title')}
+								alert={{
+									title: t('settings.root.erase.alert.title'),
+									description: t('settings.root.erase.alert.description'),
+									confirmText: t('settings.root.erase.alert.confirm'),
+									cancelText: t('settings.root.erase.alert.cancel'),
+									onConfirm: resetDb,
+								}}
+								chevron
+							/>
+
+							<SettingItem
+								icon={CloudIcon}
+								color='#b19cd9'
+								title={t('settings.root.synchronisation')}
+								href='/settings/synchronisation'
+								chevron
+							/>
+
+							<SettingItem
+								icon={SaveIcon}
+								color='#ffb347'
+								title={t('settings.root.refreshCache')}
+								action={async () => updateServiceWorker(true)}
+								value={needRefresh
+									? t('settings.cache.newVersionAvailable')
+									: t('settings.cache.upToDate')
+								}
+								chevron
+							/>
+
 						</List.List>
 					</List.Root>
 				</div>
@@ -243,3 +160,72 @@ export function Component() {
 }
 
 Component.displayName = 'Settings.Root';
+
+const formatCSV = (transactions: Transaction[], categories: Category[]) => {
+	const escapeField = (field?: string) =>
+		field ? `"${field.replace(/"/g, '""')}"` : '';
+
+	const headers = ['Amount', 'Date', 'Note', 'Category Name', 'Category Type']
+		.map(escapeField).join(',');
+
+	const rows = transactions.map(transaction => {
+		const category = categories.find(cat => cat.uuid === transaction.categoryId);
+		return [
+			transaction.amount,
+			new Date(transaction.date).toLocaleString(),
+			escapeField(transaction.note),
+			escapeField(category?.name),
+			escapeField(category?.type),
+		].join(',');
+	});
+
+	return [headers, ...rows].join('\n');
+};
+
+const exportToCsv = async () => {
+	try {
+		const db = await initializeDb();
+		const transactions = await db.transactions.find({
+			sort: [{date: 'desc'}],
+		})
+			.exec();
+		const categories = await db.categories.find()
+			.exec();
+		const content = formatCSV(transactions, categories);
+
+		const file = new File([content], 'transactions.csv', {type: 'text/csv'});
+
+		if (navigator.share) {
+			await navigator.share({
+				title: 'Transactions',
+				text: 'Transactions CSV',
+				files: [file],
+			});
+		} else {
+			download(file);
+		}
+
+		console.log('Export successful!');
+	} catch (error) {
+		console.error('Export failed:', error);
+	}
+};
+
+const download = (file: File) => {
+	const a = document.createElement('a');
+	const url = URL.createObjectURL(file);
+	a.href = url;
+	a.download = file.name;
+	a.click();
+	URL.revokeObjectURL(url);
+};
+
+const resetDb = async () => {
+	const db = await initializeDb();
+	await db.transactions.remove();
+	await db.addCollections({
+		transactions: {
+			schema: TransactionSchema,
+		},
+	});
+};

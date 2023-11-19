@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {type Theme} from '@/components/theme-provider.tsx';
+import {type Theme} from '@/components/theme-provider';
 
 export function useSystemTheme(): Theme {
 	const [systemTheme, setSystemTheme] = useState<Theme>(

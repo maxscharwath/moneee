@@ -1,7 +1,7 @@
 import type React from 'react';
 import {type ReactNode, useEffect} from 'react';
-import {useSettings} from '@/stores/db.ts';
-import {useSystemTheme} from '@/hooks/use-system-theme.ts';
+import {useSettings} from '@/stores/db';
+import {useSystemTheme} from '@/hooks/use-system-theme';
 
 export type Theme = 'dark' | 'light' | 'system';
 
@@ -11,18 +11,21 @@ type ThemeProviderProps = {
 };
 
 export const ThemeProvider: React.FC<ThemeProviderProps>
-	= ({children, defaultTheme = 'system'}) => {
-		const [settings] = useSettings();
-		const systemTheme = useSystemTheme();
-		const effectiveTheme = settings?.appearance ?? defaultTheme;
+= ({
+	children,
+	defaultTheme = 'system',
+}) => {
+	const [settings] = useSettings();
+	const systemTheme = useSystemTheme();
+	const effectiveTheme = settings?.appearance ?? defaultTheme;
 
-		useEffect(() => {
-			const root = document.documentElement;
-			const appliedTheme = effectiveTheme === 'system' ? systemTheme : effectiveTheme;
+	useEffect(() => {
+		const root = document.documentElement;
+		const appliedTheme = effectiveTheme === 'system' ? systemTheme : effectiveTheme;
 
-			root.classList.remove('light', 'dark');
-			root.classList.add(appliedTheme);
-		}, [effectiveTheme, systemTheme]);
+		root.classList.remove('light', 'dark');
+		root.classList.add(appliedTheme);
+	}, [effectiveTheme, systemTheme]);
 
-		return children;
-	};
+	return children;
+};

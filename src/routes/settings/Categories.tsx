@@ -1,12 +1,12 @@
-import {Header, HeaderTitle} from '@/components/header.tsx';
+import {Header, HeaderTitle} from '@/components/header';
 import {useTranslation} from 'react-i18next';
-import * as List from '@/components/ui/list.tsx';
+import * as List from '@/components/ui/list';
 import {ChevronLeft} from 'lucide-react';
 import {NavLink} from 'react-router-dom';
-import {Button} from '@/components/ui/button.tsx';
-import {getCategoriesByType} from '@/stores/db.ts';
-import {Container} from '@/components/container.tsx';
-import * as TabsGroup from '@/components/ui/tabs-group.tsx';
+import {Button} from '@/components/ui/button';
+import {getCategoriesByType} from '@/stores/db';
+import {Container} from '@/components/container';
+import * as TabsGroup from '@/components/ui/tabs-group';
 import React from 'react';
 
 export function Component() {

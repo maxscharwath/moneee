@@ -6,9 +6,7 @@
     "module": "ESNext",
     "skipLibCheck": true,
 
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
@@ -26,5 +24,5 @@
     "allowSyntheticDefaultImports": true,
     "types": ["vite-plugin-pwa/react"]
   },
-  "include": ["src","vite.config.ts", ".eslintrc.cjs"],
+  "include": ["src","vite.config.ts", ".eslintrc.cjs", "api"],
 }

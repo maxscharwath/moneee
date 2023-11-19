@@ -1,7 +1,9 @@
 import {
 	createRxDatabase,
 	type ExtractDocumentTypeFromTypedRxJsonSchema,
-	type RxCollection, type RxCollectionCreator, type RxDatabase,
+	type RxCollection,
+	type RxCollectionCreator,
+	type RxDatabase,
 } from 'rxdb';
 
 export const lazyInitialize = <A extends any[], R> (fn: (...args: A) => R) => {

@@ -2,14 +2,14 @@ import {addRxPlugin} from 'rxdb';
 import {getRxStorageDexie} from 'rxdb/plugins/storage-dexie';
 import {RxDBQueryBuilderPlugin} from 'rxdb/plugins/query-builder';
 import {RxDBUpdatePlugin} from 'rxdb/plugins/update';
-import {createDatabase, lazyInitialize} from '@/stores/utils/createDatabase.ts';
+import {createDatabase, lazyInitialize} from '@/stores/utils/createDatabase';
 import {useRxData} from 'rxdb-hooks';
 import {type QueryConstructor} from 'rxdb-hooks/dist/useRxData';
-import {type Transaction, TransactionSchema} from '@/stores/schemas/transaction.ts';
-import {type Category, CategorySchema} from '@/stores/schemas/category.ts';
-import {type Settings, SettingsSchema} from '@/stores/schemas/settings.ts';
-import {type Optional} from '@/lib/utils.ts';
-import {seeder} from '@/stores/seeder.ts';
+import {type Transaction, TransactionSchema} from '@/stores/schemas/transaction';
+import {type Category, CategorySchema} from '@/stores/schemas/category';
+import {type Settings, SettingsSchema} from '@/stores/schemas/settings';
+import {type Optional} from '@/lib/utils';
+import {seeder} from '@/stores/seeder';
 
 export const initializeDb = lazyInitialize(async () => {
 	addRxPlugin(RxDBUpdatePlugin);

@@ -1,11 +1,11 @@
 import {RotateCw} from 'lucide-react';
 import React from 'react';
 import {cn} from '@/lib/utils';
-import {Avatar, AvatarFallback} from '@/components/ui/avatar.tsx';
-import {Currency} from '@/components/currency.tsx';
-import {type Transaction} from '@/stores/schemas/transaction.ts';
-import {type Category} from '@/stores/schemas/category.ts';
-import {useLocale} from '@/i18n.ts';
+import {Avatar, AvatarFallback} from '@/components/ui/avatar';
+import {Currency} from '@/components/currency';
+import {type Transaction} from '@/stores/schemas/transaction';
+import {type Category} from '@/stores/schemas/category';
+import {useLocale} from '@/i18n';
 
 type TransactionItemProps = {
 	transaction: Transaction;

@@ -1,28 +1,31 @@
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
 import {ArrowDownRight, ArrowUpRight, Coins} from 'lucide-react';
 import {useMemo, useState} from 'react';
-import {FinanceButton} from '@/components/finance-button.tsx';
-import {Header, HeaderTitle} from '@/components/header.tsx';
-import {Chart} from '@/components/chart.tsx';
-import {TransactionGroup} from '@/components/transaction-group.tsx';
-import {cn, groupBy} from '@/lib/utils.ts';
-import {Currency} from '@/components/currency.tsx';
-import {usePeriod, usePeriodTitle} from '@/hooks/usePeriod.ts';
-import {Alert, AlertDescription, AlertTitle} from '@/components/ui/alert.tsx';
+import {FinanceButton} from '@/components/finance-button';
+import {Header, HeaderTitle} from '@/components/header';
+import {Chart} from '@/components/chart';
+import {TransactionGroup} from '@/components/transaction-group';
+import {cn, groupBy} from '@/lib/utils';
+import {Currency} from '@/components/currency';
+import {usePeriod, usePeriodTitle} from '@/hooks/usePeriod';
+import {Alert, AlertDescription, AlertTitle} from '@/components/ui/alert';
 import {AnimatePresence, motion} from 'framer-motion';
-import {CategoryChart} from '@/components/category-chart.tsx';
-import {PeriodNavigation} from '@/components/period-navigation.tsx';
-import {deleteTransaction} from '@/stores/db.ts';
-import {type Transaction} from '@/stores/schemas/transaction.ts';
-import {type Category} from '@/stores/schemas/category.ts';
-import {useLocale} from '@/i18n.ts';
-import {Container} from '@/components/container.tsx';
-import {useFinancialSummary} from '@/hooks/use-financial-summary.ts';
+import {CategoryChart} from '@/components/category-chart';
+import {PeriodNavigation} from '@/components/period-navigation';
+import {deleteTransaction} from '@/stores/db';
+import {type Transaction} from '@/stores/schemas/transaction';
+import {type Category} from '@/stores/schemas/category';
+import {useLocale} from '@/i18n';
+import {Container} from '@/components/container';
+import {useFinancialSummary} from '@/hooks/use-financial-summary';
 
 type Filter = 'income' | 'expense' | 'all';
 
 export function Component() {
-	const {t, formatter} = useLocale();
+	const {
+		t,
+		formatter,
+	} = useLocale();
 	const [filter, setFilter] = useState<Filter>('all');
 	const [categoryFilter, setCategoryFilter] = useState('');
 
@@ -36,7 +39,13 @@ export function Component() {
 		getPreviousPeriodDates: [previousStartDate, previousEndDate],
 	} = usePeriod();
 
-	const {transactions, categories, totalIncome, totalExpenses, total} = useFinancialSummary(startDate, endDate);
+	const {
+		transactions,
+		categories,
+		totalIncome,
+		totalExpenses,
+		total,
+	} = useFinancialSummary(startDate, endDate);
 	const {total: previousTotal} = useFinancialSummary(previousStartDate, previousEndDate);
 
 	const percentageChange = useMemo(() => {
@@ -141,7 +150,10 @@ export function Component() {
 		await deleteTransaction(transaction);
 	};
 
-	const {averagePerPeriodLabel, averagePerPeriod} = useMemo(() => {
+	const {
+		averagePerPeriodLabel,
+		averagePerPeriod,
+	} = useMemo(() => {
 		const daysInPeriod = getDaysInPeriod(periodType, currentPeriod);
 
 		let total = 0;
@@ -160,7 +172,10 @@ export function Component() {
 
 		const averagePerPeriod = periodType === 'yearly' ? (total / 12) : (total / daysInPeriod);
 
-		return {averagePerPeriodLabel, averagePerPeriod};
+		return {
+			averagePerPeriodLabel,
+			averagePerPeriod,
+		};
 	}, [filter, periodType, totalIncome, totalExpenses, currentPeriod, t]);
 
 	return (
@@ -178,9 +193,15 @@ export function Component() {
 				<motion.div
 					className='flex flex-col gap-2'
 					drag='x'
-					dragConstraints={{left: 0, right: 0}}
+					dragConstraints={{
+						left: 0,
+						right: 0,
+					}}
 					dragElastic={0.1}
-					onDragEnd={(_event, {offset, velocity}) => {
+					onDragEnd={(_event, {
+						offset,
+						velocity,
+					}) => {
 						const swipe = Math.abs(offset.x) * velocity.x;
 						const swipeThreshold = 10000;
 						if (swipe < -swipeThreshold) {
@@ -248,9 +269,18 @@ export function Component() {
 				<AnimatePresence>
 					{filter !== 'all' && filteredTransactions.length > 0 && (
 						<motion.div
-							initial={{opacity: 0, height: 0}}
-							animate={{opacity: 1, height: 'auto'}}
-							exit={{opacity: 0, height: 0}}
+							initial={{
+								opacity: 0,
+								height: 0,
+							}}
+							animate={{
+								opacity: 1,
+								height: 'auto',
+							}}
+							exit={{
+								opacity: 0,
+								height: 0,
+							}}
 						>
 							<Chart data={chartData}/>
 							<CategoryChart
@@ -265,7 +295,8 @@ export function Component() {
 					<ul className='space-y-8'>
 						{groupedTransactions.map(([key, transactions]) => (
 							<li key={key}>
-								<TransactionGroup date={key} transactions={transactions} categories={categories} onTransactionLongPress={handleTransactionDelete}/>
+								<TransactionGroup date={key} transactions={transactions} categories={categories}
+									onTransactionLongPress={handleTransactionDelete}/>
 							</li>
 						))}
 					</ul>

@@ -1,4 +1,4 @@
-import {type Database} from '@/stores/db.ts';
+import {type Database} from '@/stores/db';
 
 export async function seeder(db: Database) {
 	await db.settings.bulkInsert([{

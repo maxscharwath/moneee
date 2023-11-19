@@ -1,5 +1,5 @@
 import React, {forwardRef, type HTMLProps, type PropsWithChildren} from 'react';
-import {Avatar, AvatarFallback} from '@/components/ui/avatar.tsx';
+import {Avatar, AvatarFallback} from '@/components/ui/avatar';
 import {cn} from '@/lib/utils';
 import {Slot} from '@radix-ui/react-slot';
 
@@ -14,9 +14,13 @@ type ListProps = {
 	heading?: string;
 };
 
-export const List = React.forwardRef<HTMLUListElement, PropsWithChildren<ListProps>>(({children, heading}, ref) => (
+export const List = React.forwardRef<HTMLUListElement, PropsWithChildren<ListProps>>(({
+	children,
+	heading,
+}, ref) => (
 	<div>
-		{heading && <h2 className='mb-2 ml-2 text-xs font-bold uppercase text-muted-foreground'>{heading}</h2>}
+		{heading
+      && <h2 className='mb-2 ml-2 text-xs font-bold uppercase text-muted-foreground'>{heading}</h2>}
 		<ul ref={ref} className='flex flex-col gap-2 rounded-lg bg-muted p-1'>
 			{children}
 		</ul>
@@ -24,8 +28,12 @@ export const List = React.forwardRef<HTMLUListElement, PropsWithChildren<ListPro
 ));
 List.displayName = 'List';
 
-export const Item = React.forwardRef<HTMLLIElement, HTMLProps<HTMLLIElement>>(({children, ...props}, ref) => (
-	<li ref={ref} {...props} className='flex select-none items-center gap-2 overflow-hidden rounded-lg p-3'>
+export const Item = React.forwardRef<HTMLLIElement, HTMLProps<HTMLLIElement>>(({
+	children,
+	...props
+}, ref) => (
+	<li ref={ref} {...props}
+		className='flex select-none items-center gap-2 overflow-hidden rounded-lg p-3'>
 		{children}
 	</li>
 ));
@@ -57,7 +65,11 @@ type ItemIconProps = {
 	style?: React.CSSProperties;
 };
 
-export const ItemIcon = forwardRef<HTMLDivElement, PropsWithChildren<ItemIconProps>>(({children, className, style}, ref) => (
+export const ItemIcon = forwardRef<HTMLDivElement, PropsWithChildren<ItemIconProps>>(({
+	children,
+	className,
+	style,
+}, ref) => (
 	<Avatar className='h-8 w-8' ref={ref}>
 		<AvatarFallback className={cn('p-1 text-white', className)} style={style}>
 			{children}

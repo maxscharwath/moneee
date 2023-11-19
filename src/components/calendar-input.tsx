@@ -1,18 +1,24 @@
-import {Dialog, DialogContent, DialogTrigger} from '@/components/ui/dialog.tsx';
-import {Button} from '@/components/ui/button.tsx';
+import {Dialog, DialogContent, DialogTrigger} from '@/components/ui/dialog';
+import {Button} from '@/components/ui/button';
 import {CalendarIcon} from 'lucide-react';
-import {Calendar} from '@/components/ui/calendar.tsx';
+import {Calendar} from '@/components/ui/calendar';
 import {useState} from 'react';
-import {useDelayFunction} from '@/hooks/use-delay-function.ts';
-import {useLocale} from '@/i18n.ts';
+import {useDelayFunction} from '@/hooks/use-delay-function';
+import {useLocale} from '@/i18n';
 
 type CalendarInputProps = {
 	date: Date;
 	setDate: (date: Date) => void;
 };
 
-export const CalendarInput = ({date, setDate}: CalendarInputProps) => {
-	const {formatter, language} = useLocale();
+export const CalendarInput = ({
+	date,
+	setDate,
+}: CalendarInputProps) => {
+	const {
+		formatter,
+		language,
+	} = useLocale();
 	const [isOpen, setIsOpen] = useState(false);
 
 	const close = useDelayFunction(() => setIsOpen(false), 1000);

@@ -9,7 +9,7 @@ import {Button} from '@/components/ui/button';
 import {ChevronLeft, ChevronRight} from 'lucide-react';
 import {type PeriodType} from '@/hooks/usePeriod';
 import type React from 'react';
-import {useLocale} from '@/i18n.ts';
+import {useLocale} from '@/i18n';
 
 type PeriodNavigationProps = {
 	defaultValue?: PeriodType;

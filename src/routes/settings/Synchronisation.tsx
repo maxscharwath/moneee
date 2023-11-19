@@ -1,11 +1,11 @@
-import {Header, HeaderTitle} from '@/components/header.tsx';
+import {Header, HeaderTitle} from '@/components/header';
 import {ChevronLeft, FingerprintIcon, ScanFaceIcon} from 'lucide-react';
 import {NavLink} from 'react-router-dom';
-import {Button} from '@/components/ui/button.tsx';
-import {useLocale} from '@/i18n.ts';
-import {Container} from '@/components/container.tsx';
+import {Button} from '@/components/ui/button';
+import {useLocale} from '@/i18n';
+import {Container} from '@/components/container';
 import {useState} from 'react';
-import * as TabsGroup from '@/components/ui/tabs-group.tsx';
+import * as TabsGroup from '@/components/ui/tabs-group';
 
 export function Component() {
 	const {t} = useLocale();
@@ -16,13 +16,19 @@ export function Component() {
 		const credential = await navigator.credentials.create({
 			publicKey: {
 				challenge: crypto.getRandomValues(new Uint8Array(32)),
-				rp: {id: window.location.hostname, name: 'Moneee'},
+				rp: {
+					id: window.location.hostname,
+					name: 'Moneee',
+				},
 				user: {
 					id: crypto.getRandomValues(new Uint8Array(32)),
 					displayName: 'Moneee',
 					name: 'Moneee',
 				},
-				pubKeyCredParams: [{type: 'public-key', alg: -7}],
+				pubKeyCredParams: [{
+					type: 'public-key',
+					alg: -7,
+				}],
 			},
 		});
 		console.log(credential);

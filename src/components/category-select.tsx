@@ -4,11 +4,11 @@ import {
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from '@/components/ui/select.tsx';
+} from '@/components/ui/select';
 import {LayoutGrid} from 'lucide-react';
 import {memo} from 'react';
 import {useTranslation} from 'react-i18next';
-import {type Category} from '@/stores/schemas/category.ts';
+import {type Category} from '@/stores/schemas/category';
 
 type CategorySelectProps = {
 	value: string;

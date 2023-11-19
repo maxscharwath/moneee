@@ -1,14 +1,13 @@
 import {BarChartBig, PlusIcon, Settings2} from 'lucide-react';
-import {Button} from '@/components/ui/button.tsx';
-import {NavLink, useLocation, useOutlet, type Location} from 'react-router-dom';
-import TransactionModal from '@/components/transaction-modal.tsx';
-import React from 'react';
-import {useState} from 'react';
-import {addTransaction} from '@/stores/db.ts';
+import {Button} from '@/components/ui/button';
+import {type Location, NavLink, useLocation, useOutlet} from 'react-router-dom';
+import TransactionModal from '@/components/transaction-modal';
+import React, {useState} from 'react';
+import {addTransaction} from '@/stores/db';
 import {AnimatePresence, motion} from 'framer-motion';
-import {Footer} from '@/components/footer.tsx';
-import {type Optional} from '@/lib/utils.ts';
-import {type Transaction} from '@/stores/schemas/transaction.ts';
+import {Footer} from '@/components/footer';
+import {type Optional} from '@/lib/utils';
+import {type Transaction} from '@/stores/schemas/transaction';
 
 const LayoutContext = React.createContext<{
 	openTransactionModal: (transaction?: Transaction) => void;
@@ -53,7 +52,9 @@ export default function Layout() {
 	return (
 		<div className='flex h-[100dvh] flex-col'>
 			<LayoutContext.Provider value={{openTransactionModal}}>
-				<DirectionalTransition classname='flex flex-1 flex-col overflow-hidden bg-background px-safe' direction={direction} value={location.pathname}>
+				<DirectionalTransition
+					classname='flex flex-1 flex-col overflow-hidden bg-background px-safe'
+					direction={direction} value={location.pathname}>
 					{outlet}
 				</DirectionalTransition>
 			</LayoutContext.Provider>
@@ -79,14 +80,25 @@ export default function Layout() {
 					</div>
 				</div>
 			</Footer>
-			<TransactionModal open={showModal} onOpenChange={toggleTransactionModal} onTransaction={handleTransaction} transaction={transaction} key={transaction?.uuid}/>
+			<TransactionModal open={showModal} onOpenChange={toggleTransactionModal}
+				onTransaction={handleTransaction} transaction={transaction}
+				key={transaction?.uuid}/>
 		</div>
 	);
 }
 
 type Direction = 'left' | 'right' | 'none';
 
-const DirectionalTransition: React.FC<React.PropsWithChildren<{classname: string;direction: Direction;value: string}>> = ({children, classname, direction, value}) => {
+const DirectionalTransition: React.FC<React.PropsWithChildren<{
+	classname: string;
+	direction: Direction;
+	value: string;
+}>> = ({
+	children,
+	classname,
+	direction,
+	value,
+}) => {
 	const variants = {
 		enter: (direction: Direction) => direction === 'none' ? {} : {
 			x: direction === 'left' ? '-80vw' : '80vw',
@@ -112,7 +124,10 @@ const DirectionalTransition: React.FC<React.PropsWithChildren<{classname: string
 				initial='enter'
 				animate='center'
 				exit='exit'
-				transition={{ease: 'easeInOut', duration: 0.2}}
+				transition={{
+					ease: 'easeInOut',
+					duration: 0.2,
+				}}
 			>
 				{children}
 			</motion.main>

@@ -1,12 +1,12 @@
-import {Header, HeaderTitle} from '@/components/header.tsx';
+import {Header, HeaderTitle} from '@/components/header';
 import {useTranslation} from 'react-i18next';
-import * as List from '@/components/ui/list.tsx';
+import * as List from '@/components/ui/list';
 import {CheckIcon, ChevronLeft} from 'lucide-react';
 import * as RadioGroup from '@radix-ui/react-radio-group';
 import {NavLink} from 'react-router-dom';
-import {Button} from '@/components/ui/button.tsx';
-import {useSettings} from '@/stores/db.ts';
-import {Container} from '@/components/container.tsx';
+import {Button} from '@/components/ui/button';
+import {useSettings} from '@/stores/db';
+import {Container} from '@/components/container';
 import {useEffect, useState} from 'react';
 
 type Currency = {
@@ -26,11 +26,24 @@ function useAsync<T>(fn: () => Promise<T>, deps: any[] = []) {
 	});
 
 	useEffect(() => {
-		setState({status: 'pending', data: null, error: null});
-		fn().then(
-			data => setState({status: 'success', data, error: null}),
-			(error: Error) => setState({status: 'error', data: null, error}),
-		);
+		setState({
+			status: 'pending',
+			data: null,
+			error: null,
+		});
+		fn()
+			.then(
+				data => setState({
+					status: 'success',
+					data,
+					error: null,
+				}),
+				(error: Error) => setState({
+					status: 'error',
+					data: null,
+					error,
+				}),
+			);
 	}, deps);
 
 	return state;
@@ -61,7 +74,10 @@ export function Component() {
 					onValueChange={handleCurrencyChange}>
 					<List.Root>
 						<List.List>
-							{data?.map(({code, name}) => (
+							{data?.map(({
+								code,
+								name,
+							}) => (
 								<RadioGroup.Item asChild value={code} key={code}>
 									<List.ItemButton>
 										<span className='font-bold text-muted-foreground'>{code}</span>

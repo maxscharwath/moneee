@@ -1,7 +1,7 @@
 import type React from 'react';
 import {forwardRef} from 'react';
-import {Avatar, AvatarFallback} from '@/components/ui/avatar.tsx';
-import {Currency} from '@/components/currency.tsx';
+import {Avatar, AvatarFallback} from '@/components/ui/avatar';
+import {Currency} from '@/components/currency';
 
 export type FinanceButtonProps = {
 	colorClass: string;

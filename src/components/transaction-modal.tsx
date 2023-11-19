@@ -1,26 +1,33 @@
 import React, {useCallback, useEffect, useMemo} from 'react';
 import {Check, Delete, ScrollText, XIcon} from 'lucide-react';
-import {Button} from '@/components/ui/button.tsx';
-import * as TabsGroup from '@/components/ui/tabs-group.tsx';
-import {CalendarInput} from '@/components/calendar-input.tsx';
-import {NumericButton} from '@/components/numeric-button.tsx';
-import {type Optional, parseNumberFromString} from '@/lib/utils.ts';
-import {CategorySelect} from '@/components/category-select.tsx';
-import {Input} from '@/components/ui/input.tsx';
-import {useCategories} from '@/stores/db.ts';
+import {Button} from '@/components/ui/button';
+import * as TabsGroup from '@/components/ui/tabs-group';
+import {CalendarInput} from '@/components/calendar-input';
+import {NumericButton} from '@/components/numeric-button';
+import {type Optional, parseNumberFromString} from '@/lib/utils';
+import {CategorySelect} from '@/components/category-select';
+import {Input} from '@/components/ui/input';
+import {useCategories} from '@/stores/db';
 import * as Dialog from '@radix-ui/react-dialog';
 import {type DialogProps} from '@radix-ui/react-dialog';
-import {Header} from '@/components/header.tsx';
-import {useLocale} from '@/i18n.ts';
-import {type Transaction} from '@/stores/schemas/transaction.ts';
+import {Header} from '@/components/header';
+import {useLocale} from '@/i18n';
+import {type Transaction} from '@/stores/schemas/transaction';
 
 type TransactionModalProps = {
 	transaction?: Transaction;
 	onTransaction: (transaction: Optional<Transaction, 'uuid'>) => void;
 } & DialogProps;
 
-export default function TransactionModal({transaction, onTransaction, ...props}: TransactionModalProps) {
-	const {t, formatter} = useLocale();
+export default function TransactionModal({
+	transaction,
+	onTransaction,
+	...props
+}: TransactionModalProps) {
+	const {
+		t,
+		formatter,
+	} = useLocale();
 	const {
 		value,
 		valueString,
@@ -100,7 +107,8 @@ export default function TransactionModal({transaction, onTransaction, ...props}:
 						<div className='grid grow grid-cols-[1fr,auto,1fr] items-center gap-4'>
 							<div/>
 							<div className='flex flex-col items-center space-y-4'>
-								<button className='truncate text-center text-4xl font-extrabold' onClick={handlePaste}>
+								<button className='truncate text-center text-4xl font-extrabold'
+									onClick={handlePaste}>
 									{formatAmount}
 								</button>
 								<Input
@@ -121,7 +129,8 @@ export default function TransactionModal({transaction, onTransaction, ...props}:
 						</div>
 						<div className='flex space-x-2'>
 							<CalendarInput date={date} setDate={setDate}/>
-							<CategorySelect value={categoryId} onValueChange={setCategoryId} categories={filteredCategories}/>
+							<CategorySelect value={categoryId} onValueChange={setCategoryId}
+								categories={filteredCategories}/>
 						</div>
 						<div className='grid w-full max-w-lg grid-cols-3 gap-4 place-self-center'>
 							{['1', '2', '3', '4', '5', '6', '7', '8', '9', '.', '0'].map(value => (

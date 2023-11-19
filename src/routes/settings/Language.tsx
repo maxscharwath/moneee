@@ -1,14 +1,19 @@
-import {Header, HeaderTitle} from '@/components/header.tsx';
-import * as List from '@/components/ui/list.tsx';
+import {Header, HeaderTitle} from '@/components/header';
+import * as List from '@/components/ui/list';
 import {CheckIcon, ChevronLeft} from 'lucide-react';
 import * as RadioGroup from '@radix-ui/react-radio-group';
 import {NavLink} from 'react-router-dom';
-import {Button} from '@/components/ui/button.tsx';
-import {useLocale} from '@/i18n.ts';
-import {Container} from '@/components/container.tsx';
+import {Button} from '@/components/ui/button';
+import {useLocale} from '@/i18n';
+import {Container} from '@/components/container';
 
 export function Component() {
-	const {t, i18n, language, languages} = useLocale();
+	const {
+		t,
+		i18n,
+		language,
+		languages,
+	} = useLocale();
 
 	const handleLanguageChange = (lang: string) => {
 		void i18n.changeLanguage(lang);
@@ -30,7 +35,10 @@ export function Component() {
 					onValueChange={handleLanguageChange}>
 					<List.Root>
 						<List.List>
-							{languages.map(({code, name}) => (
+							{languages.map(({
+								code,
+								name,
+							}) => (
 								<RadioGroup.Item asChild value={code} key={code}>
 									<List.ItemButton>
 										<span className='truncate'>{name}</span>
