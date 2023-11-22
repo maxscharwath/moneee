@@ -6,7 +6,7 @@ import {
     useLocation,
     useOutlet,
 } from 'react-router-dom';
-import TransactionModal from '@/components/transaction-modal';
+import { TransactionModal } from '@/components/transaction-modal';
 import React, { useState } from 'react';
 import { addTransaction } from '@/stores/db';
 import { AnimatePresence, motion } from 'framer-motion';

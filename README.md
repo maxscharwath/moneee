@@ -12,10 +12,10 @@ Live App: [moneee.vercel.app](https://moneee.vercel.app)
 
 ## Features
 
-- **Visualized Tracking**: Easy-to-use interface for tracking finances.
-- **Insightful Analytics**: Detailed reports and spending breakdowns.
-- **Alerts & Notifications**: Timely reminders for due payments.
-- **Multi-Platform**: Access your financial data anywhere, on any device.
+-   **Visualized Tracking**: Easy-to-use interface for tracking finances.
+-   **Insightful Analytics**: Detailed reports and spending breakdowns.
+-   **Alerts & Notifications**: Timely reminders for due payments.
+-   **Multi-Platform**: Access your financial data anywhere, on any device.
 
 ## Getting Started
 
@@ -32,11 +32,11 @@ pnpm dev
 
 ## Built With
 
-- **React.js** - A JavaScript library for building user interfaces.
-- **Tailwind CSS** - A utility-first CSS framework for rapid UI development.
-- **RxDB** - A real-time database for JavaScript applications.
-- **Recharts** - A composable charting library built on React components.
-- **i18next** - An internationalization-framework written in and for JavaScript.
+-   **React.js** - A JavaScript library for building user interfaces.
+-   **Tailwind CSS** - A utility-first CSS framework for rapid UI development.
+-   **RxDB** - A real-time database for JavaScript applications.
+-   **Recharts** - A composable charting library built on React components.
+-   **i18next** - An internationalization-framework written in and for JavaScript.
 
 ## Contributing
 
