@@ -1,74 +1,74 @@
 {
-  "category": {
-    "select": "Catégorie"
-  },
-  "insights": {
-    "title": "Aperçus"
-  },
-  "period": {
-    "monthly": "Mensuel",
-    "placeholder": "Sélectionnez la période",
-    "weekly": "Hebdomadaire",
-    "yearly": "Annuel"
-  },
-  "settings": {
-    "cache": {
-      "newVersionAvailable": "Nouvelle version disponible",
-      "upToDate": "À jour"
+    "category": {
+        "select": "Catégorie"
     },
-    "currency": {
-      "title": "Devises"
+    "insights": {
+        "title": "Aperçus"
     },
-    "language": {
-      "title": "Langue"
+    "period": {
+        "monthly": "Mensuel",
+        "placeholder": "Sélectionnez la période",
+        "weekly": "Hebdomadaire",
+        "yearly": "Annuel"
     },
-    "root": {
-      "appearance": "Apparence",
-      "categories": "Catégories",
-      "currency": "Devise",
-      "data": "Données",
-      "erase": {
-        "alert": {
-          "cancel": "Annuler",
-          "confirm": "Effacer",
-          "description": "Cette action ne peut pas être annulée. Cela supprimera définitivement vos transactions et retirera les données de l'application.",
-          "title": "Êtes-vous absolument sûr?"
+    "settings": {
+        "cache": {
+            "newVersionAvailable": "Nouvelle version disponible",
+            "upToDate": "À jour"
         },
-        "title": "Effacer les données"
-      },
-      "export": "Exporter les données",
-      "general": "Général",
-      "import": "Importer des données",
-      "language": "Langue",
-      "refreshCache": "Rafraîchir le cache",
-      "synchronisation": "Synchronisation",
-      "title": "Paramètres"
+        "currency": {
+            "title": "Devises"
+        },
+        "language": {
+            "title": "Langue"
+        },
+        "root": {
+            "appearance": "Apparence",
+            "categories": "Catégories",
+            "currency": "Devise",
+            "data": "Données",
+            "erase": {
+                "alert": {
+                    "cancel": "Annuler",
+                    "confirm": "Effacer",
+                    "description": "Cette action ne peut pas être annulée. Cela supprimera définitivement vos transactions et retirera les données de l'application.",
+                    "title": "Êtes-vous absolument sûr?"
+                },
+                "title": "Effacer les données"
+            },
+            "export": "Exporter les données",
+            "general": "Général",
+            "import": "Importer des données",
+            "language": "Langue",
+            "refreshCache": "Rafraîchir le cache",
+            "synchronisation": "Synchronisation",
+            "title": "Paramètres"
+        },
+        "synchronisation": {
+            "authenticate": "Authentifier",
+            "authenticateWithDevice": "Authentifier avec votre appareil",
+            "login": "Connexion",
+            "loginWithDevice": "Connexion avec votre appareil",
+            "register": "S'inscrire",
+            "title": "Synchronisation"
+        }
     },
-    "synchronisation": {
-      "authenticate": "Authentifier",
-      "authenticateWithDevice": "Authentifier avec votre appareil",
-      "login": "Connexion",
-      "loginWithDevice": "Connexion avec votre appareil",
-      "register": "S'inscrire",
-      "title": "Synchronisation"
+    "transaction": {
+        "add_note": "Ajouter une note",
+        "averagePerDay": "moy/jour",
+        "averagePerMonth": "moy/mois",
+        "balance": "Solde",
+        "expense": "Dépense",
+        "income": "Revenu",
+        "incomePerDay": "revenu/jour",
+        "incomePerMonth": "revenu/mois",
+        "noTransactions": {
+            "description": "Vous n'avez aucune transaction pour cette période.",
+            "title": "Aucune entrée"
+        },
+        "remove": "Supprimer la transaction",
+        "spentPerDay": "dépensé/jour",
+        "spentPerMonth": "dépensé/mois",
+        "title": "Transactions"
     }
-  },
-  "transaction": {
-    "add_note": "Ajouter une note",
-    "averagePerDay": "moy/jour",
-    "averagePerMonth": "moy/mois",
-    "balance": "Solde",
-    "expense": "Dépense",
-    "income": "Revenu",
-    "incomePerDay": "revenu/jour",
-    "incomePerMonth": "revenu/mois",
-    "noTransactions": {
-      "description": "Vous n'avez aucune transaction pour cette période.",
-      "title": "Aucune entrée"
-    },
-    "remove": "Supprimer la transaction",
-    "spentPerDay": "dépensé/jour",
-    "spentPerMonth": "dépensé/mois",
-    "title": "Transactions"
-  }
 }

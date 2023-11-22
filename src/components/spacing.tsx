@@ -1,1 +1,1 @@
-export const Spacing = () => <div className='ml-auto'/>;
+export const Spacing = () => <div className="ml-auto" />;

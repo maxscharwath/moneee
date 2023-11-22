@@ -72,7 +72,7 @@
     }
 
     html {
-        @apply bg-background text-foreground overscroll-y-none select-none;
+        @apply select-none overscroll-y-none bg-background text-foreground;
         -webkit-tap-highlight-color: transparent;
     }
 }

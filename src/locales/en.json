@@ -1,74 +1,74 @@
 {
-  "category": {
-    "select": "Category"
-  },
-  "insights": {
-    "title": "Insights"
-  },
-  "period": {
-    "monthly": "Monthly",
-    "placeholder": "Select period",
-    "weekly": "Weekly",
-    "yearly": "Yearly"
-  },
-  "settings": {
-    "cache": {
-      "newVersionAvailable": "New version available",
-      "upToDate": "Up to date"
+    "category": {
+        "select": "Category"
     },
-    "currency": {
-      "title": "Currencies"
+    "insights": {
+        "title": "Insights"
     },
-    "language": {
-      "title": "Language"
+    "period": {
+        "monthly": "Monthly",
+        "placeholder": "Select period",
+        "weekly": "Weekly",
+        "yearly": "Yearly"
     },
-    "root": {
-      "appearance": "Appearance",
-      "categories": "Categories",
-      "currency": "Currency",
-      "data": "Data",
-      "erase": {
-        "alert": {
-          "cancel": "Cancel",
-          "confirm": "Erase",
-          "description": "This action cannot be undone. This will permanently delete your transactions and remove the data from the app.",
-          "title": "Are you absolutely sure?"
+    "settings": {
+        "cache": {
+            "newVersionAvailable": "New version available",
+            "upToDate": "Up to date"
         },
-        "title": "Erase Data"
-      },
-      "export": "Export Data",
-      "general": "General",
-      "import": "Import Data",
-      "language": "Language",
-      "refreshCache": "Refresh Cache",
-      "synchronisation": "Synchronization",
-      "title": "Settings"
+        "currency": {
+            "title": "Currencies"
+        },
+        "language": {
+            "title": "Language"
+        },
+        "root": {
+            "appearance": "Appearance",
+            "categories": "Categories",
+            "currency": "Currency",
+            "data": "Data",
+            "erase": {
+                "alert": {
+                    "cancel": "Cancel",
+                    "confirm": "Erase",
+                    "description": "This action cannot be undone. This will permanently delete your transactions and remove the data from the app.",
+                    "title": "Are you absolutely sure?"
+                },
+                "title": "Erase Data"
+            },
+            "export": "Export Data",
+            "general": "General",
+            "import": "Import Data",
+            "language": "Language",
+            "refreshCache": "Refresh Cache",
+            "synchronisation": "Synchronization",
+            "title": "Settings"
+        },
+        "synchronisation": {
+            "authenticate": "Authenticate",
+            "authenticateWithDevice": "Authenticate with your device",
+            "login": "Login",
+            "loginWithDevice": "Login with your device",
+            "register": "Register",
+            "title": "Synchronization"
+        }
     },
-    "synchronisation": {
-      "authenticate": "Authenticate",
-      "authenticateWithDevice": "Authenticate with your device",
-      "login": "Login",
-      "loginWithDevice": "Login with your device",
-      "register": "Register",
-      "title": "Synchronization"
+    "transaction": {
+        "add_note": "Add note",
+        "averagePerDay": "avg/day",
+        "averagePerMonth": "avg/mth",
+        "balance": "Balance",
+        "expense": "Expense",
+        "income": "Income",
+        "incomePerDay": "income/day",
+        "incomePerMonth": "income/mth",
+        "noTransactions": {
+            "description": "You have no transactions for this period.",
+            "title": "No entries"
+        },
+        "remove": "Delete transaction",
+        "spentPerDay": "spent/day",
+        "spentPerMonth": "spent/mth",
+        "title": "Transactions"
     }
-  },
-  "transaction": {
-    "add_note": "Add note",
-    "averagePerDay": "avg/day",
-    "averagePerMonth": "avg/mth",
-    "balance": "Balance",
-    "expense": "Expense",
-    "income": "Income",
-    "incomePerDay": "income/day",
-    "incomePerMonth": "income/mth",
-    "noTransactions": {
-      "description": "You have no transactions for this period.",
-      "title": "No entries"
-    },
-    "remove": "Delete transaction",
-    "spentPerDay": "spent/day",
-    "spentPerMonth": "spent/mth",
-    "title": "Transactions"
-  }
 }
