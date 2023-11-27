@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -23,3 +24,22 @@ export const parseNumberFromString = (str: string): number | null => {
 };
 
 export type Optional<T, K extends keyof T> = Omit<T, K> & Partial<T>;
+
+export function useAsync<T>(
+    fn: () => Promise<T>,
+    deps: React.DependencyList = []
+) {
+    const [data, setData] = React.useState<T | null>(null);
+    const [error, setError] = React.useState<Error | null>(null);
+    const [loading, setLoading] = React.useState(false);
+
+    React.useEffect(() => {
+        setLoading(true);
+        fn()
+            .then(setData)
+            .catch(setError)
+            .finally(() => setLoading(false));
+    }, deps);
+
+    return { data, error, loading };
+}

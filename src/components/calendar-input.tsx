@@ -1,4 +1,8 @@
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import {
+    DialogRoot,
+    DialogContent,
+    DialogTrigger,
+} from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { CalendarIcon } from 'lucide-react';
 import { Calendar } from '@/components/ui/calendar';
@@ -25,7 +29,7 @@ export const CalendarInput = ({ date, setDate }: CalendarInputProps) => {
     };
 
     return (
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogRoot open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
                 <Button variant="outline" className="grow overflow-hidden">
                     <CalendarIcon className="mr-2 h-4 w-4 shrink-0" />
@@ -48,6 +52,6 @@ export const CalendarInput = ({ date, setDate }: CalendarInputProps) => {
                     initialFocus
                 />
             </DialogContent>
-        </Dialog>
+        </DialogRoot>
     );
 };

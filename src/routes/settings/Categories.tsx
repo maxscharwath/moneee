@@ -4,16 +4,23 @@ import * as List from '@/components/ui/list';
 import { ChevronLeft } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { getCategoriesByType } from '@/stores/db';
+import { addCategory, getCategoriesByType } from '@/stores/db';
 import { Container } from '@/components/container';
 import * as TabsGroup from '@/components/ui/tabs-group';
 import React from 'react';
+import { CategoryModal } from '@/components/category-modal';
+import { Category } from '@/stores/schemas/category';
+import { Optional } from '@/lib/utils';
 
 export function Component() {
     const { t } = useTranslation();
     const [type, setType] = React.useState<'income' | 'expense'>('expense');
     const { result: categories } = getCategoriesByType(type);
-
+    const [category, setCategory] = React.useState<Category | undefined>();
+    const handleCategory = (category: Optional<Category, 'uuid'>) => {
+        void addCategory(category);
+        setCategory(undefined);
+    };
     return (
         <>
             <Header>
@@ -47,20 +54,30 @@ export function Component() {
                 <List.Root>
                     <List.List>
                         {categories?.map((category) => (
-                            <List.Item key={category.uuid}>
+                            <List.ItemButton
+                                key={category.uuid}
+                                onClick={() => setCategory(category)}
+                            >
                                 <List.ItemIcon
                                     style={{ backgroundColor: category.color }}
                                 >
                                     {category.icon}
                                 </List.ItemIcon>
-                                <span className="grow truncate">
+                                <span className="truncate">
                                     {category.name}
                                 </span>
-                            </List.Item>
+                            </List.ItemButton>
                         ))}
                     </List.List>
                 </List.Root>
             </Container>
+            <CategoryModal
+                category={category}
+                open={!!category}
+                onOpenChange={(open) => !open && setCategory(undefined)}
+                onCategory={handleCategory}
+                key={category?.uuid}
+            />
         </>
     );
 }

@@ -64,6 +64,15 @@ export async function addTransaction(
     );
 }
 
+export async function addCategory(category: Optional<Category, 'uuid'>) {
+    return initializeDb().then(async (db) =>
+        db.collections.categories.upsert({
+            ...category,
+            uuid: category.uuid ?? crypto.randomUUID(),
+        })
+    );
+}
+
 export function useCategories() {
     return useRxData<Category>('categories', (category) => category.find());
 }
