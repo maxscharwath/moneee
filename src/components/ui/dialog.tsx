@@ -38,7 +38,7 @@ const DialogContent = React.forwardRef<
         >
             <div
                 className={cn(
-                    'pointer-events-auto m-5 grid w-full max-w-lg gap-4 rounded-lg border bg-secondary/50 p-4 shadow-lg backdrop-blur-xl',
+                    'pointer-events-auto m-5 flex w-full max-w-lg flex-col gap-4 rounded-lg border bg-secondary/50 p-4 shadow-lg backdrop-blur-xl',
                     className
                 )}
             >

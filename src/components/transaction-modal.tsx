@@ -185,12 +185,14 @@ export function TransactionModal({
 }: TransactionModalProps & DialogProps) {
     return (
         <Dialog.Root {...props}>
-            <Dialog.Content className="fixed inset-0 z-50 bg-background/90 backdrop-blur-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:slide-out-to-bottom-[48%] data-[state=open]:slide-in-from-bottom-[48%]">
-                <TransactionModalContent
-                    transaction={transaction}
-                    onTransaction={onTransaction}
-                />
-            </Dialog.Content>
+            <Dialog.Portal>
+                <Dialog.Content className="fixed inset-0 z-50 bg-background/90 backdrop-blur-lg duration-500 ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom">
+                    <TransactionModalContent
+                        transaction={transaction}
+                        onTransaction={onTransaction}
+                    />
+                </Dialog.Content>
+            </Dialog.Portal>
         </Dialog.Root>
     );
 }

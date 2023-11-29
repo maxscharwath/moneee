@@ -2,19 +2,15 @@ import React from 'react';
 import { CheckIcon, XIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import * as TabsGroup from '@/components/ui/tabs-group';
-import { type Optional, useAsync } from '@/lib/utils';
+import { type Optional } from '@/lib/utils';
 import * as Dialog from '@radix-ui/react-dialog';
-import {
-    DialogRoot,
-    DialogContent,
-    DialogTrigger,
-} from '@/components/ui/dialog';
 import { type DialogProps } from '@radix-ui/react-dialog';
 import { Header } from '@/components/header';
 import { useLocale } from '@/i18n';
 import { Category } from '@/stores/schemas/category';
 import { Input } from '@/components/ui/input';
 import { ColorInput } from '@/components/ui/color-input';
+import { EmojiPicker } from '@/components/emoji-picker';
 
 type CategoryModalProps = {
     category?: Category;
@@ -29,9 +25,6 @@ function TransactionModalContent({ category, onCategory }: CategoryModalProps) {
     const [icon, setIcon] = React.useState(category?.icon ?? '💰');
     const [name, setName] = React.useState(category?.name ?? '');
     const [color, setColor] = React.useState(category?.color ?? '#ff0000');
-    const { data: emojis } = useAsync(
-        async () => (await import('@/assets/emoji.json')).default
-    );
     return (
         <div className="flex h-full flex-col">
             <Header>
@@ -58,26 +51,8 @@ function TransactionModalContent({ category, onCategory }: CategoryModalProps) {
                 </div>
             </Header>
             <div className="flex grow flex-col gap-4 p-4">
-                <div className="flex justify-center">
-                    <DialogRoot>
-                        <DialogTrigger className="flex h-24 w-24 items-center justify-center rounded-xl bg-secondary p-1 text-[3rem] ring ring-primary/50">
-                            {icon}
-                        </DialogTrigger>
-                        <DialogContent>
-                            <div className="grid max-h-[50vh] grid-cols-5 overflow-y-auto">
-                                {emojis?.map(({ emoji }) => (
-                                    <Button
-                                        key={emoji}
-                                        variant="ghost"
-                                        size="xl"
-                                        onClick={() => setIcon(emoji)}
-                                    >
-                                        {emoji}
-                                    </Button>
-                                ))}
-                            </div>
-                        </DialogContent>
-                    </DialogRoot>
+                <div className="flex items-center justify-center py-24">
+                    <EmojiPicker selectedEmoji={icon} onEmojiSelect={setIcon} />
                 </div>
                 <div className="flex flex-row items-center justify-center gap-2">
                     <ColorInput color={color} onColorChange={setColor} />
@@ -113,12 +88,14 @@ export function CategoryModal({
 }: CategoryModalProps & DialogProps) {
     return (
         <Dialog.Root {...props}>
-            <Dialog.Content className="fixed inset-0 z-50 bg-background/90 backdrop-blur-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:slide-out-to-bottom-[48%] data-[state=open]:slide-in-from-bottom-[48%]">
-                <TransactionModalContent
-                    category={category}
-                    onCategory={onCategory}
-                />
-            </Dialog.Content>
+            <Dialog.Portal>
+                <Dialog.Content className="fixed inset-0 z-50 h-screen bg-background/90 backdrop-blur-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:slide-out-to-bottom-[48%] data-[state=open]:slide-in-from-bottom-[48%]">
+                    <TransactionModalContent
+                        category={category}
+                        onCategory={onCategory}
+                    />
+                </Dialog.Content>
+            </Dialog.Portal>
         </Dialog.Root>
     );
 }

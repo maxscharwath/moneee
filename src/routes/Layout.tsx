@@ -141,7 +141,7 @@ const DirectionalTransition: React.FC<
                 exit="exit"
                 transition={{
                     ease: 'easeInOut',
-                    duration: 0.2,
+                    duration: 0.25,
                 }}
             >
                 {children}
