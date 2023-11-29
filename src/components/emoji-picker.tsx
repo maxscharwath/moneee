@@ -15,12 +15,13 @@ import {
     PizzaIcon,
     ShirtIcon,
     SmileIcon,
+    SmilePlusIcon,
 } from 'lucide-react';
 import { lazyInitialize } from '@/stores/utils/createDatabase';
 
 type EmojiPickerProps = {
-    selectedEmoji: string;
-    onEmojiSelect: (emoji: string) => void;
+    selectedEmoji?: string;
+    onEmojiSelect?: (emoji: string) => void;
 };
 
 type Category = {
@@ -92,7 +93,7 @@ export const EmojiPicker = ({
     return (
         <DialogRoot>
             <DialogTrigger className="flex h-24 w-24 items-center justify-center rounded-xl bg-secondary p-1 text-[3rem] ring ring-primary/50">
-                {selectedEmoji}
+                {selectedEmoji ?? <SmilePlusIcon size="3rem" />}
             </DialogTrigger>
             <DialogContent className="max-h-[50vh]">
                 <ToggleGroup
@@ -116,7 +117,7 @@ export const EmojiPicker = ({
                     className="grid grid-cols-5 overflow-y-auto"
                     type="single"
                     defaultValue={selectedEmoji}
-                    onValueChange={onEmojiSelect}
+                    onValueChange={(emoji) => emoji && onEmojiSelect?.(emoji)}
                 >
                     {emojis?.map(({ emoji, description }) => (
                         <ToggleGroupItem

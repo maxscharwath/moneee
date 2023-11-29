@@ -13,17 +13,17 @@ import { ColorInput } from '@/components/ui/color-input';
 import { EmojiPicker } from '@/components/emoji-picker';
 
 type CategoryModalProps = {
-    category?: Category;
+    category?: Partial<Category>;
     onCategory?: (category: Optional<Category, 'uuid'>) => void;
 };
 
-function TransactionModalContent({ category, onCategory }: CategoryModalProps) {
+function CategoryModalContent({ category, onCategory }: CategoryModalProps) {
     const { t } = useLocale();
     const [type, setType] = React.useState<'income' | 'expense'>(
         category?.type ?? 'expense'
     );
-    const [icon, setIcon] = React.useState(category?.icon ?? '💰');
-    const [name, setName] = React.useState(category?.name ?? '');
+    const [icon, setIcon] = React.useState(category?.icon);
+    const [name, setName] = React.useState(category?.name);
     const [color, setColor] = React.useState(category?.color ?? '#ff0000');
     return (
         <div className="flex h-full flex-col">
@@ -59,11 +59,13 @@ function TransactionModalContent({ category, onCategory }: CategoryModalProps) {
                     <Input
                         type="text"
                         value={name}
+                        placeholder={t('category.name')}
                         onChange={(e) => setName(e.target.value)}
                     />
                     <Button
                         size="icon"
                         onClick={() => {
+                            if (!name || !icon || !color) return;
                             onCategory?.({
                                 uuid: category?.uuid,
                                 type,
@@ -90,7 +92,7 @@ export function CategoryModal({
         <Dialog.Root {...props}>
             <Dialog.Portal>
                 <Dialog.Content className="fixed inset-0 z-50 h-screen bg-background/90 backdrop-blur-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:slide-out-to-bottom-[48%] data-[state=open]:slide-in-from-bottom-[48%]">
-                    <TransactionModalContent
+                    <CategoryModalContent
                         category={category}
                         onCategory={onCategory}
                     />

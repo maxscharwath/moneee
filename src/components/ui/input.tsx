@@ -3,13 +3,12 @@ import { cn } from '@/lib/utils';
 
 export interface InputProps
     extends React.InputHTMLAttributes<HTMLInputElement> {
-    icon?: React.ReactNode; // Added icon prop
+    icon?: React.ReactNode;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
     ({ className, type, icon, ...props }, ref) => (
         <label className="relative flex flex-1 items-center">
-            {/* Render icon if provided */}
             {icon && (
                 <div className="absolute inset-y-0 left-3 flex items-center text-muted-foreground">
                     {icon}

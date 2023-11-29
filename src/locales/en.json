@@ -1,5 +1,6 @@
 {
     "category": {
+        "name": "Category Name",
         "select": "Category"
     },
     "insights": {

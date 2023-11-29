@@ -1,7 +1,7 @@
 import { Header, HeaderTitle } from '@/components/header';
 import { useTranslation } from 'react-i18next';
 import * as List from '@/components/ui/list';
-import { ChevronLeft } from 'lucide-react';
+import { ChevronLeft, PlusIcon } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { addCategory, getCategoriesByType } from '@/stores/db';
@@ -16,7 +16,9 @@ export function Component() {
     const { t } = useTranslation();
     const [type, setType] = React.useState<'income' | 'expense'>('expense');
     const { result: categories } = getCategoriesByType(type);
-    const [category, setCategory] = React.useState<Category | undefined>();
+    const [category, setCategory] = React.useState<
+        Partial<Category> | undefined
+    >();
     const handleCategory = (category: Optional<Category, 'uuid'>) => {
         void addCategory(category);
         setCategory(undefined);
@@ -36,7 +38,8 @@ export function Component() {
                 <HeaderTitle>{t('settings.root.categories')}</HeaderTitle>
             </Header>
             <Container>
-                <div className="flex w-full items-center justify-center gap-4">
+                <div className="grid w-full grid-cols-[1fr,auto,1fr] items-center gap-4">
+                    <div />
                     <TabsGroup.Root
                         value={type}
                         onValueChange={(t) => {
@@ -50,6 +53,15 @@ export function Component() {
                             {t('transaction.expense')}
                         </TabsGroup.Item>
                     </TabsGroup.Root>
+                    <div className="flex justify-end">
+                        <Button
+                            size="icon"
+                            variant="ghost"
+                            onClick={() => setCategory({ type })}
+                        >
+                            <PlusIcon />
+                        </Button>
+                    </div>
                 </div>
                 <List.Root>
                     <List.List>
