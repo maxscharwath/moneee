@@ -13,11 +13,12 @@ import { type DialogProps } from '@radix-ui/react-dialog';
 import { Header } from '@/components/header';
 import { useLocale } from '@/i18n';
 import { type Transaction } from '@/stores/schemas/transaction';
+import { RecurrenceSelect } from '@/components/recurrence-select';
 
-type TransactionModalProps = {
+type TransactionModalProps = Readonly<{
     transaction?: Transaction;
     onTransaction: (transaction: Optional<Transaction, 'uuid'>) => void;
-};
+}>;
 
 function TransactionModalContent({
     transaction,
@@ -103,7 +104,7 @@ function TransactionModalContent({
                             {t('transaction.expense')}
                         </TabsGroup.Item>
                     </TabsGroup.Root>
-                    <div className="flex justify-end" />
+                    <RecurrenceSelect />
                 </div>
             </Header>
             <div className="flex grow flex-col space-y-4 p-4">
