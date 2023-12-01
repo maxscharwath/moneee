@@ -1,5 +1,5 @@
 import * as RadioGroup from '@radix-ui/react-radio-group';
-import { LayoutGroup, motion } from 'framer-motion';
+import { LayoutGroup, motion, MotionContext } from 'framer-motion';
 import React, { useId } from 'react';
 import { cn } from '@/lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
@@ -50,15 +50,17 @@ export const Root = React.forwardRef<
 >(({ className, size, children, ...props }, ref) => {
     const id = useId();
     return (
-        <RadioGroup.Root
-            ref={ref}
-            className={cn(rootVariants({ size }), className)}
-            {...props}
-        >
-            <TabsContext.Provider value={{ size }}>
-                <LayoutGroup id={id}>{children}</LayoutGroup>
-            </TabsContext.Provider>
-        </RadioGroup.Root>
+        <MotionContext.Provider value={{}}>
+            <RadioGroup.Root
+                ref={ref}
+                className={cn(rootVariants({ size }), className)}
+                {...props}
+            >
+                <TabsContext.Provider value={{ size }}>
+                    <LayoutGroup id={id}>{children}</LayoutGroup>
+                </TabsContext.Provider>
+            </RadioGroup.Root>
+        </MotionContext.Provider>
     );
 });
 Root.displayName = 'TabsRoot';

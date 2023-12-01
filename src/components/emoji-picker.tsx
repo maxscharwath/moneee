@@ -18,6 +18,7 @@ import {
     SmilePlusIcon,
 } from 'lucide-react';
 import { lazyInitialize } from '@/stores/utils/createDatabase';
+import { Separator } from '@/components/ui/separator';
 
 type EmojiPickerProps = {
     selectedEmoji?: string;
@@ -113,8 +114,9 @@ export const EmojiPicker = ({
                         </ToggleGroupItem>
                     ))}
                 </ToggleGroup>
+                <Separator />
                 <ToggleGroup
-                    className="grid grid-cols-5 overflow-y-auto"
+                    className="grid grid-cols-5 overflow-y-auto p-1"
                     type="single"
                     defaultValue={selectedEmoji}
                     onValueChange={(emoji) => emoji && onEmojiSelect?.(emoji)}
