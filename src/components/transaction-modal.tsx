@@ -13,7 +13,7 @@ import { type DialogProps } from '@radix-ui/react-dialog';
 import { Header } from '@/components/header';
 import { useLocale } from '@/i18n';
 import { type Transaction } from '@/stores/schemas/transaction';
-import { RecurrenceSelect } from '@/components/recurrence-select';
+import { RecurringSelect, Recurring } from '@/components/recurring-select';
 
 type TransactionModalProps = Readonly<{
     transaction?: Transaction;
@@ -53,6 +53,7 @@ function TransactionModalContent({
     const [categoryId, setCategoryId] = React.useState(
         transaction?.categoryId ?? ''
     );
+    const [recurring, setRecurring] = React.useState<Recurring>('none');
     const [note, setNote] = React.useState(transaction?.note ?? '');
     const { result: categories } = useCategories();
     const [type, setType] = React.useState<'income' | 'expense'>();
@@ -104,7 +105,10 @@ function TransactionModalContent({
                             {t('transaction.expense')}
                         </TabsGroup.Item>
                     </TabsGroup.Root>
-                    <RecurrenceSelect />
+                    <RecurringSelect
+                        value={recurring}
+                        onValueChange={setRecurring}
+                    />
                 </div>
             </Header>
             <div className="flex grow flex-col space-y-4 p-4">

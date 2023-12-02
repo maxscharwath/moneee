@@ -71,5 +71,13 @@
         "spentPerDay": "gastado/día",
         "spentPerMonth": "gastado/mes",
         "title": "Transacciones"
+    },
+    "recurring": {
+        "none": "Ninguno",
+        "daily": "Diario",
+        "weekly": "Semanal",
+        "monthly": "Mensual",
+        "yearly": "Anual",
+        "custom": "Personalizado"
     }
 }
