@@ -1,83 +1,86 @@
 {
+  "category": {
+    "name": "Nombre de la categoría",
+    "select": "Categoría"
+  },
+  "insights": {
+    "title": "Perspectivas"
+  },
+  "period": {
+    "monthly": "Mensual",
+    "placeholder": "Seleccionar período",
+    "weekly": "Semanal",
+    "yearly": "Anual"
+  },
+  "recurring": {
+    "custom": "Personalizado",
+    "daily": "Diario",
+    "monthly": "Mensual",
+    "none": "Ninguno",
+    "weekly": "Semanal",
+    "yearly": "Anual"
+  },
+  "settings": {
+    "cache": {
+      "newVersionAvailable": "Nueva versión disponible",
+      "upToDate": "Actualizado"
+    },
     "category": {
-        "name": "Nombre de la categoría",
-        "select": "Categoría"
+      "suggested": "Categorías sugeridas"
     },
-    "insights": {
-        "title": "Perspectivas"
+    "currency": {
+      "title": "Monedas"
     },
-    "period": {
-        "monthly": "Mensual",
-        "placeholder": "Seleccionar período",
-        "weekly": "Semanal",
-        "yearly": "Anual"
+    "language": {
+      "title": "Idioma"
     },
-    "settings": {
-        "cache": {
-            "newVersionAvailable": "Nueva versión disponible",
-            "upToDate": "Actualizado"
+    "root": {
+      "appearance": "Apariencia",
+      "categories": "Categorías",
+      "currency": "Moneda",
+      "data": "Datos",
+      "erase": {
+        "alert": {
+          "cancel": "Cancelar",
+          "confirm": "Borrar",
+          "description": "Esta acción no se puede deshacer. Esto eliminará permanentemente tus transacciones y eliminará los datos de la aplicación.",
+          "title": "¿Estás absolutamente seguro?"
         },
-        "currency": {
-            "title": "Monedas"
-        },
-        "language": {
-            "title": "Idioma"
-        },
-        "root": {
-            "appearance": "Apariencia",
-            "categories": "Categorías",
-            "currency": "Moneda",
-            "data": "Datos",
-            "erase": {
-                "alert": {
-                    "cancel": "Cancelar",
-                    "confirm": "Borrar",
-                    "description": "Esta acción no se puede deshacer. Esto eliminará permanentemente tus transacciones y eliminará los datos de la aplicación.",
-                    "title": "¿Estás absolutamente seguro?"
-                },
-                "title": "Borrar Datos"
-            },
-            "export": "Exportar datos",
-            "general": "General",
-            "import": "Importar datos",
-            "language": "Idioma",
-            "refreshCache": "Actualizar caché",
-            "synchronisation": "Sincronización",
-            "title": "Ajustes"
-        },
-        "synchronisation": {
-            "authenticate": "Autenticar",
-            "authenticateWithDevice": "Autenticarse con su dispositivo",
-            "login": "Iniciar sesión",
-            "loginWithDevice": "Iniciar sesión con su dispositivo",
-            "register": "Registrarse",
-            "title": "Sincronización"
-        }
+        "title": "Borrar Datos"
+      },
+      "export": "Exportar datos",
+      "general": "General",
+      "import": "Importar datos",
+      "language": "Idioma",
+      "refreshCache": "Actualizar caché",
+      "synchronisation": "Sincronización",
+      "title": "Ajustes"
     },
-    "transaction": {
-        "add_note": "Añadir nota",
-        "averagePerDay": "prom/día",
-        "averagePerMonth": "prom/mes",
-        "balance": "Saldo",
-        "expense": "Gasto",
-        "income": "Ingreso",
-        "incomePerDay": "ingreso/día",
-        "incomePerMonth": "ingreso/mes",
-        "noTransactions": {
-            "description": "No tienes transacciones para este período.",
-            "title": "Sin entradas"
-        },
-        "remove": "Eliminar transacción",
-        "spentPerDay": "gastado/día",
-        "spentPerMonth": "gastado/mes",
-        "title": "Transacciones"
-    },
-    "recurring": {
-        "none": "Ninguno",
-        "daily": "Diario",
-        "weekly": "Semanal",
-        "monthly": "Mensual",
-        "yearly": "Anual",
-        "custom": "Personalizado"
+    "synchronisation": {
+      "authenticate": "Autenticar",
+      "authenticateWithDevice": "Autenticarse con su dispositivo",
+      "login": "Iniciar sesión",
+      "loginWithDevice": "Iniciar sesión con su dispositivo",
+      "register": "Registrarse",
+      "title": "Sincronización"
     }
+  },
+  "transaction": {
+    "add_note": "Añadir nota",
+    "averagePerDay": "prom/día",
+    "averagePerMonth": "prom/mes",
+    "balance": "Saldo",
+    "expense": "Gasto",
+    "income": "Ingreso",
+    "incomePerDay": "ingreso/día",
+    "incomePerMonth": "ingreso/mes",
+    "noTransactions": {
+      "description": "No tienes transacciones para este período.",
+      "title": "Sin entradas"
+    },
+    "remove": "Eliminar transacción",
+    "spentPerDay": "gastado/día",
+    "spentPerMonth": "gastado/mes",
+    "title": "Transacciones"
+  }
 }

@@ -1,83 +1,86 @@
 {
+  "category": {
+    "name": "Nome della categoria",
+    "select": "Categoria"
+  },
+  "insights": {
+    "title": "Intuizioni"
+  },
+  "period": {
+    "monthly": "Mensile",
+    "placeholder": "Seleziona periodo",
+    "weekly": "Settimanale",
+    "yearly": "Annuale"
+  },
+  "recurring": {
+    "custom": "Personalizzato",
+    "daily": "Quotidiano",
+    "monthly": "Mensile",
+    "none": "Nessuno",
+    "weekly": "Settimanale",
+    "yearly": "Annuale"
+  },
+  "settings": {
+    "cache": {
+      "newVersionAvailable": "Nuova versione disponibile",
+      "upToDate": "Aggiornato"
+    },
     "category": {
-        "name": "Nome della categoria",
-        "select": "Categoria"
+      "suggested": "Categorie suggerite"
     },
-    "insights": {
-        "title": "Intuizioni"
+    "currency": {
+      "title": "Valute"
     },
-    "period": {
-        "monthly": "Mensile",
-        "placeholder": "Seleziona periodo",
-        "weekly": "Settimanale",
-        "yearly": "Annuale"
+    "language": {
+      "title": "Lingua"
     },
-    "settings": {
-        "cache": {
-            "newVersionAvailable": "Nuova versione disponibile",
-            "upToDate": "Aggiornato"
+    "root": {
+      "appearance": "Aspetto",
+      "categories": "Categorie",
+      "currency": "Valuta",
+      "data": "Dati",
+      "erase": {
+        "alert": {
+          "cancel": "Annulla",
+          "confirm": "Cancella",
+          "description": "Questa azione non può essere annullata. Ciò eliminerà definitivamente le tue transazioni e rimuoverà i dati dall'app.",
+          "title": "Sei assolutamente sicuro?"
         },
-        "currency": {
-            "title": "Valute"
-        },
-        "language": {
-            "title": "Lingua"
-        },
-        "root": {
-            "appearance": "Aspetto",
-            "categories": "Categorie",
-            "currency": "Valuta",
-            "data": "Dati",
-            "erase": {
-                "alert": {
-                    "cancel": "Annulla",
-                    "confirm": "Cancella",
-                    "description": "Questa azione non può essere annullata. Ciò eliminerà definitivamente le tue transazioni e rimuoverà i dati dall'app.",
-                    "title": "Sei assolutamente sicuro?"
-                },
-                "title": "Cancella Dati"
-            },
-            "export": "Esporta Dati",
-            "general": "Generale",
-            "import": "Importa Dati",
-            "language": "Lingua",
-            "refreshCache": "Aggiorna Cache",
-            "synchronisation": "Sincronizzazione",
-            "title": "Impostazioni"
-        },
-        "synchronisation": {
-            "authenticate": "Autenticare",
-            "authenticateWithDevice": "Autenticati con il tuo dispositivo",
-            "login": "Accesso",
-            "loginWithDevice": "Accedi con il tuo dispositivo",
-            "register": "Registrati",
-            "title": "Sincronizzazione"
-        }
+        "title": "Cancella Dati"
+      },
+      "export": "Esporta Dati",
+      "general": "Generale",
+      "import": "Importa Dati",
+      "language": "Lingua",
+      "refreshCache": "Aggiorna Cache",
+      "synchronisation": "Sincronizzazione",
+      "title": "Impostazioni"
     },
-    "transaction": {
-        "add_note": "Aggiungi nota",
-        "averagePerDay": "media/giorno",
-        "averagePerMonth": "media/mese",
-        "balance": "Saldo",
-        "expense": "Spesa",
-        "income": "Reddito",
-        "incomePerDay": "entrate/giorno",
-        "incomePerMonth": "entrate/mese",
-        "noTransactions": {
-            "description": "Non ci sono transazioni per questo periodo.",
-            "title": "Nessuna voce"
-        },
-        "remove": "Elimina transazione",
-        "spentPerDay": "speso/giorno",
-        "spentPerMonth": "speso/mese",
-        "title": "Transazioni"
-    },
-    "recurring": {
-        "none": "Nessuno",
-        "daily": "Quotidiano",
-        "weekly": "Settimanale",
-        "monthly": "Mensile",
-        "yearly": "Annuale",
-        "custom": "Personalizzato"
+    "synchronisation": {
+      "authenticate": "Autenticare",
+      "authenticateWithDevice": "Autenticati con il tuo dispositivo",
+      "login": "Accesso",
+      "loginWithDevice": "Accedi con il tuo dispositivo",
+      "register": "Registrati",
+      "title": "Sincronizzazione"
     }
+  },
+  "transaction": {
+    "add_note": "Aggiungi nota",
+    "averagePerDay": "media/giorno",
+    "averagePerMonth": "media/mese",
+    "balance": "Saldo",
+    "expense": "Spesa",
+    "income": "Reddito",
+    "incomePerDay": "entrate/giorno",
+    "incomePerMonth": "entrate/mese",
+    "noTransactions": {
+      "description": "Non ci sono transazioni per questo periodo.",
+      "title": "Nessuna voce"
+    },
+    "remove": "Elimina transazione",
+    "spentPerDay": "speso/giorno",
+    "spentPerMonth": "speso/mese",
+    "title": "Transazioni"
+  }
 }

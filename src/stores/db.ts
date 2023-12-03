@@ -73,6 +73,12 @@ export async function addCategory(category: Optional<Category, 'uuid'>) {
     );
 }
 
+export async function removeCategory(...categoryUuid: string[]) {
+    return initializeDb().then(async (db) =>
+        db.collections.categories.bulkRemove(categoryUuid)
+    );
+}
+
 export function useCategories() {
     return useRxData<Category>('categories', (category) => category.find());
 }

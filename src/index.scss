@@ -64,6 +64,15 @@
         --input: 240 3.7% 15.9%;
         --ring: 240 4.9% 83.9%;
     }
+
+    ::-webkit-scrollbar {
+        @apply w-2 h-2 bg-primary-foreground rounded-full;
+
+        &-thumb {
+            @apply bg-primary rounded-full;
+        }
+    }
+
 }
 
 @layer base {

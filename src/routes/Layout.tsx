@@ -57,7 +57,7 @@ export default function Layout() {
     const direction = location.state?.direction ?? 'none';
 
     return (
-        <div className="flex h-[100dvh] flex-col">
+        <div className="flex h-[100dvh] flex-col overflow-hidden">
             <LayoutContext.Provider value={{ openTransactionModal }}>
                 <DirectionalTransition
                     classname="flex flex-1 flex-col overflow-hidden bg-background px-safe"

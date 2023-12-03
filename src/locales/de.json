@@ -1,83 +1,86 @@
 {
+  "category": {
+    "name": "Kategoriename",
+    "select": "Kategorie"
+  },
+  "insights": {
+    "title": "Einblicke"
+  },
+  "period": {
+    "monthly": "Monatlich",
+    "placeholder": "Zeitraum auswählen",
+    "weekly": "Wöchentlich",
+    "yearly": "Jährlich"
+  },
+  "recurring": {
+    "custom": "Benutzerdefiniert",
+    "daily": "Täglich",
+    "monthly": "Monatlich",
+    "none": "Keine",
+    "weekly": "Wöchentlich",
+    "yearly": "Jährlich"
+  },
+  "settings": {
+    "cache": {
+      "newVersionAvailable": "Neue Version verfügbar",
+      "upToDate": "Aktuell"
+    },
     "category": {
-        "name": "Kategoriename",
-        "select": "Kategorie"
+      "suggested": "Vorgeschlagene Kategorien"
     },
-    "insights": {
-        "title": "Einblicke"
+    "currency": {
+      "title": "Währungen"
     },
-    "period": {
-        "monthly": "Monatlich",
-        "placeholder": "Zeitraum auswählen",
-        "weekly": "Wöchentlich",
-        "yearly": "Jährlich"
+    "language": {
+      "title": "Sprache"
     },
-    "settings": {
-        "cache": {
-            "newVersionAvailable": "Neue Version verfügbar",
-            "upToDate": "Aktuell"
+    "root": {
+      "appearance": "Erscheinungsbild",
+      "categories": "Kategorien",
+      "currency": "Währung",
+      "data": "Daten",
+      "erase": {
+        "alert": {
+          "cancel": "Abbrechen",
+          "confirm": "Löschen",
+          "description": "Diese Aktion kann nicht rückgängig gemacht werden. Dies wird Ihre Transaktionen endgültig löschen und die Daten aus der App entfernen.",
+          "title": "Sind Sie sich absolut sicher?"
         },
-        "currency": {
-            "title": "Währungen"
-        },
-        "language": {
-            "title": "Sprache"
-        },
-        "root": {
-            "appearance": "Erscheinungsbild",
-            "categories": "Kategorien",
-            "currency": "Währung",
-            "data": "Daten",
-            "erase": {
-                "alert": {
-                    "cancel": "Abbrechen",
-                    "confirm": "Löschen",
-                    "description": "Diese Aktion kann nicht rückgängig gemacht werden. Dies wird Ihre Transaktionen endgültig löschen und die Daten aus der App entfernen.",
-                    "title": "Sind Sie sich absolut sicher?"
-                },
-                "title": "Daten löschen"
-            },
-            "export": "Daten exportieren",
-            "general": "Allgemein",
-            "import": "Daten importieren",
-            "language": "Sprache",
-            "refreshCache": "Cache aktualisieren",
-            "synchronisation": "Synchronisation",
-            "title": "Einstellungen"
-        },
-        "synchronisation": {
-            "authenticate": "Authentifizieren",
-            "authenticateWithDevice": "Mit Ihrem Gerät authentifizieren",
-            "login": "Anmelden",
-            "loginWithDevice": "Mit Ihrem Gerät anmelden",
-            "register": "Registrieren",
-            "title": "Synchronisation"
-        }
+        "title": "Daten löschen"
+      },
+      "export": "Daten exportieren",
+      "general": "Allgemein",
+      "import": "Daten importieren",
+      "language": "Sprache",
+      "refreshCache": "Cache aktualisieren",
+      "synchronisation": "Synchronisation",
+      "title": "Einstellungen"
     },
-    "transaction": {
-        "add_note": "Notiz hinzufügen",
-        "averagePerDay": "Durchschn./Tag",
-        "averagePerMonth": "Durchschn./Monat",
-        "balance": "Saldo",
-        "expense": "Ausgabe",
-        "income": "Einkommen",
-        "incomePerDay": "Eink./Tag",
-        "incomePerMonth": "Eink./Monat",
-        "noTransactions": {
-            "description": "Sie haben keine Transaktionen für diesen Zeitraum.",
-            "title": "Keine Einträge"
-        },
-        "remove": "Transaktion löschen",
-        "spentPerDay": "Ausg./Tag",
-        "spentPerMonth": "Ausg./Monat",
-        "title": "Transaktionen"
-    },
-    "recurring": {
-        "none": "Keine",
-        "daily": "Täglich",
-        "weekly": "Wöchentlich",
-        "monthly": "Monatlich",
-        "yearly": "Jährlich",
-        "custom": "Benutzerdefiniert"
+    "synchronisation": {
+      "authenticate": "Authentifizieren",
+      "authenticateWithDevice": "Mit Ihrem Gerät authentifizieren",
+      "login": "Anmelden",
+      "loginWithDevice": "Mit Ihrem Gerät anmelden",
+      "register": "Registrieren",
+      "title": "Synchronisation"
     }
+  },
+  "transaction": {
+    "add_note": "Notiz hinzufügen",
+    "averagePerDay": "Durchschn./Tag",
+    "averagePerMonth": "Durchschn./Monat",
+    "balance": "Saldo",
+    "expense": "Ausgabe",
+    "income": "Einkommen",
+    "incomePerDay": "Eink./Tag",
+    "incomePerMonth": "Eink./Monat",
+    "noTransactions": {
+      "description": "Sie haben keine Transaktionen für diesen Zeitraum.",
+      "title": "Keine Einträge"
+    },
+    "remove": "Transaktion löschen",
+    "spentPerDay": "Ausg./Tag",
+    "spentPerMonth": "Ausg./Monat",
+    "title": "Transaktionen"
+  }
 }

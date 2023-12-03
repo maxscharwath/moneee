@@ -1,5 +1,5 @@
 import React from 'react';
-import { CheckIcon, XIcon } from 'lucide-react';
+import { CheckIcon, Trash2Icon, XIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import * as TabsGroup from '@/components/ui/tabs-group';
 import { type Optional } from '@/lib/utils';
@@ -15,9 +15,14 @@ import { EmojiPicker } from '@/components/emoji-picker';
 type CategoryModalProps = {
     category?: Partial<Category>;
     onCategory?: (category: Optional<Category, 'uuid'>) => void;
+    onDelete?: (categoryUuid: string) => void;
 };
 
-function CategoryModalContent({ category, onCategory }: CategoryModalProps) {
+function CategoryModalContent({
+    category,
+    onCategory,
+    onDelete,
+}: CategoryModalProps) {
     const { t } = useLocale();
     const [type, setType] = React.useState<'income' | 'expense'>(
         category?.type ?? 'expense'
@@ -25,6 +30,23 @@ function CategoryModalContent({ category, onCategory }: CategoryModalProps) {
     const [icon, setIcon] = React.useState(category?.icon);
     const [name, setName] = React.useState(category?.name);
     const [color, setColor] = React.useState(category?.color ?? '#ff0000');
+
+    const handleDelete = () => {
+        if (!category?.uuid) return;
+        onDelete?.(category.uuid);
+    };
+
+    const handleSave = () => {
+        if (!name || !icon || !color) return;
+        onCategory?.({
+            uuid: category?.uuid,
+            type,
+            icon,
+            name,
+            color,
+        });
+    };
+
     return (
         <div className="flex h-full flex-col">
             <Header>
@@ -47,7 +69,17 @@ function CategoryModalContent({ category, onCategory }: CategoryModalProps) {
                             {t('transaction.expense')}
                         </TabsGroup.Item>
                     </TabsGroup.Root>
-                    <div className="flex justify-end" />
+                    <div className="flex justify-end">
+                        {category?.uuid && (
+                            <Button
+                                size="icon"
+                                variant="destructive"
+                                onClick={handleDelete}
+                            >
+                                <Trash2Icon />
+                            </Button>
+                        )}
+                    </div>
                 </div>
             </Header>
             <div className="flex grow flex-col gap-4 p-4">
@@ -62,19 +94,7 @@ function CategoryModalContent({ category, onCategory }: CategoryModalProps) {
                         placeholder={t('category.name')}
                         onChange={(e) => setName(e.target.value)}
                     />
-                    <Button
-                        size="icon"
-                        onClick={() => {
-                            if (!name || !icon || !color) return;
-                            onCategory?.({
-                                uuid: category?.uuid,
-                                type,
-                                icon,
-                                name,
-                                color,
-                            });
-                        }}
-                    >
+                    <Button size="icon" onClick={handleSave}>
                         <CheckIcon />
                     </Button>
                 </div>
@@ -86,6 +106,7 @@ function CategoryModalContent({ category, onCategory }: CategoryModalProps) {
 export function CategoryModal({
     category,
     onCategory,
+    onDelete,
     ...props
 }: CategoryModalProps & DialogProps) {
     return (
@@ -95,6 +116,7 @@ export function CategoryModal({
                     <CategoryModalContent
                         category={category}
                         onCategory={onCategory}
+                        onDelete={onDelete}
                     />
                 </Dialog.Content>
             </Dialog.Portal>
