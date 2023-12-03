@@ -22,7 +22,7 @@ import {
     type Transaction,
     TransactionSchema,
 } from '@/stores/schemas/transaction';
-import { type Category } from '@/stores/schemas/category';
+import { type Category, CategorySchema } from '@/stores/schemas/category';
 import { useLocale } from '@/i18n';
 import * as TabsGroup from '@/components/ui/tabs-group';
 import { Container } from '@/components/container';
@@ -245,9 +245,13 @@ const download = (file: File) => {
 const resetDb = async () => {
     const db = await initializeDb();
     await db.transactions.remove();
+    await db.categories.remove();
     await db.addCollections({
         transactions: {
             schema: TransactionSchema,
+        },
+        categories: {
+            schema: CategorySchema,
         },
     });
 };
