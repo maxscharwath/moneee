@@ -102,7 +102,10 @@ export function Component() {
                     {suggestedCategories.length > 0 && (
                         <List.List heading={t('settings.category.suggested')}>
                             {suggestedCategories.map((category) => (
-                                <List.Item key={category.uuid}>
+                                <List.ItemButton
+                                    key={category.uuid}
+                                    onClick={() => addCategory(category)}
+                                >
                                     <List.ItemIcon
                                         style={{
                                             backgroundColor: category.color,
@@ -114,14 +117,10 @@ export function Component() {
                                         {category.name}
                                     </span>
                                     <Spacing />
-                                    <Button
-                                        variant="ghost"
-                                        size="icon"
-                                        onClick={() => addCategory(category)}
-                                    >
+                                    <div className="rounded-full bg-muted-foreground/30 p-1 text-muted-foreground">
                                         <PlusIcon />
-                                    </Button>
-                                </List.Item>
+                                    </div>
+                                </List.ItemButton>
                             ))}
                         </List.List>
                     )}
