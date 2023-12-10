@@ -14,6 +14,7 @@ import { EmojiPicker } from '@/components/emoji-picker';
 
 type CategoryModalProps = {
     category?: Partial<Category>;
+    defaultType?: 'income' | 'expense';
     onCategory?: (category: Optional<Category, 'uuid'>) => void;
     onDelete?: (categoryUuid: string) => void;
 };
@@ -22,10 +23,11 @@ function CategoryModalContent({
     category,
     onCategory,
     onDelete,
+    defaultType = 'expense',
 }: CategoryModalProps) {
     const { t } = useLocale();
     const [type, setType] = React.useState<'income' | 'expense'>(
-        category?.type ?? 'expense'
+        category?.type ?? defaultType
     );
     const [icon, setIcon] = React.useState(category?.icon);
     const [name, setName] = React.useState(category?.name);
@@ -107,16 +109,20 @@ export function CategoryModal({
     category,
     onCategory,
     onDelete,
+    defaultType,
+    children,
     ...props
 }: CategoryModalProps & DialogProps) {
     return (
         <Dialog.Root {...props}>
+            <Dialog.Trigger asChild>{children}</Dialog.Trigger>
             <Dialog.Portal>
                 <Dialog.Content className="fixed inset-0 z-50 h-screen bg-background/90 backdrop-blur-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:slide-out-to-bottom-[48%] data-[state=open]:slide-in-from-bottom-[48%]">
                     <CategoryModalContent
                         category={category}
                         onCategory={onCategory}
                         onDelete={onDelete}
+                        defaultType={defaultType}
                     />
                 </Dialog.Content>
             </Dialog.Portal>

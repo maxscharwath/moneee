@@ -147,6 +147,7 @@ function TransactionModalContent({
                         value={categoryId}
                         onValueChange={setCategoryId}
                         categories={filteredCategories}
+                        defaultType={type}
                     />
                 </div>
                 <div className="grid w-full max-w-lg grid-cols-3 gap-4 place-self-center">

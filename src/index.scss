@@ -66,13 +66,12 @@
     }
 
     ::-webkit-scrollbar {
-        @apply w-2 h-2 bg-primary-foreground rounded-full;
+        @apply h-2 w-2 rounded-full bg-primary-foreground;
 
         &-thumb {
-            @apply bg-primary rounded-full;
+            @apply rounded-full bg-border;
         }
     }
-
 }
 
 @layer base {

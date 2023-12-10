@@ -18,13 +18,13 @@ export const CategoryChart = memo(
         const totalValue = data.reduce((acc, item) => acc + item.total, 0);
 
         return (
-            <ToggleGroup.Root
-                type="single"
-                value={selected}
-                onValueChange={onSelect}
-                className="space-y-2"
-            >
-                <div className="flex h-6 w-full gap-1">
+            <div className="space-y-2">
+                <ToggleGroup.Root
+                    type="single"
+                    value={selected}
+                    onValueChange={onSelect}
+                    className="flex h-6 w-full gap-1"
+                >
                     {data.map(({ category, total }) => (
                         <ToggleGroup.Item
                             key={category.uuid}
@@ -40,8 +40,13 @@ export const CategoryChart = memo(
                             )}
                         />
                     ))}
-                </div>
-                <div className="no-scrollbar flex gap-1 overflow-x-auto p-2">
+                </ToggleGroup.Root>
+                <ToggleGroup.Root
+                    type="single"
+                    value={selected}
+                    onValueChange={onSelect}
+                    className="no-scrollbar flex gap-1 overflow-x-auto p-2"
+                >
                     {data.map(({ category, total }) => (
                         <ToggleGroup.Item
                             key={category.uuid}
@@ -69,8 +74,8 @@ export const CategoryChart = memo(
                             </Button>
                         </ToggleGroup.Item>
                     ))}
-                </div>
-            </ToggleGroup.Root>
+                </ToggleGroup.Root>
+            </div>
         );
     }
 );
