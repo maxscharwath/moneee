@@ -33,12 +33,12 @@ export function Component() {
     };
 
     const suggestedCategories = React.useMemo(() => {
-        return (
-            type === 'expense' ? expenseCategories : incomeCategories
-        ).filter(
-            (category) => !categories?.find((c) => c.uuid === category.uuid)
-        );
-    }, [type, categories]);
+        return (type === 'expense' ? expenseCategories : incomeCategories)
+            .filter(
+                (category) => !categories?.find((c) => c.uuid === category.uuid)
+            )
+            .map((category) => ({ ...category, name: t(category.name) }));
+    }, [type, categories, t]);
 
     return (
         <>

@@ -83,5 +83,28 @@
         "spentPerDay": "spent/day",
         "spentPerMonth": "spent/mth",
         "title": "Transactions"
+    },
+    "categories": {
+        "healthcare": "Healthcare",
+        "utilities": "Utilities",
+        "groceries": "Groceries",
+        "transportation": "Transportation",
+        "rent": "Rent",
+        "internet": "Internet",
+        "phone": "Phone",
+        "insurance": "Insurance",
+        "savings": "Savings",
+        "entertainment": "Entertainment",
+        "dining_out": "Dining Out",
+        "money_transfer": "Money Transfer",
+        "clothing": "Clothing",
+        "gifts": "Gifts",
+        "salary": "Salary",
+        "investment": "Investment",
+        "tips": "Tips",
+        "freelancing": "Freelancing",
+        "allowance": "Allowance",
+        "part_time_job": "Part-time Job",
+        "other_income": "Other Income"
     }
 }

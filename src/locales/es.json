@@ -83,5 +83,28 @@
         "spentPerDay": "gastado/día",
         "spentPerMonth": "gastado/mes",
         "title": "Transacciones"
+    },
+    "categories": {
+        "healthcare": "Cuidado de la salud",
+        "utilities": "Servicios públicos",
+        "groceries": "Comestibles",
+        "transportation": "Transporte",
+        "rent": "Alquiler",
+        "internet": "Internet",
+        "phone": "Teléfono",
+        "insurance": "Seguro",
+        "savings": "Ahorros",
+        "entertainment": "Entretenimiento",
+        "dining_out": "Comer fuera",
+        "money_transfer": "Transferencia de dinero",
+        "clothing": "Ropa",
+        "gifts": "Regalos",
+        "salary": "Salario",
+        "investment": "Inversión",
+        "tips": "Propinas",
+        "freelancing": "Trabajo por cuenta propia",
+        "allowance": "Subsidio",
+        "part_time_job": "Trabajo a tiempo parcial",
+        "other_income": "Otros ingresos"
     }
 }

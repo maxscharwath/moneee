@@ -1,7 +1,7 @@
 import type React from 'react';
 import { type ReactNode, useEffect } from 'react';
 import { useSettings } from '@/stores/db';
-import { useSystemTheme } from '@/hooks/use-system-theme';
+import { useSystemTheme } from '@/hooks/useSystemTheme';
 
 export type Theme = 'dark' | 'light' | 'system';
 

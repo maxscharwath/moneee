@@ -17,7 +17,8 @@ import { type Transaction } from '@/stores/schemas/transaction';
 import { type Category } from '@/stores/schemas/category';
 import { useLocale } from '@/i18n';
 import { Container } from '@/components/container';
-import { useFinancialSummary } from '@/hooks/use-financial-summary';
+import { useFinancialSummary } from '@/hooks/useFinancialSummary';
+import { match } from 'ts-pattern';
 
 type Filter = 'income' | 'expense' | 'all';
 
@@ -99,9 +100,9 @@ export function Component() {
         dayIndex: number,
         periodType: string,
         currentPeriod: Date
-    ): Date => {
-        switch (periodType) {
-            case 'weekly': {
+    ): Date =>
+        match(periodType)
+            .with('weekly', () => {
                 const startOfWeek = new Date(currentPeriod);
                 startOfWeek.setDate(
                     currentPeriod.getDate() - currentPeriod.getDay()
@@ -111,19 +112,21 @@ export function Component() {
                     startOfWeek.getMonth(),
                     startOfWeek.getDate() + dayIndex
                 );
-            }
-
-            case 'yearly':
-                return new Date(currentPeriod.getFullYear(), dayIndex, 1); // Returns first day of each month for the current year
-            case 'monthly':
-            default:
-                return new Date(
-                    currentPeriod.getFullYear(),
-                    currentPeriod.getMonth(),
-                    dayIndex + 1
-                );
-        }
-    };
+            })
+            .with(
+                'yearly',
+                () => new Date(currentPeriod.getFullYear(), dayIndex, 1)
+            )
+            .with(
+                'monthly',
+                () =>
+                    new Date(
+                        currentPeriod.getFullYear(),
+                        currentPeriod.getMonth(),
+                        dayIndex + 1
+                    )
+            )
+            .otherwise(() => currentPeriod);
 
     const chartData = useMemo(() => {
         if (periodType === 'yearly') {
@@ -227,35 +230,27 @@ export function Component() {
 
     const { averagePerPeriodLabel, averagePerPeriod } = useMemo(() => {
         const daysInPeriod = getDaysInPeriod(periodType, currentPeriod);
+        const isYearly = periodType === 'yearly';
+        const periodKey = isYearly ? 'PerMonth' : 'PerDay';
 
-        let total = 0;
-        let averagePerPeriodLabel = '';
+        const { total, label } = match(filter)
+            .with('income', () => ({
+                total: totalIncome,
+                label: `transaction.income${periodKey}`,
+            }))
+            .with('expense', () => ({
+                total: totalExpenses,
+                label: `transaction.spent${periodKey}`,
+            }))
+            .otherwise(() => ({
+                total: totalIncome - totalExpenses,
+                label: `transaction.average${periodKey}`,
+            }));
 
-        if (filter === 'income') {
-            total = totalIncome;
-            averagePerPeriodLabel =
-                periodType === 'yearly'
-                    ? t('transaction.incomePerMonth')
-                    : t('transaction.incomePerDay');
-        } else if (filter === 'expense') {
-            total = totalExpenses;
-            averagePerPeriodLabel =
-                periodType === 'yearly'
-                    ? t('transaction.spentPerMonth')
-                    : t('transaction.spentPerDay');
-        } else {
-            total = totalIncome - totalExpenses;
-            averagePerPeriodLabel =
-                periodType === 'yearly'
-                    ? t('transaction.averagePerMonth')
-                    : t('transaction.averagePerDay');
-        }
-
-        const averagePerPeriod =
-            periodType === 'yearly' ? total / 12 : total / daysInPeriod;
+        const averagePerPeriod = total / (isYearly ? 12 : daysInPeriod);
 
         return {
-            averagePerPeriodLabel,
+            averagePerPeriodLabel: t(label),
             averagePerPeriod,
         };
     }, [filter, periodType, totalIncome, totalExpenses, currentPeriod, t]);

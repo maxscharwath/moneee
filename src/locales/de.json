@@ -83,5 +83,28 @@
         "spentPerDay": "Ausg./Tag",
         "spentPerMonth": "Ausg./Monat",
         "title": "Transaktionen"
+    },
+    "categories": {
+        "healthcare": "Gesundheitspflege",
+        "utilities": "Nebenkosten",
+        "groceries": "Lebensmittel",
+        "transportation": "Transport",
+        "rent": "Miete",
+        "internet": "Internet",
+        "phone": "Telefon",
+        "insurance": "Versicherung",
+        "savings": "Ersparnisse",
+        "entertainment": "Unterhaltung",
+        "dining_out": "Essen gehen",
+        "money_transfer": "Geldüberweisung",
+        "clothing": "Kleidung",
+        "gifts": "Geschenke",
+        "salary": "Gehalt",
+        "investment": "Investition",
+        "tips": "Trinkgeld",
+        "freelancing": "Freiberuflich",
+        "allowance": "Zulage",
+        "part_time_job": "Teilzeitarbeit",
+        "other_income": "Sonstige Einkünfte"
     }
 }
