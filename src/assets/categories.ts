@@ -93,7 +93,7 @@ export const expenseCategories: Category[] = [
         type: 'expense',
     },
     {
-        uuid: '2a2c2b2d-3b3c-4d4e-5f5g-6h6i6j6k6l6m',
+        uuid: '0f08dcad-cf06-4b8b-8c8b-8b182cfdc34d',
         name: 'categories.gifts',
         color: '#FFAB91',
         icon: '🎁',
@@ -145,7 +145,7 @@ export const incomeCategories: Category[] = [
         type: 'income',
     },
     {
-        uuid: '0f08dcad-cf06-4b8b-8c8b-8b182cfdc34d',
+        uuid: '2c3d4e5f-6g7h-8i9j-0k1l-2m3n4o5p6q7r',
         name: 'categories.money_transfer',
         color: '#AED581',
         icon: '💸',
