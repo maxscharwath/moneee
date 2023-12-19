@@ -39,7 +39,7 @@ export const CategorySelect = memo(
 
         return (
             <Select onValueChange={onValueChange} value={value}>
-                <SelectTrigger>
+                <SelectTrigger showChevron={false}>
                     <SelectValue
                         placeholder={
                             <div className="inline-flex items-center justify-center truncate">
