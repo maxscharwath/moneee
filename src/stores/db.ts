@@ -30,7 +30,6 @@ export const initializeDb = lazyInitialize(async () => {
     });
 
     await seeder(db);
-
     return db;
 });
 

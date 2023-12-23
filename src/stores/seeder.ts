@@ -1,4 +1,6 @@
 import { type Database } from '@/stores/db';
+import { expenseCategories, incomeCategories } from '@/assets/categories';
+import i18n from '@/i18n';
 
 export async function seeder(db: Database) {
     await db.settings.bulkInsert([
@@ -8,64 +10,33 @@ export async function seeder(db: Database) {
         },
     ]);
 
-    await db.categories.bulkInsert([
-        {
-            uuid: '1e9c9877-bca3-4679-8121-6583d8def483',
-            name: 'Food',
-            color: '#FAD02E',
-            icon: '🍔',
-            type: 'expense',
-        },
-        {
-            uuid: '48f67c28-4c6a-4bb1-b533-49db0f1a190f',
-            name: 'Transportation',
-            color: '#B2EBF2',
-            icon: '🚗',
-            type: 'expense',
-        },
-        {
-            uuid: 'ba7567f8-5fe9-4d91-b9d8-2dbbf0c65b5e',
-            name: 'Entertainment',
-            color: '#CE93D8',
-            icon: '🎮',
-            type: 'expense',
-        },
-        {
-            uuid: '0f08dcad-cf06-4b8b-8c8b-8b182cfdc34d',
-            name: 'Salary',
-            color: '#AED581',
-            icon: '💰',
-            type: 'income',
-        },
-        {
-            uuid: 'a8c257b7-e6e7-4d3f-bfea-461d8f9205a1',
-            name: 'Investment',
-            color: '#FFCC80',
-            icon: '📈',
-            type: 'income',
-        },
-        {
-            uuid: 'e4c5c7d3-4fb3-411b-835f-09b2d0c9e441',
-            name: 'Gift',
-            color: '#D1C4E9',
-            icon: '🎁',
-            type: 'income',
-        },
-        {
-            uuid: 'fa5cfa0a-d7c9-4e6b-aa2d-0c5553b9c4e2',
-            name: 'Other Income',
-            color: '#C5E1A5',
-            icon: '📦',
-            type: 'income',
-        },
-        {
-            uuid: '2a2c2b2d-3b3c-4d4e-5f5g-6h6i6j6k6l6m',
-            name: 'Other Expense',
-            color: '#FFAB91',
-            icon: '📦',
-            type: 'expense',
-        },
-    ]);
+    const t = await i18n;
+
+    const uuids = [
+        '3c4d5e6f-7g8h-9i0j-1k2l-3m4n5o6p7q8r',
+        '9a8b7c6d-5e4f-3a2b-1c0d-e9f8g7h6i5j4',
+        '4d5e6f7g-8h9i-0j1k-2l3m-4n5o6p7q8r9s',
+        '7g8h9i0j-1k2l-3m4n-5o6p-7q8r9s0t1u2v',
+        'ba7567f8-5fe9-4d91-b9d8-2dbbf0c65b5e',
+        '0f08dcad-cf06-4b8b-8c8b-8b182cfdc34d',
+        '48f67c28-4c6a-4bb1-b533-49db0f1a190f',
+        '6p5o4n3m-2l1k-0j9i-8h7g-6f5e4d3c2b1a',
+        '8h9i0j1k-2l3m-4n5o-6p7q-8r9s0t1u2v3w',
+        '5d4c3b2a-1a2b-3c4d-5e6f-7g8h9i0j1k2l',
+        '2a2c2b2d-3b3c-4d4e-5f5g-6h6i6j6k6l6m',
+        '1e9c9877-bca3-4679-8121-6583d8def483',
+        'fa5cfa0a-d7c9-4e6b-aa2d-0c5553b9c4e2',
+        '1b2c3d4e-5f6g-7h8i-9j0k-1l2m3n4o5p6q',
+    ];
+
+    const categories = [...expenseCategories, ...incomeCategories]
+        .filter((category) => uuids.includes(category.uuid))
+        .map((category) => ({
+            ...category,
+            name: t(category.name),
+        }));
+
+    await db.categories.bulkInsert(categories);
 
     await db.transactions.bulkInsert([
         {
@@ -80,28 +51,28 @@ export async function seeder(db: Database) {
             note: 'Monthly Train Pass',
             amount: 300,
             date: genDate('09:20'),
-            categoryId: '48f67c28-4c6a-4bb1-b533-49db0f1a190f',
+            categoryId: '3c4d5e6f-7g8h-9i0j-1k2l-3m4n5o6p7q8r',
         },
         {
             uuid: '6e5f5033-c9d3-411e-a40f-c2c5db7e6e5f',
             note: 'Cinema',
             amount: 25,
             date: genDate('20:45'),
-            categoryId: 'ba7567f8-5fe9-4d91-b9d8-2dbbf0c65b5e',
+            categoryId: '2a2c2b2d-3b3c-4d4e-5f5g-6h6i6j6k6l6m',
         },
         {
             uuid: '3f4d5033-e9d3-511e-b40f-d2d5db7e7e5g',
             note: 'Monthly Salary',
             amount: 7500,
             date: genDate('12:00'),
-            categoryId: '0f08dcad-cf06-4b8b-8c8b-8b182cfdc34d',
+            categoryId: '6p5o4n3m-2l1k-0j9i-8h7g-6f5e4d3c2b1a',
         },
         {
             uuid: '756f6432-a2d2-411e-b12f-e2c5da6e8e5g',
             note: 'Groceries',
             amount: 180.5,
             date: genDate('17:15'),
-            categoryId: '1e9c9877-bca3-4679-8121-6583d8def483',
+            categoryId: '4d5e6f7g-8h9i-0j1k-2l3m-4n5o6p7q8r9s',
         },
         {
             uuid: '82f654c2-a7e2-411e-a15f-e3c4da7e9e5h',
@@ -122,42 +93,35 @@ export async function seeder(db: Database) {
             note: 'Birthday Gift',
             amount: 50,
             date: genDate('16:45'),
-            categoryId: 'e4c5c7d3-4fb3-411b-835f-09b2d0c9e441',
+            categoryId: '0f08dcad-cf06-4b8b-8c8b-8b182cfdc34d',
         },
         {
             uuid: 'b3c7d652-d9e2-411e-d19f-b3b7dacf9e5j',
-            note: 'Cafe with Friends',
+            note: 'Twint to Friend',
             amount: 30,
             date: genDate('11:25'),
-            categoryId: '1e9c9877-bca3-4679-8121-6583d8def483',
+            categoryId: '48f67c28-4c6a-4bb1-b533-49db0f1a190f',
         },
         {
             uuid: 'c3d8e662-eaf2-411e-e1af-c3d8eaf2f2k2',
             note: 'Fuel',
             amount: 60,
             date: genDate('09:30'),
-            categoryId: '48f67c28-4c6a-4bb1-b533-49db0f1a190f',
+            categoryId: '3c4d5e6f-7g8h-9i0j-1k2l-3m4n5o6p7q8r',
         },
         {
             uuid: 'd3e9f672-fbf2-411e-f1bf-d3e9fbf2g2l2',
-            note: 'Gym Membership',
+            note: 'Gift from Parents',
             amount: 45,
             date: genDate('15:40'),
-            categoryId: 'ba7567f8-5fe9-4d91-b9d8-2dbbf0c65b5e',
-        },
-        {
-            uuid: 'e3fa0872-gcg2-411e-g1cg-e3fa0gcgh2m2',
-            note: 'Investment Returns',
-            amount: 210,
-            date: genDate('10:20'),
-            categoryId: 'a8c257b7-e6e7-4d3f-bfea-461d8f9205a1',
+            categoryId: '1b2c3d4e-5f6g-7h8i-9j0k-1l2m3n4o5p6q',
         },
         {
             uuid: 'f3fb1972-hdh2-411e-h1dh-f3fb1hdi2n2n',
             note: 'Mobile Bill',
             amount: 35,
             date: genDate('12:15'),
-            categoryId: '2a2c2b2d-3b3c-4d4e-5f5g-6h6i6j6k6l6m',
+            categoryId: '7g8h9i0j-1k2l-3m4n-5o6p-7q8r9s0t1u2v',
         },
         {
             uuid: '10ga2a82-idj2-411e-i1ij-10ga2ijj3o3o',
@@ -171,42 +135,35 @@ export async function seeder(db: Database) {
             note: 'Tax Refund',
             amount: 250,
             date: genDate('10:55'),
-            categoryId: '0f08dcad-cf06-4b8b-8c8b-8b182cfdc34d',
+            categoryId: 'fa5cfa0a-d7c9-4e6b-aa2d-0c5553b9c4e2',
         },
         {
             uuid: '30ic4ca2-kfl2-411e-k1kl-30ic4klk5q5q',
             note: 'Night Out',
             amount: 60,
             date: genDate('21:30'),
-            categoryId: 'ba7567f8-5fe9-4d91-b9d8-2dbbf0c65b5e',
+            categoryId: '1e9c9877-bca3-4679-8121-6583d8def483',
         },
         {
             uuid: '40jd5db2-lgm2-411e-l1lm-40jd5lml6r6r',
             note: 'Dental Checkup',
             amount: 85,
             date: genDate('15:50'),
-            categoryId: '2a2c2b2d-3b3c-4d4e-5f5g-6h6i6j6k6l6m',
+            categoryId: '9a8b7c6d-5e4f-3a2b-1c0d-e9f8g7h6i5j4',
         },
         {
             uuid: '50ke6ec2-mhn2-411e-m1mn-50ke6mnm7s7s',
             note: 'Investment Deposit',
             amount: 300,
             date: genDate('16:00'),
-            categoryId: 'a8c257b7-e6e7-4d3f-bfea-461d8f9205a1',
-        },
-        {
-            uuid: '60lf7fd2-noo2-411e-n1no-60lf7ono8t8t',
-            note: 'Charity Donation',
-            amount: 50,
-            date: genDate('11:45'),
-            categoryId: 'e4c5c7d3-4fb3-411b-835f-09b2d0c9e441',
+            categoryId: '5d4c3b2a-1a2b-3c4d-5e6f-7g8h9i0j1k2l',
         },
         {
             uuid: '70mg8ge2-opq2-411e-o1op-70mg8opo9u9u',
             note: 'Health Insurance',
             amount: 150,
             date: genDate('10:10'),
-            categoryId: '2a2c2b2d-3b3c-4d4e-5f5g-6h6i6j6k6l6m',
+            categoryId: '8h9i0j1k-2l3m-4n5o-6p7q-8r9s0t1u2v3w',
         },
     ]);
 }

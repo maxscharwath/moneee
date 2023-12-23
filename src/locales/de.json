@@ -48,6 +48,7 @@
     "yearly": "Jährlich"
   },
   "settings": {
+    "build": "Build: {{build}}",
     "cache": {
       "newVersionAvailable": "Neue Version verfügbar",
       "upToDate": "Aktuell"
@@ -90,7 +91,8 @@
       "loginWithDevice": "Mit Ihrem Gerät anmelden",
       "register": "Registrieren",
       "title": "Synchronisation"
-    }
+    },
+    "version": "Version: {{version}}"
   },
   "transaction": {
     "add_note": "Notiz hinzufügen",

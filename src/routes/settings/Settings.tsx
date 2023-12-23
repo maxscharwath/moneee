@@ -38,6 +38,8 @@ export function Component() {
 
     const [settings, setSettings] = useSettings();
 
+    const githubRepo = 'maxscharwath/moneee';
+
     return (
         <>
             <Header>
@@ -165,11 +167,16 @@ export function Component() {
                 </div>
                 <div className="mt-4 flex justify-center gap-2">
                     <span className="text-xs font-bold text-muted-foreground">
-                        Version: {version}
+                        {t('settings.version', { version })}
                     </span>
-                    <span className="text-xs font-bold text-muted-foreground">
-                        Build: {abbreviatedSha}
-                    </span>
+                    <a
+                        className="text-xs font-bold text-muted-foreground"
+                        href={`https://github.com/${githubRepo}`}
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        {t('settings.build', { build: abbreviatedSha })}
+                    </a>
                 </div>
             </Container>
         </>

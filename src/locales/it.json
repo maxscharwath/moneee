@@ -48,6 +48,7 @@
     "yearly": "Annuale"
   },
   "settings": {
+    "build": "Build: {{build}}",
     "cache": {
       "newVersionAvailable": "Nuova versione disponibile",
       "upToDate": "Aggiornato"
@@ -90,7 +91,8 @@
       "loginWithDevice": "Accedi con il tuo dispositivo",
       "register": "Registrati",
       "title": "Sincronizzazione"
-    }
+    },
+    "version": "Version: {{version}}"
   },
   "transaction": {
     "add_note": "Aggiungi nota",

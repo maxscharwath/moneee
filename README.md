@@ -20,9 +20,6 @@ Live App: [moneee.vercel.app](https://moneee.vercel.app)
 ## Getting Started
 
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/moneee.git
-
 # Install dependencies
 pnpm install
 

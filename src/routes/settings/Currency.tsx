@@ -7,48 +7,12 @@ import { NavLink } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { useSettings } from '@/stores/db';
 import { Container } from '@/components/container';
-import { useEffect, useState } from 'react';
+import { useAsync } from '@/hooks/useAsync';
 
 type Currency = {
     code: string;
     name: string;
 };
-
-function useAsync<T>(fn: () => Promise<T>, deps: unknown[] = []) {
-    const [state, setState] = useState<{
-        status: 'idle' | 'pending' | 'success' | 'error';
-        data: T | null;
-        error: Error | null;
-    }>({
-        status: 'idle',
-        data: null,
-        error: null,
-    });
-
-    useEffect(() => {
-        setState({
-            status: 'pending',
-            data: null,
-            error: null,
-        });
-        fn().then(
-            (data) =>
-                setState({
-                    status: 'success',
-                    data,
-                    error: null,
-                }),
-            (error: Error) =>
-                setState({
-                    status: 'error',
-                    data: null,
-                    error,
-                })
-        );
-    }, deps);
-
-    return state;
-}
 
 export function Component() {
     const { t } = useTranslation();

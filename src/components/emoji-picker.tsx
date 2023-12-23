@@ -1,4 +1,3 @@
-import { useAsync } from '@/lib/utils';
 import React, { useMemo } from 'react';
 import {
     DialogContent,
@@ -19,6 +18,7 @@ import {
 } from 'lucide-react';
 import { lazyInitialize } from '@/stores/utils/createDatabase';
 import { Separator } from '@/components/ui/separator';
+import { useAsync } from '@/hooks/useAsync';
 
 type EmojiPickerProps = {
     selectedEmoji?: string;
