@@ -1,9 +1,4 @@
 import React, { useMemo } from 'react';
-import {
-    DialogContent,
-    DialogRoot,
-    DialogTrigger,
-} from '@/components/ui/dialog';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import {
     CarIcon,
@@ -19,6 +14,12 @@ import {
 import { lazyInitialize } from '@/stores/utils/createDatabase';
 import { Separator } from '@/components/ui/separator';
 import { useAsync } from '@/hooks/useAsync';
+import {
+    Drawer,
+    DrawerContent,
+    DrawerHeader,
+    DrawerTrigger,
+} from '@/components/ui/drawer';
 
 type EmojiPickerProps = {
     selectedEmoji?: string;
@@ -92,28 +93,30 @@ export const EmojiPicker = ({
     );
 
     return (
-        <DialogRoot>
-            <DialogTrigger className="flex h-24 w-24 items-center justify-center rounded-xl bg-secondary p-1 text-[3rem] ring ring-primary/50">
+        <Drawer>
+            <DrawerTrigger className="flex h-24 w-24 items-center justify-center rounded-xl bg-secondary p-1 text-[3rem] ring ring-primary/50">
                 {selectedEmoji ?? <SmilePlusIcon size="3rem" />}
-            </DialogTrigger>
-            <DialogContent className="max-h-[50vh]">
-                <ToggleGroup
-                    type="single"
-                    defaultValue={category}
-                    onValueChange={setCategory}
-                >
-                    {categories?.map(({ id, name, icon }) => (
-                        <ToggleGroupItem
-                            key={id}
-                            value={id}
-                            aria-label={name}
-                            size="sm"
-                            className="grow"
-                        >
-                            {icon}
-                        </ToggleGroupItem>
-                    ))}
-                </ToggleGroup>
+            </DrawerTrigger>
+            <DrawerContent className="m-auto max-h-[50vh] w-full max-w-lg">
+                <DrawerHeader>
+                    <ToggleGroup
+                        type="single"
+                        defaultValue={category}
+                        onValueChange={setCategory}
+                    >
+                        {categories?.map(({ id, name, icon }) => (
+                            <ToggleGroupItem
+                                key={id}
+                                value={id}
+                                aria-label={name}
+                                size="sm"
+                                className="grow"
+                            >
+                                {icon}
+                            </ToggleGroupItem>
+                        ))}
+                    </ToggleGroup>
+                </DrawerHeader>
                 <Separator />
                 <ToggleGroup
                     className="grid grid-cols-5 overflow-y-auto p-1"
@@ -132,7 +135,7 @@ export const EmojiPicker = ({
                         </ToggleGroupItem>
                     ))}
                 </ToggleGroup>
-            </DialogContent>
-        </DialogRoot>
+            </DrawerContent>
+        </Drawer>
     );
 };

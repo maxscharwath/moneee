@@ -10,7 +10,7 @@ type AlertProps = {
     description: string;
     confirmText: string;
     cancelText: string;
-    onConfirm: () => void;
+    onConfirm: () => void | Promise<void>;
 };
 
 type SettingItemProps = {

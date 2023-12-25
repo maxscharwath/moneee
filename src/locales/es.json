@@ -1,115 +1,115 @@
 {
-  "categories": {
-    "allowance": "Subsidio",
-    "clothing": "Ropa",
-    "dining_out": "Comer fuera",
-    "entertainment": "Entretenimiento",
-    "freelancing": "Trabajo por cuenta propia",
-    "gifts": "Regalos",
-    "groceries": "Comestibles",
-    "healthcare": "Cuidado de la salud",
-    "insurance": "Seguro",
-    "internet": "Internet",
-    "investment": "Inversión",
-    "money_transfer": "Transferencia de dinero",
-    "other_income": "Otros ingresos",
-    "part_time_job": "Trabajo a tiempo parcial",
-    "phone": "Teléfono",
-    "rent": "Alquiler",
-    "salary": "Salario",
-    "savings": "Ahorros",
-    "tips": "Propinas",
-    "transportation": "Transporte",
-    "utilities": "Servicios públicos"
-  },
-  "category": {
-    "create": "Crear categoría",
-    "name": "Nombre de la categoría",
-    "select": "Categoría"
-  },
-  "date": {
-    "today": "Hoy"
-  },
-  "insights": {
-    "title": "Perspectivas"
-  },
-  "period": {
-    "monthly": "Mensual",
-    "placeholder": "Seleccionar período",
-    "weekly": "Semanal",
-    "yearly": "Anual"
-  },
-  "recurring": {
-    "custom": "Personalizado",
-    "daily": "Diario",
-    "monthly": "Mensual",
-    "none": "Ninguno",
-    "weekly": "Semanal",
-    "yearly": "Anual"
-  },
-  "settings": {
-    "build": "Build: {{build}}",
-    "cache": {
-      "newVersionAvailable": "Nueva versión disponible",
-      "upToDate": "Actualizado"
+    "categories": {
+        "allowance": "Subsidio",
+        "clothing": "Ropa",
+        "dining_out": "Comer fuera",
+        "entertainment": "Entretenimiento",
+        "freelancing": "Trabajo por cuenta propia",
+        "gifts": "Regalos",
+        "groceries": "Comestibles",
+        "healthcare": "Cuidado de la salud",
+        "insurance": "Seguro",
+        "internet": "Internet",
+        "investment": "Inversión",
+        "money_transfer": "Transferencia de dinero",
+        "other_income": "Otros ingresos",
+        "part_time_job": "Trabajo a tiempo parcial",
+        "phone": "Teléfono",
+        "rent": "Alquiler",
+        "salary": "Salario",
+        "savings": "Ahorros",
+        "tips": "Propinas",
+        "transportation": "Transporte",
+        "utilities": "Servicios públicos"
     },
     "category": {
-      "suggested": "Categorías sugeridas"
+        "create": "Crear categoría",
+        "name": "Nombre de la categoría",
+        "select": "Categoría"
     },
-    "currency": {
-      "title": "Monedas"
+    "date": {
+        "today": "Hoy"
     },
-    "language": {
-      "title": "Idioma"
+    "insights": {
+        "title": "Perspectivas"
     },
-    "root": {
-      "appearance": "Apariencia",
-      "categories": "Categorías",
-      "currency": "Moneda",
-      "data": "Datos",
-      "erase": {
-        "alert": {
-          "cancel": "Cancelar",
-          "confirm": "Borrar",
-          "description": "Esta acción no se puede deshacer. Esto eliminará permanentemente tus transacciones y eliminará los datos de la aplicación.",
-          "title": "¿Estás absolutamente seguro?"
+    "period": {
+        "monthly": "Mensual",
+        "placeholder": "Seleccionar período",
+        "weekly": "Semanal",
+        "yearly": "Anual"
+    },
+    "recurring": {
+        "custom": "Personalizado",
+        "daily": "Diario",
+        "monthly": "Mensual",
+        "none": "Ninguno",
+        "weekly": "Semanal",
+        "yearly": "Anual"
+    },
+    "settings": {
+        "build": "Build: {{build}}",
+        "cache": {
+            "newVersionAvailable": "Nueva versión disponible",
+            "upToDate": "Actualizado"
         },
-        "title": "Borrar Datos"
-      },
-      "export": "Exportar datos",
-      "general": "General",
-      "import": "Importar datos",
-      "language": "Idioma",
-      "refreshCache": "Actualizar caché",
-      "synchronisation": "Sincronización",
-      "title": "Ajustes"
+        "category": {
+            "suggested": "Categorías sugeridas"
+        },
+        "currency": {
+            "title": "Monedas"
+        },
+        "language": {
+            "title": "Idioma"
+        },
+        "root": {
+            "appearance": "Apariencia",
+            "categories": "Categorías",
+            "currency": "Moneda",
+            "data": "Datos",
+            "erase": {
+                "alert": {
+                    "cancel": "Cancelar",
+                    "confirm": "Borrar",
+                    "description": "Esta acción no se puede deshacer. Esto eliminará permanentemente tus transacciones y eliminará los datos de la aplicación.",
+                    "title": "¿Estás absolutamente seguro?"
+                },
+                "title": "Borrar Datos"
+            },
+            "export": "Exportar datos",
+            "general": "General",
+            "import": "Importar datos",
+            "language": "Idioma",
+            "refreshCache": "Actualizar caché",
+            "synchronisation": "Sincronización",
+            "title": "Ajustes"
+        },
+        "synchronisation": {
+            "authenticate": "Autenticar",
+            "authenticateWithDevice": "Autenticarse con su dispositivo",
+            "login": "Iniciar sesión",
+            "loginWithDevice": "Iniciar sesión con su dispositivo",
+            "register": "Registrarse",
+            "title": "Sincronización"
+        },
+        "version": "Version: {{version}}"
     },
-    "synchronisation": {
-      "authenticate": "Autenticar",
-      "authenticateWithDevice": "Autenticarse con su dispositivo",
-      "login": "Iniciar sesión",
-      "loginWithDevice": "Iniciar sesión con su dispositivo",
-      "register": "Registrarse",
-      "title": "Sincronización"
-    },
-    "version": "Version: {{version}}"
-  },
-  "transaction": {
-    "add_note": "Añadir nota",
-    "averagePerDay": "prom/día",
-    "averagePerMonth": "prom/mes",
-    "balance": "Saldo",
-    "expense": "Gasto",
-    "income": "Ingreso",
-    "incomePerDay": "ingreso/día",
-    "incomePerMonth": "ingreso/mes",
-    "noTransactions": {
-      "description": "No tienes transacciones para este período.",
-      "title": "Sin entradas"
-    },
-    "remove": "Eliminar transacción",
-    "spentPerDay": "gastado/día",
-    "spentPerMonth": "gastado/mes",
-    "title": "Transacciones"
-  }
+    "transaction": {
+        "add_note": "Añadir nota",
+        "averagePerDay": "prom/día",
+        "averagePerMonth": "prom/mes",
+        "balance": "Saldo",
+        "expense": "Gasto",
+        "income": "Ingreso",
+        "incomePerDay": "ingreso/día",
+        "incomePerMonth": "ingreso/mes",
+        "noTransactions": {
+            "description": "No tienes transacciones para este período.",
+            "title": "Sin entradas"
+        },
+        "remove": "Eliminar transacción",
+        "spentPerDay": "gastado/día",
+        "spentPerMonth": "gastado/mes",
+        "title": "Transacciones"
+    }
 }

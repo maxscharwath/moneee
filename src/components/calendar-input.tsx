@@ -1,8 +1,3 @@
-import {
-    DialogRoot,
-    DialogContent,
-    DialogTrigger,
-} from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { CalendarIcon } from 'lucide-react';
 import { Calendar } from '@/components/ui/calendar';
@@ -10,6 +5,7 @@ import { useState } from 'react';
 import { useDelayFunction } from '@/hooks/useDelayFunction';
 import { useLocale } from '@/i18n';
 import { Spacing } from '@/components/spacing';
+import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
 
 type CalendarInputProps = {
     date: Date;
@@ -54,16 +50,16 @@ export const CalendarInput = ({ date, setDate }: CalendarInputProps) => {
     };
 
     return (
-        <DialogRoot open={isOpen} onOpenChange={setIsOpen}>
-            <DialogTrigger asChild>
+        <Drawer open={isOpen} onOpenChange={setIsOpen}>
+            <DrawerTrigger asChild>
                 <Button variant="outline" className="grow overflow-hidden">
                     <CalendarIcon className="h-4 w-4 shrink-0" />
                     <span className="truncate">{formatDate(date)}</span>
                     <Spacing />
                     <span className="truncate">{formatTime(date)}</span>
                 </Button>
-            </DialogTrigger>
-            <DialogContent>
+            </DrawerTrigger>
+            <DrawerContent className="m-auto max-h-[50vh] w-full max-w-lg p-4">
                 <Calendar
                     locale={language?.locale}
                     mode="single"
@@ -74,7 +70,7 @@ export const CalendarInput = ({ date, setDate }: CalendarInputProps) => {
                     onSelect={handleSelect}
                     initialFocus
                 />
-            </DialogContent>
-        </DialogRoot>
+            </DrawerContent>
+        </Drawer>
     );
 };
