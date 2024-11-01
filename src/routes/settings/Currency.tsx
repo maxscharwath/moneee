@@ -8,11 +8,26 @@ import { Button } from '@/components/ui/button';
 import { useSettings } from '@/stores/db';
 import { Container } from '@/components/container';
 import { useAsync } from '@/hooks/useAsync';
+import { useMemo } from 'react';
 
 type Currency = {
     code: string;
+    symbol: string;
     name: string;
+    locales: string[];
 };
+
+const CurrencyItem = ({ code, name }: Currency) => (
+    <RadioGroup.Item asChild value={code} key={code}>
+        <List.ItemButton>
+            <span className="font-bold text-muted-foreground">{code}</span>
+            <span className="truncate">{name}</span>
+            <RadioGroup.Indicator asChild>
+                <CheckIcon className="ml-auto shrink-0" />
+            </RadioGroup.Indicator>
+        </List.ItemButton>
+    </RadioGroup.Item>
+);
 
 export function Component() {
     const { t } = useTranslation();
@@ -25,6 +40,23 @@ export function Component() {
     const handleCurrencyChange = (currency: string) => {
         setSettings({ currency });
     };
+
+    const languageSet = useMemo(() => new Set(navigator.languages), []);
+    const suggestedCurrencies = useMemo(() => {
+        return (
+            data?.filter(({ locales }) =>
+                locales.some((locale) => languageSet.has(locale))
+            ) ?? []
+        );
+    }, [data, languageSet]);
+
+    const remainingCurrencies = useMemo(() => {
+        return (
+            data?.filter(
+                ({ code }) => !suggestedCurrencies.some((c) => c.code === code)
+            ) ?? []
+        );
+    }, [data, suggestedCurrencies]);
 
     return (
         <>
@@ -46,24 +78,15 @@ export function Component() {
                     onValueChange={handleCurrencyChange}
                 >
                     <List.Root>
+                        {suggestedCurrencies.length > 0 && (
+                            <List.List
+                                heading={t('settings.currency.suggested')}
+                            >
+                                {suggestedCurrencies.map(CurrencyItem)}
+                            </List.List>
+                        )}
                         <List.List>
-                            {data?.map(({ code, name }) => (
-                                <RadioGroup.Item
-                                    asChild
-                                    value={code}
-                                    key={code}
-                                >
-                                    <List.ItemButton>
-                                        <span className="font-bold text-muted-foreground">
-                                            {code}
-                                        </span>
-                                        <span className="truncate">{name}</span>
-                                        <RadioGroup.Indicator asChild>
-                                            <CheckIcon className="ml-auto shrink-0" />
-                                        </RadioGroup.Indicator>
-                                    </List.ItemButton>
-                                </RadioGroup.Item>
-                            ))}
+                            {remainingCurrencies.map(CurrencyItem)}
                         </List.List>
                     </List.Root>
                 </RadioGroup.Root>
