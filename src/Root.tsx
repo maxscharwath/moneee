@@ -37,6 +37,10 @@ const router = createBrowserRouter(
                         import('@/routes/settings/Synchronisation')
                     }
                 />
+                <Route
+                    path="about"
+                    lazy={async () => import('@/routes/settings/About')}
+                />
             </Route>
         </Route>
     )

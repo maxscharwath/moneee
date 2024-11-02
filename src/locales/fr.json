@@ -1,4 +1,15 @@
 {
+  "about": {
+    "author": "Auteur",
+    "buildDate": "Date",
+    "buildHash": "Build",
+    "details": "Infos App",
+    "license": "License",
+    "repo": "Source",
+    "reportBug": "Signaler un bug",
+    "title": "À propos",
+    "version": "Version"
+  },
   "categories": {
     "allowance": "Allocation",
     "clothing": "Vêtements",
@@ -64,6 +75,7 @@
       "title": "Langue"
     },
     "root": {
+      "about": "À propos",
       "appearance": "Apparence",
       "categories": "Catégories",
       "currency": "Devise",

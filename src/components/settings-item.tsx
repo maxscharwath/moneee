@@ -30,7 +30,7 @@ const SettingContent = memo<PropsWithChildren<SettingItemProps>>(
             <List.ItemIcon style={{ backgroundColor: color }}>
                 <IconComponent />
             </List.ItemIcon>
-            <span className="truncate">{title}</span>
+            <span className="shrink-0 truncate">{title}</span>
             <Spacing />
             {value && (
                 <span className="truncate text-muted-foreground">{value}</span>

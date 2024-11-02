@@ -1,4 +1,15 @@
 {
+  "about": {
+    "author": "Autor",
+    "buildDate": "Fecha",
+    "buildHash": "Build",
+    "details": "Info App",
+    "license": "Licencia",
+    "repo": "Fuente",
+    "reportBug": "Reportar bug",
+    "title": "Acerca de",
+    "version": "Versión"
+  },
   "categories": {
     "allowance": "Subsidio",
     "clothing": "Ropa",
@@ -64,6 +75,7 @@
       "title": "Idioma"
     },
     "root": {
+      "about": "Acerca de",
       "appearance": "Apariencia",
       "categories": "Categorías",
       "currency": "Moneda",

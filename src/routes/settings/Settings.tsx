@@ -7,6 +7,7 @@ import {
     CoinsIcon,
     ContrastIcon,
     DownloadIcon,
+    Info,
     LanguagesIcon,
     LayoutGridIcon,
     MonitorIcon,
@@ -26,6 +27,7 @@ import { Container } from '@/components/container';
 import { SettingItem } from '@/components/settings-item';
 import { exportToCsv } from '@/lib/exportTransactions';
 import { useSettings } from '@/hooks/useSettings';
+import { NavLink } from 'react-router-dom';
 
 export function Component() {
     const { t, language } = useLocale();
@@ -36,8 +38,6 @@ export function Component() {
     } = useRegisterSW();
 
     const [settings, setSettings] = useSettings();
-
-    const githubRepo = 'maxscharwath/moneee';
 
     return (
         <>
@@ -102,6 +102,14 @@ export function Component() {
                                 href="/settings/categories"
                                 chevron
                             />
+
+                            <SettingItem
+                                icon={Info}
+                                color="#a8aeb3"
+                                title={t('settings.root.about')}
+                                href="/settings/about"
+                                chevron
+                            />
                         </List.List>
                         <List.List heading={t('settings.root.data')}>
                             <SettingItem
@@ -164,19 +172,18 @@ export function Component() {
                         </List.List>
                     </List.Root>
                 </div>
-                <div className="mt-4 flex justify-center gap-2">
+                <NavLink
+                    to="/settings/about"
+                    className="mt-4 flex justify-center gap-2"
+                    state={{ direction: 'right' }}
+                >
                     <span className="text-xs font-bold text-muted-foreground">
                         {t('settings.version', { version })}
                     </span>
-                    <a
-                        className="text-xs font-bold text-muted-foreground"
-                        href={`https://github.com/${githubRepo}`}
-                        target="_blank"
-                        rel="noreferrer"
-                    >
+                    <span className="text-xs font-bold text-muted-foreground">
                         {t('settings.build', { build: abbreviatedSha })}
-                    </a>
-                </div>
+                    </span>
+                </NavLink>
             </Container>
         </>
     );

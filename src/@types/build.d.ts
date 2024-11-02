@@ -67,5 +67,5 @@ declare module '@build/package' {
     export const license: string;
 
     /** Package author */
-    export const author: string;
+    export const author: { name: string; email?: string; url?: string };
 }

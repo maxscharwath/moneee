@@ -1,15 +1,46 @@
 {
     "name": "moneee",
     "private": true,
-    "version": "0.0.0",
+    "version": "1.0.0",
+    "description": "Discover Moneee, a contemporary budgeting app designed to track and analyze your finances effortlessly. Gain insights into your spending habits and set financial goals with ease.",
+    "keywords": [
+        "budgeting",
+        "finance",
+        "personal finance",
+        "expense tracking",
+        "financial goals"
+    ],
     "type": "module",
+    "author": {
+        "name": "Maxime Scharwath",
+        "email": "maxime@scharwath.ch",
+        "url": "https://maxime.scharwath.ch"
+    },
+    "contributors": [
+        {
+            "name": "Maxime Scharwath",
+            "email": "maxime@scharwath.ch",
+            "url": "https://maxime.scharwath.ch"
+        }
+    ],
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/maxscharwath/moneee.git"
+    },
+    "bugs": {
+        "url": "https://github.com/maxscharwath/moneee/issues",
+        "email": "maxime@scharwath.ch"
+    },
+    "homepage": "https://github.com/maxscharwath/moneee#readme",
     "scripts": {
         "dev": "vite --host",
         "build": "tsc && vite build",
         "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
         "format": "prettier --write . && npm run lint -- --fix",
         "preview": "vite preview",
-        "generate-icons": "pwa-asset-generator ./public/logo.png ./public -b \"linear-gradient(45deg, rgba(37,41,43,1) 0%, rgba(162,164,166,1) 100%)\" -f -r"
+        "generate-icons": "pwa-asset-generator ./public/logo.png ./public -b \"linear-gradient(45deg, rgba(37,41,43,1) 0%, rgba(162,164,166,1) 100%)\" -f -r",
+        "test": "jest"
     },
     "dependencies": {
         "@radix-ui/react-alert-dialog": "^1.1.2",
@@ -23,17 +54,13 @@
         "@radix-ui/react-tabs": "^1.1.1",
         "@radix-ui/react-toggle": "^1.1.0",
         "@radix-ui/react-toggle-group": "^1.1.0",
-        "@radix-ui/react-use-controllable-state": "^1.1.0",
         "@uidotdev/usehooks": "^2.4.1",
         "@vercel/edge": "^1.1.2",
-        "class-variance-authority": "^0.7.0",
-        "clsx": "^2.1.1",
         "date-fns": "^3.0.6",
         "framer-motion": "^11.11.11",
         "i18next": "^23.16.4",
         "i18next-browser-languagedetector": "^8.0.0",
         "i18next-resources-to-backend": "^1.2.1",
-        "lucide-react": "^0.454.0",
         "react": "^18.3.1",
         "react-day-picker": "^8.10.1",
         "react-dom": "^18.3.1",
@@ -43,10 +70,7 @@
         "rxdb": "^15.36.1",
         "rxdb-hooks": "^5.0.2",
         "tailwind-merge": "^2.5.4",
-        "tailwindcss-animate": "^1.0.7",
-        "ts-pattern": "^5.5.0",
-        "vaul": "^1.1.1",
-        "vite-plugin-mkcert": "^1.17.6"
+        "ts-pattern": "^5.5.0"
     },
     "devDependencies": {
         "@types/node": "^22.8.6",
@@ -56,20 +80,37 @@
         "@typescript-eslint/parser": "^8.12.2",
         "@vitejs/plugin-react-swc": "^3.7.1",
         "autoprefixer": "^10.4.20",
+        "class-variance-authority": "^0.7.0",
+        "clsx": "^2.1.1",
         "eslint": "^9.14.0",
         "eslint-config-prettier": "^9.1.0",
         "eslint-plugin-react": "^7.37.2",
+        "jest": "^29.6.2",
+        "lucide-react": "^0.454.0",
         "postcss": "^8.4.47",
         "prettier": "^3.3.3",
         "prettier-plugin-tailwindcss": "^0.6.8",
         "pwa-asset-generator": "^6.4.0",
         "sass": "^1.80.5",
         "tailwindcss": "^3.4.14",
+        "tailwindcss-animate": "^1.0.7",
         "tailwindcss-safe-area": "^0.6.0",
         "typescript": "^5.6.3",
+        "vaul": "^1.1.1",
         "vite": "^5.4.10",
         "vite-plugin-info": "^0.4.1",
+        "vite-plugin-mkcert": "^1.17.6",
         "vite-plugin-pwa": "^0.20.5",
+        "vite-plugin-webp-generator": "^0.1.0",
         "workbox-window": "^7.3.0"
-    }
+    },
+    "engines": {
+        "node": ">=18.0.0",
+        "npm": ">=9.0.0"
+    },
+    "browserslist": [
+        ">0.2%",
+        "not dead",
+        "not op_mini all"
+    ]
 }

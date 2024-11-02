@@ -1,4 +1,15 @@
 {
+  "about": {
+    "author": "Autor",
+    "buildDate": "Datum",
+    "buildHash": "Build",
+    "details": "App-Info",
+    "license": "Lizenz",
+    "repo": "Quelle",
+    "reportBug": "Fehler melden",
+    "title": "Über",
+    "version": "Version"
+  },
   "categories": {
     "allowance": "Zulage",
     "clothing": "Kleidung",
@@ -64,6 +75,7 @@
       "title": "Sprache"
     },
     "root": {
+      "about": "Über",
       "appearance": "Erscheinungsbild",
       "categories": "Kategorien",
       "currency": "Währung",
