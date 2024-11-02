@@ -12,13 +12,13 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { AnimatePresence, motion } from 'framer-motion';
 import { CategoryChart } from '@/components/category-chart';
 import { PeriodNavigation } from '@/components/period-navigation';
-import { deleteTransaction } from '@/stores/db';
 import { type Transaction } from '@/stores/schemas/transaction';
 import { type Category } from '@/stores/schemas/category';
 import { useLocale } from '@/i18n';
 import { Container } from '@/components/container';
 import { useFinancialSummary } from '@/hooks/useFinancialSummary';
 import { match } from 'ts-pattern';
+import { deleteTransaction } from '@/hooks/useTransaction';
 
 type Filter = 'income' | 'expense' | 'all';
 

@@ -4,7 +4,6 @@ import * as List from '@/components/ui/list';
 import { ChevronLeft, PlusIcon } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { addCategory, getCategoriesByType, removeCategory } from '@/stores/db';
 import { Container } from '@/components/container';
 import * as TabsGroup from '@/components/ui/tabs-group';
 import React from 'react';
@@ -13,6 +12,11 @@ import { Category } from '@/stores/schemas/category';
 import { Optional } from '@/lib/utils';
 import { Spacing } from '@/components/spacing';
 import { expenseCategories, incomeCategories } from '@/assets/categories';
+import {
+    addCategory,
+    getCategoriesByType,
+    removeCategory,
+} from '@/hooks/useCategory';
 
 export function Component() {
     const { t } = useTranslation();

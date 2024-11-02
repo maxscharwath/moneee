@@ -3,8 +3,8 @@ import { initReactI18next, useTranslation } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import resourcesToBackend from 'i18next-resources-to-backend';
 import { useCallback, useMemo } from 'react';
-import { useSettings } from '@/stores/db';
 import { de, enUS, es, fr, frCH, it, itCH } from 'date-fns/locale';
+import { useSettings } from '@/hooks/useSettings';
 
 export default i18n
     .use(initReactI18next)

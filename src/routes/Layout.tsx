@@ -8,11 +8,13 @@ import {
 } from 'react-router-dom';
 import { TransactionModal } from '@/components/transaction-modal';
 import React, { useState } from 'react';
-import { addTransaction } from '@/stores/db';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Footer } from '@/components/footer';
 import { type Optional } from '@/lib/utils';
 import { type Transaction } from '@/stores/schemas/transaction';
+import { Indicator } from '@/components/ui/indicator';
+import { useRegisterSW } from 'virtual:pwa-register/react';
+import { addTransaction } from '@/hooks/useTransaction';
 
 const LayoutContext = React.createContext<{
     openTransactionModal: (transaction?: Transaction) => void;
@@ -53,6 +55,9 @@ export default function Layout() {
 
     const location = useLocation() as Location<{ direction: Direction }>;
     const outlet = useOutlet();
+    const {
+        needRefresh: [needRefresh],
+    } = useRegisterSW();
 
     const direction = location.state?.direction ?? 'none';
 
@@ -81,8 +86,15 @@ export default function Layout() {
                     </Button>
                     <div className="flex justify-evenly">
                         <Button variant="navlink" size="icon" asChild>
-                            <NavLink to="/settings">
+                            <NavLink to="/settings" className="relative">
                                 <Settings2 />
+                                {needRefresh && (
+                                    <Indicator
+                                        variant="red"
+                                        position="top-right"
+                                        size="sm"
+                                    />
+                                )}
                             </NavLink>
                         </Button>
                     </div>

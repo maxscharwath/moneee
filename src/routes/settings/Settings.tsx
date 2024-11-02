@@ -1,6 +1,6 @@
 import { useRegisterSW } from 'virtual:pwa-register/react';
 import { Header, HeaderTitle } from '@/components/header';
-import { initializeDb, useSettings } from '@/stores/db';
+import { initializeDb } from '@/stores/db';
 import * as List from '@/components/ui/list';
 import {
     CloudIcon,
@@ -18,15 +18,14 @@ import {
 } from 'lucide-react';
 import { abbreviatedSha } from '@build/info';
 import { version } from '@build/package';
-import {
-    type Transaction,
-    TransactionSchema,
-} from '@/stores/schemas/transaction';
-import { type Category, CategorySchema } from '@/stores/schemas/category';
+import { TransactionSchema } from '@/stores/schemas/transaction';
+import { CategorySchema } from '@/stores/schemas/category';
 import { useLocale } from '@/i18n';
 import * as TabsGroup from '@/components/ui/tabs-group';
 import { Container } from '@/components/container';
 import { SettingItem } from '@/components/settings-item';
+import { exportToCsv } from '@/lib/exportTransactions';
+import { useSettings } from '@/hooks/useSettings';
 
 export function Component() {
     const { t, language } = useLocale();
@@ -184,70 +183,6 @@ export function Component() {
 }
 
 Component.displayName = 'Settings.Root';
-
-const formatCSV = (transactions: Transaction[], categories: Category[]) => {
-    const escapeField = (field?: string) =>
-        field ? `"${field.replace(/"/g, '""')}"` : '';
-
-    const headers = ['Amount', 'Date', 'Note', 'Category Name', 'Category Type']
-        .map(escapeField)
-        .join(',');
-
-    const rows = transactions.map((transaction) => {
-        const category = categories.find(
-            (cat) => cat.uuid === transaction.categoryId
-        );
-        return [
-            transaction.amount,
-            new Date(transaction.date).toLocaleString(),
-            escapeField(transaction.note),
-            escapeField(category?.name),
-            escapeField(category?.type),
-        ].join(',');
-    });
-
-    return [headers, ...rows].join('\n');
-};
-
-const exportToCsv = async () => {
-    try {
-        const db = await initializeDb();
-        const transactions = await db.transactions
-            .find({
-                sort: [{ date: 'desc' }],
-            })
-            .exec();
-        const categories = await db.categories.find().exec();
-        const content = formatCSV(transactions, categories);
-
-        const file = new File([content], 'transactions.csv', {
-            type: 'text/csv',
-        });
-
-        if (navigator.share) {
-            await navigator.share({
-                title: 'Transactions',
-                text: 'Transactions CSV',
-                files: [file],
-            });
-        } else {
-            download(file);
-        }
-
-        console.log('Export successful!');
-    } catch (error) {
-        console.error('Export failed:', error);
-    }
-};
-
-const download = (file: File) => {
-    const a = document.createElement('a');
-    const url = URL.createObjectURL(file);
-    a.href = url;
-    a.download = file.name;
-    a.click();
-    URL.revokeObjectURL(url);
-};
 
 const resetDb = async () => {
     const db = await initializeDb();

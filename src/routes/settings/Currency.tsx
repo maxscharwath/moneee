@@ -5,10 +5,10 @@ import { CheckIcon, ChevronLeft } from 'lucide-react';
 import * as RadioGroup from '@radix-ui/react-radio-group';
 import { NavLink } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { useSettings } from '@/stores/db';
 import { Container } from '@/components/container';
 import { useAsync } from '@/hooks/useAsync';
 import { useMemo } from 'react';
+import { useSettings } from '@/hooks/useSettings';
 
 type Currency = {
     code: string;

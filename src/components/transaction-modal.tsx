@@ -7,13 +7,13 @@ import { NumericButton } from '@/components/numeric-button';
 import { type Optional, parseNumberFromString } from '@/lib/utils';
 import { CategorySelect } from '@/components/category-select';
 import { Input } from '@/components/ui/input';
-import { useCategories } from '@/stores/db';
 import * as Dialog from '@radix-ui/react-dialog';
 import { type DialogProps } from '@radix-ui/react-dialog';
 import { Header } from '@/components/header';
 import { useLocale } from '@/i18n';
 import { type Transaction } from '@/stores/schemas/transaction';
 import { RecurringSelect, Recurring } from '@/components/recurring-select';
+import { useCategories } from '@/hooks/useCategory';
 
 type TransactionModalProps = Readonly<{
     transaction?: Transaction;

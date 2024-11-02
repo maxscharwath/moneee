@@ -14,7 +14,7 @@ import { type Category } from '@/stores/schemas/category';
 import { Button } from '@/components/ui/button';
 import { CategoryModal } from '@/components/category-modal';
 import { Optional } from '@/lib/utils';
-import { addCategory } from '@/stores/db';
+import { addCategory } from '@/hooks/useCategory';
 
 type CategorySelectProps = {
     value: string;
