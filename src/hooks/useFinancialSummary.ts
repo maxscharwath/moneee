@@ -1,9 +1,14 @@
 import { useMemo } from 'react';
 import { useCategories } from '@/hooks/useCategory';
 import { getFilteredTransactions } from '@/hooks/useTransaction';
+import {
+    generateRecurrenceDates,
+    monthlyCron,
+    weeklyCron,
+} from '@/lib/recurrentUtils';
 
 export function useFinancialSummary(startDate: Date, endDate: Date) {
-    const { result: transactions } = getFilteredTransactions((collection) =>
+    const { result } = getFilteredTransactions((collection) =>
         collection.find({
             selector: {
                 date: {
@@ -14,15 +19,54 @@ export function useFinancialSummary(startDate: Date, endDate: Date) {
             sort: [{ date: 'desc' }],
         })
     );
+    const transactions = useMemo(
+        () =>
+            [
+                ...result,
+                ...Array.from(
+                    // Cannot directly use map() on Iterator, not supported in Safari
+                    generateRecurrenceDates({
+                        startDate: startDate,
+                        endDate: endDate,
+                        cronString: weeklyCron(1, 10, 30),
+                        inclusiveEnd: true,
+                        inclusiveStart: true,
+                    })
+                ).map((date) => ({
+                    amount: 100,
+                    categoryId: '48f67c28-4c6a-4bb1-b533-49db0f1a190f',
+                    date: date.toISOString(),
+                    note: 'Every Monday',
+                    uuid: crypto.randomUUID(),
+                })),
+                ...Array.from(
+                    generateRecurrenceDates({
+                        startDate: startDate,
+                        endDate: endDate,
+                        cronString: monthlyCron(27),
+                        inclusiveEnd: true,
+                        inclusiveStart: true,
+                    })
+                ).map((date) => ({
+                    amount: 5700,
+                    categoryId: '6p5o4n3m-2l1k-0j9i-8h7g-6f5e4d3c2b1a',
+                    date: date.toISOString(),
+                    note: 'Salary',
+                    uuid: crypto.randomUUID(),
+                })),
+            ].sort((a, b) => Date.parse(a.date) - Date.parse(b.date)),
+        [result]
+    );
 
     const { result: categories } = useCategories();
+    const categoryMap = useMemo(() => {
+        return new Map(categories.map((category) => [category.uuid, category]));
+    }, [categories]);
 
     return useMemo(() => {
         const totalSummary = transactions.reduce(
             (acc, transaction) => {
-                const category = categories.find(
-                    (c) => c.uuid === transaction.categoryId
-                );
+                const category = categoryMap.get(transaction.categoryId);
                 const amount =
                     category?.type === 'expense'
                         ? -transaction.amount
@@ -40,11 +84,10 @@ export function useFinancialSummary(startDate: Date, endDate: Date) {
                 total: 0,
             }
         );
-
         return {
             ...totalSummary,
             transactions,
-            categories,
+            categories: categoryMap,
         };
-    }, [transactions, categories]);
+    }, [transactions, categoryMap]);
 }

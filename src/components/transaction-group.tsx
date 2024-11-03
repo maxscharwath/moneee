@@ -13,7 +13,7 @@ import { useLayout } from '@/routes/Layout';
 type TransactionGroupProps = {
     date: string;
     transactions: Transaction[];
-    categories: Category[];
+    categories: Map<string, Category>;
     onTransactionLongPress?: (transaction: Transaction) => void;
 };
 
@@ -28,8 +28,8 @@ export const TransactionGroup = memo(
         const totalTransactions = useCallback(
             (transactions: Transaction[]) =>
                 transactions.reduce((acc, transaction) => {
-                    const transactionType = categories.find(
-                        (category) => category.uuid === transaction.categoryId
+                    const transactionType = categories.get(
+                        transaction.categoryId
                     )?.type;
                     return (
                         acc +
@@ -45,9 +45,7 @@ export const TransactionGroup = memo(
             () =>
                 transactions.map((transaction) => ({
                     transaction,
-                    category: categories.find(
-                        (category) => category.uuid === transaction.categoryId
-                    )!,
+                    category: categories.get(transaction.categoryId)!,
                 })),
             [transactions, categories]
         );

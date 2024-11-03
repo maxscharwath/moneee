@@ -62,10 +62,7 @@ export function Component() {
                 .filter(
                     (transaction) =>
                         filter === 'all' ||
-                        categories.find(
-                            (category) =>
-                                category.uuid === transaction.categoryId
-                        )?.type === filter
+                        categories.get(transaction.categoryId)?.type === filter
                 )
                 .filter(
                     (transaction) =>
@@ -92,9 +89,7 @@ export function Component() {
     };
 
     const filterTransactionAmount = (transaction: Transaction): number => {
-        const transactionType = categories.find(
-            (category) => category.uuid === transaction.categoryId
-        )?.type;
+        const transactionType = categories.get(transaction.categoryId)?.type;
         return filter === 'all' || filter === transactionType
             ? transaction.amount
             : 0;
@@ -148,9 +143,7 @@ export function Component() {
 
                 const categoryTotals = transactionsInThisMonth.reduce(
                     (acc, transaction) => {
-                        const category = categories.find(
-                            (cat) => cat.uuid === transaction.categoryId
-                        );
+                        const category = categories.get(transaction.categoryId);
                         if (category) {
                             if (!acc[category.uuid]) {
                                 acc[category.uuid] = {
@@ -196,9 +189,7 @@ export function Component() {
 
             const categoryTotals = transactionsOnThisDay.reduce(
                 (acc, transaction) => {
-                    const category = categories.find(
-                        (cat) => cat.uuid === transaction.categoryId
-                    );
+                    const category = categories.get(transaction.categoryId);
                     if (category) {
                         if (!acc[category.uuid]) {
                             acc[category.uuid] = {
@@ -242,9 +233,7 @@ export function Component() {
         > = {};
 
         transactions.forEach((transaction) => {
-            const category = categories.find(
-                (category) => category.uuid === transaction.categoryId
-            );
+            const category = categories.get(transaction.categoryId);
             if (filter === category?.type) {
                 categorySpend[category.uuid] = {
                     total:

@@ -7,6 +7,7 @@ import { TransactionSchema } from '@/stores/schemas/transaction';
 import { CategorySchema } from '@/stores/schemas/category';
 import { SettingsSchema } from '@/stores/schemas/settings';
 import { seeder } from '@/stores/seeder';
+import { RecurrentSchema } from '@/stores/schemas/recurrent';
 
 export const initializeDb = lazyInitialize(async () => {
     addRxPlugin(RxDBUpdatePlugin);
@@ -20,6 +21,7 @@ export const initializeDb = lazyInitialize(async () => {
             transactions: { schema: TransactionSchema },
             categories: { schema: CategorySchema },
             settings: { schema: SettingsSchema },
+            recurrings: { schema: RecurrentSchema },
         },
     });
 

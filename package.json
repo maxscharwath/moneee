@@ -102,6 +102,7 @@
         "vite-plugin-mkcert": "^1.17.6",
         "vite-plugin-pwa": "^0.20.5",
         "vite-plugin-webp-generator": "^0.1.0",
+        "vitest": "^2.1.4",
         "workbox-window": "^7.3.0"
     },
     "engines": {
