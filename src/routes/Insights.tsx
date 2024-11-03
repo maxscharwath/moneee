@@ -1,6 +1,6 @@
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
 import { ArrowDownRight, ArrowUpRight, Coins } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { FinanceButton } from '@/components/finance-button';
 import { Header, HeaderTitle } from '@/components/header';
 import { Chart } from '@/components/chart';
@@ -25,7 +25,7 @@ type Filter = 'income' | 'expense' | 'all';
 export function Component() {
     const { t, formatter } = useLocale();
     const [filter, setFilter] = useState<Filter>('all');
-    const [categoryFilter, setCategoryFilter] = useState('');
+    const [categoriesFilter, setCategoriesFilter] = useState<string[]>([]);
 
     const {
         currentPeriod,
@@ -36,6 +36,10 @@ export function Component() {
         getPeriodDates: [startDate, endDate],
         getPreviousPeriodDates: [previousStartDate, previousEndDate],
     } = usePeriod();
+
+    useEffect(() => {
+        setCategoriesFilter([]);
+    }, [currentPeriod, periodType]);
 
     const { transactions, categories, totalIncome, totalExpenses, total } =
         useFinancialSummary(startDate, endDate);
@@ -65,10 +69,10 @@ export function Component() {
                 )
                 .filter(
                     (transaction) =>
-                        categoryFilter === '' ||
-                        transaction.categoryId === categoryFilter
+                        !categoriesFilter.length ||
+                        categoriesFilter.includes(transaction.categoryId)
                 ),
-        [transactions, categories, filter, categoryFilter]
+        [transactions, categories, filter, categoriesFilter]
     );
 
     const getDaysInPeriod = (periodType: string, date: Date): number => {
@@ -141,18 +145,39 @@ export function Component() {
                         );
                     }
                 );
-                const total = transactionsInThisMonth.reduce(
-                    (acc, transaction) =>
-                        acc + filterTransactionAmount(transaction),
-                    0
+
+                const categoryTotals = transactionsInThisMonth.reduce(
+                    (acc, transaction) => {
+                        const category = categories.find(
+                            (cat) => cat.uuid === transaction.categoryId
+                        );
+                        if (category) {
+                            if (!acc[category.uuid]) {
+                                acc[category.uuid] = {
+                                    category,
+                                    total: 0,
+                                };
+                            }
+                            acc[category.uuid].total += transaction.amount;
+                        }
+                        return acc;
+                    },
+                    {} as Record<string, { category: Category; total: number }>
                 );
 
                 return {
                     name: formatter.date(
                         new Date(currentPeriod.getFullYear(), monthIndex),
-                        { month: 'short' }
+                        {
+                            month: 'short',
+                        }
                     ),
-                    total,
+                    total: transactionsInThisMonth.reduce(
+                        (acc, transaction) =>
+                            acc + filterTransactionAmount(transaction),
+                        0
+                    ),
+                    categories: Object.values(categoryTotals),
                 };
             });
         }
@@ -168,15 +193,34 @@ export function Component() {
             const transactionsOnThisDay = filteredTransactions.filter(
                 (t) => new Date(t.date).getDate() === date.getDate()
             );
-            const total = transactionsOnThisDay.reduce(
-                (acc, transaction) =>
-                    acc + filterTransactionAmount(transaction),
-                0
+
+            const categoryTotals = transactionsOnThisDay.reduce(
+                (acc, transaction) => {
+                    const category = categories.find(
+                        (cat) => cat.uuid === transaction.categoryId
+                    );
+                    if (category) {
+                        if (!acc[category.uuid]) {
+                            acc[category.uuid] = {
+                                category,
+                                total: 0,
+                            };
+                        }
+                        acc[category.uuid].total += transaction.amount;
+                    }
+                    return acc;
+                },
+                {} as Record<string, { category: Category; total: number }>
             );
 
             return {
                 name: formatter.date(date, { day: '2-digit' }),
-                total,
+                total: transactionsOnThisDay.reduce(
+                    (acc, transaction) =>
+                        acc + filterTransactionAmount(transaction),
+                    0
+                ),
+                categories: Object.values(categoryTotals),
             };
         });
     }, [
@@ -221,7 +265,7 @@ export function Component() {
                     new Date(transaction.date).toDateString()
                 )
             ),
-        [transactions, categories, filter, categoryFilter]
+        [transactions, categories, filter, categoriesFilter]
     );
 
     const handleTransactionDelete = async (transaction: Transaction) => {
@@ -325,7 +369,7 @@ export function Component() {
                         value={filter}
                         onValueChange={(f: Filter) => {
                             setFilter(f || 'all');
-                            setCategoryFilter('');
+                            setCategoriesFilter([]);
                         }}
                     >
                         <ToggleGroup.Item value="income" asChild>
@@ -365,8 +409,8 @@ export function Component() {
                             <Chart data={chartData} />
                             <CategoryChart
                                 data={categorySpendDetails}
-                                selected={categoryFilter}
-                                onSelect={setCategoryFilter}
+                                selected={categoriesFilter}
+                                onSelect={setCategoriesFilter}
                             />
                         </motion.div>
                     )}

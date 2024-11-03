@@ -9,8 +9,8 @@ type CategoryChartProps = {
         category: Category;
         total: number;
     }>;
-    selected?: string;
-    onSelect?: (category: string) => void;
+    selected?: string[];
+    onSelect?: (categories: string[]) => void;
 };
 
 export const CategoryChart = memo(
@@ -20,10 +20,10 @@ export const CategoryChart = memo(
         return (
             <div className="space-y-2">
                 <ToggleGroup.Root
-                    type="single"
+                    type="multiple"
                     value={selected}
                     onValueChange={onSelect}
-                    className="flex h-6 w-full gap-1"
+                    className="flex h-6 w-full gap-1.5"
                 >
                     {data.map(({ category, total }) => (
                         <ToggleGroup.Item
@@ -36,16 +36,17 @@ export const CategoryChart = memo(
                             className={cn(
                                 'flex items-center justify-center rounded-md transition-all duration-200',
                                 'data-[state=on]:ring-2 data-[state=on]:ring-primary',
-                                selected && 'data-[state=off]:opacity-50'
+                                selected?.length &&
+                                    'data-[state=off]:opacity-50'
                             )}
                         />
                     ))}
                 </ToggleGroup.Root>
                 <ToggleGroup.Root
-                    type="single"
+                    type="multiple"
                     value={selected}
                     onValueChange={onSelect}
-                    className="no-scrollbar flex gap-1 overflow-x-auto p-2"
+                    className="no-scrollbar flex gap-2 overflow-x-auto p-2"
                 >
                     {data.map(({ category, total }) => (
                         <ToggleGroup.Item
@@ -57,7 +58,7 @@ export const CategoryChart = memo(
                                 variant="ghost"
                                 size="sm"
                                 className={cn(
-                                    'flex items-center space-x-2',
+                                    'flex items-center',
                                     'ring-primary/50 data-[state=on]:bg-secondary data-[state=on]:ring'
                                 )}
                             >
