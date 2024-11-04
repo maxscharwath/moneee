@@ -1,11 +1,8 @@
 import { useMemo } from 'react';
 import { useCategories } from '@/hooks/useCategory';
 import { getFilteredTransactions } from '@/hooks/useTransaction';
-import {
-    generateRecurrenceDates,
-    monthlyCron,
-    weeklyCron,
-} from '@/lib/recurrentUtils';
+import { generateDates } from '@/packages/cron/generator';
+import { parseCronExpression } from '@/packages/cron/parser';
 
 export function useFinancialSummary(startDate: Date, endDate: Date) {
     const { result } = getFilteredTransactions((collection) =>
@@ -19,44 +16,41 @@ export function useFinancialSummary(startDate: Date, endDate: Date) {
             sort: [{ date: 'desc' }],
         })
     );
-    const transactions = useMemo(
-        () =>
-            [
-                ...result,
-                ...Array.from(
-                    // Cannot directly use map() on Iterator, not supported in Safari
-                    generateRecurrenceDates({
-                        startDate: startDate,
-                        endDate: endDate,
-                        cronString: weeklyCron(1, 10, 30),
-                        inclusiveEnd: true,
-                        inclusiveStart: true,
-                    })
-                ).map((date) => ({
-                    amount: 100,
-                    categoryId: '48f67c28-4c6a-4bb1-b533-49db0f1a190f',
-                    date: date.toISOString(),
-                    note: 'Every Monday',
-                    uuid: crypto.randomUUID(),
-                })),
-                ...Array.from(
-                    generateRecurrenceDates({
-                        startDate: startDate,
-                        endDate: endDate,
-                        cronString: monthlyCron(27),
-                        inclusiveEnd: true,
-                        inclusiveStart: true,
-                    })
-                ).map((date) => ({
-                    amount: 5700,
-                    categoryId: '6p5o4n3m-2l1k-0j9i-8h7g-6f5e4d3c2b1a',
-                    date: date.toISOString(),
-                    note: 'Salary',
-                    uuid: crypto.randomUUID(),
-                })),
-            ].sort((a, b) => Date.parse(a.date) - Date.parse(b.date)),
-        [result]
-    );
+
+    const transactions = useMemo(() => {
+        return [
+            ...result,
+            ...Array.from(
+                // Cannot directly use map() on Iterator, not supported in Safari
+                generateDates(
+                    // every monday at 10:30 AM but not on march
+                    parseCronExpression('30 10 */3 */2 *'),
+                    startDate,
+                    endDate
+                )
+            ).map((date) => ({
+                amount: 100,
+                categoryId: '48f67c28-4c6a-4bb1-b533-49db0f1a190f',
+                date: date.toISOString(),
+                note: 'Every Monday',
+                uuid: crypto.randomUUID(),
+            })),
+            ...Array.from(
+                generateDates(
+                    // every 27th of the month
+                    parseCronExpression('0 0 31 * *'),
+                    startDate,
+                    endDate
+                )
+            ).map((date) => ({
+                amount: 5700,
+                categoryId: '6p5o4n3m-2l1k-0j9i-8h7g-6f5e4d3c2b1a',
+                date: date.toISOString(),
+                note: 'Salary',
+                uuid: crypto.randomUUID(),
+            })),
+        ].sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
+    }, [result]);
 
     const { result: categories } = useCategories();
     const categoryMap = useMemo(() => {
