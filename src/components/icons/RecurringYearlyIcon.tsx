@@ -14,7 +14,7 @@ export const RecurringYearlyIcon = React.forwardRef<
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="lucide lucide-scroll-text "
+        className="lucide lucide-scroll-text"
         ref={forwardedRef}
         {...props}
     >

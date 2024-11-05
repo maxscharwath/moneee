@@ -1,6 +1,6 @@
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
 import { ArrowDownRight, ArrowUpRight, Coins } from 'lucide-react';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { FinanceButton } from '@/components/finance-button';
 import { Header, HeaderTitle } from '@/components/header';
 import { Chart } from '@/components/chart';
@@ -19,6 +19,7 @@ import { Container } from '@/components/container';
 import { useFinancialSummary } from '@/hooks/useFinancialSummary';
 import { match } from 'ts-pattern';
 import { deleteTransaction } from '@/hooks/useTransaction';
+import { InfiniteList } from '@/components/infinite-list';
 
 type Filter = 'income' | 'expense' | 'all';
 
@@ -288,6 +289,8 @@ export function Component() {
         };
     }, [filter, periodType, totalIncome, totalExpenses, currentPeriod, t]);
 
+    const ref = useRef<HTMLDivElement>(null);
+
     return (
         <>
             <Header className="justify-between">
@@ -299,7 +302,7 @@ export function Component() {
                     onPeriodChange={setPeriodType}
                 />
             </Header>
-            <Container>
+            <Container ref={ref}>
                 <motion.div
                     className="flex flex-col gap-2"
                     drag="x"
@@ -405,20 +408,22 @@ export function Component() {
                     )}
                 </AnimatePresence>
                 {groupedTransactions.length > 0 ? (
-                    <ul className="space-y-8">
-                        {groupedTransactions.map(([key, transactions]) => (
-                            <li key={key}>
-                                <TransactionGroup
-                                    date={key}
-                                    transactions={transactions}
-                                    categories={categories}
-                                    onTransactionLongPress={
-                                        handleTransactionDelete
-                                    }
-                                />
-                            </li>
-                        ))}
-                    </ul>
+                    <InfiniteList
+                        values={groupedTransactions}
+                        rowHeight={([, transactions]) =>
+                            50 + transactions.length * 60
+                        }
+                        scrollElement={ref}
+                    >
+                        {([date, transactions]) => (
+                            <TransactionGroup
+                                date={date}
+                                transactions={transactions}
+                                categories={categories}
+                                onTransactionLongPress={handleTransactionDelete}
+                            />
+                        )}
+                    </InfiniteList>
                 ) : (
                     <Alert align="center">
                         <Coins className="h-4 w-4" />

@@ -95,3 +95,7 @@
         scrollbar-width: none; /* Firefox */
     }
 }
+
+.resize-triggers {
+    display: contents !important;
+}

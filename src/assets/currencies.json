@@ -261,7 +261,33 @@
         "code": "EUR",
         "symbol": "\u20ac",
         "name": "European Euro",
-        "locales": ["bg-BG", "ca-ES", "cs-CZ", "da-DK", "de-DE", "el-GR", "en-GB", "es-ES", "et-EE", "fi-FI", "fr-FR", "ga-IE", "hr-HR", "hu-HU", "it-IT", "lt-LT", "lv-LV", "mt-MT", "nl-NL", "pl-PL", "pt-PT", "ro-RO", "sk-SK", "sl-SI", "sv-SE"]
+        "locales": [
+            "bg-BG",
+            "ca-ES",
+            "cs-CZ",
+            "da-DK",
+            "de-DE",
+            "el-GR",
+            "en-GB",
+            "es-ES",
+            "et-EE",
+            "fi-FI",
+            "fr-FR",
+            "ga-IE",
+            "hr-HR",
+            "hu-HU",
+            "it-IT",
+            "lt-LT",
+            "lv-LV",
+            "mt-MT",
+            "nl-NL",
+            "pl-PL",
+            "pt-PT",
+            "ro-RO",
+            "sk-SK",
+            "sl-SI",
+            "sv-SE"
+        ]
     },
     {
         "code": "FJD",
@@ -375,7 +401,18 @@
         "code": "INR",
         "symbol": "\u20B9",
         "name": "Indian rupee",
-        "locales": ["bn-IN", "gu-IN", "hi-IN", "kn-IN", "ml-IN", "mr-IN", "pa-IN", "ta-IN", "te-IN", "ur-IN"]
+        "locales": [
+            "bn-IN",
+            "gu-IN",
+            "hi-IN",
+            "kn-IN",
+            "ml-IN",
+            "mr-IN",
+            "pa-IN",
+            "ta-IN",
+            "te-IN",
+            "ur-IN"
+        ]
     },
     {
         "code": "IQD",
@@ -891,7 +928,15 @@
         "code": "XCD",
         "symbol": "EC$",
         "name": "East Caribbean dollar",
-        "locales": ["en-AG", "en-DM", "en-GD", "en-MS", "en-KN", "en-LC", "en-VC"]
+        "locales": [
+            "en-AG",
+            "en-DM",
+            "en-GD",
+            "en-MS",
+            "en-KN",
+            "en-LC",
+            "en-VC"
+        ]
     },
     {
         "code": "XDR",
@@ -921,7 +966,18 @@
         "code": "ZAR",
         "symbol": "R",
         "name": "South African rand",
-        "locales": ["af-ZA", "en-ZA", "nr-ZA", "st-ZA", "ss-ZA", "tn-ZA", "ts-ZA", "ve-ZA", "xh-ZA", "zu-ZA"]
+        "locales": [
+            "af-ZA",
+            "en-ZA",
+            "nr-ZA",
+            "st-ZA",
+            "ss-ZA",
+            "tn-ZA",
+            "ts-ZA",
+            "ve-ZA",
+            "xh-ZA",
+            "zu-ZA"
+        ]
     },
     {
         "code": "ZMK",

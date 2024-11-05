@@ -98,7 +98,7 @@ export const Content: React.FC<
     React.ComponentPropsWithoutRef<typeof PopoverContent>
 > = (props) => (
     <DialogPrimitive.Portal>
-        <DialogPrimitive.Overlay className="fixed inset-0 z-10 bg-background/50 backdrop-blur-sm  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
+        <DialogPrimitive.Overlay className="fixed inset-0 z-10 bg-background/50 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
         <DialogPrimitive.Content asChild>
             <PopoverContent {...props} />
         </DialogPrimitive.Content>
