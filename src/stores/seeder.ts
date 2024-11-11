@@ -36,9 +36,9 @@ export async function seeder(db: Database) {
             name: t(category.name),
         }));
 
-    await db.categories.bulkInsert(categories);
+    await db.categories.bulkUpsert(categories);
 
-    await db.transactions.bulkInsert([
+    await db.transactions.bulkUpsert([
         {
             uuid: 'e3f3d7b2-b0b2-4f5b-9a1a-63de3a4e0bc2',
             note: 'Dinner at Restaurant',
@@ -164,6 +164,57 @@ export async function seeder(db: Database) {
             amount: 150,
             date: genDate('10:10'),
             categoryId: '8h9i0j1k-2l3m-4n5o-6p7q-8r9s0t1u2v3w',
+        },
+    ]);
+
+    await db.recurrences.bulkUpsert([
+        {
+            uuid: '123e4567-e89b-12d3-a456-426614174000',
+            note: 'Monthly Rent',
+            amount: 1200,
+            startDate: genDate('18:00'),
+            cron: '0 0 1 * *',
+            categoryId: '6p5o4n3m-2l1k-0j9i-8h7g-6f5e4d3c2b1a',
+        },
+        {
+            uuid: '123e4567-e89b-12d3-a456-426614174001',
+            note: 'Weekly Groceries',
+            amount: 50,
+            startDate: genDate('10:30'),
+            cron: '0 10 * * 0',
+            categoryId: '4d5e6f7g-8h9i-0j1k-2l3m-4n5o6p7q8r9s',
+        },
+        {
+            uuid: '123e4567-e89b-12d3-a456-426614174002',
+            note: 'Monthly Gym Membership',
+            amount: 60,
+            startDate: genDate('07:45'),
+            cron: '0 7 5 * *',
+            categoryId: '4d5e6f7g-8h9i-0j1k-2l3m-4n5o6p7q8r9s',
+        },
+        {
+            uuid: '123e4567-e89b-12d3-a456-426614174003',
+            note: 'Monthly Phone Bill',
+            amount: 30,
+            startDate: genDate('16:15'),
+            cron: '15 16 15 * *',
+            categoryId: '7g8h9i0j-1k2l-3m4n-5o6p-7q8r9s0t1u2v',
+        },
+        {
+            uuid: '123e4567-e89b-12d3-a456-426614174004',
+            note: 'Biweekly Insurance Payment',
+            amount: 75,
+            startDate: genDate('09:00'),
+            cron: '0 9 */14 * *',
+            categoryId: '8h9i0j1k-2l3m-4n5o-6p7q-8r9s0t1u2v3w',
+        },
+        {
+            uuid: '123e4567-e89b-12d3-a456-426614174005',
+            note: 'Quarterly Investment Deposit',
+            amount: 500,
+            startDate: genDate('11:00'),
+            cron: '0 11 1 */3 *',
+            categoryId: '5d4c3b2a-1a2b-3c4d-5e6f-7g8h9i0j1k2l',
         },
     ]);
 }

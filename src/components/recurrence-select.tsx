@@ -6,46 +6,36 @@ import { Button } from '@/components/ui/button';
 import { RecurringDailyIcon } from '@/components/icons/RecurringDailyIcon';
 import { RecurringWeaklyIcon } from '@/components/icons/RecurringWeeklyIcon';
 import { RecurringYearlyIcon } from '@/components/icons/RecurringYearlyIcon';
-import { RecurringCustomIcon } from '@/components/icons/RecurringCustomIcon';
 import { RecurringMonthlyIcon } from '@/components/icons/RecurringMonthlyIcon';
 import { useLocale } from '@/i18n';
 
-type RecurringSelectProps = {
-    value?: Recurring;
-    onValueChange?: (value: Recurring) => void;
+type RecurrenceSelectProps = {
+    value?: RecurrenceType;
+    onValueChange?: (value: RecurrenceType) => void;
 };
 
-const recurring = {
+const recurrences = {
     none: {
-        label: 'None',
         icon: <RotateCwIcon />,
     },
     daily: {
-        label: 'Daily',
         icon: <RecurringDailyIcon />,
     },
     weekly: {
-        label: 'Weekly',
         icon: <RecurringWeaklyIcon />,
     },
     monthly: {
-        label: 'Monthly',
         icon: <RecurringMonthlyIcon />,
     },
     yearly: {
-        label: 'Yearly',
         icon: <RecurringYearlyIcon />,
-    },
-    custom: {
-        label: 'Custom',
-        icon: <RecurringCustomIcon />,
     },
 } as const;
 
-export type Recurring = keyof typeof recurring;
+export type RecurrenceType = keyof typeof recurrences;
 
-export const RecurringSelect = memo(
-    ({ value, onValueChange }: RecurringSelectProps) => {
+export const RecurrenceSelect = memo(
+    ({ value, onValueChange }: RecurrenceSelectProps) => {
         const { t } = useLocale();
         return (
             <Select
@@ -56,26 +46,23 @@ export const RecurringSelect = memo(
                 <SelectPrimitive.Trigger className="flex items-center justify-end">
                     <Button size="icon" variant="ghost">
                         <SelectPrimitive.Value asChild>
-                            {recurring[value ?? 'none'].icon}
+                            {recurrences[value ?? 'none'].icon}
                         </SelectPrimitive.Value>
                     </Button>
                 </SelectPrimitive.Trigger>
                 <SelectContent position="item-aligned">
-                    <SelectItem value="none">{t('recurring.none')}</SelectItem>
+                    <SelectItem value="none">{t('recurrence.none')}</SelectItem>
                     <SelectItem value="daily">
-                        {t('recurring.daily')}
+                        {t('recurrence.daily')}
                     </SelectItem>
                     <SelectItem value="weekly">
-                        {t('recurring.weekly')}
+                        {t('recurrence.weekly')}
                     </SelectItem>
                     <SelectItem value="monthly">
-                        {t('recurring.monthly')}
+                        {t('recurrence.monthly')}
                     </SelectItem>
                     <SelectItem value="yearly">
-                        {t('recurring.yearly')}
-                    </SelectItem>
-                    <SelectItem value="custom">
-                        {t('recurring.custom')}
+                        {t('recurrence.yearly')}
                     </SelectItem>
                 </SelectContent>
             </Select>
@@ -83,4 +70,4 @@ export const RecurringSelect = memo(
     }
 );
 
-RecurringSelect.displayName = 'RecurrenceSelect';
+RecurrenceSelect.displayName = 'RecurrenceSelect';

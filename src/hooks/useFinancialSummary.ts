@@ -3,85 +3,107 @@ import { useCategories } from '@/hooks/useCategory';
 import { getFilteredTransactions } from '@/hooks/useTransaction';
 import { generateDates } from '@/packages/cron/generator';
 import { parseCronExpression } from '@/packages/cron/parser';
+import { getRecurrencesForPeriod } from '@/hooks/useRecurrence';
+import { v5 as uuidv5 } from 'uuid';
+import { Transaction } from '@/stores/schemas/transaction';
+import { Recurrence } from '@/stores/schemas/recurrence';
+import { Category } from '@/stores/schemas/category';
 
-export function useFinancialSummary(startDate: Date, endDate: Date) {
-    const { result } = getFilteredTransactions((collection) =>
-        collection.find({
-            selector: {
-                date: {
-                    $gte: startDate.toISOString(),
-                    $lte: endDate.toISOString(),
-                },
+// Utility to calculate financial summary
+function calculateFinancialSummary(
+    transactions: Transaction[],
+    categoryMap: Map<string, Category>
+) {
+    return transactions.reduce(
+        (acc, transaction) => {
+            const category = categoryMap.get(transaction.categoryId);
+            const amount =
+                category?.type === 'expense'
+                    ? -transaction.amount
+                    : transaction.amount;
+
+            return {
+                totalIncome: acc.totalIncome + (amount > 0 ? amount : 0),
+                totalExpenses: acc.totalExpenses + (amount < 0 ? -amount : 0),
+                total: acc.total + amount,
+            };
+        },
+        { totalIncome: 0, totalExpenses: 0, total: 0 }
+    );
+}
+
+// Utility to generate recurring transactions for a specific period
+function generateRecurringTransactions(
+    recurrences: Recurrence[],
+    startDate: Date,
+    endDate: Date
+): Transaction[] {
+    return recurrences.flatMap((recurrence) => {
+        const cronDates = generateDates(
+            parseCronExpression(recurrence.cron),
+            startDate,
+            endDate
+        );
+        return Array.from(cronDates).map((date) => ({
+            amount: recurrence.amount,
+            categoryId: recurrence.categoryId,
+            date: date.toISOString(),
+            note: recurrence.note,
+            uuid: uuidv5(date.toISOString(), recurrence.uuid),
+            recurrence: {
+                uuid: recurrence.uuid,
+                startDate: recurrence.startDate,
+                endDate: recurrence.endDate,
+                cron: recurrence.cron,
             },
-            sort: [{ date: 'desc' }],
-        })
+        }));
+    });
+}
+
+// Main hook to retrieve and summarize financial data
+export function useFinancialSummary(startDate: Date, endDate: Date) {
+    const { result: transactionsResult = [] } = getFilteredTransactions(
+        (collection) =>
+            collection.find({
+                selector: {
+                    date: {
+                        $gte: startDate.toISOString(),
+                        $lte: endDate.toISOString(),
+                    },
+                },
+                sort: [{ date: 'desc' }],
+            })
     );
 
-    const transactions = useMemo(() => {
-        return [
-            ...result,
-            ...Array.from(
-                // Cannot directly use map() on Iterator, not supported in Safari
-                generateDates(
-                    // every monday at 10:30 AM but not on march
-                    parseCronExpression('30 10 */3 */2 *'),
-                    startDate,
-                    endDate
-                )
-            ).map((date) => ({
-                amount: 100,
-                categoryId: '48f67c28-4c6a-4bb1-b533-49db0f1a190f',
-                date: date.toISOString(),
-                note: 'Every Monday',
-                uuid: crypto.randomUUID(),
-            })),
-            ...Array.from(
-                generateDates(
-                    // every 27th of the month
-                    parseCronExpression('0 0 31 * *'),
-                    startDate,
-                    endDate
-                )
-            ).map((date) => ({
-                amount: 5700,
-                categoryId: '6p5o4n3m-2l1k-0j9i-8h7g-6f5e4d3c2b1a',
-                date: date.toISOString(),
-                note: 'Salary',
-                uuid: crypto.randomUUID(),
-            })),
-        ].sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
-    }, [result]);
+    const { result: recurrences = [] } = getRecurrencesForPeriod(
+        startDate,
+        endDate
+    );
 
-    const { result: categories } = useCategories();
-    const categoryMap = useMemo(() => {
-        return new Map(categories.map((category) => [category.uuid, category]));
-    }, [categories]);
+    const recurringTransactions = useMemo(
+        () => generateRecurringTransactions(recurrences, startDate, endDate),
+        [recurrences, startDate, endDate]
+    );
 
-    return useMemo(() => {
-        const totalSummary = transactions.reduce(
-            (acc, transaction) => {
-                const category = categoryMap.get(transaction.categoryId);
-                const amount =
-                    category?.type === 'expense'
-                        ? -transaction.amount
-                        : transaction.amount;
-                return {
-                    totalIncome: acc.totalIncome + (amount > 0 ? amount : 0),
-                    totalExpenses:
-                        acc.totalExpenses + (amount < 0 ? -amount : 0),
-                    total: acc.total + amount,
-                };
-            },
-            {
-                totalIncome: 0,
-                totalExpenses: 0,
-                total: 0,
-            }
+    const allTransactions = useMemo(() => {
+        return [...transactionsResult, ...recurringTransactions].sort(
+            (a, b) => Date.parse(a.date) - Date.parse(b.date)
         );
-        return {
-            ...totalSummary,
-            transactions,
-            categories: categoryMap,
-        };
-    }, [transactions, categoryMap]);
+    }, [transactionsResult, recurringTransactions]);
+
+    const { result: categories = [] } = useCategories();
+    const categoryMap = useMemo(
+        () => new Map(categories.map((category) => [category.uuid, category])),
+        [categories]
+    );
+
+    const financialSummary = useMemo(() => {
+        return calculateFinancialSummary(allTransactions, categoryMap);
+    }, [allTransactions, categoryMap]);
+
+    return {
+        ...financialSummary,
+        transactions: allTransactions,
+        categories: categoryMap,
+    };
 }

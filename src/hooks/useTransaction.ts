@@ -7,19 +7,6 @@ export function getFilteredTransactions(query: QueryConstructor<Transaction>) {
     return useRxData<Transaction>('transactions', query);
 }
 
-export function getTransactionsForPeriod(startDate: Date, endDate: Date) {
-    return useRxData<Transaction>('transactions', (transaction) =>
-        transaction.find({
-            selector: {
-                date: {
-                    $gte: startDate.toISOString(),
-                    $lte: endDate.toISOString(),
-                },
-            },
-        })
-    );
-}
-
 export async function addTransaction(
     transaction: Optional<Transaction, 'uuid'>
 ) {

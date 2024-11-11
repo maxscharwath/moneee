@@ -12,17 +12,27 @@ import { type DialogProps } from '@radix-ui/react-dialog';
 import { Header } from '@/components/header';
 import { useLocale } from '@/i18n';
 import { type Transaction } from '@/stores/schemas/transaction';
-import { RecurringSelect, Recurring } from '@/components/recurring-select';
+import {
+    RecurrenceSelect,
+    RecurrenceType,
+} from '@/components/recurrence-select';
 import { useCategories } from '@/hooks/useCategory';
+import { Recurrence } from '@/stores/schemas/recurrence';
+import {
+    cronToRecurrenceType,
+    generateCronExpression,
+} from '@/lib/recurrentUtils';
 
 type TransactionModalProps = Readonly<{
     transaction?: Transaction;
     onTransaction: (transaction: Optional<Transaction, 'uuid'>) => void;
+    onRecurrence: (recurrence: Optional<Recurrence, 'uuid'>) => void;
 }>;
 
 function TransactionModalContent({
     transaction,
     onTransaction,
+    onRecurrence,
 }: TransactionModalProps) {
     const { t, formatter } = useLocale();
     const {
@@ -53,7 +63,11 @@ function TransactionModalContent({
     const [categoryId, setCategoryId] = React.useState(
         transaction?.categoryId ?? ''
     );
-    const [recurring, setRecurring] = React.useState<Recurring>('none');
+    const [recurring, setRecurring] = React.useState<RecurrenceType>(
+        transaction?.recurrence
+            ? cronToRecurrenceType(transaction.recurrence.cron)
+            : 'none'
+    );
     const [note, setNote] = React.useState(transaction?.note ?? '');
     const { result: categories } = useCategories();
     const [type, setType] = React.useState<'income' | 'expense'>();
@@ -72,13 +86,25 @@ function TransactionModalContent({
 
     const handleTransaction = () => {
         if (value > 0 && categoryId !== '') {
-            onTransaction({
-                uuid: transaction?.uuid,
-                amount: value,
-                categoryId,
-                date: date.toISOString(),
-                note,
-            });
+            if (recurring === 'none') {
+                onTransaction({
+                    uuid: transaction?.uuid,
+                    amount: value,
+                    categoryId,
+                    date: date.toISOString(),
+                    note,
+                });
+            } else {
+                const cronExpression = generateCronExpression(recurring, date);
+                onRecurrence({
+                    uuid: transaction?.recurrence?.uuid,
+                    amount: value,
+                    categoryId,
+                    note,
+                    startDate: date.toISOString(),
+                    cron: cronExpression,
+                });
+            }
         }
     };
 
@@ -105,9 +131,9 @@ function TransactionModalContent({
                             {t('transaction.expense')}
                         </TabsGroup.Item>
                     </TabsGroup.Root>
-                    <RecurringSelect
+                    <RecurrenceSelect
                         value={recurring}
-                        onValueChange={setRecurring}
+                        onValueChange={setRecurring} // No immediate effect; waits for validation in handleTransaction
                     />
                 </div>
             </Header>
@@ -174,7 +200,7 @@ function TransactionModalContent({
                     <Button
                         disabled={!isValid}
                         size="xl"
-                        onClick={handleTransaction}
+                        onClick={handleTransaction} // Trigger both onTransaction and onRecurrence if valid
                     >
                         <Check />
                     </Button>
@@ -187,6 +213,7 @@ function TransactionModalContent({
 export function TransactionModal({
     transaction,
     onTransaction,
+    onRecurrence,
     ...props
 }: TransactionModalProps & DialogProps) {
     return (
@@ -196,6 +223,7 @@ export function TransactionModal({
                     <TransactionModalContent
                         transaction={transaction}
                         onTransaction={onTransaction}
+                        onRecurrence={onRecurrence}
                     />
                 </Dialog.Content>
             </Dialog.Portal>

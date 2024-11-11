@@ -1,128 +1,128 @@
 {
-    "about": {
-        "author": "Autor",
-        "buildDate": "Datum",
-        "buildHash": "Build",
-        "details": "App-Info",
-        "license": "Lizenz",
-        "repo": "Quelle",
-        "reportBug": "Fehler melden",
-        "title": "Über",
-        "version": "Version"
-    },
-    "categories": {
-        "allowance": "Zulage",
-        "clothing": "Kleidung",
-        "dining_out": "Essen gehen",
-        "entertainment": "Unterhaltung",
-        "freelancing": "Freiberuflich",
-        "gifts": "Geschenke",
-        "groceries": "Lebensmittel",
-        "healthcare": "Gesundheitspflege",
-        "insurance": "Versicherung",
-        "internet": "Internet",
-        "investment": "Investition",
-        "money_transfer": "Geldüberweisung",
-        "other_income": "Sonstige Einkünfte",
-        "part_time_job": "Teilzeitarbeit",
-        "phone": "Telefon",
-        "rent": "Miete",
-        "salary": "Gehalt",
-        "savings": "Ersparnisse",
-        "tips": "Trinkgeld",
-        "transportation": "Transport",
-        "utilities": "Nebenkosten"
+  "about": {
+    "author": "Autor",
+    "buildDate": "Datum",
+    "buildHash": "Build",
+    "details": "App-Info",
+    "license": "Lizenz",
+    "repo": "Quelle",
+    "reportBug": "Fehler melden",
+    "title": "Über",
+    "version": "Version"
+  },
+  "categories": {
+    "allowance": "Zulage",
+    "clothing": "Kleidung",
+    "dining_out": "Essen gehen",
+    "entertainment": "Unterhaltung",
+    "freelancing": "Freiberuflich",
+    "gifts": "Geschenke",
+    "groceries": "Lebensmittel",
+    "healthcare": "Gesundheitspflege",
+    "insurance": "Versicherung",
+    "internet": "Internet",
+    "investment": "Investition",
+    "money_transfer": "Geldüberweisung",
+    "other_income": "Sonstige Einkünfte",
+    "part_time_job": "Teilzeitarbeit",
+    "phone": "Telefon",
+    "rent": "Miete",
+    "salary": "Gehalt",
+    "savings": "Ersparnisse",
+    "tips": "Trinkgeld",
+    "transportation": "Transport",
+    "utilities": "Nebenkosten"
+  },
+  "category": {
+    "create": "Kategorie erstellen",
+    "name": "Kategoriename",
+    "select": "Kategorie"
+  },
+  "date": {
+    "today": "Heute"
+  },
+  "insights": {
+    "title": "Einblicke"
+  },
+  "period": {
+    "monthly": "Monatlich",
+    "placeholder": "Zeitraum auswählen",
+    "weekly": "Wöchentlich",
+    "yearly": "Jährlich"
+  },
+  "recurrence": {
+    "custom": "Benutzerdefiniert",
+    "daily": "Täglich",
+    "monthly": "Monatlich",
+    "none": "Keine",
+    "weekly": "Wöchentlich",
+    "yearly": "Jährlich"
+  },
+  "settings": {
+    "build": "Build: {{build}}",
+    "cache": {
+      "newVersionAvailable": "Neue Version verfügbar",
+      "upToDate": "Aktuell"
     },
     "category": {
-        "create": "Kategorie erstellen",
-        "name": "Kategoriename",
-        "select": "Kategorie"
+      "suggested": "Vorgeschlagene Kategorien"
     },
-    "date": {
-        "today": "Heute"
+    "currency": {
+      "suggested": "Vorgeschlagene Währungen",
+      "title": "Währungen"
     },
-    "insights": {
-        "title": "Einblicke"
+    "language": {
+      "title": "Sprache"
     },
-    "period": {
-        "monthly": "Monatlich",
-        "placeholder": "Zeitraum auswählen",
-        "weekly": "Wöchentlich",
-        "yearly": "Jährlich"
+    "root": {
+      "about": "Über",
+      "appearance": "Erscheinungsbild",
+      "categories": "Kategorien",
+      "currency": "Währung",
+      "data": "Daten",
+      "erase": {
+        "alert": {
+          "cancel": "Abbrechen",
+          "confirm": "Löschen",
+          "description": "Diese Aktion kann nicht rückgängig gemacht werden. Dies wird Ihre Transaktionen endgültig löschen und die Daten aus der App entfernen.",
+          "title": "Sind Sie sich absolut sicher?"
+        },
+        "title": "Daten löschen"
+      },
+      "export": "Daten exportieren",
+      "general": "Allgemein",
+      "import": "Daten importieren",
+      "language": "Sprache",
+      "refreshCache": "Cache aktualisieren",
+      "synchronisation": "Synchronisation",
+      "title": "Einstellungen"
     },
-    "recurring": {
-        "custom": "Benutzerdefiniert",
-        "daily": "Täglich",
-        "monthly": "Monatlich",
-        "none": "Keine",
-        "weekly": "Wöchentlich",
-        "yearly": "Jährlich"
+    "synchronisation": {
+      "authenticate": "Authentifizieren",
+      "authenticateWithDevice": "Mit Ihrem Gerät authentifizieren",
+      "login": "Anmelden",
+      "loginWithDevice": "Mit Ihrem Gerät anmelden",
+      "register": "Registrieren",
+      "title": "Synchronisation"
     },
-    "settings": {
-        "build": "Build: {{build}}",
-        "cache": {
-            "newVersionAvailable": "Neue Version verfügbar",
-            "upToDate": "Aktuell"
-        },
-        "category": {
-            "suggested": "Vorgeschlagene Kategorien"
-        },
-        "currency": {
-            "suggested": "Vorgeschlagene Währungen",
-            "title": "Währungen"
-        },
-        "language": {
-            "title": "Sprache"
-        },
-        "root": {
-            "about": "Über",
-            "appearance": "Erscheinungsbild",
-            "categories": "Kategorien",
-            "currency": "Währung",
-            "data": "Daten",
-            "erase": {
-                "alert": {
-                    "cancel": "Abbrechen",
-                    "confirm": "Löschen",
-                    "description": "Diese Aktion kann nicht rückgängig gemacht werden. Dies wird Ihre Transaktionen endgültig löschen und die Daten aus der App entfernen.",
-                    "title": "Sind Sie sich absolut sicher?"
-                },
-                "title": "Daten löschen"
-            },
-            "export": "Daten exportieren",
-            "general": "Allgemein",
-            "import": "Daten importieren",
-            "language": "Sprache",
-            "refreshCache": "Cache aktualisieren",
-            "synchronisation": "Synchronisation",
-            "title": "Einstellungen"
-        },
-        "synchronisation": {
-            "authenticate": "Authentifizieren",
-            "authenticateWithDevice": "Mit Ihrem Gerät authentifizieren",
-            "login": "Anmelden",
-            "loginWithDevice": "Mit Ihrem Gerät anmelden",
-            "register": "Registrieren",
-            "title": "Synchronisation"
-        },
-        "version": "Version: {{version}}"
+    "version": "Version: {{version}}"
+  },
+  "transaction": {
+    "add_note": "Notiz hinzufügen",
+    "averagePerDay": "Durchschn./Tag",
+    "averagePerMonth": "Durchschn./Monat",
+    "balance": "Saldo",
+    "expense": "Ausgabe",
+    "income": "Einkommen",
+    "incomePerDay": "Eink./Tag",
+    "incomePerMonth": "Eink./Monat",
+    "noTransactions": {
+      "description": "Sie haben keine Transaktionen für diesen Zeitraum.",
+      "title": "Keine Einträge"
     },
-    "transaction": {
-        "add_note": "Notiz hinzufügen",
-        "averagePerDay": "Durchschn./Tag",
-        "averagePerMonth": "Durchschn./Monat",
-        "balance": "Saldo",
-        "expense": "Ausgabe",
-        "income": "Einkommen",
-        "incomePerDay": "Eink./Tag",
-        "incomePerMonth": "Eink./Monat",
-        "noTransactions": {
-            "description": "Sie haben keine Transaktionen für diesen Zeitraum.",
-            "title": "Keine Einträge"
-        },
-        "remove": "Transaktion löschen",
-        "spentPerDay": "Ausg./Tag",
-        "spentPerMonth": "Ausg./Monat",
-        "title": "Transaktionen"
-    }
+    "remove": "Transaktion löschen",
+    "spentPerDay": "Ausg./Tag",
+    "spentPerMonth": "Ausg./Monat",
+    "title": "Transaktionen"
+  }
 }

@@ -1,128 +1,128 @@
 {
-    "about": {
-        "author": "Autore",
-        "buildDate": "Data",
-        "buildHash": "Build",
-        "details": "Info App",
-        "license": "Licenza",
-        "repo": "Fonte",
-        "reportBug": "Segnala bug",
-        "title": "Info",
-        "version": "Versione"
-    },
-    "categories": {
-        "allowance": "Indennità",
-        "clothing": "Abbigliamento",
-        "dining_out": "Mangiare fuori",
-        "entertainment": "Intrattenimento",
-        "freelancing": "Libero professionista",
-        "gifts": "Regali",
-        "groceries": "Generi alimentari",
-        "healthcare": "Assistenza sanitaria",
-        "insurance": "Assicurazione",
-        "internet": "Internet",
-        "investment": "Investimento",
-        "money_transfer": "Trasferimento di denaro",
-        "other_income": "Altri redditi",
-        "part_time_job": "Lavoro part-time",
-        "phone": "Telefono",
-        "rent": "Affitto",
-        "salary": "Stipendio",
-        "savings": "Risparmi",
-        "tips": "Mance",
-        "transportation": "Trasporto",
-        "utilities": "Utenze"
+  "about": {
+    "author": "Autore",
+    "buildDate": "Data",
+    "buildHash": "Build",
+    "details": "Info App",
+    "license": "Licenza",
+    "repo": "Fonte",
+    "reportBug": "Segnala bug",
+    "title": "Info",
+    "version": "Versione"
+  },
+  "categories": {
+    "allowance": "Indennità",
+    "clothing": "Abbigliamento",
+    "dining_out": "Mangiare fuori",
+    "entertainment": "Intrattenimento",
+    "freelancing": "Libero professionista",
+    "gifts": "Regali",
+    "groceries": "Generi alimentari",
+    "healthcare": "Assistenza sanitaria",
+    "insurance": "Assicurazione",
+    "internet": "Internet",
+    "investment": "Investimento",
+    "money_transfer": "Trasferimento di denaro",
+    "other_income": "Altri redditi",
+    "part_time_job": "Lavoro part-time",
+    "phone": "Telefono",
+    "rent": "Affitto",
+    "salary": "Stipendio",
+    "savings": "Risparmi",
+    "tips": "Mance",
+    "transportation": "Trasporto",
+    "utilities": "Utenze"
+  },
+  "category": {
+    "create": "Crea categoria",
+    "name": "Nome della categoria",
+    "select": "Categoria"
+  },
+  "date": {
+    "today": "Oggi"
+  },
+  "insights": {
+    "title": "Intuizioni"
+  },
+  "period": {
+    "monthly": "Mensile",
+    "placeholder": "Seleziona periodo",
+    "weekly": "Settimanale",
+    "yearly": "Annuale"
+  },
+  "recurrence": {
+    "custom": "Personalizzato",
+    "daily": "Quotidiano",
+    "monthly": "Mensile",
+    "none": "Nessuno",
+    "weekly": "Settimanale",
+    "yearly": "Annuale"
+  },
+  "settings": {
+    "build": "Build: {{build}}",
+    "cache": {
+      "newVersionAvailable": "Nuova versione disponibile",
+      "upToDate": "Aggiornato"
     },
     "category": {
-        "create": "Crea categoria",
-        "name": "Nome della categoria",
-        "select": "Categoria"
+      "suggested": "Categorie suggerite"
     },
-    "date": {
-        "today": "Oggi"
+    "currency": {
+      "suggested": "Valute suggerite",
+      "title": "Valute"
     },
-    "insights": {
-        "title": "Intuizioni"
+    "language": {
+      "title": "Lingua"
     },
-    "period": {
-        "monthly": "Mensile",
-        "placeholder": "Seleziona periodo",
-        "weekly": "Settimanale",
-        "yearly": "Annuale"
+    "root": {
+      "about": "Info",
+      "appearance": "Aspetto",
+      "categories": "Categorie",
+      "currency": "Valuta",
+      "data": "Dati",
+      "erase": {
+        "alert": {
+          "cancel": "Annulla",
+          "confirm": "Cancella",
+          "description": "Questa azione non può essere annullata. Ciò eliminerà definitivamente le tue transazioni e rimuoverà i dati dall'app.",
+          "title": "Sei assolutamente sicuro?"
+        },
+        "title": "Cancella Dati"
+      },
+      "export": "Esporta Dati",
+      "general": "Generale",
+      "import": "Importa Dati",
+      "language": "Lingua",
+      "refreshCache": "Aggiorna Cache",
+      "synchronisation": "Sincronizzazione",
+      "title": "Impostazioni"
     },
-    "recurring": {
-        "custom": "Personalizzato",
-        "daily": "Quotidiano",
-        "monthly": "Mensile",
-        "none": "Nessuno",
-        "weekly": "Settimanale",
-        "yearly": "Annuale"
+    "synchronisation": {
+      "authenticate": "Autenticare",
+      "authenticateWithDevice": "Autenticati con il tuo dispositivo",
+      "login": "Accesso",
+      "loginWithDevice": "Accedi con il tuo dispositivo",
+      "register": "Registrati",
+      "title": "Sincronizzazione"
     },
-    "settings": {
-        "build": "Build: {{build}}",
-        "cache": {
-            "newVersionAvailable": "Nuova versione disponibile",
-            "upToDate": "Aggiornato"
-        },
-        "category": {
-            "suggested": "Categorie suggerite"
-        },
-        "currency": {
-            "suggested": "Valute suggerite",
-            "title": "Valute"
-        },
-        "language": {
-            "title": "Lingua"
-        },
-        "root": {
-            "about": "Info",
-            "appearance": "Aspetto",
-            "categories": "Categorie",
-            "currency": "Valuta",
-            "data": "Dati",
-            "erase": {
-                "alert": {
-                    "cancel": "Annulla",
-                    "confirm": "Cancella",
-                    "description": "Questa azione non può essere annullata. Ciò eliminerà definitivamente le tue transazioni e rimuoverà i dati dall'app.",
-                    "title": "Sei assolutamente sicuro?"
-                },
-                "title": "Cancella Dati"
-            },
-            "export": "Esporta Dati",
-            "general": "Generale",
-            "import": "Importa Dati",
-            "language": "Lingua",
-            "refreshCache": "Aggiorna Cache",
-            "synchronisation": "Sincronizzazione",
-            "title": "Impostazioni"
-        },
-        "synchronisation": {
-            "authenticate": "Autenticare",
-            "authenticateWithDevice": "Autenticati con il tuo dispositivo",
-            "login": "Accesso",
-            "loginWithDevice": "Accedi con il tuo dispositivo",
-            "register": "Registrati",
-            "title": "Sincronizzazione"
-        },
-        "version": "Version: {{version}}"
+    "version": "Version: {{version}}"
+  },
+  "transaction": {
+    "add_note": "Aggiungi nota",
+    "averagePerDay": "media/giorno",
+    "averagePerMonth": "media/mese",
+    "balance": "Saldo",
+    "expense": "Spesa",
+    "income": "Reddito",
+    "incomePerDay": "entrate/giorno",
+    "incomePerMonth": "entrate/mese",
+    "noTransactions": {
+      "description": "Non ci sono transazioni per questo periodo.",
+      "title": "Nessuna voce"
     },
-    "transaction": {
-        "add_note": "Aggiungi nota",
-        "averagePerDay": "media/giorno",
-        "averagePerMonth": "media/mese",
-        "balance": "Saldo",
-        "expense": "Spesa",
-        "income": "Reddito",
-        "incomePerDay": "entrate/giorno",
-        "incomePerMonth": "entrate/mese",
-        "noTransactions": {
-            "description": "Non ci sono transazioni per questo periodo.",
-            "title": "Nessuna voce"
-        },
-        "remove": "Elimina transazione",
-        "spentPerDay": "speso/giorno",
-        "spentPerMonth": "speso/mese",
-        "title": "Transazioni"
-    }
+    "remove": "Elimina transazione",
+    "spentPerDay": "speso/giorno",
+    "spentPerMonth": "speso/mese",
+    "title": "Transazioni"
+  }
 }

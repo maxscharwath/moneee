@@ -20,6 +20,7 @@ import { useFinancialSummary } from '@/hooks/useFinancialSummary';
 import { match } from 'ts-pattern';
 import { deleteTransaction } from '@/hooks/useTransaction';
 import { InfiniteList } from '@/components/infinite-list';
+import { deleteRecurrence } from '@/hooks/useRecurrence';
 
 type Filter = 'income' | 'expense' | 'all';
 
@@ -259,7 +260,11 @@ export function Component() {
     );
 
     const handleTransactionDelete = async (transaction: Transaction) => {
-        await deleteTransaction(transaction);
+        if (transaction.recurrence) {
+            await deleteRecurrence(transaction.recurrence);
+        } else {
+            await deleteTransaction(transaction);
+        }
     };
 
     const { averagePerPeriodLabel, averagePerPeriod } = useMemo(() => {

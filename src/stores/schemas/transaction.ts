@@ -33,4 +33,11 @@ export const TransactionSchema = toTypedRxJsonSchema({
 
 export type Transaction = ExtractDocumentTypeFromTypedRxJsonSchema<
     typeof TransactionSchema
->;
+> & {
+    recurrence?: {
+        uuid: string;
+        startDate: string;
+        endDate?: string;
+        cron: string;
+    };
+};

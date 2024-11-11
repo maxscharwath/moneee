@@ -34,11 +34,11 @@ export const TransactionItem = React.forwardRef<
                 >
                     {category?.icon}
                 </AvatarFallback>
-                {
+                {transaction?.recurrence && (
                     <div className="absolute bottom-0 right-0 translate-x-1/4 translate-y-1/4 rounded-xl border bg-background/50 p-1 text-xs backdrop-blur-sm">
                         <RotateCw size={12} />
                     </div>
-                }
+                )}
             </Avatar>
             <div className="flex flex-col">
                 <h3 className="font-bold">

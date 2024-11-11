@@ -15,6 +15,8 @@ import { type Transaction } from '@/stores/schemas/transaction';
 import { Indicator } from '@/components/ui/indicator';
 import { useRegisterSW } from 'virtual:pwa-register/react';
 import { addTransaction } from '@/hooks/useTransaction';
+import { Recurrence } from '@/stores/schemas/recurrence';
+import { addRecurrence } from '@/hooks/useRecurrence';
 
 const LayoutContext = React.createContext<{
     openTransactionModal: (transaction?: Transaction) => void;
@@ -50,6 +52,11 @@ export default function Layout() {
 
     const handleTransaction = (transaction: Optional<Transaction, 'uuid'>) => {
         void addTransaction(transaction);
+        setShowModal(false);
+    };
+
+    const handleRecurrence = (recurrence: Optional<Recurrence, 'uuid'>) => {
+        void addRecurrence(recurrence);
         setShowModal(false);
     };
 
@@ -104,6 +111,7 @@ export default function Layout() {
                 open={showModal}
                 onOpenChange={toggleTransactionModal}
                 onTransaction={handleTransaction}
+                onRecurrence={handleRecurrence}
                 transaction={transaction}
                 key={transaction?.uuid}
             />

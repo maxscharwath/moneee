@@ -3,8 +3,8 @@ import {
     toTypedRxJsonSchema,
 } from 'rxdb';
 
-export const RecurrentSchema = toTypedRxJsonSchema({
-    title: 'recurrent',
+export const RecurrenceSchema = toTypedRxJsonSchema({
+    title: 'recurrence',
     version: 0,
     type: 'object',
     primaryKey: 'uuid',
@@ -26,31 +26,19 @@ export const RecurrentSchema = toTypedRxJsonSchema({
         endDate: {
             type: 'string',
             format: 'date-time',
-            nullable: true,
         },
-        recurrenceCron: {
+        cron: {
             type: 'string',
-            description:
-                "Cron expression for custom recurrence (e.g., '0 10 * * 1' for every Monday at 10 am).",
-            pattern:
-                '^([0-5]?\\d)\\s([0-5]?\\d)\\s([01]?\\d|2[0-3])\\s([1-9]|[12]\\d|3[01])\\s([1-9]|1[0-2])\\s([0-6])$',
         },
         categoryId: {
             type: 'string',
             ref: 'categories',
         },
     },
-    required: [
-        'uuid',
-        'note',
-        'amount',
-        'startDate',
-        'recurrenceCron',
-        'categoryId',
-    ],
+    required: ['uuid', 'note', 'amount', 'startDate', 'cron', 'categoryId'],
     additionalProperties: false,
 } as const);
 
-export type Recurrent = ExtractDocumentTypeFromTypedRxJsonSchema<
-    typeof RecurrentSchema
+export type Recurrence = ExtractDocumentTypeFromTypedRxJsonSchema<
+    typeof RecurrenceSchema
 >;
