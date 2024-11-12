@@ -1,0 +1,135 @@
+{
+  "about": {
+    "author": "Cap'n",
+    "buildDate": "Day o' Construction",
+    "buildHash": "Ship's Code",
+    "details": "Details o' the App",
+    "license": "Letter o' Marque",
+    "repo": "Treasure Code",
+    "reportBug": "Report a Kraken",
+    "title": "All About Ye App",
+    "version": "Version"
+  },
+  "categories": {
+    "allowance": "Rations",
+    "clothing": "Duds",
+    "dining_out": "Feastin' Ashore",
+    "entertainment": "Carousin'",
+    "freelancing": "Freelootin'",
+    "gifts": "Spoils",
+    "groceries": "Grub",
+    "healthcare": "Sawbone's Fee",
+    "insurance": "Plunder Protection",
+    "internet": "Scryin' Net",
+    "investment": "Booty Hoardin'",
+    "money_transfer": "Coin Movin'",
+    "other_income": "Other Booty",
+    "part_time_job": "Odd Jobs",
+    "phone": "Squawk Box",
+    "rent": "Ship's Berth",
+    "salary": "Coin Purse",
+    "savings": "Treasure Chest",
+    "tips": "Extra Booty",
+    "transportation": "Voyagin' Costs",
+    "utilities": "Galley Bills"
+  },
+  "category": {
+    "create": "Forge New Category",
+    "name": "Category's Name",
+    "select": "Pick Yer Category"
+  },
+  "date": {
+    "today": "This Very Day"
+  },
+  "insights": {
+    "title": "Rumors & Insights"
+  },
+  "period": {
+    "monthly": "Ev'ry Full Moon",
+    "placeholder": "Pick Yer Time Span",
+    "weekly": "Ev'ry Seven Suns",
+    "yearly": "Once a Voyage Round the Sun"
+  },
+  "recurrence": {
+    "custom": "Make it Yer Own",
+    "daily": "Each Mornin'",
+    "monthly": "Ev'ry Full Moon",
+    "none": "None at All",
+    "weekly": "Once Each Seven Suns",
+    "yearly": "Once Ev'ry Voyage"
+  },
+  "recurrences": {
+    "noRecurrences": {
+      "description": "Ye be havin' no regular booty set up. Add some, ye scallywag!",
+      "title": "Nay Regular Booty"
+    }
+  },
+  "settings": {
+    "build": "Ship's Code: {{build}}",
+    "cache": {
+      "newVersionAvailable": "A Fresh Version Be Waitin'",
+      "upToDate": "Ye Be Up to Date"
+    },
+    "category": {
+      "suggested": "Suggested Categories"
+    },
+    "currency": {
+      "suggested": "Suggested Coin",
+      "title": "Yer Coin"
+    },
+    "language": {
+      "title": "Tongue"
+    },
+    "root": {
+      "about": "All About Ye App",
+      "appearance": "How It Be Lookin'",
+      "categories": "All Yer Categories",
+      "currency": "Ye Coin",
+      "data": "Yer Records",
+      "erase": {
+        "alert": {
+          "cancel": "Belay That",
+          "confirm": "Erase All",
+          "description": "This act cannot be undone. It be deletin' all yer transactions and throwin' it to the depths.",
+          "title": "Ye Sure Ye Be Wantin' This?"
+        },
+        "title": "Erase All Data"
+      },
+      "export": "Send Off Yer Records",
+      "general": "General Orders",
+      "import": "Bring Aboard Data",
+      "language": "Choose Yer Tongue",
+      "recurrences": "Regular Booty",
+      "refreshCache": "Refresh the Cache",
+      "synchronisation": "Ye Sync",
+      "title": "Ship's Settings"
+    },
+    "synchronisation": {
+      "authenticate": "Prove Yer Worth",
+      "authenticateWithDevice": "Prove Yerself with Yer Device",
+      "login": "Sign Aboard",
+      "loginWithDevice": "Board with Yer Device",
+      "register": "Set Sail",
+      "title": "Synchronization"
+    },
+    "version": "Version: {{version}}"
+  },
+  "transaction": {
+    "add_note": "Add Yer Notes",
+    "averagePerDay": "avg/day o' plunder",
+    "averagePerMonth": "avg/month o' loot",
+    "balance": "Ship's Balance",
+    "expense": "Spent Booty",
+    "income": "Incoming Loot",
+    "incomePerDay": "loot/day",
+    "incomePerMonth": "loot/month",
+    "noTransactions": {
+      "description": "Ye have no loot fer this period.",
+      "title": "Nay Entries"
+    },
+    "remove": "Scuttle Transaction",
+    "spentPerDay": "spent/day o' loot",
+    "spentPerMonth": "spent/month o' loot",
+    "title": "Yer Transactions"
+  }
+}

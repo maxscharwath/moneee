@@ -3,7 +3,18 @@ import { initReactI18next, useTranslation } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import resourcesToBackend from 'i18next-resources-to-backend';
 import { useCallback, useMemo } from 'react';
-import { de, enUS, es, fr, frCH, it, itCH } from 'date-fns/locale';
+import {
+    de,
+    enUS,
+    es,
+    fr,
+    frCH,
+    it,
+    itCH,
+    ja,
+    vi,
+    zhCN,
+} from 'date-fns/locale';
 import { useSettings } from '@/hooks/useSettings';
 
 export default i18n
@@ -23,41 +34,79 @@ export const languages = [
         code: 'en',
         name: 'English',
         locale: enUS,
+        icon: '🇺🇸',
     },
     {
         code: 'fr-FR',
         name: 'Français',
         locale: fr,
+        icon: '🇫🇷',
     },
     {
         code: 'fr-CH',
         name: 'Français (Suisse)',
         locale: frCH,
+        icon: '🇨🇭',
     },
     {
         code: 'de',
         name: 'Deutsch',
         locale: de,
+        icon: '🇩🇪',
     },
     {
         code: 'de-CH',
         name: 'Deutsch (Schweiz)',
         locale: de,
+        icon: '🇨🇭',
     },
     {
         code: 'es',
         name: 'Español',
         locale: es,
+        icon: '🇪🇸',
     },
     {
         code: 'it',
         name: 'Italiano',
         locale: it,
+        icon: '🇮🇹',
     },
     {
         code: 'it-CH',
         name: 'Italiano (Svizzera)',
         locale: itCH,
+        icon: '🇨🇭',
+    },
+    {
+        code: 'vi',
+        name: 'Tiếng Việt',
+        locale: vi,
+        icon: '🇻🇳',
+    },
+    {
+        code: 'ja',
+        name: '日本語',
+        locale: ja,
+        icon: '🇯🇵',
+    },
+    {
+        code: 'zh-CN',
+        name: '简体中文',
+        locale: zhCN,
+        icon: '🇨🇳',
+    },
+    {
+        code: 'pirate',
+        name: 'Pirate Speak',
+        locale: enUS,
+        icon: '🏴‍☠️',
+    },
+    {
+        code: 'cimode',
+        name: 'Debug',
+        locale: enUS,
+        icon: '🐛',
     },
 ];
 

@@ -92,7 +92,7 @@ export function Component() {
                                 color="#5a96ee"
                                 title={t('settings.root.language')}
                                 href="/settings/language"
-                                value={language?.name}
+                                value={`${language?.icon} ${language?.name}`}
                                 chevron
                             />
 
