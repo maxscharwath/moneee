@@ -1,10 +1,7 @@
 import type { Transaction } from '@/stores/schemas/transaction';
-import type { Recurrence } from '@/stores/schemas/recurrence';
 import type { Category } from '@/stores/schemas/category';
 import { initializeDb } from '@/stores/db';
-import { generateDates } from '@/packages/cron/generator';
-import { parseCronExpression } from '@/packages/cron/parser';
-import { v5 as uuidv5 } from 'uuid';
+import { generateRecurringTransactions } from '@/hooks/useRecurrence';
 
 export const exportToCsv = async () => {
     try {
@@ -24,6 +21,7 @@ export const exportToCsv = async () => {
         const endOfYear = new Date(new Date().getFullYear(), 11, 31);
         const recurringTransactions = generateRecurringTransactions(
             recurrings,
+            new Date(0),
             endOfYear
         );
 
@@ -51,39 +49,6 @@ export const exportToCsv = async () => {
     } catch (error) {
         console.error('Export failed:', error);
     }
-};
-
-const generateRecurringTransactions = (
-    recurrings: Recurrence[],
-    endDate: Date
-): Transaction[] => {
-    const recurringTransactions: Transaction[] = [];
-
-    recurrings.forEach((recurring) => {
-        const cronDates = generateDates(
-            parseCronExpression(recurring.cron),
-            new Date(),
-            endDate
-        );
-
-        Array.from(cronDates).forEach((date) => {
-            recurringTransactions.push({
-                amount: recurring.amount,
-                categoryId: recurring.categoryId,
-                date: date.toISOString(),
-                note: recurring.note,
-                uuid: uuidv5(date.toISOString(), recurring.uuid),
-                recurrence: {
-                    uuid: recurring.uuid,
-                    startDate: recurring.startDate,
-                    endDate: recurring.endDate,
-                    cron: recurring.cron,
-                },
-            });
-        });
-    });
-
-    return recurringTransactions;
 };
 
 const formatCSV = (

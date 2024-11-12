@@ -58,6 +58,12 @@
     "weekly": "Weekly",
     "yearly": "Yearly"
   },
+  "recurrences": {
+    "noRecurrences": {
+      "description": "You currently have no recurring transactions set up. Add one to get started.",
+      "title": "No Recurring Transactions"
+    }
+  },
   "settings": {
     "build": "Build: {{build}}",
     "cache": {
@@ -93,6 +99,7 @@
       "general": "General",
       "import": "Import Data",
       "language": "Language",
+      "recurrences": "Recurrences",
       "refreshCache": "Refresh Cache",
       "synchronisation": "Synchronization",
       "title": "Settings"

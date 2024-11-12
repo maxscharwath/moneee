@@ -12,6 +12,7 @@ import {
     LayoutGridIcon,
     MonitorIcon,
     MoonIcon,
+    RotateCwIcon,
     SaveIcon,
     SunIcon,
     Trash2Icon,
@@ -100,6 +101,14 @@ export function Component() {
                                 color="#c3aed6"
                                 title={t('settings.root.categories')}
                                 href="/settings/categories"
+                                chevron
+                            />
+
+                            <SettingItem
+                                icon={RotateCwIcon}
+                                color="#ffcc5c"
+                                title={t('settings.root.recurrences')}
+                                href="/settings/recurrences"
                                 chevron
                             />
 

@@ -22,4 +22,19 @@ export const parseNumberFromString = (str: string): number | null => {
     return matched ? parseFloat(matched[0]) : null;
 };
 
+export function isNotNull<T>(value: Nullable<T>): value is T {
+    return value != null;
+}
+
 export type Optional<T, K extends keyof T> = Omit<T, K> & Partial<T>;
+
+export type Nullable<T> = T | null | undefined;
+
+export type MaybeNullable<T, U, V extends readonly Nullable<U>[]> = V extends [
+    infer First,
+    ...infer Rest extends readonly Nullable<U>[],
+]
+    ? First extends U
+        ? T
+        : MaybeNullable<T, U, Rest>
+    : Nullable<T>;

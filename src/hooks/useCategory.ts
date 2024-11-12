@@ -1,4 +1,3 @@
-// categoryService.ts
 import { useRxData } from 'rxdb-hooks';
 import { type Category } from '@/stores/schemas/category';
 import { type Optional } from '@/lib/utils';

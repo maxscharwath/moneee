@@ -32,6 +32,10 @@ const router = createBrowserRouter(
                     lazy={async () => import('@/routes/settings/Categories')}
                 />
                 <Route
+                    path="recurrences"
+                    lazy={async () => import('@/routes/settings/Recurrences')}
+                />
+                <Route
                     path="synchronisation"
                     lazy={async () =>
                         import('@/routes/settings/Synchronisation')

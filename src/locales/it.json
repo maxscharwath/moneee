@@ -58,6 +58,12 @@
     "weekly": "Settimanale",
     "yearly": "Annuale"
   },
+  "recurrences": {
+    "noRecurrences": {
+      "description": "Attualmente non hai configurato transazioni ricorrenti. Aggiungine una per iniziare.",
+      "title": "Nessuna transazione ricorrente"
+    }
+  },
   "settings": {
     "build": "Build: {{build}}",
     "cache": {
@@ -93,6 +99,7 @@
       "general": "Generale",
       "import": "Importa Dati",
       "language": "Lingua",
+      "recurrences": "Ricorrenze",
       "refreshCache": "Aggiorna Cache",
       "synchronisation": "Sincronizzazione",
       "title": "Impostazioni"
