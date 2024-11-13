@@ -1,0 +1,135 @@
+{
+	"about": {
+		"author": "Tác giả",
+		"buildDate": "Ngày xây dựng",
+		"buildHash": "Bản dựng",
+		"details": "Chi tiết ứng dụng",
+		"license": "Giấy phép",
+		"repo": "Mã nguồn",
+		"reportBug": "Báo cáo lỗi",
+		"title": "Giới thiệu",
+		"version": "Phiên bản"
+	},
+	"categories": {
+		"allowance": "Trợ cấp",
+		"clothing": "Quần áo",
+		"dining_out": "Ăn ngoài",
+		"entertainment": "Giải trí",
+		"freelancing": "Làm tự do",
+		"gifts": "Quà tặng",
+		"groceries": "Hàng tạp hóa",
+		"healthcare": "Chăm sóc sức khỏe",
+		"insurance": "Bảo hiểm",
+		"internet": "Internet",
+		"investment": "Đầu tư",
+		"money_transfer": "Chuyển tiền",
+		"other_income": "Thu nhập khác",
+		"part_time_job": "Việc làm thêm",
+		"phone": "Điện thoại",
+		"rent": "Tiền thuê nhà",
+		"salary": "Lương",
+		"savings": "Tiết kiệm",
+		"tips": "Tiền boa",
+		"transportation": "Giao thông",
+		"utilities": "Tiện ích"
+	},
+	"category": {
+		"create": "Tạo danh mục",
+		"name": "Tên danh mục",
+		"select": "Danh mục"
+	},
+	"date": {
+		"today": "Hôm nay"
+	},
+	"insights": {
+		"title": "Thống kê"
+	},
+	"period": {
+		"monthly": "Hàng tháng",
+		"placeholder": "Chọn giai đoạn",
+		"weekly": "Hàng tuần",
+		"yearly": "Hàng năm"
+	},
+	"recurrence": {
+		"custom": "Tùy chỉnh",
+		"daily": "Hàng ngày",
+		"monthly": "Hàng tháng",
+		"none": "Không",
+		"weekly": "Hàng tuần",
+		"yearly": "Hàng năm"
+	},
+	"recurrences": {
+		"noRecurrences": {
+			"description": "Hiện tại bạn chưa thiết lập giao dịch định kỳ nào. Thêm một giao dịch để bắt đầu.",
+			"title": "Không có giao dịch định kỳ"
+		}
+	},
+	"settings": {
+		"build": "Bản dựng: {{build}}",
+		"cache": {
+			"newVersionAvailable": "Có phiên bản mới",
+			"upToDate": "Đã cập nhật"
+		},
+		"category": {
+			"suggested": "Danh mục gợi ý"
+		},
+		"currency": {
+			"suggested": "Tiền tệ gợi ý",
+			"title": "Tiền tệ"
+		},
+		"language": {
+			"title": "Ngôn ngữ"
+		},
+		"root": {
+			"about": "Giới thiệu",
+			"appearance": "Giao diện",
+			"categories": "Danh mục",
+			"currency": "Tiền tệ",
+			"data": "Dữ liệu",
+			"erase": {
+				"alert": {
+					"cancel": "Hủy",
+					"confirm": "Xóa",
+					"description": "Hành động này không thể hoàn tác. Điều này sẽ xóa vĩnh viễn các giao dịch của bạn và xóa dữ liệu khỏi ứng dụng.",
+					"title": "Bạn có chắc chắn không?"
+				},
+				"title": "Xóa dữ liệu"
+			},
+			"export": "Xuất dữ liệu",
+			"general": "Chung",
+			"import": "Nhập dữ liệu",
+			"language": "Ngôn ngữ",
+			"recurrences": "Định kỳ",
+			"refreshCache": "Làm mới bộ nhớ đệm",
+			"synchronisation": "Đồng bộ hóa",
+			"title": "Cài đặt"
+		},
+		"synchronisation": {
+			"authenticate": "Xác thực",
+			"authenticateWithDevice": "Xác thực với thiết bị của bạn",
+			"login": "Đăng nhập",
+			"loginWithDevice": "Đăng nhập với thiết bị của bạn",
+			"register": "Đăng ký",
+			"title": "Đồng bộ hóa"
+		},
+		"version": "Phiên bản: {{version}}"
+	},
+	"transaction": {
+		"add_note": "Thêm ghi chú",
+		"averagePerDay": "trung bình/ngày",
+		"averagePerMonth": "trung bình/tháng",
+		"balance": "Số dư",
+		"expense": "Chi tiêu",
+		"income": "Thu nhập",
+		"incomePerDay": "thu nhập/ngày",
+		"incomePerMonth": "thu nhập/tháng",
+		"noTransactions": {
+			"description": "Bạn không có giao dịch nào trong giai đoạn này.",
+			"title": "Không có giao dịch"
+		},
+		"remove": "Xóa giao dịch",
+		"spentPerDay": "đã chi/ngày",
+		"spentPerMonth": "đã chi/tháng",
+		"title": "Giao dịch"
+	}
+}

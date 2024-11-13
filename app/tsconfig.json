@@ -1,0 +1,12 @@
+{
+	"extends": "tsconfig/react.json",
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./src/*"]
+		},
+		"types": ["vitest/globals", "vite-plugin-pwa/client"]
+	},
+	"include": ["."],
+	"exclude": ["dist", "build", "node_modules"]
+}

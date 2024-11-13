@@ -1,0 +1,135 @@
+{
+	"about": {
+		"author": "Auteur",
+		"buildDate": "Date",
+		"buildHash": "Build",
+		"details": "Infos App",
+		"license": "License",
+		"repo": "Source",
+		"reportBug": "Signaler un bug",
+		"title": "À propos",
+		"version": "Version"
+	},
+	"categories": {
+		"allowance": "Allocation",
+		"clothing": "Vêtements",
+		"dining_out": "Repas à l'extérieur",
+		"entertainment": "Divertissement",
+		"freelancing": "Freelance",
+		"gifts": "Cadeaux",
+		"groceries": "Épicerie",
+		"healthcare": "Soins de santé",
+		"insurance": "Assurance",
+		"internet": "Internet",
+		"investment": "Investissement",
+		"money_transfer": "Transfert d'argent",
+		"other_income": "Autres revenus",
+		"part_time_job": "Travail à temps partiel",
+		"phone": "Téléphone",
+		"rent": "Loyer",
+		"salary": "Salaire",
+		"savings": "Économies",
+		"tips": "Pourboires",
+		"transportation": "Transport",
+		"utilities": "Services publics"
+	},
+	"category": {
+		"create": "Créer une catégorie",
+		"name": "Nom de la catégorie",
+		"select": "Catégorie"
+	},
+	"date": {
+		"today": "Auj."
+	},
+	"insights": {
+		"title": "Aperçus"
+	},
+	"period": {
+		"monthly": "Mensuel",
+		"placeholder": "Sélectionnez la période",
+		"weekly": "Hebdomadaire",
+		"yearly": "Annuel"
+	},
+	"recurrence": {
+		"custom": "Personnalisé",
+		"daily": "Quotidien",
+		"monthly": "Mensuel",
+		"none": "Aucun",
+		"weekly": "Hebdomadaire",
+		"yearly": "Annuel"
+	},
+	"recurrences": {
+		"noRecurrences": {
+			"description": "Vous n'avez actuellement aucune transaction récurrente configurée. Ajoutez-en une pour commencer.",
+			"title": "Aucune transaction récurrente"
+		}
+	},
+	"settings": {
+		"build": "Build: {{build}}",
+		"cache": {
+			"newVersionAvailable": "Nouvelle version disponible",
+			"upToDate": "À jour"
+		},
+		"category": {
+			"suggested": "Catégories suggérées"
+		},
+		"currency": {
+			"suggested": "Devises suggérées",
+			"title": "Devises"
+		},
+		"language": {
+			"title": "Langue"
+		},
+		"root": {
+			"about": "À propos",
+			"appearance": "Apparence",
+			"categories": "Catégories",
+			"currency": "Devise",
+			"data": "Données",
+			"erase": {
+				"alert": {
+					"cancel": "Annuler",
+					"confirm": "Effacer",
+					"description": "Cette action ne peut pas être annulée. Cela supprimera définitivement vos transactions et retirera les données de l'application.",
+					"title": "Êtes-vous absolument sûr?"
+				},
+				"title": "Effacer les données"
+			},
+			"export": "Exporter les données",
+			"general": "Général",
+			"import": "Importer des données",
+			"language": "Langue",
+			"recurrences": "Récurrences",
+			"refreshCache": "Rafraîchir le cache",
+			"synchronisation": "Synchronisation",
+			"title": "Paramètres"
+		},
+		"synchronisation": {
+			"authenticate": "Authentifier",
+			"authenticateWithDevice": "Authentifier avec votre appareil",
+			"login": "Connexion",
+			"loginWithDevice": "Connexion avec votre appareil",
+			"register": "S'inscrire",
+			"title": "Synchronisation"
+		},
+		"version": "Version: {{version}}"
+	},
+	"transaction": {
+		"add_note": "Ajouter une note",
+		"averagePerDay": "moy/jour",
+		"averagePerMonth": "moy/mois",
+		"balance": "Solde",
+		"expense": "Dépense",
+		"income": "Revenu",
+		"incomePerDay": "revenu/jour",
+		"incomePerMonth": "revenu/mois",
+		"noTransactions": {
+			"description": "Vous n'avez aucune transaction pour cette période.",
+			"title": "Aucune entrée"
+		},
+		"remove": "Supprimer la transaction",
+		"spentPerDay": "dépensé/jour",
+		"spentPerMonth": "dépensé/mois",
+		"title": "Transactions"
+	}
+}
