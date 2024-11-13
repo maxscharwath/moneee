@@ -1,0 +1,19 @@
+{
+	"name": "cron",
+	"version": "1.0.0",
+	"description": "Cron job generator",
+	"main": "src/index.ts",
+	"scripts": {},
+	"keywords": [],
+	"type": "module",
+	"author": {
+		"name": "Maxime Scharwath",
+		"email": "maxime@scharwath.ch",
+		"url": "https://maxime.scharwath.ch"
+	},
+	"license": "MIT",
+	"devDependencies": {
+		"tsconfig": "workspace:*",
+		"vitest": "^2.1.4"
+	}
+}

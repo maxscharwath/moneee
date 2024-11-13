@@ -1,8 +1,8 @@
-import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
-import type { Category } from '@/stores/schemas/category'
-import * as ToggleGroup from '@radix-ui/react-toggle-group'
-import { memo } from 'react'
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import type { Category } from "@/stores/schemas/category";
+import * as ToggleGroup from "@radix-ui/react-toggle-group";
+import { memo } from "react";
 
 type CategoryChartProps = {
 	data: Array<{

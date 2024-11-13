@@ -1,5 +1,4 @@
-// Helper function to parse CronValue into an array of valid numbers
-import type { CronExpression, CronValue } from '@/packages/cron/types'
+import type { CronExpression, CronValue } from "./types";
 
 type ValidValues = {
 	minute: number[];

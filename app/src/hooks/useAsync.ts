@@ -1,5 +1,5 @@
-import type * as React from 'react'
-import { useEffect, useState } from 'react'
+import type * as React from "react";
+import { useEffect, useState } from "react";
 
 export function useAsync<T>(
 	fn: () => Promise<T>,

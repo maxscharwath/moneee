@@ -1,13 +1,13 @@
 import type {
 	CronValue,
-	NumberValue,
-	WildcardValue,
-	StepValue,
-	StepFromValue,
-	RangeValue,
 	ListValue,
+	NumberValue,
+	RangeValue,
+	StepFromValue,
+	StepValue,
+	WildcardValue,
 } from "./types";
-import { validateCronValue, mapAlias } from "./validator";
+import { mapAlias, validateCronValue } from "./validator";
 
 function parseNumber(value: string, min: number, max: number): NumberValue {
 	const num = validateCronValue(mapAlias(value), min, max);

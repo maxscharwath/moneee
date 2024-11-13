@@ -4,7 +4,7 @@ import {
 	type RxCollectionCreator,
 	type RxDatabase,
 	createRxDatabase,
-} from 'rxdb'
+} from "rxdb";
 
 export const lazyInitialize = <A extends unknown[], R>(
 	fn: (...args: A) => R,

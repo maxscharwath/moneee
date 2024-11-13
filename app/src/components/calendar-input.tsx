@@ -1,11 +1,11 @@
-import { Spacing } from '@/components/spacing'
-import { Button } from '@/components/ui/button'
-import { Calendar } from '@/components/ui/calendar'
-import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer'
-import { useDelayFunction } from '@/hooks/useDelayFunction'
-import { useLocale } from '@/i18n'
-import { CalendarIcon } from 'lucide-react'
-import { useState } from 'react'
+import { Spacing } from "@/components/spacing";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
+import { useDelayFunction } from "@/hooks/useDelayFunction";
+import { useLocale } from "@/i18n";
+import { CalendarIcon } from "lucide-react";
+import { useState } from "react";
 
 type CalendarInputProps = {
 	date: Date;

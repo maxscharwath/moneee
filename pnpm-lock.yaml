@@ -63,6 +63,9 @@ importers:
       '@vercel/edge':
         specifier: ^1.1.2
         version: 1.1.2
+      cron:
+        specifier: workspace:*
+        version: link:../packages/cron
       date-fns:
         specifier: ^3.0.6
         version: 3.6.0
@@ -190,6 +193,15 @@ importers:
       workbox-window:
         specifier: ^7.3.0
         version: 7.3.0
+
+  packages/cron:
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+      vitest:
+        specifier: ^2.1.4
+        version: 2.1.5(@types/node@22.9.0)(sass@1.80.7)(terser@5.36.0)
 
   packages/tsconfig: {}
 

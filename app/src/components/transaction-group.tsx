@@ -1,14 +1,14 @@
-import { Currency } from '@/components/currency'
-import { TransactionItem } from '@/components/transaction-item'
-import { Button } from '@/components/ui/button'
-import * as LongPressDialog from '@/components/ui/longpress-dialog'
-import { Separator } from '@/components/ui/separator'
-import { useLocale } from '@/i18n'
-import { useLayout } from '@/routes/Layout'
-import type { Category } from '@/stores/schemas/category'
-import type { Transaction } from '@/stores/schemas/transaction'
-import { Trash2Icon } from 'lucide-react'
-import { memo, useCallback, useMemo } from 'react'
+import { Currency } from "@/components/currency";
+import { TransactionItem } from "@/components/transaction-item";
+import { Button } from "@/components/ui/button";
+import * as LongPressDialog from "@/components/ui/longpress-dialog";
+import { Separator } from "@/components/ui/separator";
+import { useLocale } from "@/i18n";
+import { useLayout } from "@/routes/Layout";
+import type { Category } from "@/stores/schemas/category";
+import type { Transaction } from "@/stores/schemas/transaction";
+import { Trash2Icon } from "lucide-react";
+import { memo, useCallback, useMemo } from "react";
 
 type TransactionGroupProps = {
 	date: string;

@@ -1,8 +1,8 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from "tailwindcss";
 
-import tailwindcssAnimate from 'tailwindcss-animate'
+import tailwindcssAnimate from "tailwindcss-animate";
 
-import tailwindcssSafeArea from 'tailwindcss-safe-area'
+import tailwindcssSafeArea from "tailwindcss-safe-area";
 
 export default {
 	darkMode: ["class"],

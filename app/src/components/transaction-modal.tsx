@@ -1,21 +1,27 @@
-import { CalendarInput } from '@/components/calendar-input'
-import { CategorySelect } from '@/components/category-select'
-import { Header } from '@/components/header'
-import { NumericButton } from '@/components/numeric-button'
-import { RecurrenceSelect, type RecurrenceType, } from '@/components/recurrence-select'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import * as TabsGroup from '@/components/ui/tabs-group'
-import { useCategories } from '@/hooks/useCategory'
-import { useLocale } from '@/i18n'
-import { cronToRecurrenceType, generateCronExpression, } from '@/lib/recurrentUtils'
-import { type Optional, parseNumberFromString } from '@/lib/utils'
-import type { Recurrence } from '@/stores/schemas/recurrence'
-import type { Transaction } from '@/stores/schemas/transaction'
-import type { DialogProps } from '@radix-ui/react-dialog'
-import * as Dialog from '@radix-ui/react-dialog'
-import { Check, Delete, ScrollText, XIcon } from 'lucide-react'
-import React, { useCallback, useEffect, useMemo } from 'react'
+import { CalendarInput } from "@/components/calendar-input";
+import { CategorySelect } from "@/components/category-select";
+import { Header } from "@/components/header";
+import { NumericButton } from "@/components/numeric-button";
+import {
+	RecurrenceSelect,
+	type RecurrenceType,
+} from "@/components/recurrence-select";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import * as TabsGroup from "@/components/ui/tabs-group";
+import { useCategories } from "@/hooks/useCategory";
+import { useLocale } from "@/i18n";
+import {
+	cronToRecurrenceType,
+	generateCronExpression,
+} from "@/lib/recurrentUtils";
+import { type Optional, parseNumberFromString } from "@/lib/utils";
+import type { Recurrence } from "@/stores/schemas/recurrence";
+import type { Transaction } from "@/stores/schemas/transaction";
+import type { DialogProps } from "@radix-ui/react-dialog";
+import * as Dialog from "@radix-ui/react-dialog";
+import { Check, Delete, ScrollText, XIcon } from "lucide-react";
+import React, { useCallback, useEffect, useMemo } from "react";
 
 type TransactionModalProps = Readonly<{
 	transaction?: Transaction;

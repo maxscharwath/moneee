@@ -1,4 +1,4 @@
-import { ALIAS_MAP, type AliasMap } from './types'
+import { ALIAS_MAP, type AliasMap } from "./types";
 
 export function validateCronValue(
 	part: string,

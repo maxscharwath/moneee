@@ -1,4 +1,4 @@
-import type { CronExpression, CronValue } from "@/packages/cron/types";
+import type { CronExpression, CronValue } from "./types";
 
 const formatValue = (value: CronValue) => {
 	switch (value.type) {

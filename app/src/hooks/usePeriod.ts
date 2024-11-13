@@ -1,5 +1,5 @@
-import { useLocale } from '@/i18n'
-import { useMemo, useState } from 'react'
+import { useLocale } from "@/i18n";
+import { useMemo, useState } from "react";
 
 export type PeriodType = "weekly" | "monthly" | "yearly";
 

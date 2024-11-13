@@ -1,8 +1,13 @@
-import { Drawer, DrawerContent, DrawerHeader, DrawerTrigger, } from '@/components/ui/drawer'
-import { Separator } from '@/components/ui/separator'
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
-import { useAsync } from '@/hooks/useAsync'
-import { lazyInitialize } from '@/stores/utils/createDatabase'
+import {
+	Drawer,
+	DrawerContent,
+	DrawerHeader,
+	DrawerTrigger,
+} from "@/components/ui/drawer";
+import { Separator } from "@/components/ui/separator";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { useAsync } from "@/hooks/useAsync";
+import { lazyInitialize } from "@/stores/utils/createDatabase";
 import {
 	CarIcon,
 	FlagIcon,
@@ -13,8 +18,8 @@ import {
 	ShirtIcon,
 	SmileIcon,
 	SmilePlusIcon,
-} from 'lucide-react'
-import React, { useMemo } from 'react'
+} from "lucide-react";
+import React, { useMemo } from "react";
 
 type EmojiPickerProps = {
 	selectedEmoji?: string;
