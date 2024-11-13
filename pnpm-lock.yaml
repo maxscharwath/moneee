@@ -203,6 +203,25 @@ importers:
         specifier: ^2.1.4
         version: 2.1.5(@types/node@22.9.0)(sass@1.80.7)(terser@5.36.0)
 
+  packages/crypto:
+    dependencies:
+      '@describble/base-x':
+        specifier: ^1.0.1
+        version: 1.0.1
+      '@noble/hashes':
+        specifier: ^1.5.0
+        version: 1.5.0
+      '@noble/secp256k1':
+        specifier: ^2.1.0
+        version: 2.1.0
+    devDependencies:
+      tsconfig:
+        specifier: workspace:*
+        version: link:../tsconfig
+      vitest:
+        specifier: ^2.1.4
+        version: 2.1.5(@types/node@22.9.0)(sass@1.80.7)(terser@5.36.0)
+
   packages/tsconfig: {}
 
 packages:
@@ -917,6 +936,10 @@ packages:
   '@changesets/write@0.3.2':
     resolution: {integrity: sha512-kDxDrPNpUgsjDbWBvUo27PzKX4gqeKOlhibaOXDJA6kuBisGqNHv/HwGJrAu8U/dSf8ZEFIeHIPtvSlZI1kULw==}
 
+  '@describble/base-x@1.0.1':
+    resolution: {integrity: sha512-TwAUMBsGpPU/O83rVjyj/syALi5q9qArIa2xx6Ma1mtUSb8NyaW6fW+aiKjyKeW49PRmNYv1Q+f+31kdclFxOQ==}
+    engines: {node: '>=19.0.0', pnpm: '>=7.0.0'}
+
   '@esbuild/aix-ppc64@0.21.5':
     resolution: {integrity: sha512-1SDgH6ZSPTlggy1yI6+Dbkiz8xzpHJEVAlF/AM1tHPLsf5STom9rwtjE4hKAF20FfXXNTFqEYXyJNWh1GiZedQ==}
     engines: {node: '>=12'}
@@ -1396,6 +1419,13 @@ packages:
 
   '@mongodb-js/saslprep@1.1.9':
     resolution: {integrity: sha512-tVkljjeEaAhCqTzajSdgbQ6gE6f3oneVwa3iXR6csiEwXXOFsiC6Uh9iAjAhXPtqa/XMDHWjjeNH/77m/Yq2dw==}
+
+  '@noble/hashes@1.5.0':
+    resolution: {integrity: sha512-1j6kQFb7QRru7eKN3ZDvRcP13rugwdxZqCjbiAVZfIJwgj2A65UmT4TgARXGlXgnRkORLTDTrO19ZErt7+QXgA==}
+    engines: {node: ^14.21.3 || >=16}
+
+  '@noble/secp256k1@2.1.0':
+    resolution: {integrity: sha512-XLEQQNdablO0XZOIniFQimiXsZDNwaYgL96dZwC54Q30imSbAOFf3NKtepc+cXyuZf5Q1HCgbqgZ2UFFuHVcEw==}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -7752,6 +7782,8 @@ snapshots:
       human-id: 1.0.2
       prettier: 2.8.8
 
+  '@describble/base-x@1.0.1': {}
+
   '@esbuild/aix-ppc64@0.21.5':
     optional: true
 
@@ -8389,6 +8421,10 @@ snapshots:
   '@mongodb-js/saslprep@1.1.9':
     dependencies:
       sparse-bitfield: 3.0.3
+
+  '@noble/hashes@1.5.0': {}
+
+  '@noble/secp256k1@2.1.0': {}
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
