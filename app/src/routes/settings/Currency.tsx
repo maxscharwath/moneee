@@ -1,14 +1,14 @@
-import { Header, HeaderTitle } from "@/components/header";
-import { useTranslation } from "react-i18next";
-import * as List from "@/components/ui/list";
-import { CheckIcon, ChevronLeft } from "lucide-react";
-import * as RadioGroup from "@radix-ui/react-radio-group";
-import { NavLink } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Container } from "@/components/container";
-import { useAsync } from "@/hooks/useAsync";
-import { useMemo } from "react";
-import { useSettings } from "@/hooks/useSettings";
+import { Container } from '@/components/container'
+import { Header, HeaderTitle } from '@/components/header'
+import { Button } from '@/components/ui/button'
+import * as List from '@/components/ui/list'
+import { useAsync } from '@/hooks/useAsync'
+import { useSettings } from '@/hooks/useSettings'
+import * as RadioGroup from '@radix-ui/react-radio-group'
+import { CheckIcon, ChevronLeft } from 'lucide-react'
+import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
+import { NavLink } from 'react-router-dom'
 
 type Currency = {
 	code: string;
@@ -41,14 +41,14 @@ export function Component() {
 		setSettings({ currency });
 	};
 
-	const languageSet = useMemo(() => new Set(navigator.languages), []);
 	const suggestedCurrencies = useMemo(() => {
+		const languageSet = new Set(navigator.languages);
 		return (
 			data?.filter(({ locales }) =>
 				locales.some((locale) => languageSet.has(locale)),
 			) ?? []
 		);
-	}, [data, languageSet]);
+	}, [data]);
 
 	const remainingCurrencies = useMemo(() => {
 		return (

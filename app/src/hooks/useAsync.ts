@@ -1,10 +1,11 @@
-import type * as React from "react";
-import { useEffect, useState } from "react";
+import type * as React from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export function useAsync<T>(
 	fn: () => Promise<T>,
 	deps: React.DependencyList = [],
 ) {
+	const fnRef = useRef(fn);
 	const [state, setState] = useState<{
 		status: "idle" | "pending" | "success" | "error";
 		data: T | null;
@@ -16,12 +17,8 @@ export function useAsync<T>(
 	});
 
 	useEffect(() => {
-		setState({
-			status: "pending",
-			data: null,
-			error: null,
-		});
-		fn().then(
+		setState({ status: "pending", data: null, error: null });
+		fnRef.current().then(
 			(data) =>
 				setState({
 					status: "success",
@@ -35,7 +32,7 @@ export function useAsync<T>(
 					error,
 				}),
 		);
-	}, [...deps, fn]);
+	}, deps);
 
 	return state;
 }
