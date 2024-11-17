@@ -1,0 +1,284 @@
+about:
+  author: 著者
+  buildDate: ビルド日
+  buildHash: ビルド
+  details: アプリの詳細
+  license: ライセンス
+  repo: ソースコード
+  reportBug: バグを報告
+  title: アプリについて
+  version: バージョン
+categories:
+  allowance: 手当
+  clothing: 衣類
+  dining_out: 外食
+  entertainment: 娯楽
+  freelancing: フリーランス
+  gifts: 贈り物
+  groceries: 食料品
+  healthcare: 医療
+  insurance: 保険
+  internet: インターネット
+  investment: 投資
+  money_transfer: 送金
+  other_income: その他の収入
+  part_time_job: アルバイト
+  phone: 電話
+  rent: 家賃
+  salary: 給料
+  savings: 貯金
+  tips: チップ
+  transportation: 交通
+  utilities: 光熱費
+category:
+  create: カテゴリを作成
+  name: カテゴリ名
+  select: カテゴリを選択
+date:
+  today: 今日
+insights:
+  title: インサイト
+period:
+  monthly: 毎月
+  placeholder: 期間を選択
+  weekly: 毎週
+  yearly: 毎年
+recurrence:
+  custom: カスタム
+  daily: 毎日
+  monthly: 毎月
+  none: なし
+  weekly: 毎週
+  yearly: 毎年
+recurrences:
+  noRecurrences:
+    description: 現在、設定されている定期的な取引はありません。追加して開始してください。
+    title: 定期的な取引なし
+settings:
+  build: 'ビルド: {{build}}'
+  cache:
+    newVersionAvailable: 新しいバージョンが利用可能です
+    upToDate: 最新です
+  category:
+    suggested: 推奨カテゴリ
+  currency:
+    suggested: 推奨通貨
+    title: 通貨
+  language:
+    title: 言語
+  root:
+    about: アプリについて
+    appearance: 外観
+    categories: カテゴリ
+    currency: 通貨
+    data: データ
+    erase:
+      alert:
+        cancel: キャンセル
+        confirm: 削除
+        description: この操作は元に戻せません。これにより、取引が永久に削除され、アプリからデータが削除されます。
+        title: 本当に実行してよろしいですか？
+      title: データを削除
+    export: データをエクスポート
+    general: 一般
+    import: データをインポート
+    language: 言語
+    recurrences: 定期的な取引
+    refreshCache: キャッシュを更新
+    synchronisation: 同期
+    title: 設定
+  synchronisation:
+    authenticate: 認証
+    authenticateWithDevice: デバイスで認証
+    login: ログイン
+    loginWithDevice: デバイスでログイン
+    register: 登録
+    title: 同期
+  version: 'バージョン: {{version}}'
+transaction:
+  add_note: メモを追加
+  averagePerDay: 平均/日
+  averagePerMonth: 平均/月
+  balance: 残高
+  expense: 支出
+  income: 収入
+  incomePerDay: 収入/日
+  incomePerMonth: 収入/月
+  noTransactions:
+    description: この期間の取引はありません。
+    title: 取引なし
+  remove: 取引を削除
+  spentPerDay: 支出/日
+  spentPerMonth: 支出/月
+  title: 取引
+languages:
+  en: 英語
+  fr-FR: フランス語
+  fr-CH: フランス語（スイス）
+  de: ドイツ語
+  de-CH: ドイツ語（スイス）
+  es: スペイン語
+  it: イタリア語
+  it-CH: イタリア語（スイス）
+  vi: ベトナム語
+  ja: 日本語
+  zh-CN: 簡体字中国語
+  pirate: 海賊語
+  cimode: デバッグ
+currencies:
+  AED: アラブ首長国連邦ディルハム
+  AFN: アフガニスタン アフガニー
+  ALL: アルバニア レク
+  AMD: アルメニア ドラム
+  ANG: オランダ領アンティル ギルダー
+  AOA: アンゴラ クワンザ
+  ARS: アルゼンチン ペソ
+  AUD: オーストラリア ドル
+  AWG: アルバ フロリン
+  AZN: アゼルバイジャン マナト
+  BAM: ボスニア・ヘルツェゴビナ 兌換マルク
+  BBD: バルバドス ドル
+  BDT: バングラデシュ タカ
+  BGN: ブルガリア 新レフ
+  BHD: バーレーン ディナール
+  BIF: ブルンジ フラン
+  BMD: バミューダ ドル
+  BND: ブルネイ ドル
+  BOB: ボリビア ボリビアーノ
+  BRL: ブラジル レアル
+  BSD: バハマ ドル
+  BTN: ブータン ニュルタム
+  BWP: ボツワナ プラ
+  BYR: ベラルーシ ルーブル
+  BZD: ベリーズ ドル
+  CAD: カナダ ドル
+  CDF: コンゴ フラン
+  CHF: スイス フラン
+  CLP: チリ ペソ
+  CNY: 中国人民元
+  COP: コロンビア ペソ
+  CRC: コスタリカ コロン
+  CUC: キューバ 兌換ペソ
+  CVE: カーボベルデ エスクード
+  CZK: チェコ コルナ
+  DJF: ジブチ フラン
+  DKK: デンマーク クローネ
+  DOP: ドミニカ ペソ
+  DZD: アルジェリア ディナール
+  EEK: エストニア クルーン
+  EGP: エジプト ポンド
+  ERN: エリトリア ナクファ
+  ETB: エチオピア ブル
+  EUR: ユーロ
+  FJD: フィジー ドル
+  FKP: フォークランド（マルビナス）諸島 ポンド
+  GBP: 英国ポンド
+  GEL: ジョージア ラリ
+  GHS: ガーナ セディ
+  GIP: ジブラルタル ポンド
+  GMD: ガンビア ダラシ
+  GNF: ギニア フラン
+  GQE: 赤道ギニア エクウェレ
+  GTQ: グアテマラ ケツァル
+  GYD: ガイアナ ドル
+  HKD: 香港ドル
+  HNL: ホンジュラス レンピラ
+  HRK: クロアチア クーナ
+  HTG: ハイチ グールド
+  HUF: ハンガリー フォリント
+  IDR: インドネシア ルピア
+  ILS: イスラエル新シェケル
+  INR: インド ルピー
+  IQD: イラク ディナール
+  IRR: イラン リアル
+  ISK: アイスランド クローナ
+  JMD: ジャマイカ ドル
+  JOD: ヨルダン ディナール
+  JPY: 日本円
+  KES: ケニア シリング
+  KGS: キルギス ソム
+  KHR: カンボジア リエル
+  KMF: コモロ フラン
+  KPW: 北朝鮮ウォン
+  KRW: 韓国ウォン
+  KWD: クウェート ディナール
+  KYD: ケイマン諸島 ドル
+  KZT: カザフスタン テンゲ
+  LAK: ラオス キープ
+  LBP: レバノン ポンド
+  LKR: スリランカ ルピー
+  LRD: リベリア ドル
+  LSL: レソト ロティ
+  LTL: リトアニア リタス
+  LVL: ラトビア ラッツ
+  LYD: リビア ディナール
+  MAD: モロッコ ディルハム
+  MDL: モルドバ レイ
+  MGA: マダガスカル アリアリ
+  MKD: マケドニア デナル
+  MMK: ミャンマー チャット
+  MNT: モンゴル トグログ
+  MOP: マカオ パタカ
+  MRO: モーリタニア ウギア
+  MUR: モーリシャス ルピー
+  MVR: モルディブ ルフィア
+  MWK: マラウィ クワチャ
+  MXN: メキシコ ペソ
+  MYR: マレーシア リンギット
+  MZM: モザンビーク メティカル
+  NAD: ナミビア ドル
+  NGN: ナイジェリア ナイラ
+  NIO: ニカラグア コルドバ オロ
+  NOK: ノルウェー クローネ
+  NPR: ネパール ルピー
+  NZD: ニュージーランド ドル
+  OMR: オマーン リアル
+  PAB: パナマ バルボア
+  PEN: ペルー ソル
+  PGK: パプアニューギニア キナ
+  PHP: フィリピン ペソ
+  PKR: パキスタン ルピー
+  PLN: ポーランド ズウォティ
+  PYG: パラグアイ グアラニ
+  QAR: カタール リアル
+  RON: ルーマニア レイ
+  RSD: ディナール (セルビア)
+  RUB: ロシア ルーブル
+  SAR: サウジ リヤル
+  SBD: ソロモン諸島 ドル
+  SCR: セーシェル ルピー
+  SDG: スーダン ポンド
+  SEK: スウェーデン クローナ
+  SGD: シンガポール ドル
+  SHP: セントヘレナ ポンド
+  SLL: シエラレオネ レオン
+  SOS: ソマリア シリング
+  SRD: スリナム ドル
+  SYP: シリア ポンド
+  SZL: スワジランド リランゲニ
+  THB: タイ バーツ
+  TJS: タジキスタン ソモニ
+  TMT: トルクメニスタン マナト
+  TND: チュニジア ディナール
+  TRY: トルコ リラ
+  TTD: トリニダード・トバゴ ドル
+  TWD: 新台湾ドル
+  TZS: タンザニア シリング
+  UAH: ウクライナ グリブナ
+  UGX: ウガンダ シリング
+  USD: 米ドル
+  UYU: ウルグアイ ペソ
+  UZS: ウズベキスタン スム
+  VEB: ベネズエラ ボリバル
+  VND: ベトナム ドン
+  VUV: バヌアツ バツ
+  WST: サモア タラ
+  XAF: 中央アフリカ CFA フラン
+  XCD: 東カリブ ドル
+  XDR: 特別引き出し権
+  XOF: 西アフリカ CFA フラン
+  XPF: CFP フラン
+  YER: イエメン リアル
+  ZAR: 南アフリカ ランド
+  ZMK: ザンビア クワチャ
+  ZWR: シンバブエ ドル

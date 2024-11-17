@@ -1,7 +1,17 @@
 import { useRegisterSW } from "virtual:pwa-register/react";
+import { Container } from "@/components/container";
 import { Header, HeaderTitle } from "@/components/header";
-import { initializeDb } from "@/stores/db";
+import { SettingItem } from "@/components/settings-item";
 import * as List from "@/components/ui/list";
+import * as TabsGroup from "@/components/ui/tabs-group";
+import { useSettings } from "@/hooks/useSettings";
+import { useLocale } from "@/i18n";
+import { exportToCsv } from "@/lib/exportTransactions";
+import { initializeDb } from "@/stores/db";
+import { CategorySchema } from "@/stores/schemas/category";
+import { TransactionSchema } from "@/stores/schemas/transaction";
+import { abbreviatedSha } from "@build/info";
+import { version } from "@build/package";
 import {
 	CloudIcon,
 	CoinsIcon,
@@ -18,16 +28,6 @@ import {
 	Trash2Icon,
 	UploadIcon,
 } from "lucide-react";
-import { abbreviatedSha } from "@build/info";
-import { version } from "@build/package";
-import { TransactionSchema } from "@/stores/schemas/transaction";
-import { CategorySchema } from "@/stores/schemas/category";
-import { useLocale } from "@/i18n";
-import * as TabsGroup from "@/components/ui/tabs-group";
-import { Container } from "@/components/container";
-import { SettingItem } from "@/components/settings-item";
-import { exportToCsv } from "@/lib/exportTransactions";
-import { useSettings } from "@/hooks/useSettings";
 import { NavLink } from "react-router-dom";
 
 export function Component() {
@@ -89,7 +89,11 @@ export function Component() {
 								color="#5a96ee"
 								title={t("settings.root.language")}
 								href="/settings/language"
-								value={`${language?.icon} ${language?.name}`}
+								value={
+									<>
+										{language?.icon} {t(`languages.${language?.code}`)}
+									</>
+								}
 								chevron
 							/>
 

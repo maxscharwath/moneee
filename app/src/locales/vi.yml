@@ -1,0 +1,286 @@
+about:
+  author: Tác giả
+  buildDate: Ngày xây dựng
+  buildHash: Bản dựng
+  details: Chi tiết ứng dụng
+  license: Giấy phép
+  repo: Mã nguồn
+  reportBug: Báo cáo lỗi
+  title: Giới thiệu
+  version: Phiên bản
+categories:
+  allowance: Trợ cấp
+  clothing: Quần áo
+  dining_out: Ăn ngoài
+  entertainment: Giải trí
+  freelancing: Làm tự do
+  gifts: Quà tặng
+  groceries: Hàng tạp hóa
+  healthcare: Chăm sóc sức khỏe
+  insurance: Bảo hiểm
+  internet: Internet
+  investment: Đầu tư
+  money_transfer: Chuyển tiền
+  other_income: Thu nhập khác
+  part_time_job: Việc làm thêm
+  phone: Điện thoại
+  rent: Tiền thuê nhà
+  salary: Lương
+  savings: Tiết kiệm
+  tips: Tiền boa
+  transportation: Giao thông
+  utilities: Tiện ích
+category:
+  create: Tạo danh mục
+  name: Tên danh mục
+  select: Danh mục
+date:
+  today: Hôm nay
+insights:
+  title: Thống kê
+period:
+  monthly: Hàng tháng
+  placeholder: Chọn giai đoạn
+  weekly: Hàng tuần
+  yearly: Hàng năm
+recurrence:
+  custom: Tùy chỉnh
+  daily: Hàng ngày
+  monthly: Hàng tháng
+  none: Không
+  weekly: Hàng tuần
+  yearly: Hàng năm
+recurrences:
+  noRecurrences:
+    description: Hiện tại bạn chưa thiết lập giao dịch định kỳ nào. Thêm một giao
+      dịch để bắt đầu.
+    title: Không có giao dịch định kỳ
+settings:
+  build: 'Bản dựng: {{build}}'
+  cache:
+    newVersionAvailable: Có phiên bản mới
+    upToDate: Đã cập nhật
+  category:
+    suggested: Danh mục gợi ý
+  currency:
+    suggested: Tiền tệ gợi ý
+    title: Tiền tệ
+  language:
+    title: Ngôn ngữ
+  root:
+    about: Giới thiệu
+    appearance: Giao diện
+    categories: Danh mục
+    currency: Tiền tệ
+    data: Dữ liệu
+    erase:
+      alert:
+        cancel: Hủy
+        confirm: Xóa
+        description: Hành động này không thể hoàn tác. Điều này sẽ xóa vĩnh viễn các
+          giao dịch của bạn và xóa dữ liệu khỏi ứng dụng.
+        title: Bạn có chắc chắn không?
+      title: Xóa dữ liệu
+    export: Xuất dữ liệu
+    general: Chung
+    import: Nhập dữ liệu
+    language: Ngôn ngữ
+    recurrences: Định kỳ
+    refreshCache: Làm mới bộ nhớ đệm
+    synchronisation: Đồng bộ hóa
+    title: Cài đặt
+  synchronisation:
+    authenticate: Xác thực
+    authenticateWithDevice: Xác thực với thiết bị của bạn
+    login: Đăng nhập
+    loginWithDevice: Đăng nhập với thiết bị của bạn
+    register: Đăng ký
+    title: Đồng bộ hóa
+  version: 'Phiên bản: {{version}}'
+transaction:
+  add_note: Thêm ghi chú
+  averagePerDay: trung bình/ngày
+  averagePerMonth: trung bình/tháng
+  balance: Số dư
+  expense: Chi tiêu
+  income: Thu nhập
+  incomePerDay: thu nhập/ngày
+  incomePerMonth: thu nhập/tháng
+  noTransactions:
+    description: Bạn không có giao dịch nào trong giai đoạn này.
+    title: Không có giao dịch
+  remove: Xóa giao dịch
+  spentPerDay: đã chi/ngày
+  spentPerMonth: đã chi/tháng
+  title: Giao dịch
+languages:
+  en: Tiếng Anh
+  fr-FR: Tiếng Pháp
+  fr-CH: Tiếng Pháp (Thụy Sĩ)
+  de: Tiếng Đức
+  de-CH: Tiếng Đức (Thụy Sĩ)
+  es: Tiếng Tây Ban Nha
+  it: Tiếng Ý
+  it-CH: Tiếng Ý (Thụy Sĩ)
+  vi: Tiếng Việt
+  ja: Tiếng Nhật
+  zh-CN: Tiếng Trung giản thể
+  pirate: Ngôn ngữ Cướp biển
+  cimode: Gỡ lỗi
+currencies:
+  AED: Dirham UAE
+  AFN: Afghani Afghanistan
+  ALL: Lek Albania
+  AMD: Dram Armenia
+  ANG: Guilder Antille Hà Lan
+  AOA: Kwanza Angola
+  ARS: Peso Argentina
+  AUD: Đô la Australia
+  AWG: Florin Aruba
+  AZN: Manat Azerbaijan
+  BAM: Mark Bosnia-Herzegovina có thể chuyển đổi
+  BBD: Đô la Barbados
+  BDT: Taka Bangladesh
+  BGN: Lev Bulgaria
+  BHD: Dinar Bahrain
+  BIF: Franc Burundi
+  BMD: Đô la Bermuda
+  BND: Đô la Brunei
+  BOB: Boliviano Bolivia
+  BRL: Real Braxin
+  BSD: Đô la Bahamas
+  BTN: Ngultrum Bhutan
+  BWP: Pula Botswana
+  BYR: Rúp Belarus
+  BZD: Đô la Belize
+  CAD: Đô la Canada
+  CDF: Franc Congo
+  CHF: Franc Thụy sĩ
+  CLP: Peso Chile
+  CNY: Nhân dân tệ
+  COP: Peso Colombia
+  CRC: Colón Costa Rica
+  CUC: Peso Cuba có thể chuyển đổi
+  CVE: Escudo Cape Verde
+  CZK: Koruna Cộng hòa Séc
+  DJF: Franc Djibouti
+  DKK: Krone Đan Mạch
+  DOP: Peso Dominica
+  DZD: Dinar Algeria
+  EEK: Crun Extônia
+  EGP: Bảng Ai Cập
+  ERN: Nakfa Eritrea
+  ETB: Birr Ethiopia
+  EUR: Euro
+  FJD: Đô la Fiji
+  FKP: Bảng Quần đảo Falkland
+  GBP: Bảng Anh
+  GEL: Lari Georgia
+  GHS: Cedi Ghana
+  GIP: Bảng Gibraltar
+  GMD: Dalasi Gambia
+  GNF: Franc Guinea
+  GQE: Đồng Ekwele của Guinea Xích Đạo
+  GTQ: Quetzal Guatemala
+  GYD: Đô la Guyana
+  HKD: Đô la Hồng Kông
+  HNL: Lempira Honduras
+  HRK: Kuna Croatia
+  HTG: Gourde Haiti
+  HUF: Forint Hungary
+  IDR: Rupiah Indonesia
+  ILS: Sheqel Israel mới
+  INR: Rupee Ấn Độ
+  IQD: Dinar Iraq
+  IRR: Rial Iran
+  ISK: Króna Iceland
+  JMD: Đô la Jamaica
+  JOD: Dinar Jordan
+  JPY: Yên Nhật
+  KES: Shilling Kenya
+  KGS: Som Kyrgyzstan
+  KHR: Riel Campuchia
+  KMF: Franc Comoros
+  KPW: Won Triều Tiên
+  KRW: Won Hàn Quốc
+  KWD: Dinar Kuwait
+  KYD: Đô la Quần đảo Cayman
+  KZT: Tenge Kazakhstan
+  LAK: Kip Lào
+  LBP: Bảng Li-băng
+  LKR: Rupee Sri Lanka
+  LRD: Đô la Liberia
+  LSL: Loti Lesotho
+  LTL: Litas Lít-va
+  LVL: Lats Latvia
+  LYD: Dinar Libi
+  MAD: Dirham Ma-rốc
+  MDL: Leu Moldova
+  MGA: Ariary Madagascar
+  MKD: Denar Macedonia
+  MMK: Kyat Myanma
+  MNT: Tugrik Mông Cổ
+  MOP: Pataca Ma Cao
+  MRO: Ouguiya Mauritaniar
+  MUR: Rupee Mauritius
+  MVR: Rufiyaa Maldives
+  MWK: Kwacha Malawi
+  MXN: Peso Mexico
+  MYR: Ringgit Malaysia
+  MZM: Đồng Metical Mozambique
+  NAD: Đô la Namibia
+  NGN: Naira Nigeria
+  NIO: Córdoba Nicaragua
+  NOK: Krone Na Uy
+  NPR: Rupee Nepal
+  NZD: Đô la New Zealand
+  OMR: Rial Oman
+  PAB: Balboa Panama
+  PEN: Sol Peru
+  PGK: Kina Papua New Guinea
+  PHP: Peso Philipin
+  PKR: Rupee Pakistan
+  PLN: Zloty Ba Lan
+  PYG: Guarani Paraguay
+  QAR: Rial Qatar
+  RON: Leu Romania
+  RSD: Dinar Serbia
+  RUB: Rúp Nga
+  SAR: Riyal Ả Rập Xê-út
+  SBD: Đô la quần đảo Solomon
+  SCR: Rupee Seychelles
+  SDG: Bảng Sudan
+  SEK: Krona Thụy Điển
+  SGD: Đô la Singapore
+  SHP: Bảng St. Helena
+  SLL: Leone Sierra Leone
+  SOS: Shilling Somali
+  SRD: Đô la Suriname
+  SYP: Bảng Syria
+  SZL: Lilangeni Swaziland
+  THB: Bạt Thái Lan
+  TJS: Somoni Tajikistan
+  TMT: Manat Turkmenistan
+  TND: Dinar Tunisia
+  TRY: Lia Thổ Nhĩ Kỳ
+  TTD: Đô la Trinidad và Tobago
+  TWD: Đô la Đài Loan mới
+  TZS: Shilling Tanzania
+  UAH: Hryvnia Ukraina
+  UGX: Shilling Uganda
+  USD: Đô la Mỹ
+  UYU: Peso Uruguay
+  UZS: Som Uzbekistan
+  VEB: Đồng bolívar của Venezuela
+  VND: Đồng Việt Nam
+  VUV: Vatu Vanuatu
+  WST: Tala Samoa
+  XAF: Franc CFA Trung Phi
+  XCD: Đô la Đông Caribê
+  XDR: Quyền Rút vốn Đặc biệt
+  XOF: Franc CFA Tây Phi
+  XPF: Franc CFP
+  YER: Rial Yemen
+  ZAR: Rand Nam Phi
+  ZMK: Đồng kwacha của Zambia
+  ZWR: Đồng Đô la Zimbabwe

@@ -1,13 +1,8 @@
-import {
-	Drawer,
-	DrawerContent,
-	DrawerHeader,
-	DrawerTrigger,
-} from "@/components/ui/drawer";
-import { Separator } from "@/components/ui/separator";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { useAsync } from "@/hooks/useAsync";
-import { lazyInitialize } from "@/stores/utils/createDatabase";
+import { Drawer, DrawerContent, DrawerHeader, DrawerTrigger, } from '@/components/ui/drawer'
+import { Separator } from '@/components/ui/separator'
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
+import { useAsync } from '@/hooks/useAsync'
+
 import {
 	CarIcon,
 	FlagIcon,
@@ -18,8 +13,8 @@ import {
 	ShirtIcon,
 	SmileIcon,
 	SmilePlusIcon,
-} from "lucide-react";
-import React, { useMemo } from "react";
+} from 'lucide-react'
+import React, { useMemo } from 'react'
 
 type EmojiPickerProps = {
 	selectedEmoji?: string;
@@ -75,15 +70,18 @@ const categories = [
 	},
 ] satisfies Category[];
 
-const initEmojis = lazyInitialize(
-	async () => (await import("@/assets/emoji.json")).default,
-);
+const initEmojis = async () =>
+	(await import("@/assets/emoji.yml")).default as Array<{
+		emoji: string;
+		description: string;
+		category: string;
+	}>;
 
 export const EmojiPicker = ({
 	selectedEmoji,
 	onEmojiSelect,
 }: EmojiPickerProps) => {
-	const { data } = useAsync(initEmojis);
+	const { data } = useAsync(initEmojis, []);
 
 	const [category, setCategory] = React.useState<string | undefined>();
 

@@ -118,6 +118,12 @@ importers:
         specifier: ^11.0.3
         version: 11.0.3
     devDependencies:
+      '@importable/yaml':
+        specifier: ^0.1.1
+        version: 0.1.1
+      '@modyfi/vite-plugin-yaml':
+        specifier: ^1.1.0
+        version: 1.1.0(rollup@2.79.2)(vite@5.4.11(@types/node@22.9.0)(sass@1.80.7)(terser@5.36.0))
       '@types/node':
         specifier: ^22.8.6
         version: 22.9.0
@@ -139,6 +145,9 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      importable:
+        specifier: ^0.1.0
+        version: 0.1.0(typescript@5.6.3)
       jest:
         specifier: ^29.6.2
         version: 29.7.0(@types/node@22.9.0)
@@ -1312,6 +1321,9 @@ packages:
     engines: {node: '>=6'}
     hasBin: true
 
+  '@importable/yaml@0.1.1':
+    resolution: {integrity: sha512-+sbB2yMJOFgNtTjK7HmjH3Q/desTEEeK4EpEOJq40JALA5fPHwz+hoa4qDZA+M409J11M1MTXzmRCaL8F47EZw==}
+
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
     engines: {node: '>=12'}
@@ -1416,6 +1428,11 @@ packages:
 
   '@manypkg/get-packages@1.1.3':
     resolution: {integrity: sha512-fo+QhuU3qE/2TQMQmbVMqaQ6EWbMhi4ABWP+O4AM1NqPBuy0OrApV5LO6BrrgnhtAHS2NH6RrVk9OL181tTi8A==}
+
+  '@modyfi/vite-plugin-yaml@1.1.0':
+    resolution: {integrity: sha512-L26xfzkSo1yamODCAtk/ipVlL6OEw2bcJ92zunyHu8zxi7+meV0zefA9xscRMDCsMY8xL3C3wi3DhMiPxcbxbw==}
+    peerDependencies:
+      vite: ^3.2.7 || ^4.0.5 || ^5.0.5
 
   '@mongodb-js/saslprep@1.1.9':
     resolution: {integrity: sha512-tVkljjeEaAhCqTzajSdgbQ6gE6f3oneVwa3iXR6csiEwXXOFsiC6Uh9iAjAhXPtqa/XMDHWjjeNH/77m/Yq2dw==}
@@ -2049,6 +2066,15 @@ packages:
     peerDependencies:
       rollup: ^1.20.0||^2.0.0
 
+  '@rollup/pluginutils@5.1.0':
+    resolution: {integrity: sha512-XTIWOPPcpvyKI6L1NHo0lFlCyznUEyPmPY1mc3KpPVDYulHSTvyeLNVW00QTLIAFNhR3kYnJTQHeGqU4M3n09g==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+
   '@rollup/pluginutils@5.1.3':
     resolution: {integrity: sha512-Pnsb6f32CD2W3uCaLZIzDmeFyQ2b8UWMFI7xtwUezpcGBDVDW6y9XgAWIlARiGAo6eNF5FK5aQTr0LFyNyqq5A==}
     engines: {node: '>=14.0.0'}
@@ -2531,6 +2557,9 @@ packages:
 
   argparse@1.0.10:
     resolution: {integrity: sha512-o5Roy6tNG4SL/FOkCAN6RzjiakZS25RLYFrcMttJqbdd8BWrnA+fGz57iN5Pb06pvBGvl5gQ0B48dJlslXvoTg==}
+
+  argparse@2.0.1:
+    resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
 
   aria-hidden@1.2.4:
     resolution: {integrity: sha512-y+CcFFwelSXpLZk/7fMB2mUbGtX9lKycf1MWJ7CaTIERyitVlyQx6C+sxcROU2BAJ24OiZyK+8wj2i8AlBoS3A==}
@@ -4081,6 +4110,11 @@ packages:
     engines: {node: '>=8'}
     hasBin: true
 
+  importable@0.1.0:
+    resolution: {integrity: sha512-KdtsjA+ifjamEgHOfR0CYI9VyIdIPalJwBPhkogSLqr6dsLlk/JgCbrfaITruZfc2V6wvBL1f/d2AWPOGuShlA==}
+    peerDependencies:
+      typescript: ^5
+
   imurmurhash@0.1.4:
     resolution: {integrity: sha512-JmXMZ6wuvDmLiHEml9ykzqO6lwFbof0GG4IkcGaENdCRDDmMVnny7s5HsIgHCbaq0w2MyPhDqkhTUgS2LU2PHA==}
     engines: {node: '>=0.8.19'}
@@ -4564,6 +4598,10 @@ packages:
 
   js-yaml@3.14.1:
     resolution: {integrity: sha512-okMH7OXXJ7YrN9Ok3/SXrnu4iX9yOk+25nqX4imS2npuvTYDmo/QEZoqwZkYaIDk3jVvBOTOIEgEhaLOynBS9g==}
+    hasBin: true
+
+  js-yaml@4.1.0:
+    resolution: {integrity: sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==}
     hasBin: true
 
   jsesc@3.0.2:
@@ -6259,6 +6297,10 @@ packages:
   to-through@2.0.0:
     resolution: {integrity: sha512-+QIz37Ly7acM4EMdw2PRN389OneM5+d844tirkGp4dPKzI5OE72V9OsbFp+CIYJDahZ41ZV05hNtcPAQUAm9/Q==}
     engines: {node: '>= 0.10'}
+
+  tosource@2.0.0-alpha.3:
+    resolution: {integrity: sha512-KAB2lrSS48y91MzFPFuDg4hLbvDiyTjOVgaK7Erw+5AmZXNq4sFRVn8r6yxSLuNs15PaokrDRpS61ERY9uZOug==}
+    engines: {node: '>=10'}
 
   tr46@0.0.3:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
@@ -8199,6 +8241,10 @@ snapshots:
       protobufjs: 7.4.0
       yargs: 17.7.2
 
+  '@importable/yaml@0.1.1':
+    dependencies:
+      yaml: 2.6.0
+
   '@isaacs/cliui@8.0.2':
     dependencies:
       string-width: 5.1.2
@@ -8417,6 +8463,15 @@ snapshots:
       fs-extra: 8.1.0
       globby: 11.1.0
       read-yaml-file: 1.1.0
+
+  '@modyfi/vite-plugin-yaml@1.1.0(rollup@2.79.2)(vite@5.4.11(@types/node@22.9.0)(sass@1.80.7)(terser@5.36.0))':
+    dependencies:
+      '@rollup/pluginutils': 5.1.0(rollup@2.79.2)
+      js-yaml: 4.1.0
+      tosource: 2.0.0-alpha.3
+      vite: 5.4.11(@types/node@22.9.0)(sass@1.80.7)(terser@5.36.0)
+    transitivePeerDependencies:
+      - rollup
 
   '@mongodb-js/saslprep@1.1.9':
     dependencies:
@@ -9017,6 +9072,14 @@ snapshots:
       picomatch: 2.3.1
       rollup: 2.79.2
 
+  '@rollup/pluginutils@5.1.0(rollup@2.79.2)':
+    dependencies:
+      '@types/estree': 1.0.6
+      estree-walker: 2.0.2
+      picomatch: 2.3.1
+    optionalDependencies:
+      rollup: 2.79.2
+
   '@rollup/pluginutils@5.1.3(rollup@2.79.2)':
     dependencies:
       '@types/estree': 1.0.6
@@ -9462,6 +9525,8 @@ snapshots:
   argparse@1.0.10:
     dependencies:
       sprintf-js: 1.0.3
+
+  argparse@2.0.1: {}
 
   aria-hidden@1.2.4:
     dependencies:
@@ -11379,6 +11444,10 @@ snapshots:
       pkg-dir: 4.2.0
       resolve-cwd: 3.0.0
 
+  importable@0.1.0(typescript@5.6.3):
+    dependencies:
+      typescript: 5.6.3
+
   imurmurhash@0.1.4: {}
 
   indent-string@4.0.0: {}
@@ -12015,6 +12084,10 @@ snapshots:
     dependencies:
       argparse: 1.0.10
       esprima: 4.0.1
+
+  js-yaml@4.1.0:
+    dependencies:
+      argparse: 2.0.1
 
   jsesc@3.0.2: {}
 
@@ -13816,6 +13889,8 @@ snapshots:
   to-through@2.0.0:
     dependencies:
       through2: 2.0.5
+
+  tosource@2.0.0-alpha.3: {}
 
   tr46@0.0.3: {}
 

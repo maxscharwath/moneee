@@ -1,8 +1,8 @@
-import { type FC, memo, type PropsWithChildren } from "react";
 import { Spacing } from "@/components/spacing";
-import { ChevronRight } from "lucide-react";
 import * as Alert from "@/components/ui/alert-dialog";
 import * as List from "@/components/ui/list";
+import { ChevronRight } from "lucide-react";
+import { type FC, type PropsWithChildren, type ReactNode, memo } from "react";
 import { NavLink } from "react-router-dom";
 
 type AlertProps = {
@@ -19,7 +19,7 @@ type SettingItemProps = {
 	title: string;
 	action?: () => void;
 	href?: string;
-	value?: string;
+	value?: string | ReactNode;
 	chevron?: boolean;
 	alert?: AlertProps;
 };

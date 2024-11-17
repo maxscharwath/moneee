@@ -77,6 +77,8 @@
 		"uuid": "^11.0.3"
 	},
 	"devDependencies": {
+		"@importable/yaml": "^0.1.1",
+		"@modyfi/vite-plugin-yaml": "^1.1.0",
 		"@types/node": "^22.8.6",
 		"@types/react": "^18.3.12",
 		"@types/react-dom": "^18.3.1",
@@ -84,6 +86,7 @@
 		"autoprefixer": "^10.4.20",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.1.1",
+		"importable": "^0.1.0",
 		"jest": "^29.6.2",
 		"lucide-react": "^0.456.0",
 		"postcss": "^8.4.47",

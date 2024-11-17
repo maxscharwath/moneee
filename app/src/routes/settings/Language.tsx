@@ -1,11 +1,11 @@
-import { Header, HeaderTitle } from "@/components/header";
-import * as List from "@/components/ui/list";
-import { CheckIcon, ChevronLeft } from "lucide-react";
-import * as RadioGroup from "@radix-ui/react-radio-group";
-import { NavLink } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { useLocale } from "@/i18n";
 import { Container } from "@/components/container";
+import { Header, HeaderTitle } from "@/components/header";
+import { Button } from "@/components/ui/button";
+import * as List from "@/components/ui/list";
+import { useLocale } from "@/i18n";
+import * as RadioGroup from "@radix-ui/react-radio-group";
+import { CheckIcon, ChevronLeft } from "lucide-react";
+import { NavLink } from "react-router-dom";
 
 export function Component() {
 	const { t, i18n, language, languages } = useLocale();
@@ -35,11 +35,11 @@ export function Component() {
 				>
 					<List.Root>
 						<List.List>
-							{languages.map(({ icon, code, name }) => (
+							{languages.map(({ icon, code }) => (
 								<RadioGroup.Item asChild value={code} key={code}>
 									<List.ItemButton>
 										<List.ItemIcon>{icon}</List.ItemIcon>
-										<span className="truncate">{name}</span>
+										<span className="truncate">{t(`languages.${code}`)}</span>
 										<RadioGroup.Indicator asChild>
 											<CheckIcon className="ml-auto shrink-0" />
 										</RadioGroup.Indicator>

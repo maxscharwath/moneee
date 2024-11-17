@@ -1,26 +1,26 @@
-import { CategoryChart } from '@/components/category-chart'
-import { Chart } from '@/components/chart'
-import { Container } from '@/components/container'
-import { Currency } from '@/components/currency'
-import { FinanceButton } from '@/components/finance-button'
-import { Header, HeaderTitle } from '@/components/header'
-import { InfiniteList } from '@/components/infinite-list'
-import { PeriodNavigation } from '@/components/period-navigation'
-import { TransactionGroup } from '@/components/transaction-group'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { useFinancialSummary } from '@/hooks/useFinancialSummary'
-import { usePeriod, usePeriodTitle } from '@/hooks/usePeriod'
-import { deleteRecurrence } from '@/hooks/useRecurrence'
-import { deleteTransaction } from '@/hooks/useTransaction'
-import { useLocale } from '@/i18n'
-import { cn, groupBy } from '@/lib/utils'
-import type { Category } from '@/stores/schemas/category'
-import type { Transaction } from '@/stores/schemas/transaction'
-import * as ToggleGroup from '@radix-ui/react-toggle-group'
-import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowDownRight, ArrowUpRight, Coins } from 'lucide-react'
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { match } from 'ts-pattern'
+import { CategoryChart } from "@/components/category-chart";
+import { Chart } from "@/components/chart";
+import { Container } from "@/components/container";
+import { Currency } from "@/components/currency";
+import { FinanceButton } from "@/components/finance-button";
+import { Header, HeaderTitle } from "@/components/header";
+import { InfiniteList } from "@/components/infinite-list";
+import { PeriodNavigation } from "@/components/period-navigation";
+import { TransactionGroup } from "@/components/transaction-group";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { useFinancialSummary } from "@/hooks/useFinancialSummary";
+import { usePeriod, usePeriodTitle } from "@/hooks/usePeriod";
+import { deleteRecurrence } from "@/hooks/useRecurrence";
+import { deleteTransaction } from "@/hooks/useTransaction";
+import { useLocale } from "@/i18n";
+import { cn, groupBy } from "@/lib/utils";
+import type { Category } from "@/stores/schemas/category";
+import type { Transaction } from "@/stores/schemas/transaction";
+import * as ToggleGroup from "@radix-ui/react-toggle-group";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowDownRight, ArrowUpRight, Coins } from "lucide-react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { match } from "ts-pattern";
 
 type Filter = "income" | "expense" | "all";
 

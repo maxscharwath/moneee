@@ -5,7 +5,11 @@
 		"paths": {
 			"@/*": ["./src/*"]
 		},
-		"types": ["vitest/globals", "vite-plugin-pwa/client"]
+		"types": [
+			"vitest/globals",
+			"vite-plugin-pwa/client",
+			"@modyfi/vite-plugin-yaml/modules"
+		]
 	},
 	"include": ["."],
 	"exclude": ["dist", "build", "node_modules"]
