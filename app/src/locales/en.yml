@@ -51,7 +51,7 @@ recurrence:
   weekly: Weekly
   yearly: Yearly
 recurrences:
-  noRecurrences:
+  noRecurrence:
     description: You currently have no recurring transactions set up. Add one to get
       started.
     title: No Recurring Transactions
@@ -61,6 +61,9 @@ settings:
     newVersionAvailable: New version available
     upToDate: Up to date
   category:
+    noCategory:
+      title: No Categories
+      description: You currently have no categories set up. Add one to get started.
     suggested: Suggested categories
   currency:
     suggested: Suggested Currencies

@@ -1,15 +1,22 @@
-import { RotateCw } from "lucide-react";
-import React from "react";
-import { cn } from "@/lib/utils";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Currency } from "@/components/currency";
-import type { Transaction } from "@/stores/schemas/transaction";
-import type { Category } from "@/stores/schemas/category";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useLocale } from "@/i18n";
+import { cn } from "@/lib/utils";
+import type { Category } from "@/stores/schemas/category";
+import type { Transaction } from "@/stores/schemas/transaction";
+import {
+	CircleSlash,
+	LoaderCircleIcon,
+	LoaderPinwheelIcon,
+	OctagonAlertIcon,
+	RotateCw,
+	SlashIcon,
+} from "lucide-react";
+import React from "react";
 
 type TransactionItemProps = {
 	transaction: Transaction;
-	category: Category;
+	category?: Category;
 	onLongPress?: (transaction: Transaction) => void;
 };
 
@@ -32,7 +39,7 @@ export const TransactionItem = React.forwardRef<
 					style={{ backgroundColor: category?.color }}
 					className="text-xl"
 				>
-					{category?.icon}
+					{category?.icon ?? <CircleSlash />}
 				</AvatarFallback>
 				{transaction?.recurrence && (
 					<div className="absolute bottom-0 right-0 translate-x-1/4 translate-y-1/4 rounded-xl border bg-background/50 p-1 text-xs backdrop-blur-sm">

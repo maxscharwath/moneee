@@ -51,7 +51,7 @@ recurrence:
   weekly: Semanal
   yearly: Anual
 recurrences:
-  noRecurrences:
+  noRecurrence:
     description: Actualmente no tienes transacciones recurrentes configuradas. Agrega
       una para comenzar.
     title: No hay transacciones recurrentes

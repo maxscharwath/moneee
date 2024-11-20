@@ -1,4 +1,5 @@
 import { useSettings } from "@/hooks/useSettings";
+import { type DateLike, type Nullable, formatNullable } from "@/lib/utils";
 import {
 	de,
 	enUS,
@@ -33,62 +34,62 @@ export const languages = [
 	{
 		code: "en",
 		locale: enUS,
-		icon: "🇺🇸",
+		icon: "🇺",
 	},
 	{
 		code: "fr-FR",
 		locale: fr,
-		icon: "🇫🇷",
+		icon: "🇫",
 	},
 	{
 		code: "fr-CH",
 		locale: frCH,
-		icon: "🇨🇭",
+		icon: "🇨",
 	},
 	{
 		code: "de",
 		locale: de,
-		icon: "🇩🇪",
+		icon: "🇩",
 	},
 	{
 		code: "de-CH",
 		locale: de,
-		icon: "🇨🇭",
+		icon: "🇨",
 	},
 	{
 		code: "es",
 		locale: es,
-		icon: "🇪🇸",
+		icon: "🇪",
 	},
 	{
 		code: "it",
 		locale: it,
-		icon: "🇮🇹",
+		icon: "🇮",
 	},
 	{
 		code: "it-CH",
 		locale: itCH,
-		icon: "🇨🇭",
+		icon: "🇨",
 	},
 	{
 		code: "vi",
 		locale: vi,
-		icon: "🇻🇳",
+		icon: "🇻",
 	},
 	{
 		code: "ja",
 		locale: ja,
-		icon: "🇯🇵",
+		icon: "🇯",
 	},
 	{
 		code: "zh-CN",
 		locale: zhCN,
-		icon: "🇨🇳",
+		icon: "🇨",
 	},
 	{
 		code: "pirate",
 		locale: enUS,
-		icon: "🏴‍☠️",
+		icon: "🏴",
 	},
 	{
 		code: "cimode",
@@ -111,14 +112,35 @@ export const useLocale = () => {
 	);
 
 	const date = useCallback(
-		(date: Date, options?: Intl.DateTimeFormatOptions) =>
-			date.toLocaleDateString(translation.i18n.language, options),
+		<T extends Nullable<DateLike>>(
+			date: Date,
+			options?: Intl.DateTimeFormatOptions,
+		) =>
+			formatNullable(date, (date) =>
+				new Date(date).toLocaleDateString(translation.i18n.language, options),
+			),
 		[translation.i18n.language],
 	);
 
 	const time = useCallback(
-		(date: Date, options?: Intl.DateTimeFormatOptions) =>
-			date.toLocaleTimeString(translation.i18n.language, options),
+		<T extends Nullable<DateLike>>(
+			date: T,
+			options?: Intl.DateTimeFormatOptions,
+		) =>
+			formatNullable(date, (date) =>
+				new Date(date).toLocaleTimeString(translation.i18n.language, options),
+			),
+		[translation.i18n.language],
+	);
+
+	const dateTime = useCallback(
+		<T extends Nullable<DateLike>>(
+			date: T,
+			options?: Intl.DateTimeFormatOptions,
+		) =>
+			formatNullable(date, (date) =>
+				new Date(date).toLocaleString(translation.i18n.language, options),
+			),
 		[translation.i18n.language],
 	);
 
@@ -135,6 +157,7 @@ export const useLocale = () => {
 			currency,
 			date,
 			time,
+			dateTime,
 		},
 	};
 };

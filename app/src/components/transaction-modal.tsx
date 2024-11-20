@@ -1,5 +1,6 @@
 import { CalendarInput } from "@/components/calendar-input";
 import { CategorySelect } from "@/components/category-select";
+import { Container } from "@/components/container";
 import { Header } from "@/components/header";
 import { NumericButton } from "@/components/numeric-button";
 import {
@@ -137,7 +138,7 @@ function TransactionModalContent({
 					/>
 				</div>
 			</Header>
-			<div className="flex grow flex-col space-y-4 p-4">
+			<Container>
 				<div className="grid grow grid-cols-[1fr,auto,1fr] items-center gap-4">
 					<div />
 					<div className="flex flex-col items-center space-y-4">
@@ -192,7 +193,7 @@ function TransactionModalContent({
 						<Check />
 					</Button>
 				</div>
-			</div>
+			</Container>
 		</div>
 	);
 }

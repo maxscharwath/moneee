@@ -1,30 +1,25 @@
-import { expenseCategories, incomeCategories } from "@/assets/categories";
-import { CategoryModal } from "@/components/category-modal";
-import { Container } from "@/components/container";
-import { Header, HeaderTitle } from "@/components/header";
-import { Spacing } from "@/components/spacing";
-import { Button } from "@/components/ui/button";
-import * as List from "@/components/ui/list";
-import * as TabsGroup from "@/components/ui/tabs-group";
-import {
-	addCategory,
-	getCategoriesByType,
-	removeCategory,
-} from "@/hooks/useCategory";
-import type { Optional } from "@/lib/utils";
-import type { Category } from "@/stores/schemas/category";
-import { ChevronLeft, PlusIcon } from "lucide-react";
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { NavLink } from "react-router-dom";
+import { expenseCategories, incomeCategories } from '@/assets/categories'
+import { CategoryModal } from '@/components/category-modal'
+import { Container } from '@/components/container'
+import { Header, HeaderTitle } from '@/components/header'
+import { Spacing } from '@/components/spacing'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { Button } from '@/components/ui/button'
+import * as List from '@/components/ui/list'
+import * as TabsGroup from '@/components/ui/tabs-group'
+import { addCategory, getCategoriesByType, removeCategory, } from '@/hooks/useCategory'
+import type { Optional } from '@/lib/utils'
+import type { Category } from '@/stores/schemas/category'
+import { ChevronLeft, LayoutGridIcon, PlusIcon } from 'lucide-react'
+import React, { useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { NavLink } from 'react-router-dom'
 
 export function Component() {
 	const { t } = useTranslation();
-	const [type, setType] = React.useState<"income" | "expense">("expense");
+	const [type, setType] = useState<"income" | "expense">("expense");
 	const { result: categories } = getCategoriesByType(type);
-	const [category, setCategory] = React.useState<
-		Partial<Category> | undefined
-	>();
+	const [category, setCategory] = useState<Partial<Category> | undefined>();
 	const handleCategory = (category: Optional<Category, "uuid">) => {
 		void addCategory(category);
 		setCategory(undefined);
@@ -36,11 +31,11 @@ export function Component() {
 		setCategory(undefined);
 	};
 
-	const suggestedCategories = React.useMemo(() => {
+	const suggestedCategories = useMemo(() => {
 		return (type === "expense" ? expenseCategories : incomeCategories)
 			.filter((category) => !categories?.find((c) => c.uuid === category.uuid))
 			.map((category) => ({ ...category, name: t(category.name) }));
-	}, [categories, t]);
+	}, [categories, t, type]);
 
 	return (
 		<>
@@ -83,19 +78,29 @@ export function Component() {
 					</div>
 				</div>
 				<List.Root>
-					<List.List heading={t("settings.root.categories")}>
-						{categories?.map((category) => (
-							<List.ItemButton
-								key={category.uuid}
-								onClick={() => setCategory(category)}
-							>
-								<List.ItemIcon style={{ backgroundColor: category.color }}>
-									{category.icon}
-								</List.ItemIcon>
-								<span className="truncate">{category.name}</span>
-							</List.ItemButton>
-						))}
-					</List.List>
+					{categories?.length > 0 ? (
+						<List.List heading={t("settings.root.categories")}>
+							{categories?.map((category) => (
+								<List.ItemButton
+									key={category.uuid}
+									onClick={() => setCategory(category)}
+								>
+									<List.ItemIcon style={{ backgroundColor: category.color }}>
+										{category.icon}
+									</List.ItemIcon>
+									<span className="truncate">{category.name}</span>
+								</List.ItemButton>
+							))}
+						</List.List>
+					) : (
+						<Alert align="center" variant="default">
+							<LayoutGridIcon className="h-4 w-4" />
+							<AlertTitle>{t("settings.category.noCategory.title")}</AlertTitle>
+							<AlertDescription>
+								{t("settings.category.noCategory.description")}
+							</AlertDescription>
+						</Alert>
+					)}
 
 					{suggestedCategories.length > 0 && (
 						<List.List heading={t("settings.category.suggested")}>

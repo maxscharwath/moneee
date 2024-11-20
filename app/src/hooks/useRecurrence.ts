@@ -59,7 +59,7 @@ export function generateRecurringTransactions(
 			getOldestDate(endDate, recurrence.endDate),
 		);
 
-		return Array.from(cronDates).map((date) =>
+		return Array.from(cronDates, (date) =>
 			makeRecurringTransactions(recurrence, date),
 		);
 	});

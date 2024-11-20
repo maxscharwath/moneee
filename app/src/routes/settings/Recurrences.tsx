@@ -1,17 +1,24 @@
-import { Header, HeaderTitle } from "@/components/header";
-import { useTranslation } from "react-i18next";
-import * as List from "@/components/ui/list";
-import { CalendarClockIcon, ChevronLeft, XIcon } from "lucide-react";
-import { NavLink } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import { Container } from "@/components/container";
-import { useMemo } from "react";
+import { Currency } from "@/components/currency";
+import { Header, HeaderTitle } from "@/components/header";
+import { RecurrentModal } from "@/components/recurrent-modal";
+import { Spacing } from "@/components/spacing";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import * as List from "@/components/ui/list";
 import { useCategories } from "@/hooks/useCategory";
 import { deleteRecurrence, getRecurrences } from "@/hooks/useRecurrence";
-import { Spacing } from "@/components/spacing";
-import { Badge } from "@/components/ui/badge";
-import { Currency } from "@/components/currency";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import type { Recurrence } from "@/stores/schemas/recurrence";
+import {
+	CalendarClockIcon,
+	ChevronLeft,
+	CircleSlash,
+	XIcon,
+} from "lucide-react";
+import React, { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { NavLink } from "react-router-dom";
 
 export function Component() {
 	const { t } = useTranslation();
@@ -21,6 +28,7 @@ export function Component() {
 		() => new Map(categories.map((category) => [category.uuid, category])),
 		[categories],
 	);
+	const [recurrence, setRecurrence] = useState<Recurrence | undefined>();
 
 	return (
 		<>
@@ -43,19 +51,21 @@ export function Component() {
 							{recurrences?.map((recurrence) => {
 								const category = categoryMap.get(recurrence.categoryId);
 								return (
-									<List.ItemButton key={recurrence.uuid}>
+									<List.ItemButton
+										key={recurrence.uuid}
+										onClick={() => setRecurrence(recurrence)}
+									>
 										<List.ItemIcon
 											style={{
 												backgroundColor: category?.color,
 											}}
 										>
-											{category?.icon}
+											{category?.icon ?? <CircleSlash />}
 										</List.ItemIcon>
 										<span className="truncate">{category?.name}</span>
 										<Badge>
 											<Currency amount={recurrence.amount} />
 										</Badge>
-										<Badge>{recurrence.cron}</Badge>
 										<Spacing />
 										<Button
 											variant="destructive"
@@ -71,14 +81,19 @@ export function Component() {
 					) : (
 						<Alert align="center">
 							<CalendarClockIcon className="h-4 w-4" />
-							<AlertTitle>{t("recurrences.noRecurrences.title")}</AlertTitle>
+							<AlertTitle>{t("recurrences.noRecurrence.title")}</AlertTitle>
 							<AlertDescription>
-								{t("recurrences.noRecurrences.description")}
+								{t("recurrences.noRecurrence.description")}
 							</AlertDescription>
 						</Alert>
 					)}
 				</List.Root>
 			</Container>
+			<RecurrentModal
+				recurrence={recurrence}
+				open={!!recurrence}
+				onOpenChange={(open) => !open && setRecurrence(undefined)}
+			/>
 		</>
 	);
 }

@@ -51,7 +51,7 @@ recurrence:
   weekly: Hàng tuần
   yearly: Hàng năm
 recurrences:
-  noRecurrences:
+  noRecurrence:
     description: Hiện tại bạn chưa thiết lập giao dịch định kỳ nào. Thêm một giao
       dịch để bắt đầu.
     title: Không có giao dịch định kỳ

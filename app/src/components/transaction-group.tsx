@@ -39,16 +39,14 @@ export const TransactionGroup = memo(
 			[categories],
 		);
 
-		const transactionsWithCategory = useMemo(() => {
-			const result = [];
-			for (const transaction of transactions) {
-				const category = categories.get(transaction.categoryId);
-				if (category) {
-					result.push({ transaction, category });
-				}
-			}
-			return result;
-		}, [transactions, categories]);
+		const transactionsWithCategory = useMemo(
+			() =>
+				transactions.map((transaction) => ({
+					transaction,
+					category: categories.get(transaction.categoryId),
+				})),
+			[transactions, categories],
+		);
 
 		const { openTransactionModal } = useLayout();
 

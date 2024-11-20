@@ -1,16 +1,17 @@
-import React from "react";
-import { CheckIcon, Trash2Icon, XIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import * as TabsGroup from "@/components/ui/tabs-group";
-import type { Optional } from "@/lib/utils";
-import * as Dialog from "@radix-ui/react-dialog";
-import type { DialogProps } from "@radix-ui/react-dialog";
-import { Header } from "@/components/header";
-import { useLocale } from "@/i18n";
-import type { Category } from "@/stores/schemas/category";
-import { Input } from "@/components/ui/input";
-import { ColorInput } from "@/components/ui/color-input";
+import { Container } from "@/components/container";
 import { EmojiPicker } from "@/components/emoji-picker";
+import { Header } from "@/components/header";
+import { Button } from "@/components/ui/button";
+import { ColorInput } from "@/components/ui/color-input";
+import { Input } from "@/components/ui/input";
+import * as TabsGroup from "@/components/ui/tabs-group";
+import { useLocale } from "@/i18n";
+import type { Optional } from "@/lib/utils";
+import type { Category } from "@/stores/schemas/category";
+import type { DialogProps } from "@radix-ui/react-dialog";
+import * as Dialog from "@radix-ui/react-dialog";
+import { CheckIcon, Trash2Icon, XIcon } from "lucide-react";
+import React from "react";
 
 type CategoryModalProps = {
 	category?: Partial<Category>;
@@ -50,7 +51,7 @@ function CategoryModalContent({
 	};
 
 	return (
-		<div className="flex h-full flex-col">
+		<>
 			<Header>
 				<div className="grid w-full grid-cols-[1fr,auto,1fr] items-center gap-4">
 					<Dialog.Close asChild>
@@ -80,7 +81,7 @@ function CategoryModalContent({
 					</div>
 				</div>
 			</Header>
-			<div className="flex grow flex-col gap-4 p-4">
+			<Container>
 				<div className="flex items-center justify-center py-24">
 					<EmojiPicker selectedEmoji={icon} onEmojiSelect={setIcon} />
 				</div>
@@ -96,8 +97,8 @@ function CategoryModalContent({
 						<CheckIcon />
 					</Button>
 				</div>
-			</div>
-		</div>
+			</Container>
+		</>
 	);
 }
 

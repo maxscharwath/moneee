@@ -1,22 +1,22 @@
-import { BarChartBig, PlusIcon, Settings2 } from "lucide-react";
+import { useRegisterSW } from "virtual:pwa-register/react";
+import { Footer } from "@/components/footer";
+import { TransactionModal } from "@/components/transaction-modal";
 import { Button } from "@/components/ui/button";
+import { Indicator } from "@/components/ui/indicator";
+import { addRecurrence } from "@/hooks/useRecurrence";
+import { addTransaction } from "@/hooks/useTransaction";
+import type { Optional } from "@/lib/utils";
+import type { Recurrence } from "@/stores/schemas/recurrence";
+import type { Transaction } from "@/stores/schemas/transaction";
+import { AnimatePresence, motion } from "framer-motion";
+import { BarChartBig, PlusIcon, Settings2 } from "lucide-react";
+import React, { useState } from "react";
 import {
 	type Location,
 	NavLink,
 	useLocation,
 	useOutlet,
 } from "react-router-dom";
-import { TransactionModal } from "@/components/transaction-modal";
-import React, { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { Footer } from "@/components/footer";
-import type { Optional } from "@/lib/utils";
-import type { Transaction } from "@/stores/schemas/transaction";
-import { Indicator } from "@/components/ui/indicator";
-import { useRegisterSW } from "virtual:pwa-register/react";
-import { addTransaction } from "@/hooks/useTransaction";
-import type { Recurrence } from "@/stores/schemas/recurrence";
-import { addRecurrence } from "@/hooks/useRecurrence";
 
 const LayoutContext = React.createContext<{
 	openTransactionModal: (transaction?: Transaction) => void;

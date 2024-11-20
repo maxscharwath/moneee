@@ -18,8 +18,7 @@
 		"@changesets/cli": "^2.26.2"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "1.9.4",
-		"turbo": "^2.2.3"
+		"@biomejs/biome": "1.9.4"
 	},
 	"engines": {
 		"node": ">=19.0.0"

@@ -89,7 +89,7 @@ function getNextValue(values: number[], currentValue: number): number | null {
 
 export function* generateDates(
 	cronExpression: CronExpression,
-	startDate: Date,
+	startDate: Date = new Date(),
 	endDate?: Date,
 ): Generator<Date> {
 	const validValues = getValidValues(cronExpression);

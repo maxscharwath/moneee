@@ -1,25 +1,25 @@
-import type React from "react";
+import logo from "@/assets/logo.webp";
 import { Container } from "@/components/container";
 import { Header, HeaderTitle } from "@/components/header";
-import { abbreviatedSha, github } from "@build/info";
-import { version, author, license } from "@build/package";
-import now from "@build/time";
-import { useLocale } from "@/i18n";
+import { SettingItem } from "@/components/settings-item";
 import { Button } from "@/components/ui/button";
-import { NavLink } from "react-router-dom";
+import * as List from "@/components/ui/list";
+import { useLocale } from "@/i18n";
+import { abbreviatedSha, github } from "@build/info";
+import { author, license, version } from "@build/package";
+import now from "@build/time";
 import {
-	ChevronLeft,
-	User,
+	Bug,
 	Calendar,
+	ChevronLeft,
+	Code2Icon,
 	Hash,
 	Package,
-	Bug,
-	Code2Icon,
 	Shield,
+	User,
 } from "lucide-react";
-import logo from "@/assets/logo.webp";
-import * as List from "@/components/ui/list";
-import { SettingItem } from "@/components/settings-item";
+import type React from "react";
+import { NavLink } from "react-router-dom";
 
 export const Component: React.FC = () => {
 	const { t } = useLocale();

@@ -51,7 +51,7 @@ recurrence:
   weekly: 毎週
   yearly: 毎年
 recurrences:
-  noRecurrences:
+  noRecurrence:
     description: 現在、設定されている定期的な取引はありません。追加して開始してください。
     title: 定期的な取引なし
 settings:

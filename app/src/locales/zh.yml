@@ -51,7 +51,7 @@ recurrence:
   weekly: 每周
   yearly: 每年
 recurrences:
-  noRecurrences:
+  noRecurrence:
     description: 当前没有设置任何定期交易。添加一个以开始使用。
     title: 无定期交易
 settings:

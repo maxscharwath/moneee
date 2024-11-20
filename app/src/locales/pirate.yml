@@ -51,7 +51,7 @@ recurrence:
   weekly: Once Each Seven Suns
   yearly: Once Ev'ry Voyage
 recurrences:
-  noRecurrences:
+  noRecurrence:
     description: Ye be havin' no regular booty set up. Add some, ye scallywag!
     title: Nay Regular Booty
 settings:

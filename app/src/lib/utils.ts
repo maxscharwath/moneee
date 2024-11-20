@@ -25,13 +25,17 @@ export const parseNumberFromString = (str: string): number | null => {
 	return matched ? Number.parseFloat(matched[0]) : null;
 };
 
-export function isNotNull<T>(value: Nullable<T>): value is T {
-	return value != null;
+export type DateLike = Date | string | number;
+
+export function isNotNull<T>(value: Nullable<T>): value is NotNull<T> {
+	return value !== null && value !== undefined;
 }
 
 export type Optional<T, K extends keyof T> = Omit<T, K> & Partial<T>;
 
 export type Nullable<T> = T | null | undefined;
+
+export type NotNull<T> = Exclude<T, null | undefined>;
 
 export type MaybeNullable<T, U, V extends readonly Nullable<U>[]> = V extends [
 	infer First,
@@ -41,3 +45,19 @@ export type MaybeNullable<T, U, V extends readonly Nullable<U>[]> = V extends [
 		? T
 		: MaybeNullable<T, U, Rest>
 	: Nullable<T>;
+
+export function formatNullable<T, R>(
+	value: T,
+	formatter: (value: NonNullable<T>) => R,
+): T extends null | undefined ? undefined : R {
+	if (value == null) {
+		return undefined as T extends null | undefined ? undefined : R;
+	}
+	return formatter(value as NonNullable<T>) as T extends null | undefined
+		? undefined
+		: R;
+}
+
+export function take<T>(generator: Generator<T>, count: number): T[] {
+	return Array.from({ length: count }, () => generator.next().value);
+}
