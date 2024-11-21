@@ -9,7 +9,7 @@ export const Container = forwardRef<
 	<div
 		ref={ref}
 		className={cn(
-			"flex flex-col flex-1 space-y-4 overflow-y-auto overflow-x-hidden p-4",
+			"flex-1 space-y-4 overflow-y-auto overflow-x-hidden p-4",
 			className,
 		)}
 	>

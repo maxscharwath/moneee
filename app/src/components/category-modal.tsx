@@ -114,7 +114,7 @@ export function CategoryModal({
 		<Dialog.Root {...props}>
 			<Dialog.Trigger asChild>{children}</Dialog.Trigger>
 			<Dialog.Portal>
-				<Dialog.Content className="fixed inset-0 z-50 h-screen bg-background/90 backdrop-blur-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:slide-out-to-bottom-[48%] data-[state=open]:slide-in-from-bottom-[48%]">
+				<Dialog.Content className="fixed inset-0 z-50 bg-background/90 backdrop-blur-lg duration-500 ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom">
 					<CategoryModalContent
 						category={category}
 						onCategory={onCategory}

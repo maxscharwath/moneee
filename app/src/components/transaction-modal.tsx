@@ -138,7 +138,7 @@ function TransactionModalContent({
 					/>
 				</div>
 			</Header>
-			<Container>
+			<Container className="flex grow flex-col">
 				<div className="grid grow grid-cols-[1fr,auto,1fr] items-center gap-4">
 					<div />
 					<div className="flex flex-col items-center space-y-4">

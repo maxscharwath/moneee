@@ -30,21 +30,26 @@ export const List = React.forwardRef<
 				{heading}
 			</h2>
 		)}
-		<ul ref={ref} className="flex flex-col gap-2 rounded-lg bg-muted p-1">
+		<ul
+			ref={ref}
+			className="flex flex-col  *:py-1 first:*:pt-0 last:*:pb-0 rounded-lg bg-muted p-1 divide-y divide-muted-foreground/10"
+		>
 			{children}
 		</ul>
 	</div>
 ));
 List.displayName = "List";
 
-export const Item = React.forwardRef<HTMLLIElement, HTMLProps<HTMLLIElement>>(
+export const Item = React.forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement>>(
 	({ children, ...props }, ref) => (
-		<li
-			ref={ref}
-			{...props}
-			className="flex select-none items-center gap-2 overflow-hidden rounded-lg p-3"
-		>
-			{children}
+		<li className="flex">
+			<div
+				ref={ref}
+				{...props}
+				className="flex flex-1 select-none items-center gap-2 overflow-hidden rounded-lg p-3"
+			>
+				{children}
+			</div>
 		</li>
 	),
 );

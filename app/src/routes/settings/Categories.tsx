@@ -1,19 +1,23 @@
-import { expenseCategories, incomeCategories } from '@/assets/categories'
-import { CategoryModal } from '@/components/category-modal'
-import { Container } from '@/components/container'
-import { Header, HeaderTitle } from '@/components/header'
-import { Spacing } from '@/components/spacing'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { Button } from '@/components/ui/button'
-import * as List from '@/components/ui/list'
-import * as TabsGroup from '@/components/ui/tabs-group'
-import { addCategory, getCategoriesByType, removeCategory, } from '@/hooks/useCategory'
-import type { Optional } from '@/lib/utils'
-import type { Category } from '@/stores/schemas/category'
-import { ChevronLeft, LayoutGridIcon, PlusIcon } from 'lucide-react'
-import React, { useMemo, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { NavLink } from 'react-router-dom'
+import { expenseCategories, incomeCategories } from "@/assets/categories";
+import { CategoryModal } from "@/components/category-modal";
+import { Container } from "@/components/container";
+import { Header, HeaderTitle } from "@/components/header";
+import { Spacing } from "@/components/spacing";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import * as List from "@/components/ui/list";
+import * as TabsGroup from "@/components/ui/tabs-group";
+import {
+	addCategory,
+	getCategoriesByType,
+	removeCategory,
+} from "@/hooks/useCategory";
+import type { Optional } from "@/lib/utils";
+import type { Category } from "@/stores/schemas/category";
+import { ChevronLeft, LayoutGridIcon, PlusIcon } from "lucide-react";
+import React, { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { NavLink } from "react-router-dom";
 
 export function Component() {
 	const { t } = useTranslation();

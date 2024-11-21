@@ -35,11 +35,16 @@ export function Component() {
 				>
 					<List.Root>
 						<List.List>
-							{languages.map(({ icon, code }) => (
+							{languages.map(({ icon, code, name }) => (
 								<RadioGroup.Item asChild value={code} key={code}>
 									<List.ItemButton>
 										<List.ItemIcon>{icon}</List.ItemIcon>
-										<span className="truncate">{t(`languages.${code}`)}</span>
+										<div className="flex flex-col items-start">
+											<span className="truncate">{name}</span>
+											<span className="truncate text-xs text-muted-foreground">
+												{t(`languages.${code}`)}
+											</span>
+										</div>
 										<RadioGroup.Indicator asChild>
 											<CheckIcon className="ml-auto shrink-0" />
 										</RadioGroup.Indicator>

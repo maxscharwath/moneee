@@ -1,5 +1,5 @@
 import { useSettings } from "@/hooks/useSettings";
-import { type DateLike, type Nullable, formatNullable } from "@/lib/utils";
+import { type DateLike, formatNullable, type Nullable } from "@/lib/utils";
 import {
 	de,
 	enUS,
@@ -33,70 +33,83 @@ export default i18n
 export const languages = [
 	{
 		code: "en",
+		name: "English",
 		locale: enUS,
-		icon: "🇺",
+		icon: "🇺🇸",
 	},
 	{
 		code: "fr-FR",
+		name: "Français",
 		locale: fr,
-		icon: "🇫",
+		icon: "🇫🇷",
 	},
 	{
 		code: "fr-CH",
+		name: "Français (Suisse)",
 		locale: frCH,
-		icon: "🇨",
+		icon: "🇨🇭",
 	},
 	{
 		code: "de",
+		name: "Deutsch",
 		locale: de,
-		icon: "🇩",
+		icon: "🇩🇪",
 	},
 	{
 		code: "de-CH",
+		name: "Deutsch (Schweiz)",
 		locale: de,
-		icon: "🇨",
+		icon: "🇨🇭",
 	},
 	{
 		code: "es",
+		name: "Español",
 		locale: es,
-		icon: "🇪",
+		icon: "🇪🇸",
 	},
 	{
 		code: "it",
+		name: "Italiano",
 		locale: it,
-		icon: "🇮",
+		icon: "🇮🇹",
 	},
 	{
 		code: "it-CH",
+		name: "Italiano (Svizzera)",
 		locale: itCH,
-		icon: "🇨",
+		icon: "🇨🇭",
 	},
 	{
 		code: "vi",
+		name: "Tiếng Việt",
 		locale: vi,
-		icon: "🇻",
+		icon: "🇻🇳",
 	},
 	{
 		code: "ja",
+		name: "日本語",
 		locale: ja,
-		icon: "🇯",
+		icon: "🇯🇵",
 	},
 	{
 		code: "zh-CN",
+		name: "简体中文",
 		locale: zhCN,
-		icon: "🇨",
+		icon: "🇨🇳",
 	},
 	{
 		code: "pirate",
+		name: "Pirate Speak",
 		locale: enUS,
-		icon: "🏴",
+		icon: "🏴‍☠️",
 	},
 	{
 		code: "cimode",
+		name: "Debug",
 		locale: enUS,
 		icon: "🐛",
 	},
-];
+] as const;
 
 export const useLocale = () => {
 	const translation = useTranslation();

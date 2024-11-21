@@ -4,7 +4,7 @@ import { defineConfig } from "vite";
 import buildInfo from "vite-plugin-info";
 import mkcert from "vite-plugin-mkcert";
 import ViteYaml from "@modyfi/vite-plugin-yaml";
-import { type VitePWAOptions, VitePWA as vitePwa } from "vite-plugin-pwa";
+import { VitePWA as vitePwa, type VitePWAOptions } from "vite-plugin-pwa";
 
 const pwaConfig = {
 	registerType: "prompt",

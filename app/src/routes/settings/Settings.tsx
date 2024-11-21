@@ -91,7 +91,7 @@ export function Component() {
 								href="/settings/language"
 								value={
 									<>
-										{language?.icon} {t(`languages.${language?.code}`)}
+										{language?.icon} {language?.name}
 									</>
 								}
 								chevron
