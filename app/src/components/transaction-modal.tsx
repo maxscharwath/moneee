@@ -8,7 +8,6 @@ import {
 	type RecurrenceType,
 } from "@/components/recurrence-select";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import * as TabsGroup from "@/components/ui/tabs-group";
 import { useCategories } from "@/hooks/useCategory";
 import { useLocale } from "@/i18n";
@@ -21,8 +20,10 @@ import type { Recurrence } from "@/stores/schemas/recurrence";
 import type { Transaction } from "@/stores/schemas/transaction";
 import type { DialogProps } from "@radix-ui/react-dialog";
 import * as Dialog from "@radix-ui/react-dialog";
-import { Check, Delete, ScrollText, XIcon } from "lucide-react";
+import { Check, Delete, ScrollTextIcon, XIcon } from "lucide-react";
 import React, { useCallback, useEffect, useMemo } from "react";
+import { AutoComplete } from "@/components/autocomplete";
+import { getTransactions } from "@/hooks/useTransaction";
 
 type TransactionModalProps = Readonly<{
 	transaction?: Transaction;
@@ -109,6 +110,14 @@ function TransactionModalContent({
 		}
 	};
 
+	const { result } = getTransactions();
+	const options = result
+		.filter((transaction) => transaction.note)
+		.map((transaction) => ({
+			value: transaction.note,
+			label: transaction.note,
+		}));
+
 	return (
 		<div className="flex h-full flex-col">
 			<Header>
@@ -149,12 +158,13 @@ function TransactionModalContent({
 						>
 							{formatAmount}
 						</button>
-						<Input
-							type="text"
+						<AutoComplete
+							icon={<ScrollTextIcon />}
 							placeholder={t("transaction.add_note")}
-							icon={<ScrollText />}
-							value={note}
-							onChange={(e) => setNote(e.target.value)}
+							value={{ value: note, label: note }}
+							onChange={(e) => setNote(e.value)}
+							options={options}
+							emptyMessage={t("transaction.no_notes")}
 						/>
 					</div>
 					<div className="flex flex-col items-end">
@@ -185,11 +195,7 @@ function TransactionModalContent({
 							/>
 						),
 					)}
-					<Button
-						disabled={!isValid}
-						size="xl"
-						onClick={handleTransaction} // Trigger both onTransaction and onRecurrence if valid
-					>
+					<Button disabled={!isValid} size="xl" onClick={handleTransaction}>
 						<Check />
 					</Button>
 				</div>

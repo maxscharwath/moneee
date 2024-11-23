@@ -3,8 +3,11 @@ import type { Transaction } from "@/stores/schemas/transaction";
 import type { Optional } from "@/lib/utils";
 import { initializeDb } from "@/stores/db";
 
-export function getFilteredTransactions(query: QueryConstructor<Transaction>) {
-	return useRxData<Transaction>("transactions", query);
+export function getTransactions(query?: QueryConstructor<Transaction>) {
+	return useRxData<Transaction>(
+		"transactions",
+		query ?? ((transaction) => transaction.find()),
+	);
 }
 
 export async function addTransaction(

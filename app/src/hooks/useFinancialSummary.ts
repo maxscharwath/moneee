@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useCategories } from "@/hooks/useCategory";
-import { getFilteredTransactions } from "@/hooks/useTransaction";
+import { getTransactions } from "@/hooks/useTransaction";
 import { useRecurringTransactions } from "@/hooks/useRecurrence";
 import type { Transaction } from "@/stores/schemas/transaction";
 import type { Category } from "@/stores/schemas/category";
@@ -27,17 +27,16 @@ function calculateFinancialSummary(
 
 // Main hook to retrieve and summarize financial data
 export function useFinancialSummary(startDate: Date, endDate: Date) {
-	const { result: transactionsResult = [] } = getFilteredTransactions(
-		(collection) =>
-			collection.find({
-				selector: {
-					date: {
-						$gte: startDate.toISOString(),
-						$lte: endDate.toISOString(),
-					},
+	const { result: transactionsResult = [] } = getTransactions((collection) =>
+		collection.find({
+			selector: {
+				date: {
+					$gte: startDate.toISOString(),
+					$lte: endDate.toISOString(),
 				},
-				sort: [{ date: "desc" }],
-			}),
+			},
+			sort: [{ date: "desc" }],
+		}),
 	);
 
 	const recurringTransactions = useRecurringTransactions(startDate, endDate);
