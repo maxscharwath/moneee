@@ -1,3 +1,4 @@
+import { TransactionAutocomplete } from "@/components/transaction-autocomplete";
 import { CalendarInput } from "@/components/calendar-input";
 import { CategorySelect } from "@/components/category-select";
 import { Container } from "@/components/container";
@@ -10,6 +11,8 @@ import {
 import { Button } from "@/components/ui/button";
 import * as TabsGroup from "@/components/ui/tabs-group";
 import { useCategories } from "@/hooks/useCategory";
+import { getRecurrences } from "@/hooks/useRecurrence";
+import { getTransactions } from "@/hooks/useTransaction";
 import { useLocale } from "@/i18n";
 import {
 	cronToRecurrenceType,
@@ -22,8 +25,7 @@ import type { DialogProps } from "@radix-ui/react-dialog";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Check, Delete, ScrollTextIcon, XIcon } from "lucide-react";
 import React, { useCallback, useEffect, useMemo } from "react";
-import { AutoComplete } from "@/components/autocomplete";
-import { getTransactions } from "@/hooks/useTransaction";
+import type { Category } from "@/stores/schemas/category";
 
 type TransactionModalProps = Readonly<{
 	transaction?: Transaction;
@@ -72,6 +74,10 @@ function TransactionModalContent({
 	);
 	const [note, setNote] = React.useState(transaction?.note ?? "");
 	const { result: categories } = useCategories();
+	const categoryMap = useMemo(
+		() => new Map(categories.map((category) => [category.uuid, category])),
+		[categories],
+	);
 	const [type, setType] = React.useState<"income" | "expense">();
 
 	useEffect(() => {
@@ -110,13 +116,27 @@ function TransactionModalContent({
 		}
 	};
 
-	const { result } = getTransactions();
-	const options = result
-		.filter((transaction) => transaction.note)
-		.map((transaction) => ({
-			value: transaction.note,
-			label: transaction.note,
-		}));
+	const { result: transactions } = getTransactions();
+	const { result: recurrences } = getRecurrences();
+
+	const options = useMemo(
+		() =>
+			[...transactions, ...recurrences]
+				.reduce(
+					(uniqueNotes, { categoryId, note }) => {
+						if (note && !uniqueNotes.some((item) => item.value === note)) {
+							uniqueNotes.push({
+								value: note,
+								category: categoryMap.get(categoryId),
+							});
+						}
+						return uniqueNotes;
+					},
+					[] as { value: string; category?: Category }[],
+				)
+				.sort((a, b) => a.value.localeCompare(b.value)),
+		[transactions, recurrences, categoryMap],
+	);
 
 	return (
 		<div className="flex h-full flex-col">
@@ -158,11 +178,17 @@ function TransactionModalContent({
 						>
 							{formatAmount}
 						</button>
-						<AutoComplete
+						<TransactionAutocomplete
 							icon={<ScrollTextIcon />}
 							placeholder={t("transaction.add_note")}
-							value={{ value: note, label: note }}
-							onChange={(e) => setNote(e.value)}
+							value={{ value: note, category: categoryMap.get(categoryId) }}
+							onChange={({ value, category }) => {
+								setNote(value);
+								if (category) {
+									setCategoryId(category.uuid);
+									setType(category.type);
+								}
+							}}
 							options={options}
 							emptyMessage={t("transaction.no_notes")}
 						/>

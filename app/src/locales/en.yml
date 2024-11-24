@@ -1,81 +1,24 @@
-about:
-  author: Author
-  buildDate: Build Date
-  buildHash: Build
-  details: App details
-  license: License
-  repo: Source Code
-  reportBug: Report a Bug
-  title: About
-  version: Version
-categories:
-  allowance: Allowance
-  clothing: Clothing
-  dining_out: Dining Out
-  entertainment: Entertainment
-  freelancing: Freelancing
-  gifts: Gifts
-  groceries: Groceries
-  healthcare: Healthcare
-  insurance: Insurance
-  internet: Internet
-  investment: Investment
-  money_transfer: Money Transfer
-  other_income: Other Income
-  part_time_job: Part-time Job
-  phone: Phone
-  rent: Rent
-  salary: Salary
-  savings: Savings
-  tips: Tips
-  transportation: Transportation
-  utilities: Utilities
-category:
-  create: Create category
-  name: Category Name
-  select: Category
 date:
   today: Today
-insights:
-  title: Insights
-period:
-  monthly: Monthly
-  placeholder: Select period
-  weekly: Weekly
-  yearly: Yearly
 recurrence:
   custom: Custom
   daily: Daily
   monthly: Monthly
   none: None
-  weekly: Weekly
   yearly: Yearly
+  weekly: Weekly
 recurrences:
   noRecurrence:
     description: You currently have no recurring transactions set up. Add one to get
       started.
     title: No Recurring Transactions
 settings:
-  build: 'Build: {{build}}'
   cache:
-    newVersionAvailable: New version available
     upToDate: Up to date
-  category:
-    noCategory:
-      title: No Categories
-      description: You currently have no categories set up. Add one to get started.
-    suggested: Suggested categories
-  currency:
-    suggested: Suggested Currencies
-    title: Currencies
-  language:
-    title: Language
+    newVersionAvailable: New version available
+  build: 'Build: {{build}}'
   root:
-    about: About
-    appearance: Appearance
-    categories: Categories
-    currency: Currency
-    data: Data
+    recurrences: Recurrences
     erase:
       alert:
         cancel: Cancel
@@ -84,206 +27,264 @@ settings:
           transactions and remove the data from the app.
         title: Are you absolutely sure?
       title: Erase Data
-    export: Export Data
-    general: General
+    data: Data
     import: Import Data
+    about: About
     language: Language
-    recurrences: Recurrences
     refreshCache: Refresh Cache
-    synchronisation: Synchronization
     title: Settings
+    synchronisation: Synchronization
+    general: General
+    appearance: Appearance
+    currency: Currency
+    categories: Categories
+    export: Export Data
+  currency:
+    suggested: Suggested Currencies
+    title: Currencies
+  language:
+    title: Language
+  category:
+    suggested: Suggested categories
+    noCategory:
+      description: You currently have no categories set up. Add one to get started.
+      title: No Categories
+  version: 'Version: {{version}}'
   synchronisation:
     authenticate: Authenticate
-    authenticateWithDevice: Authenticate with your device
     login: Login
-    loginWithDevice: Login with your device
-    register: Register
     title: Synchronization
-  version: 'Version: {{version}}'
+    loginWithDevice: Login with your device
+    authenticateWithDevice: Authenticate with your device
+    register: Register
+period:
+  monthly: Monthly
+  placeholder: Select period
+  yearly: Yearly
+  weekly: Weekly
+languages:
+  de: German
+  pirate: Pirate Speak
+  cimode: Debug
+  en: English
+  it: Italian
+  zh-CN: Simplified Chinese
+  es: Spanish
+  vi: Vietnamese
+  fr-CH: French (Switzerland)
+  ja: Japanese
+  it-CH: Italian (Switzerland)
+  fr-FR: French
+  de-CH: German (Switzerland)
+insights:
+  title: Insights
+about:
+  reportBug: Report a Bug
+  license: License
+  buildHash: Build
+  author: Author
+  repo: Source Code
+  details: App details
+  buildDate: Build Date
+  title: About
+  version: Version
+categories:
+  insurance: Insurance
+  freelancing: Freelancing
+  entertainment: Entertainment
+  other_income: Other Income
+  money_transfer: Money Transfer
+  investment: Investment
+  allowance: Allowance
+  rent: Rent
+  salary: Salary
+  utilities: Utilities
+  part_time_job: Part-time Job
+  tips: Tips
+  healthcare: Healthcare
+  transportation: Transportation
+  phone: Phone
+  dining_out: Dining Out
+  clothing: Clothing
+  savings: Savings
+  groceries: Groceries
+  internet: Internet
+  gifts: Gifts
+category:
+  select: Category
+  name: Category Name
+  create: Create category
 transaction:
+  income: Income
   add_note: Add note
   averagePerDay: avg/day
   averagePerMonth: avg/mth
-  balance: Balance
   expense: Expense
-  income: Income
-  incomePerDay: income/day
-  incomePerMonth: income/mth
+  title: Transactions
+  remove: Delete transaction
+  no_notes: No notes
+  balance: Balance
+  spentPerDay: spent/day
   noTransactions:
     description: You have no transactions for this period.
     title: No entries
-  remove: Delete transaction
-  spentPerDay: spent/day
+  incomePerDay: income/day
   spentPerMonth: spent/mth
-  title: Transactions
-languages:
-  en: English
-  fr-FR: French
-  fr-CH: French (Switzerland)
-  de: German
-  de-CH: German (Switzerland)
-  es: Spanish
-  it: Italian
-  it-CH: Italian (Switzerland)
-  vi: Vietnamese
-  ja: Japanese
-  zh-CN: Simplified Chinese
-  pirate: Pirate Speak
-  cimode: Debug
+  incomePerMonth: income/mth
 currencies:
-  AED: United Arab Emirates Dirham
-  AFN: Afghan Afghani
-  ALL: Albanian Lek
-  AMD: Armenian Dram
-  ANG: Netherlands Antillean Guilder
-  AOA: Angolan Kwanza
-  ARS: Argentine Peso
-  AUD: Australian Dollar
-  AWG: Aruban Florin
-  AZN: Azerbaijani Manat
-  BAM: Bosnia-Herzegovina Convertible Mark
-  BBD: Barbadian Dollar
-  BDT: Bangladeshi Taka
-  BGN: Bulgarian Lev
-  BHD: Bahraini Dinar
-  BIF: Burundian Franc
-  BMD: Bermudan Dollar
-  BND: Brunei Dollar
-  BOB: Bolivian Boliviano
-  BRL: Brazilian Real
-  BSD: Bahamian Dollar
-  BTN: Bhutanese Ngultrum
-  BWP: Botswanan Pula
-  BYR: Belarusian Ruble
-  BZD: Belize Dollar
-  CAD: Canadian Dollar
-  CDF: Congolese Franc
-  CHF: Swiss Franc
-  CLP: Chilean Peso
-  CNY: Chinese Yuan
-  COP: Colombian Peso
-  CRC: Costa Rican Colón
-  CUC: Cuban Convertible Peso
-  CVE: Cape Verdean Escudo
-  CZK: Czech Koruna
-  DJF: Djiboutian Franc
-  DKK: Danish Krone
-  DOP: Dominican Peso
-  DZD: Algerian Dinar
-  EEK: Estonian Kroon
-  EGP: Egyptian Pound
-  ERN: Eritrean Nakfa
-  ETB: Ethiopian Birr
-  EUR: Euro
   FJD: Fijian Dollar
-  FKP: Falkland Islands Pound
-  GBP: British Pound
-  GEL: Georgian Lari
-  GHS: Ghanaian Cedi
-  GIP: Gibraltar Pound
-  GMD: Gambian Dalasi
-  GNF: Guinean Franc
-  GQE: Equatorial Guinean Ekwele
+  MXN: Mexican Peso
+  LVL: Latvian Lats
+  SCR: Seychellois Rupee
+  CDF: Congolese Franc
+  BBD: Barbadian Dollar
   GTQ: Guatemalan Quetzal
-  GYD: Guyanaese Dollar
-  HKD: Hong Kong Dollar
+  CLP: Chilean Peso
   HNL: Honduran Lempira
-  HRK: Croatian Kuna
-  HTG: Haitian Gourde
-  HUF: Hungarian Forint
-  IDR: Indonesian Rupiah
-  ILS: Israeli New Shekel
-  INR: Indian Rupee
+  UGX: Ugandan Shilling
+  ZAR: South African Rand
+  TND: Tunisian Dinar
+  CUC: Cuban Convertible Peso
+  BSD: Bahamian Dollar
+  SLL: Sierra Leonean Leone
+  SDG: Sudanese Pound
   IQD: Iraqi Dinar
+  GMD: Gambian Dalasi
+  TWD: New Taiwan Dollar
+  RSD: Serbian Dinar
+  DOP: Dominican Peso
+  KMF: Comorian Franc
+  MYR: Malaysian Ringgit
+  FKP: Falkland Islands Pound
+  XOF: West African CFA Franc
+  GEL: Georgian Lari
+  UYU: Uruguayan Peso
+  MAD: Moroccan Dirham
+  CVE: Cape Verdean Escudo
+  AZN: Azerbaijani Manat
+  OMR: Omani Rial
+  PGK: Papua New Guinean Kina
+  KES: Kenyan Shilling
+  SEK: Swedish Krona
+  BTN: Bhutanese Ngultrum
+  UAH: Ukrainian Hryvnia
+  GNF: Guinean Franc
+  ERN: Eritrean Nakfa
+  MZM: Mozambican Metical
+  ARS: Argentine Peso
+  QAR: Qatari Riyal
   IRR: Iranian Rial
+  MRO: Mauritanian Ouguiya
+  CNY: Chinese Yuan
+  THB: Thai Baht
+  UZS: Uzbekistani Som
+  XPF: CFP Franc
+  BDT: Bangladeshi Taka
+  LYD: Libyan Dinar
+  BMD: Bermudan Dollar
+  KWD: Kuwaiti Dinar
+  PHP: Philippine Peso
+  RUB: Russian Ruble
+  PYG: Paraguayan Guarani
   ISK: Icelandic Króna
   JMD: Jamaican Dollar
-  JOD: Jordanian Dinar
-  JPY: Japanese Yen
-  KES: Kenyan Shilling
-  KGS: Kyrgystani Som
-  KHR: Cambodian Riel
-  KMF: Comorian Franc
-  KPW: North Korean Won
-  KRW: South Korean Won
-  KWD: Kuwaiti Dinar
-  KYD: Cayman Islands Dollar
-  KZT: Kazakhstani Tenge
-  LAK: Laotian Kip
-  LBP: Lebanese Pound
-  LKR: Sri Lankan Rupee
-  LRD: Liberian Dollar
-  LSL: Lesotho Loti
-  LTL: Lithuanian Litas
-  LVL: Latvian Lats
-  LYD: Libyan Dinar
-  MAD: Moroccan Dirham
-  MDL: Moldovan Leu
-  MGA: Malagasy Ariary
+  COP: Colombian Peso
   MKD: Macedonian Denar
-  MMK: Myanmar Kyat
-  MNT: Mongolian Tugrik
-  MOP: Macanese Pataca
-  MRO: Mauritanian Ouguiya
-  MUR: Mauritian Rupee
-  MVR: Maldivian Rufiyaa
-  MWK: Malawian Kwacha
-  MXN: Mexican Peso
-  MYR: Malaysian Ringgit
-  MZM: Mozambican Metical
-  NAD: Namibian Dollar
-  NGN: Nigerian Naira
-  NIO: Nicaraguan Córdoba
-  NOK: Norwegian Krone
-  NPR: Nepalese Rupee
-  NZD: New Zealand Dollar
-  OMR: Omani Rial
-  PAB: Panamanian Balboa
-  PEN: Peruvian Sol
-  PGK: Papua New Guinean Kina
-  PHP: Philippine Peso
-  PKR: Pakistani Rupee
-  PLN: Polish Zloty
-  PYG: Paraguayan Guarani
-  QAR: Qatari Riyal
-  RON: Romanian Leu
-  RSD: Serbian Dinar
-  RUB: Russian Ruble
-  SAR: Saudi Riyal
-  SBD: Solomon Islands Dollar
-  SCR: Seychellois Rupee
-  SDG: Sudanese Pound
-  SEK: Swedish Krona
-  SGD: Singapore Dollar
-  SHP: St. Helena Pound
-  SLL: Sierra Leonean Leone
-  SOS: Somali Shilling
-  SRD: Surinamese Dollar
-  SYP: Syrian Pound
-  SZL: Swazi Lilangeni
-  THB: Thai Baht
-  TJS: Tajikistani Somoni
-  TMT: Turkmenistani Manat
-  TND: Tunisian Dinar
-  TRY: Turkish Lira
-  TTD: Trinidad & Tobago Dollar
-  TWD: New Taiwan Dollar
-  TZS: Tanzanian Shilling
-  UAH: Ukrainian Hryvnia
-  UGX: Ugandan Shilling
   USD: US Dollar
-  UYU: Uruguayan Peso
-  UZS: Uzbekistani Som
+  DZD: Algerian Dinar
+  PAB: Panamanian Balboa
+  SGD: Singapore Dollar
+  ETB: Ethiopian Birr
   VEB: Venezuelan Bolívar
-  VND: Vietnamese Dong
+  KGS: Kyrgystani Som
+  SOS: Somali Shilling
   VUV: Vanuatu Vatu
-  WST: Samoan Tala
-  XAF: Central African CFA Franc
-  XCD: East Caribbean Dollar
-  XDR: Special Drawing Rights
-  XOF: West African CFA Franc
-  XPF: CFP Franc
-  YER: Yemeni Rial
-  ZAR: South African Rand
+  LAK: Laotian Kip
+  BND: Brunei Dollar
   ZMK: Zambian Kwacha
+  XAF: Central African CFA Franc
+  LRD: Liberian Dollar
+  CHF: Swiss Franc
+  HRK: Croatian Kuna
+  ALL: Albanian Lek
+  DJF: Djiboutian Franc
+  TZS: Tanzanian Shilling
+  VND: Vietnamese Dong
+  AUD: Australian Dollar
+  ILS: Israeli New Shekel
+  GHS: Ghanaian Cedi
+  GYD: Guyanaese Dollar
+  KPW: North Korean Won
+  BOB: Bolivian Boliviano
+  KHR: Cambodian Riel
+  MDL: Moldovan Leu
+  IDR: Indonesian Rupiah
+  KYD: Cayman Islands Dollar
+  AMD: Armenian Dram
+  BWP: Botswanan Pula
+  GQE: Equatorial Guinean Ekwele
+  SHP: St. Helena Pound
+  TRY: Turkish Lira
+  LBP: Lebanese Pound
+  TJS: Tajikistani Somoni
+  JOD: Jordanian Dinar
+  AED: United Arab Emirates Dirham
+  HKD: Hong Kong Dollar
+  EUR: Euro
+  LSL: Lesotho Loti
+  DKK: Danish Krone
+  CAD: Canadian Dollar
+  BGN: Bulgarian Lev
+  EEK: Estonian Kroon
+  MMK: Myanmar Kyat
+  MUR: Mauritian Rupee
+  NOK: Norwegian Krone
+  SYP: Syrian Pound
+  GIP: Gibraltar Pound
+  RON: Romanian Leu
+  LKR: Sri Lankan Rupee
+  NGN: Nigerian Naira
   ZWR: Zimbabwean Dollar
+  CRC: Costa Rican Colón
+  CZK: Czech Koruna
+  PKR: Pakistani Rupee
+  XCD: East Caribbean Dollar
+  ANG: Netherlands Antillean Guilder
+  HTG: Haitian Gourde
+  BHD: Bahraini Dinar
+  KZT: Kazakhstani Tenge
+  SRD: Surinamese Dollar
+  SZL: Swazi Lilangeni
+  LTL: Lithuanian Litas
+  SAR: Saudi Riyal
+  TTD: Trinidad & Tobago Dollar
+  YER: Yemeni Rial
+  MVR: Maldivian Rufiyaa
+  AFN: Afghan Afghani
+  INR: Indian Rupee
+  AWG: Aruban Florin
+  KRW: South Korean Won
+  NPR: Nepalese Rupee
+  JPY: Japanese Yen
+  MNT: Mongolian Tugrik
+  AOA: Angolan Kwanza
+  PLN: Polish Zloty
+  GBP: British Pound
+  SBD: Solomon Islands Dollar
+  HUF: Hungarian Forint
+  BYR: Belarusian Ruble
+  BIF: Burundian Franc
+  MWK: Malawian Kwacha
+  MGA: Malagasy Ariary
+  XDR: Special Drawing Rights
+  BZD: Belize Dollar
+  BAM: Bosnia-Herzegovina Convertible Mark
+  EGP: Egyptian Pound
+  MOP: Macanese Pataca
+  NAD: Namibian Dollar
+  NIO: Nicaraguan Córdoba
+  PEN: Peruvian Sol
+  NZD: New Zealand Dollar
+  WST: Samoan Tala
+  TMT: Turkmenistani Manat
+  BRL: Brazilian Real

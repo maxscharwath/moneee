@@ -1,7 +1,7 @@
 import { Command as CommandPrimitive } from "cmdk";
 import {
 	type KeyboardEvent,
-	ReactNode,
+	type ReactNode,
 	useCallback,
 	useRef,
 	useState,
@@ -15,9 +15,13 @@ import {
 import { Skeleton } from "./ui/skeleton";
 
 import { cn } from "@/lib/utils";
+import type { Category } from "@/stores/schemas/category";
 import { Check } from "lucide-react";
 
-export type Option = Record<"value" | "label", string> & Record<string, string>;
+export type Option = {
+	value: string;
+	category?: Category;
+};
 
 type AutoCompleteProps = {
 	options: Option[];
@@ -30,7 +34,7 @@ type AutoCompleteProps = {
 	icon?: ReactNode;
 };
 
-export const AutoComplete = ({
+export const TransactionAutocomplete = ({
 	options,
 	placeholder,
 	emptyMessage,
@@ -44,7 +48,7 @@ export const AutoComplete = ({
 
 	const [isOpen, setOpen] = useState(false);
 	const [selected, setSelected] = useState<Option>(value as Option);
-	const [inputValue, setInputValue] = useState<string>(value?.label ?? "");
+	const [inputValue, setInputValue] = useState<string>(value?.value ?? "");
 
 	const handleKeyDown = useCallback(
 		(event: KeyboardEvent<HTMLDivElement>) => {
@@ -61,7 +65,7 @@ export const AutoComplete = ({
 			// This is not a default behaviour of the <input /> field
 			if (event.key === "Enter" && input.value !== "") {
 				const optionToSelect = options.find(
-					(option) => option.label === input.value,
+					(option) => option.value === input.value,
 				);
 				if (optionToSelect) {
 					setSelected(optionToSelect);
@@ -78,12 +82,12 @@ export const AutoComplete = ({
 
 	const handleBlur = useCallback(() => {
 		setOpen(false);
-		onChange?.({ value: inputRef.current?.value ?? "", label: "" });
-	}, [selected]);
+		onChange?.({ value: inputRef.current?.value ?? "" });
+	}, [onChange]);
 
 	const handleSelectOption = useCallback(
 		(selectedOption: Option) => {
-			setInputValue(selectedOption.label);
+			setInputValue(selectedOption.value);
 
 			setSelected(selectedOption);
 			onChange?.(selectedOption);
@@ -98,7 +102,7 @@ export const AutoComplete = ({
 	);
 
 	return (
-		<CommandPrimitive onKeyDown={handleKeyDown}>
+		<CommandPrimitive onKeyDown={handleKeyDown} loop>
 			<div>
 				<CommandInput
 					ref={inputRef}
@@ -134,7 +138,7 @@ export const AutoComplete = ({
 									return (
 										<CommandItem
 											key={option.value}
-											value={option.label}
+											value={option.value}
 											onMouseDown={(event) => {
 												event.preventDefault();
 												event.stopPropagation();
@@ -146,7 +150,10 @@ export const AutoComplete = ({
 											)}
 										>
 											{isSelected ? <Check className="w-4" /> : null}
-											{option.label}
+											<div className="flex items-center space-x-2">
+												<span>{option.category?.icon}</span>
+												<span>{option.value}</span>
+											</div>
 										</CommandItem>
 									);
 								})}

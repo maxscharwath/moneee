@@ -73,7 +73,7 @@
 		"recharts": "^2.13.3",
 		"rxdb": "^15.39.0",
 		"rxdb-hooks": "^5.0.2",
-		"tailwind-merge": "^2.5.4",
+		"tailwind-merge": "^2.5.5",
 		"ts-pattern": "^5.5.0",
 		"uuid": "^11.0.3"
 	},
@@ -111,5 +111,9 @@
 		"node": ">=18.0.0",
 		"npm": ">=9.0.0"
 	},
-	"browserslist": [">0.2%", "not dead", "not op_mini all"]
+	"browserslist": [
+		">0.2%",
+		"not dead",
+		"not op_mini all"
+	]
 }

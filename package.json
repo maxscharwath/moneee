@@ -13,10 +13,7 @@
 		"format": "biome format --write",
 		"lint": "biome lint --write"
 	},
-	"workspaces": [
-		"app/*",
-		"packages/*"
-	],
+	"workspaces": ["app/*", "packages/*"],
 	"dependencies": {
 		"@changesets/cli": "^2.27.10"
 	},

@@ -1,78 +1,24 @@
-about:
-  author: Auteur
-  buildDate: Date
-  buildHash: Build
-  details: Infos App
-  license: License
-  repo: Source
-  reportBug: Signaler un bug
-  title: À propos
-  version: Version
-categories:
-  allowance: Allocation
-  clothing: Vêtements
-  dining_out: Repas à l'extérieur
-  entertainment: Divertissement
-  freelancing: Freelance
-  gifts: Cadeaux
-  groceries: Épicerie
-  healthcare: Soins de santé
-  insurance: Assurance
-  internet: Internet
-  investment: Investissement
-  money_transfer: Transfert d'argent
-  other_income: Autres revenus
-  part_time_job: Travail à temps partiel
-  phone: Téléphone
-  rent: Loyer
-  salary: Salaire
-  savings: Économies
-  tips: Pourboires
-  transportation: Transport
-  utilities: Services publics
-category:
-  create: Créer une catégorie
-  name: Nom de la catégorie
-  select: Catégorie
 date:
   today: Auj.
-insights:
-  title: Aperçus
-period:
-  monthly: Mensuel
-  placeholder: Sélectionnez la période
-  weekly: Hebdomadaire
-  yearly: Annuel
 recurrence:
   custom: Personnalisé
   daily: Quotidien
   monthly: Mensuel
   none: Aucun
-  weekly: Hebdomadaire
   yearly: Annuel
+  weekly: Hebdomadaire
 recurrences:
   noRecurrence:
     description: Vous n'avez actuellement aucune transaction récurrente configurée.
       Ajoutez-en une pour commencer.
     title: Aucune transaction récurrente
 settings:
-  build: 'Build: {{build}}'
   cache:
-    newVersionAvailable: Nouvelle version disponible
     upToDate: À jour
-  category:
-    suggested: Catégories suggérées
-  currency:
-    suggested: Devises suggérées
-    title: Devises
-  language:
-    title: Langue
+    newVersionAvailable: Nouvelle version disponible
+  build: 'Build: {{build}}'
   root:
-    about: À propos
-    appearance: Apparence
-    categories: Catégories
-    currency: Devise
-    data: Données
+    recurrences: Récurrences
     erase:
       alert:
         cancel: Annuler
@@ -81,206 +27,261 @@ settings:
           vos transactions et retirera les données de l'application.
         title: Êtes-vous absolument sûr?
       title: Effacer les données
-    export: Exporter les données
-    general: Général
+    data: Données
     import: Importer des données
+    about: À propos
     language: Langue
-    recurrences: Récurrences
     refreshCache: Rafraîchir le cache
-    synchronisation: Synchronisation
     title: Paramètres
+    synchronisation: Synchronisation
+    general: Général
+    appearance: Apparence
+    currency: Devise
+    categories: Catégories
+    export: Exporter les données
+  currency:
+    suggested: Devises suggérées
+    title: Devises
+  language:
+    title: Langue
+  category:
+    suggested: Catégories suggérées
+  version: 'Version: {{version}}'
   synchronisation:
     authenticate: Authentifier
-    authenticateWithDevice: Authentifier avec votre appareil
     login: Connexion
-    loginWithDevice: Connexion avec votre appareil
-    register: S'inscrire
     title: Synchronisation
-  version: 'Version: {{version}}'
+    loginWithDevice: Connexion avec votre appareil
+    authenticateWithDevice: Authentifier avec votre appareil
+    register: S'inscrire
+period:
+  monthly: Mensuel
+  placeholder: Sélectionnez la période
+  yearly: Annuel
+  weekly: Hebdomadaire
+languages:
+  de: Allemand
+  pirate: Langage Pirate
+  cimode: Debug
+  en: Anglais
+  it: Italien
+  zh-CN: Chinois simplifié
+  es: Espagnol
+  vi: Vietnamien
+  fr-CH: Français (Suisse)
+  ja: Japonais
+  it-CH: Italien (Suisse)
+  fr-FR: Français
+  de-CH: Allemand (Suisse)
+insights:
+  title: Aperçus
+about:
+  reportBug: Signaler un bug
+  license: License
+  buildHash: Build
+  author: Auteur
+  repo: Source
+  details: Infos App
+  buildDate: Date
+  title: À propos
+  version: Version
+categories:
+  insurance: Assurance
+  freelancing: Freelance
+  entertainment: Divertissement
+  other_income: Autres revenus
+  money_transfer: Transfert d'argent
+  investment: Investissement
+  allowance: Allocation
+  rent: Loyer
+  salary: Salaire
+  utilities: Services publics
+  part_time_job: Travail à temps partiel
+  tips: Pourboires
+  healthcare: Soins de santé
+  transportation: Transport
+  phone: Téléphone
+  dining_out: Repas à l'extérieur
+  clothing: Vêtements
+  savings: Économies
+  groceries: Épicerie
+  internet: Internet
+  gifts: Cadeaux
+category:
+  select: Catégorie
+  name: Nom de la catégorie
+  create: Créer une catégorie
 transaction:
+  income: Revenu
   add_note: Ajouter une note
   averagePerDay: moy/jour
   averagePerMonth: moy/mois
-  balance: Solde
   expense: Dépense
-  income: Revenu
-  incomePerDay: revenu/jour
-  incomePerMonth: revenu/mois
+  title: Transactions
+  remove: Supprimer la transaction
+  no_notes: Pas de notes
+  balance: Solde
+  spentPerDay: dépensé/jour
   noTransactions:
     description: Vous n'avez aucune transaction pour cette période.
     title: Aucune entrée
-  remove: Supprimer la transaction
-  spentPerDay: dépensé/jour
+  incomePerDay: revenu/jour
   spentPerMonth: dépensé/mois
-  title: Transactions
-languages:
-  en: Anglais
-  fr-FR: Français
-  fr-CH: Français (Suisse)
-  de: Allemand
-  de-CH: Allemand (Suisse)
-  es: Espagnol
-  it: Italien
-  it-CH: Italien (Suisse)
-  vi: Vietnamien
-  ja: Japonais
-  zh-CN: Chinois simplifié
-  pirate: Langage Pirate
-  cimode: Debug
+  incomePerMonth: revenu/mois
 currencies:
-  AED: dirham des Émirats arabes unis
-  AFN: afghani afghan
-  ALL: lek albanais
-  AMD: dram arménien
-  ANG: florin antillais
-  AOA: kwanza angolais
-  ARS: peso argentin
-  AUD: dollar australien
-  AWG: florin arubais
-  AZN: manat azéri
-  BAM: mark convertible bosniaque
-  BBD: dollar barbadien
-  BDT: taka bangladeshi
-  BGN: lev bulgare
-  BHD: dinar bahreïni
-  BIF: franc burundais
-  BMD: dollar bermudien
-  BND: dollar brunéien
-  BOB: boliviano bolivien
-  BRL: réal brésilien
-  BSD: dollar bahaméen
-  BTN: ngultrum bouthanais
-  BWP: pula botswanais
-  BYR: rouble biélorusse
-  BZD: dollar bélizéen
-  CAD: dollar canadien
-  CDF: franc congolais
-  CHF: franc suisse
-  CLP: peso chilien
-  CNY: yuan renminbi chinois
-  COP: peso colombien
-  CRC: colón costaricain
-  CUC: peso cubain convertible
-  CVE: escudo capverdien
-  CZK: couronne tchèque
-  DJF: franc djiboutien
-  DKK: couronne danoise
-  DOP: peso dominicain
-  DZD: dinar algérien
-  EEK: couronne estonienne
-  EGP: livre égyptienne
-  ERN: nafka érythréen
-  ETB: birr éthiopien
-  EUR: euro
   FJD: dollar fidjien
-  FKP: livre des îles Malouines
-  GBP: livre sterling
-  GEL: lari géorgien
-  GHS: cédi ghanéen
-  GIP: livre de Gibraltar
-  GMD: dalasi gambien
-  GNF: franc guinéen
-  GQE: ekwélé équatoguinéen
+  MXN: peso mexicain
+  LVL: lats letton
+  SCR: roupie des Seychelles
+  CDF: franc congolais
+  BBD: dollar barbadien
   GTQ: quetzal guatémaltèque
-  GYD: dollar du Guyana
-  HKD: dollar de Hong Kong
+  CLP: peso chilien
   HNL: lempira hondurien
-  HRK: kuna croate
-  HTG: gourde haïtienne
-  HUF: forint hongrois
-  IDR: roupie indonésienne
-  ILS: nouveau shekel israélien
-  INR: roupie indienne
+  UGX: shilling ougandais
+  ZAR: rand sud-africain
+  TND: dinar tunisien
+  CUC: peso cubain convertible
+  BSD: dollar bahaméen
+  SLL: leone sierra-léonais
+  SDG: livre soudanaise
   IQD: dinar irakien
+  GMD: dalasi gambien
+  TWD: nouveau dollar taïwanais
+  RSD: dinar serbe
+  DOP: peso dominicain
+  KMF: franc comorien
+  MYR: ringgit malais
+  FKP: livre des îles Malouines
+  XOF: franc CFA (BCEAO)
+  GEL: lari géorgien
+  UYU: peso uruguayen
+  MAD: dirham marocain
+  CVE: escudo capverdien
+  AZN: manat azéri
+  OMR: riyal omanais
+  PGK: kina papouan-néo-guinéen
+  KES: shilling kényan
+  SEK: couronne suédoise
+  BTN: ngultrum bouthanais
+  UAH: hryvnia ukrainienne
+  GNF: franc guinéen
+  ERN: nafka érythréen
+  MZM: métical
+  ARS: peso argentin
+  QAR: riyal qatari
   IRR: riyal iranien
+  MRO: ouguiya mauritanien
+  CNY: yuan renminbi chinois
+  THB: baht thaïlandais
+  UZS: sum ouzbek
+  XPF: franc CFP
+  BDT: taka bangladeshi
+  LYD: dinar libyen
+  BMD: dollar bermudien
+  KWD: dinar koweïtien
+  PHP: peso philippin
+  RUB: rouble russe
+  PYG: guaraní paraguayen
   ISK: couronne islandaise
   JMD: dollar jamaïcain
-  JOD: dinar jordanien
-  JPY: yen japonais
-  KES: shilling kényan
-  KGS: som kirghize
-  KHR: riel cambodgien
-  KMF: franc comorien
-  KPW: won nord-coréen
-  KRW: won sud-coréen
-  KWD: dinar koweïtien
-  KYD: dollar des îles Caïmans
-  KZT: tenge kazakh
-  LAK: kip laotien
-  LBP: livre libanaise
-  LKR: roupie srilankaise
-  LRD: dollar libérien
-  LSL: loti lesothan
-  LTL: litas lituanien
-  LVL: lats letton
-  LYD: dinar libyen
-  MAD: dirham marocain
-  MDL: leu moldave
-  MGA: ariary malgache
+  COP: peso colombien
   MKD: denar macédonien
-  MMK: kyat myanmarais
-  MNT: tugrik mongol
-  MOP: pataca macanaise
-  MRO: ouguiya mauritanien
-  MUR: roupie mauricienne
-  MVR: rufiyaa maldivienne
-  MWK: kwacha malawite
-  MXN: peso mexicain
-  MYR: ringgit malais
-  MZM: métical
-  NAD: dollar namibien
-  NGN: naira nigérian
-  NIO: córdoba oro nicaraguayen
-  NOK: couronne norvégienne
-  NPR: roupie népalaise
-  NZD: dollar néo-zélandais
-  OMR: riyal omanais
-  PAB: balboa panaméen
-  PEN: sol péruvien
-  PGK: kina papouan-néo-guinéen
-  PHP: peso philippin
-  PKR: roupie pakistanaise
-  PLN: zloty polonais
-  PYG: guaraní paraguayen
-  QAR: riyal qatari
-  RON: leu roumain
-  RSD: dinar serbe
-  RUB: rouble russe
-  SAR: riyal saoudien
-  SBD: dollar des îles Salomon
-  SCR: roupie des Seychelles
-  SDG: livre soudanaise
-  SEK: couronne suédoise
-  SGD: dollar de Singapour
-  SHP: livre de Sainte-Hélène
-  SLL: leone sierra-léonais
-  SOS: shilling somalien
-  SRD: dollar surinamais
-  SYP: livre syrienne
-  SZL: lilangeni swazi
-  THB: baht thaïlandais
-  TJS: somoni tadjik
-  TMT: nouveau manat turkmène
-  TND: dinar tunisien
-  TRY: livre turque
-  TTD: dollar de Trinité-et-Tobago
-  TWD: nouveau dollar taïwanais
-  TZS: shilling tanzanien
-  UAH: hryvnia ukrainienne
-  UGX: shilling ougandais
   USD: dollar des États-Unis
-  UYU: peso uruguayen
-  UZS: sum ouzbek
+  DZD: dinar algérien
+  PAB: balboa panaméen
+  SGD: dollar de Singapour
+  ETB: birr éthiopien
   VEB: bolivar vénézuélien
-  VND: dông vietnamien
+  KGS: som kirghize
+  SOS: shilling somalien
   VUV: vatu vanuatuan
-  WST: tala samoan
-  XAF: franc CFA (BEAC)
-  XCD: dollar des Caraïbes orientales
-  XDR: droit de tirage spécial
-  XOF: franc CFA (BCEAO)
-  XPF: franc CFP
-  YER: riyal yéménite
-  ZAR: rand sud-africain
+  LAK: kip laotien
+  BND: dollar brunéien
   ZMK: kwacha zambien
+  XAF: franc CFA (BEAC)
+  LRD: dollar libérien
+  CHF: franc suisse
+  HRK: kuna croate
+  ALL: lek albanais
+  DJF: franc djiboutien
+  TZS: shilling tanzanien
+  VND: dông vietnamien
+  AUD: dollar australien
+  ILS: nouveau shekel israélien
+  GHS: cédi ghanéen
+  GYD: dollar du Guyana
+  KPW: won nord-coréen
+  BOB: boliviano bolivien
+  KHR: riel cambodgien
+  MDL: leu moldave
+  IDR: roupie indonésienne
+  KYD: dollar des îles Caïmans
+  AMD: dram arménien
+  BWP: pula botswanais
+  GQE: ekwélé équatoguinéen
+  SHP: livre de Sainte-Hélène
+  TRY: livre turque
+  LBP: livre libanaise
+  TJS: somoni tadjik
+  JOD: dinar jordanien
+  AED: dirham des Émirats arabes unis
+  HKD: dollar de Hong Kong
+  EUR: euro
+  LSL: loti lesothan
+  DKK: couronne danoise
+  CAD: dollar canadien
+  BGN: lev bulgare
+  EEK: couronne estonienne
+  MMK: kyat myanmarais
+  MUR: roupie mauricienne
+  NOK: couronne norvégienne
+  SYP: livre syrienne
+  GIP: livre de Gibraltar
+  RON: leu roumain
+  LKR: roupie srilankaise
+  NGN: naira nigérian
   ZWR: dollar zimbabwéen
+  CRC: colón costaricain
+  CZK: couronne tchèque
+  PKR: roupie pakistanaise
+  XCD: dollar des Caraïbes orientales
+  ANG: florin antillais
+  HTG: gourde haïtienne
+  BHD: dinar bahreïni
+  KZT: tenge kazakh
+  SRD: dollar surinamais
+  SZL: lilangeni swazi
+  LTL: litas lituanien
+  SAR: riyal saoudien
+  TTD: dollar de Trinité-et-Tobago
+  YER: riyal yéménite
+  MVR: rufiyaa maldivienne
+  AFN: afghani afghan
+  INR: roupie indienne
+  AWG: florin arubais
+  KRW: won sud-coréen
+  NPR: roupie népalaise
+  JPY: yen japonais
+  MNT: tugrik mongol
+  AOA: kwanza angolais
+  PLN: zloty polonais
+  GBP: livre sterling
+  SBD: dollar des îles Salomon
+  HUF: forint hongrois
+  BYR: rouble biélorusse
+  BIF: franc burundais
+  MWK: kwacha malawite
+  MGA: ariary malgache
+  XDR: droit de tirage spécial
+  BZD: dollar bélizéen
+  BAM: mark convertible bosniaque
+  EGP: livre égyptienne
+  MOP: pataca macanaise
+  NAD: dollar namibien
+  NIO: córdoba oro nicaraguayen
+  PEN: sol péruvien
+  NZD: dollar néo-zélandais
+  WST: tala samoan
+  TMT: nouveau manat turkmène
+  BRL: réal brésilien

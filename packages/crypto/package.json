@@ -14,7 +14,7 @@
 	"license": "MIT",
 	"dependencies": {
 		"@describble/base-x": "^1.0.1",
-		"@noble/hashes": "^1.6.0",
+		"@noble/hashes": "^1.6.1",
 		"@noble/secp256k1": "^2.1.0"
 	},
 	"devDependencies": {

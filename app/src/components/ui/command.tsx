@@ -40,7 +40,7 @@ const CommandInput = React.forwardRef<
 	}
 >(({ className, icon, ...props }, ref) => (
 	<div className="relative flex flex-1 items-center">
-		<div className="absolute inset-y-0 left-3 flex items-center text-muted-foreground">
+		<div className="absolute inset-y-0 left-3 flex items-center text-muted-foreground pointer-events-none">
 			{icon || <SearchIcon />}
 		</div>
 		<CommandPrimitive.Input
