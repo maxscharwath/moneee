@@ -81,6 +81,7 @@ about:
   repo: 源代码
   details: 应用详情
   buildDate: 构建日期
+  contributors: '贡献者 '
   title: 关于
   version: 版本
 categories:

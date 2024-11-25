@@ -11,8 +11,8 @@ import {
 import { Button } from "@/components/ui/button";
 import * as TabsGroup from "@/components/ui/tabs-group";
 import { useCategories } from "@/hooks/useCategory";
-import { getRecurrences } from "@/hooks/useRecurrence";
-import { getTransactions } from "@/hooks/useTransaction";
+import { useRecurrences } from "@/hooks/useRecurrence";
+import { useTransactions } from "@/hooks/useTransaction";
 import { useLocale } from "@/i18n";
 import {
 	cronToRecurrenceType,
@@ -116,8 +116,8 @@ function TransactionModalContent({
 		}
 	};
 
-	const { result: transactions } = getTransactions();
-	const { result: recurrences } = getRecurrences();
+	const { result: transactions } = useTransactions();
+	const { result: recurrences } = useRecurrences();
 
 	const options = useMemo(
 		() =>
@@ -334,6 +334,7 @@ const allowedNumbers = new Set([
 	"0",
 ]);
 const decimalSymbols = new Set([".", ","]);
+
 function useKeyboard(
 	appendToValue: (char: string) => void,
 	clearLastDigit: () => void,

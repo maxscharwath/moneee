@@ -1,5 +1,5 @@
-import { type ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { type ClassValue, clsx } from 'clsx'
+import { twMerge } from 'tailwind-merge'
 
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
@@ -53,11 +53,28 @@ export function formatNullable<T, R>(
 	if (value == null) {
 		return undefined as T extends null | undefined ? undefined : R;
 	}
-	return formatter(value as NonNullable<T>) as T extends null | undefined
-		? undefined
-		: R;
+	return formatter(value) as T extends null | undefined ? undefined : R;
 }
 
 export function take<T>(generator: Generator<T>, count: number): T[] {
 	return Array.from({ length: count }, () => generator.next().value);
 }
+
+export const hashString = (str: string): number => {
+	let hash = 0;
+	const prime = 31; // A small prime number
+	for (let i = 0; i < str.length; i++) {
+		hash = hash * prime + str.charCodeAt(i) * 90;
+		hash |= 0; // Convert to 32bit integer
+	}
+	return Math.abs(hash);
+};
+
+export const getPastelColorFromHash = (str: string): string => {
+	const hash = hashString(str);
+	console.log(hash, str);
+	const hue = hash % 360;
+	const saturation = 70 + (hash % 10);
+	const lightness = 65;
+	return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+};

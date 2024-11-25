@@ -8,15 +8,16 @@ import { useMemo } from "react";
 import { type QueryConstructor, useRxData } from "rxdb-hooks";
 import { v5 as uuidv5 } from "uuid";
 
-export function getRecurrences(query?: QueryConstructor<Recurrence>) {
+export function useRecurrences(query?: QueryConstructor<Recurrence>) {
 	return useRxData<Recurrence>(
 		"recurrences",
 		query ?? ((recurrence) => recurrence.find()),
+		{ json: true },
 	);
 }
 
-export function getRecurrencesForPeriod(startDate: Date, endDate?: Date) {
-	return getRecurrences((recurrence) =>
+export function useRecurrencesForPeriod(startDate: Date, endDate?: Date) {
+	return useRecurrences((recurrence) =>
 		recurrence.find({
 			selector: {
 				startDate: { $gte: startDate.toISOString() },
@@ -80,7 +81,7 @@ function makeRecurringTransactions(
 }
 
 export function useRecurringTransactions(startDate: Date, endDate: Date) {
-	const { result: recurrences = [] } = getRecurrencesForPeriod(
+	const { result: recurrences = [] } = useRecurrencesForPeriod(
 		startDate,
 		endDate,
 	);

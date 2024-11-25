@@ -9,8 +9,8 @@ import * as List from "@/components/ui/list";
 import * as TabsGroup from "@/components/ui/tabs-group";
 import {
 	addCategory,
-	getCategoriesByType,
 	removeCategory,
+	useCategoriesByType,
 } from "@/hooks/useCategory";
 import type { Optional } from "@/lib/utils";
 import type { Category } from "@/stores/schemas/category";
@@ -22,7 +22,7 @@ import { NavLink } from "react-router-dom";
 export function Component() {
 	const { t } = useTranslation();
 	const [type, setType] = useState<"income" | "expense">("expense");
-	const { result: categories } = getCategoriesByType(type);
+	const { result: categories } = useCategoriesByType(type);
 	const [category, setCategory] = useState<Partial<Category> | undefined>();
 	const handleCategory = (category: Optional<Category, "uuid">) => {
 		void addCategory(category);

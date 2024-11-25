@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useCategories } from "@/hooks/useCategory";
-import { getTransactions } from "@/hooks/useTransaction";
+import { useTransactions } from "@/hooks/useTransaction";
 import { useRecurringTransactions } from "@/hooks/useRecurrence";
 import type { Transaction } from "@/stores/schemas/transaction";
 import type { Category } from "@/stores/schemas/category";
@@ -25,9 +25,8 @@ function calculateFinancialSummary(
 	);
 }
 
-// Main hook to retrieve and summarize financial data
 export function useFinancialSummary(startDate: Date, endDate: Date) {
-	const { result: transactionsResult = [] } = getTransactions((collection) =>
+	const { result: transactionsResult = [] } = useTransactions((collection) =>
 		collection.find({
 			selector: {
 				date: {

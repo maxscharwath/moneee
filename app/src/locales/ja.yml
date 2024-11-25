@@ -81,6 +81,7 @@ about:
   repo: ソースコード
   details: アプリの詳細
   buildDate: ビルド日
+  contributors: '貢献者 '
   title: アプリについて
   version: バージョン
 categories:

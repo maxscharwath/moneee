@@ -3,7 +3,7 @@ import type { Transaction } from "@/stores/schemas/transaction";
 import type { Optional } from "@/lib/utils";
 import { initializeDb } from "@/stores/db";
 
-export function getTransactions(query?: QueryConstructor<Transaction>) {
+export function useTransactions(query?: QueryConstructor<Transaction>) {
 	return useRxData<Transaction>(
 		"transactions",
 		query ?? ((transaction) => transaction.find()),

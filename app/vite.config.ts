@@ -1,10 +1,10 @@
 import path from "node:path";
 import react from "@vitejs/plugin-react-swc";
 import { defineConfig } from "vite";
-import buildInfo from "vite-plugin-info";
 import mkcert from "vite-plugin-mkcert";
 import ViteYaml from "@modyfi/vite-plugin-yaml";
 import { VitePWA as vitePwa, type VitePWAOptions } from "vite-plugin-pwa";
+import Info from "unplugin-info/vite";
 
 const pwaConfig = {
 	registerType: "prompt",
@@ -50,7 +50,12 @@ export default defineConfig({
 		react(),
 		vitePwa(pwaConfig),
 		mkcert(),
-		buildInfo({ prefix: "@build" }),
+		Info({
+			prefix: "@build",
+			package: {
+				contributors: true,
+			},
+		}),
 	],
 	resolve: {
 		alias: {

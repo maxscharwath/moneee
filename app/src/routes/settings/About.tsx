@@ -6,13 +6,16 @@ import { Button } from "@/components/ui/button";
 import * as List from "@/components/ui/list";
 import { useLocale } from "@/i18n";
 import { abbreviatedSha, github } from "@build/info";
-import { author, license, version } from "@build/package";
+import { contributors, license, version } from "@build/package";
 import now from "@build/time";
+import { SiBluesky, SiGithub } from "@icons-pack/react-simple-icons";
 import {
+	AtSignIcon,
 	Bug,
 	Calendar,
 	ChevronLeft,
 	Code2Icon,
+	GlobeIcon,
 	Hash,
 	Package,
 	Shield,
@@ -20,6 +23,39 @@ import {
 } from "lucide-react";
 import type React from "react";
 import { NavLink } from "react-router-dom";
+import { getPastelColorFromHash } from "@/lib/utils";
+
+const socialPlatforms: Record<
+	string,
+	{ icon: React.ReactNode; linkPrefix?: string }
+> = {
+	email: { icon: <AtSignIcon />, linkPrefix: "mailto:" },
+	bluesky: { icon: <SiBluesky /> },
+	github: { icon: <SiGithub /> },
+	website: { icon: <GlobeIcon /> },
+};
+
+const SocialLinks: React.FC<{
+	socials: Record<string, string | undefined>;
+}> = ({ socials }) => (
+	<div className="flex gap-2">
+		{Object.entries(socials).map(([platform, value]) => {
+			const socialConfig = socialPlatforms[platform];
+			if (!value || !socialConfig) return null; // Ignore unmatched or undefined social platforms
+
+			const { icon, linkPrefix } = socialConfig;
+			const href = linkPrefix ? `${linkPrefix}${value}` : value;
+
+			return (
+				<Button key={platform} variant="ghost" size="icon" asChild>
+					<a href={href} target="_blank" rel="noopener noreferrer">
+						{icon}
+					</a>
+				</Button>
+			);
+		})}
+	</div>
+);
 
 export const Component: React.FC = () => {
 	const { t } = useLocale();
@@ -44,37 +80,29 @@ export const Component: React.FC = () => {
 						<img src={logo} alt="App Logo" draggable={false} />
 					</div>
 				</div>
-
 				<List.Root>
 					<List.List heading={t("about.details")}>
 						<SettingItem
-							icon={User}
-							color="#ff8a8a"
-							title={t("about.author")}
-							value={author.name}
-							href={`mailto:${author.email}`}
-						/>
-						<SettingItem
 							icon={Package}
-							color="#66b2ff"
+							color="#66B2FF"
 							title={t("about.version")}
 							value={version}
 						/>
 						<SettingItem
 							icon={Calendar}
-							color="#f5b583"
+							color="#F5B583"
 							title={t("about.buildDate")}
 							value={now.toLocaleString()}
 						/>
 						<SettingItem
 							icon={Hash}
-							color="#7a9e70"
+							color="#7A9E70"
 							title={t("about.buildHash")}
 							value={abbreviatedSha}
 						/>
 						<SettingItem
 							icon={Shield}
-							color="#a8aeb3"
+							color="#A8AEB3"
 							title={t("about.license")}
 							value={license}
 						/>
@@ -82,20 +110,39 @@ export const Component: React.FC = () => {
 							<>
 								<SettingItem
 									icon={Code2Icon}
-									color="#a8aeb3"
+									color="#A8AEB3"
 									title={t("about.repo")}
 									href={github}
 									chevron
 								/>
 								<SettingItem
 									icon={Bug}
-									color="#e57373"
+									color="#E57373"
 									title={t("about.reportBug")}
 									href={`${github}/issues/new?template=bug_report.md`}
 									chevron
 								/>
 							</>
 						)}
+					</List.List>
+					<List.List heading={t("about.contributors")}>
+						{contributors.map((contributor, index) => (
+							<SettingItem
+								key={`${contributor.name}-${index}`}
+								icon={User}
+								color={getPastelColorFromHash(`${contributor.name}-${index}`)}
+								title={contributor.name}
+							>
+								<SocialLinks
+									socials={{
+										email: contributor.email,
+										bluesky: contributor.bluesky,
+										github: contributor.github,
+										website: contributor.url,
+									}}
+								/>
+							</SettingItem>
+						))}
 					</List.List>
 				</List.Root>
 			</Container>

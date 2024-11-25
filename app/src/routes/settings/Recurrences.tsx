@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import * as List from "@/components/ui/list";
 import { useCategories } from "@/hooks/useCategory";
-import { deleteRecurrence, getRecurrences } from "@/hooks/useRecurrence";
+import { deleteRecurrence, useRecurrences } from "@/hooks/useRecurrence";
 import type { Recurrence } from "@/stores/schemas/recurrence";
 import {
 	CalendarClockIcon,
@@ -22,7 +22,7 @@ import { NavLink } from "react-router-dom";
 
 export function Component() {
 	const { t } = useTranslation();
-	const { result: recurrences } = getRecurrences();
+	const { result: recurrences } = useRecurrences();
 	const { result: categories = [] } = useCategories();
 	const categoryMap = useMemo(
 		() => new Map(categories.map((category) => [category.uuid, category])),

@@ -4,7 +4,6 @@ import { Container } from "@/components/container";
 import { Currency } from "@/components/currency";
 import { FinanceButton } from "@/components/finance-button";
 import { Header, HeaderTitle } from "@/components/header";
-import { InfiniteList } from "@/components/infinite-list";
 import { PeriodNavigation } from "@/components/period-navigation";
 import { TransactionGroup } from "@/components/transaction-group";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -18,9 +17,10 @@ import type { Category } from "@/stores/schemas/category";
 import type { Transaction } from "@/stores/schemas/transaction";
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowDownRight, ArrowUpRight, Coins } from "lucide-react";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { ArrowDownRight, ArrowUpRight, CoinsIcon } from "lucide-react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { match } from "ts-pattern";
+import { Virtualizer } from "virtua";
 
 type Filter = "income" | "expense" | "all";
 
@@ -282,7 +282,7 @@ export function Component() {
 		};
 	}, [filter, periodType, totalExpenses, currentPeriod, t, getDaysInPeriod]);
 
-	const ref = useRef<HTMLDivElement>(null);
+	const showChart = filter !== "all" && filteredTransactions.length > 0;
 
 	return (
 		<>
@@ -295,7 +295,7 @@ export function Component() {
 					onPeriodChange={setPeriodType}
 				/>
 			</Header>
-			<Container ref={ref}>
+			<Container>
 				<motion.div
 					className="flex flex-col gap-2"
 					drag="x"
@@ -373,7 +373,7 @@ export function Component() {
 					</ToggleGroup.Root>
 				</motion.div>
 				<AnimatePresence>
-					{filter !== "all" && filteredTransactions.length > 0 && (
+					{showChart && (
 						<motion.div
 							initial={{
 								opacity: 0,
@@ -398,23 +398,20 @@ export function Component() {
 					)}
 				</AnimatePresence>
 				{groupedTransactions.length > 0 ? (
-					<InfiniteList
-						values={groupedTransactions}
-						rowHeight={([, transactions]) => 50 + transactions.length * 60}
-						scrollElement={ref}
-					>
-						{([date, transactions]) => (
+					<Virtualizer startMargin={showChart ? 445 : 145}>
+						{groupedTransactions.map(([date, transactions]) => (
 							<TransactionGroup
+								key={date}
 								date={date}
 								transactions={transactions}
 								categories={categories}
 								onTransactionLongPress={handleTransactionDelete}
 							/>
-						)}
-					</InfiniteList>
+						))}
+					</Virtualizer>
 				) : (
 					<Alert align="center">
-						<Coins className="h-4 w-4" />
+						<CoinsIcon className="h-4 w-4" />
 						<AlertTitle>{t("transaction.noTransactions.title")}</AlertTitle>
 						<AlertDescription>
 							{t("transaction.noTransactions.description")}
