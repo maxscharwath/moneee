@@ -4,10 +4,7 @@ declare module "@build/time" {
 	export = time;
 }
 
-declare module "@build/info" {
-	/** CI environment name */
-	export const CI: string | null;
-
+declare module "@build/git" {
 	/** Github repo url */
 	export const github: string | null;
 
@@ -23,17 +20,17 @@ declare module "@build/info" {
 	/** The tag for the current SHA (or `null` if no tag exists) */
 	export const tag: string | null;
 
+	/** The tags for the current SHA*/
+	export const tags: string[];
+
 	/** Tag for the closest tagged ancestor (or `null` if no ancestor is tagged) */
 	export const lastTag: string | null;
 
-	/**
-	 * Number of commits since the closest tagged ancestor.
-	 * `0` if this commit is tagged, or `Infinity` if no ancestor is tagged.
-	 */
-	export const commitsSinceLastTag: number;
-
 	/** The committer of the current SHA */
 	export const committer: string;
+
+	/** The committer email of the current SHA */
+	export const committerEmail: string;
 
 	/** The commit date of the current SHA */
 	export const committerDate: string;
@@ -41,11 +38,17 @@ declare module "@build/info" {
 	/** The author for the current SHA */
 	export const author: string;
 
+	/** The author email for the current SHA */
+	export const authorEmail: string;
+
 	/** The authored date for the current SHA */
 	export const authorDate: string;
 
 	/** The commit message for the current SHA */
 	export const commitMessage: string;
+
+	/** Gets whether this represents a clean working branch. */
+	export const isClean: boolean;
 }
 
 declare module "@build/meta" {}

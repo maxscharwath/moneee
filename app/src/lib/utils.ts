@@ -72,7 +72,6 @@ export const hashString = (str: string): number => {
 
 export const getPastelColorFromHash = (str: string): string => {
 	const hash = hashString(str);
-	console.log(hash, str);
 	const hue = hash % 360;
 	const saturation = 70 + (hash % 10);
 	const lightness = 65;

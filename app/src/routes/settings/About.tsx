@@ -5,7 +5,7 @@ import { SettingItem } from "@/components/settings-item";
 import { Button } from "@/components/ui/button";
 import * as List from "@/components/ui/list";
 import { useLocale } from "@/i18n";
-import { abbreviatedSha, github } from "@build/info";
+import { abbreviatedSha, github } from "@build/git";
 import { contributors, license, version } from "@build/package";
 import now from "@build/time";
 import { SiBluesky, SiGithub } from "@icons-pack/react-simple-icons";

@@ -10,7 +10,7 @@ import { exportToCsv } from "@/lib/exportTransactions";
 import { initializeDb } from "@/stores/db";
 import { CategorySchema } from "@/stores/schemas/category";
 import { TransactionSchema } from "@/stores/schemas/transaction";
-import { abbreviatedSha } from "@build/info";
+import { abbreviatedSha } from "@build/git";
 import { version } from "@build/package";
 import {
 	CloudIcon,
