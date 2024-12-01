@@ -1,15 +1,20 @@
-import { Spacing } from "@/components/spacing";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { useDelayFunction } from "@/hooks/useDelayFunction";
 import { useLocale } from "@/i18n";
 import { CalendarIcon } from "lucide-react";
-import { useState } from "react";
+import {
+	type Dispatch,
+	type SetStateAction,
+	useCallback,
+	useState,
+} from "react";
+import { Spacing } from "@/components/spacing";
 
 type CalendarInputProps = {
 	date: Date;
-	setDate: (date: Date) => void;
+	setDate: Dispatch<SetStateAction<Date>>;
 };
 
 export const CalendarInput = ({ date, setDate }: CalendarInputProps) => {
@@ -18,12 +23,21 @@ export const CalendarInput = ({ date, setDate }: CalendarInputProps) => {
 
 	const close = useDelayFunction(() => setIsOpen(false), 1000);
 
-	const handleSelect = (date?: Date) => {
-		if (date) {
-			setDate(date);
-			close();
-		}
-	};
+	const handleSelect = useCallback(
+		(date?: Date) => {
+			if (date) {
+				setDate((current) => {
+					const next = new Date(current);
+					next.setFullYear(date.getFullYear());
+					next.setMonth(date.getMonth());
+					next.setDate(date.getDate());
+					return next;
+				});
+				close();
+			}
+		},
+		[setDate, close],
+	);
 
 	const formatDate = (date: Date) => {
 		const today = new Date();
@@ -41,13 +55,6 @@ export const CalendarInput = ({ date, setDate }: CalendarInputProps) => {
 		});
 	};
 
-	const formatTime = (date: Date) => {
-		return formatter.time(date, {
-			hour: "numeric",
-			minute: "numeric",
-		});
-	};
-
 	return (
 		<Drawer open={isOpen} onOpenChange={setIsOpen}>
 			<DrawerTrigger asChild>
@@ -55,7 +62,6 @@ export const CalendarInput = ({ date, setDate }: CalendarInputProps) => {
 					<CalendarIcon className="h-4 w-4 shrink-0" />
 					<span className="truncate">{formatDate(date)}</span>
 					<Spacing />
-					<span className="truncate">{formatTime(date)}</span>
 				</Button>
 			</DrawerTrigger>
 			<DrawerContent className="m-auto max-h-[50vh] w-full max-w-lg p-4">

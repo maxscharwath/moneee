@@ -26,6 +26,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { Check, Delete, ScrollTextIcon, XIcon } from "lucide-react";
 import React, { useCallback, useEffect, useMemo } from "react";
 import type { Category } from "@/stores/schemas/category";
+import { TimeInput } from "@/components/time-input";
 
 type TransactionModalProps = Readonly<{
 	transaction?: Transaction;
@@ -203,6 +204,7 @@ function TransactionModalContent({
 				</div>
 				<div className="flex space-x-2">
 					<CalendarInput date={date} setDate={setDate} />
+					<TimeInput date={date} setDate={setDate} />
 					<CategorySelect
 						value={categoryId}
 						onValueChange={setCategoryId}
