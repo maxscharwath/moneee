@@ -1,5 +1,5 @@
 {
-	"name": "cron",
+	"name": "@moneee/cron",
 	"version": "1.0.0",
 	"description": "Cron job generator",
 	"main": "src/index.ts",
@@ -14,6 +14,6 @@
 	"license": "MIT",
 	"devDependencies": {
 		"tsconfig": "workspace:*",
-		"vitest": "^2.1.6"
+		"vitest": "^2.1.8"
 	}
 }

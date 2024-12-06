@@ -1,9 +1,9 @@
-import { Spacing } from "@/components/spacing";
-import * as Alert from "@/components/ui/alert-dialog";
-import * as List from "@/components/ui/list";
-import { ChevronRight } from "lucide-react";
-import { type FC, type PropsWithChildren, type ReactNode, memo } from "react";
-import { NavLink } from "react-router-dom";
+import { Spacing } from '@/components/spacing'
+import * as Alert from '@/components/ui/alert-dialog'
+import * as List from '@/components/ui/list'
+import { ChevronRight } from 'lucide-react'
+import { type FC, memo, type PropsWithChildren, type ReactNode } from 'react'
+import { NavLink } from 'react-router-dom'
 
 type AlertProps = {
 	title: string;
@@ -41,7 +41,7 @@ const SettingContent = memo<PropsWithChildren<SettingItemProps>>(
 
 SettingContent.displayName = "SettingContent";
 
-const AlertDialogContent: FC<{ alert: AlertProps; content: JSX.Element }> = ({
+const AlertDialogContent: FC<{ alert: AlertProps; content: ReactNode }> = ({
 	alert,
 	content,
 }) => (

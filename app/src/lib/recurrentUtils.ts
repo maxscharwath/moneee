@@ -1,9 +1,5 @@
-import type { RecurrenceType } from "@/components/recurrence-select";
-import {
-	type CronExpression,
-	cronExpressionToString,
-	parseCronExpression,
-} from "cron";
+import type { RecurrenceType } from '@/components/recurrence-select'
+import { type CronExpression, cronExpressionToString, parseCronExpression, } from '@moneee/cron'
 
 export const generateCronExpression = (
 	recurrenceType: RecurrenceType,

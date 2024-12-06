@@ -1,9 +1,11 @@
 {
-	"name": "crypto",
+	"name": "@moneee/crypto",
 	"version": "1.0.0",
 	"description": "Crypto library",
 	"main": "src/index.ts",
-	"scripts": {},
+	"scripts": {
+		"test": "vitest"
+	},
 	"keywords": [],
 	"type": "module",
 	"author": {
@@ -19,6 +21,6 @@
 	},
 	"devDependencies": {
 		"tsconfig": "workspace:*",
-		"vitest": "^2.1.6"
+		"vitest": "^2.1.8"
 	}
 }

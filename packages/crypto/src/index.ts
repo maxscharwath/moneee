@@ -1,11 +1,12 @@
-import { hmac } from "@noble/hashes/hmac";
-import { pbkdf2Async } from "@noble/hashes/pbkdf2";
-import { sha256 } from "@noble/hashes/sha256";
-import type { Input } from "@noble/hashes/src/utils";
-import * as secp256k1 from "@noble/secp256k1";
+import { hmac } from '@noble/hashes/hmac'
+import { pbkdf2Async } from '@noble/hashes/pbkdf2'
+import { sha256 } from '@noble/hashes/sha256'
+import type { Input } from '@noble/hashes/src/utils'
+import * as secp256k1 from '@noble/secp256k1'
 
 export { sha256 } from "@noble/hashes/sha256";
 export { bytesToHex, hexToBytes } from "@noble/hashes/utils";
+export { base58 } from "@describble/base-x";
 
 /**
  * Generates a new private key.
@@ -26,8 +27,7 @@ export function derivePrivateKey(
 	masterPrivateKey: Uint8Array,
 	seed: Input,
 ): Uint8Array {
-	const derivedKeyMaterial = hmac(sha256, masterPrivateKey, seed);
-	return secp256k1.etc.hashToPrivateKey(derivedKeyMaterial);
+	return hmac(sha256, masterPrivateKey, seed);
 }
 
 /**
