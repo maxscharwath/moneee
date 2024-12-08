@@ -47,12 +47,9 @@ settings:
     suggested: Suggested Categories
   version: 'Version: {{version}}'
   synchronisation:
-    authenticate: Prove Yer Worth
-    login: Sign Aboard
+    scanSync: Scan Me QR Code
+    enableSync: Yer QR Code
     title: Synchronization
-    loginWithDevice: Board with Yer Device
-    authenticateWithDevice: Prove Yerself with Yer Device
-    register: Set Sail
 period:
   monthly: Ev'ry Full Moon
   placeholder: Pick Yer Time Span

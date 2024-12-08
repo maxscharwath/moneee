@@ -46,12 +46,9 @@ settings:
     suggested: 推奨カテゴリ
   version: 'バージョン: {{version}}'
   synchronisation:
-    authenticate: 認証
-    login: ログイン
+    scanSync: QRコードをスキャン
+    enableSync: QRコード
     title: 同期
-    loginWithDevice: デバイスでログイン
-    authenticateWithDevice: デバイスで認証
-    register: 登録
 period:
   monthly: 毎月
   placeholder: 期間を選択

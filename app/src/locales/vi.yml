@@ -48,12 +48,9 @@ settings:
     suggested: Danh mục gợi ý
   version: 'Phiên bản: {{version}}'
   synchronisation:
-    authenticate: Xác thực
-    login: Đăng nhập
+    scanSync: Quét mã QR
+    enableSync: Mã QR của tôi
     title: Đồng bộ hóa
-    loginWithDevice: Đăng nhập với thiết bị của bạn
-    authenticateWithDevice: Xác thực với thiết bị của bạn
-    register: Đăng ký
 period:
   monthly: Hàng tháng
   placeholder: Chọn giai đoạn

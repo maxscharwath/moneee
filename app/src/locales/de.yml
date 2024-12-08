@@ -48,12 +48,9 @@ settings:
     suggested: Vorgeschlagene Kategorien
   version: 'Version: {{version}}'
   synchronisation:
-    authenticate: Authentifizieren
-    login: Anmelden
+    scanSync: QR-Code scannen
+    enableSync: Mein QR-Code
     title: Synchronisation
-    loginWithDevice: Mit Ihrem Gerät anmelden
-    authenticateWithDevice: Mit Ihrem Gerät authentifizieren
-    register: Registrieren
 period:
   monthly: Monatlich
   placeholder: Zeitraum auswählen

@@ -51,12 +51,9 @@ settings:
       title: No Categories
   version: 'Version: {{version}}'
   synchronisation:
-    authenticate: Authenticate
-    login: Login
+    scanSync: Scan QR Code
+    enableSync: My QR Code
     title: Synchronization
-    loginWithDevice: Login with your device
-    authenticateWithDevice: Authenticate with your device
-    register: Register
 period:
   monthly: Monthly
   placeholder: Select period

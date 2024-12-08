@@ -46,12 +46,9 @@ settings:
     suggested: 推荐类别
   version: '版本: {{version}}'
   synchronisation:
-    authenticate: 认证
-    login: 登录
+    scanSync: 扫描二维码
+    enableSync: 我的二维码
     title: 同步
-    loginWithDevice: 使用设备登录
-    authenticateWithDevice: 使用设备认证
-    register: 注册
 period:
   monthly: 每月
   placeholder: 选择时间段
