@@ -1,5 +1,4 @@
 declare module "virtual:pwa-register/react" {
-	// @ts-expect-error ignore when react is not installed
 	import type { Dispatch, SetStateAction } from "react";
 	import type { RegisterSWOptions } from "vite-plugin-pwa/types";
 

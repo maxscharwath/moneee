@@ -16,11 +16,11 @@
 	"license": "MIT",
 	"dependencies": {
 		"@describble/base-x": "^1.0.1",
-		"@noble/hashes": "^1.6.1",
-		"@noble/secp256k1": "^2.1.0"
+		"@noble/hashes": "^1.7.1",
+		"@noble/secp256k1": "^2.2.3"
 	},
 	"devDependencies": {
 		"tsconfig": "workspace:*",
-		"vitest": "^2.1.8"
+		"vitest": "^3.1.1"
 	}
 }

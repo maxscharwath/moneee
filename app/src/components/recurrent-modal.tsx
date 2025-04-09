@@ -1,17 +1,25 @@
-import { Container } from '@/components/container'
-import { Currency } from '@/components/currency'
-import { Header } from '@/components/header'
-import { SettingItem } from '@/components/settings-item'
-import { Button } from '@/components/ui/button'
-import { usePage } from '@/hooks/usePage'
-import { useLocale } from '@/i18n'
-import type { Recurrence } from '@/stores/schemas/recurrence'
-import type { DialogProps } from '@radix-ui/react-dialog'
-import * as Dialog from '@radix-ui/react-dialog'
-import { generateDates, parseCronExpression } from '@moneee/cron'
-import { CalendarIcon, ClockIcon, DollarSignIcon, Edit2Icon, ListIcon, TagIcon, XIcon, } from 'lucide-react'
-import React from 'react'
-import * as List from './ui/list'
+import { Container } from "@/components/container";
+import { Currency } from "@/components/currency";
+import { Header } from "@/components/header";
+import { SettingItem } from "@/components/settings-item";
+import { Button } from "@/components/ui/button";
+import { usePage } from "@/hooks/usePage";
+import { useLocale } from "@/i18n";
+import type { Recurrence } from "@/stores/schemas/recurrence";
+import type { DialogProps } from "@radix-ui/react-dialog";
+import * as Dialog from "@radix-ui/react-dialog";
+import { generateDates, parseCronExpression } from "@moneee/cron";
+import {
+	CalendarIcon,
+	ClockIcon,
+	DollarSignIcon,
+	Edit2Icon,
+	ListIcon,
+	TagIcon,
+	XIcon,
+} from "lucide-react";
+import React from "react";
+import * as List from "./ui/list";
 
 type RecurrentModalProps = {
 	recurrence?: Partial<Recurrence>;

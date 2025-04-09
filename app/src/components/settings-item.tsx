@@ -1,9 +1,9 @@
-import { Spacing } from '@/components/spacing'
-import * as Alert from '@/components/ui/alert-dialog'
-import * as List from '@/components/ui/list'
-import { ChevronRight } from 'lucide-react'
-import { type FC, memo, type PropsWithChildren, type ReactNode } from 'react'
-import { NavLink } from 'react-router-dom'
+import { Spacing } from "@/components/spacing";
+import * as Alert from "@/components/ui/alert-dialog";
+import * as List from "@/components/ui/list";
+import { ChevronRight } from "lucide-react";
+import { type FC, memo, type PropsWithChildren, type ReactNode } from "react";
+import { NavLink } from "react-router-dom";
 
 type AlertProps = {
 	title: string;
@@ -27,7 +27,7 @@ type SettingItemProps = {
 const SettingContent = memo<PropsWithChildren<SettingItemProps>>(
 	({ icon: IconComponent, color, title, value, chevron, children }) => (
 		<>
-			<List.ItemIcon style={{ backgroundColor: color }}>
+			<List.ItemIcon color={color}>
 				<IconComponent />
 			</List.ItemIcon>
 			<span className="shrink-0 truncate">{title}</span>

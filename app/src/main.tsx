@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.scss";
+import "./index.css";
 import "@/i18n";
 import "@/stores/db";
 import Root from "@/Root";

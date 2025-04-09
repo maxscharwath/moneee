@@ -4,8 +4,9 @@ import React, {
 	type PropsWithChildren,
 } from "react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { cn } from "@/lib/utils";
+import { cn, getPastelColorFromHash } from "@/lib/utils";
 import { Slot } from "@radix-ui/react-slot";
+import { TinyColor } from "@ctrl/tinycolor";
 
 export const Root = React.forwardRef<HTMLDivElement, PropsWithChildren>(
 	({ children }, ref) => (
@@ -78,17 +79,28 @@ ItemButton.displayName = "List.ItemButton";
 
 type ItemIconProps = {
 	className?: string;
-	style?: React.CSSProperties;
+	colorFromValue?: string;
+	color?: string;
 };
 
 export const ItemIcon = forwardRef<
 	HTMLDivElement,
 	PropsWithChildren<ItemIconProps>
->(({ children, className, style }, ref) => (
-	<Avatar className="h-8 w-8" ref={ref}>
-		<AvatarFallback className={cn("p-1 text-white", className)} style={style}>
-			{children}
-		</AvatarFallback>
-	</Avatar>
-));
+>(({ children, className, colorFromValue, color }, ref) => {
+	const backgroundColor = colorFromValue
+		? getPastelColorFromHash(colorFromValue)
+		: color;
+	const textColor =
+		new TinyColor(backgroundColor).getLuminance() > 0.6 ? "#000" : "#fff";
+	return (
+		<Avatar className="h-8 w-8" ref={ref}>
+			<AvatarFallback
+				className={cn("p-1", className)}
+				style={{ backgroundColor, color: textColor }}
+			>
+				{children}
+			</AvatarFallback>
+		</Avatar>
+	);
+});
 ItemIcon.displayName = "List.ItemIcon";

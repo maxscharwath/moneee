@@ -1,12 +1,12 @@
-import { getMostRecentDate, getOldestDate } from '@/lib/dateUtils'
-import type { Optional } from '@/lib/utils'
-import { initializeDb } from '@/stores/db'
-import type { Recurrence } from '@/stores/schemas/recurrence'
-import type { Transaction } from '@/stores/schemas/transaction'
-import { generateDates, parseCronExpression } from '@moneee/cron'
-import { useMemo } from 'react'
-import { type QueryConstructor, useRxData } from 'rxdb-hooks'
-import { v5 as uuidv5 } from 'uuid'
+import { getMostRecentDate, getOldestDate } from "@/lib/dateUtils";
+import type { Optional } from "@/lib/utils";
+import { initializeDb } from "@/stores/db";
+import type { Recurrence } from "@/stores/schemas/recurrence";
+import type { Transaction } from "@/stores/schemas/transaction";
+import { generateDates, parseCronExpression } from "@moneee/cron";
+import { useMemo } from "react";
+import { type QueryConstructor, useRxData } from "rxdb-hooks";
+import { v5 as uuidv5 } from "uuid";
 
 export function useRecurrences(query?: QueryConstructor<Recurrence>) {
 	return useRxData<Recurrence>(

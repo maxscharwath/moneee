@@ -1,22 +1,42 @@
-import { Header, HeaderTitle } from '@/components/header'
-import { ChevronLeft, HashIcon, VideoOffIcon } from 'lucide-react'
-import { NavLink } from 'react-router-dom'
-import { Button } from '@/components/ui/button'
-import { useLocale } from '@/i18n'
 import { Container } from '@/components/container'
-import { RefObject, useEffect, useRef, useState } from 'react'
-import * as TabsGroup from '@/components/ui/tabs-group'
-import { base58, generatePrivateKey, getPublicKey } from '@moneee/crypto'
-import { QRCodeSVG } from 'qrcode.react'
+import { Header, HeaderTitle } from '@/components/header'
+import { Spacing } from '@/components/spacing'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import * as List from '@/components/ui/list'
 import { Select, SelectContent, SelectItem } from '@/components/ui/select'
-import * as SelectPrimitive from '@radix-ui/react-select'
 import { useAsync } from '@/hooks/useAsync'
+import { useLocale } from '@/i18n'
+import { base58, derivePrivateKey, generatePrivateKey, getPublicKey, } from '@moneee/crypto'
+import * as SelectPrimitive from '@radix-ui/react-select'
 import { BrowserQRCodeReader, type IScannerControls } from '@zxing/browser'
+import { ChevronLeft, HashIcon, QrCodeIcon, VideoOffIcon, XIcon, } from 'lucide-react'
+import { QRCodeSVG } from 'qrcode.react'
+import { type RefObject, useEffect, useRef, useState } from 'react'
+import { NavLink } from 'react-router-dom'
 
 export function Component () {
   const { t } = useLocale()
-  const [mode, setMode] = useState<'enable-sync' | 'scan-sync'>('enable-sync')
+  const masterKey = useKeyPair()
+  const [keys, setKeys] = useState<
+    { privateKey: string; publicKey: string; uuid: string }[]
+  >([])
+
+  const addKey = () => {
+    setKeys((prevState) => {
+      const uuid = crypto.randomUUID()
+      const privateKey = derivePrivateKey(masterKey.privateKey, uuid)
+      const publicKey = getPublicKey(privateKey)
+      return [
+        ...prevState,
+        {
+          uuid,
+          privateKey: base58.encode(privateKey),
+          publicKey: base58.encode(publicKey),
+        },
+      ]
+    })
+  }
 
   return (
     <>
@@ -33,24 +53,33 @@ export function Component () {
         <HeaderTitle>{t('settings.synchronisation.title')}</HeaderTitle>
       </Header>
       <Container>
-        <div className="flex w-full items-center justify-center gap-4">
-          <TabsGroup.Root
-            value={mode}
-            onValueChange={(t) => {
-              setMode(t as 'enable-sync' | 'scan-sync')
-            }}
-          >
-            <TabsGroup.Item value="enable-sync">
-              {t('settings.synchronisation.enableSync')}
-            </TabsGroup.Item>
-            <TabsGroup.Item value="scan-sync">
-              {t('settings.synchronisation.scanSync')}
-            </TabsGroup.Item>
-          </TabsGroup.Root>
-        </div>
-        <div className="flex flex-col items-center justify-center gap-4">
-          {mode === 'enable-sync' ? <EnableSyncTab/> : <ScanSyncTab/>}
-        </div>
+        <Button onClick={addKey}>
+          {t('settings.synchronisation.add-key')}
+        </Button>
+        <List.Root>
+          <List.List>
+            {keys.map((key) => (
+              <List.ItemButton key={key.uuid}>
+                <List.ItemIcon>
+                  <QrCodeIcon/>
+                </List.ItemIcon>
+                {key.publicKey}
+                <Spacing/>
+                <Button
+                  variant="destructive"
+                  size="icon"
+                  onClick={() =>
+                    setKeys((prevState) =>
+                      prevState.filter((k) => k.uuid !== key.uuid),
+                    )
+                  }
+                >
+                  <XIcon/>
+                </Button>
+              </List.ItemButton>
+            ))}
+          </List.List>
+        </List.Root>
       </Container>
     </>
   )
@@ -58,12 +87,17 @@ export function Component () {
 
 Component.displayName = 'Settings.Synchronisation'
 
-const EnableSyncTab = () => {
+const useKeyPair = () => {
   const [key] = useState(() => {
     const privateKey = generatePrivateKey()
     const publicKey = getPublicKey(privateKey)
     return { privateKey, publicKey }
   })
+  return key
+}
+
+const EnableSyncTab = () => {
+  const key = useKeyPair()
 
   return (
     <>

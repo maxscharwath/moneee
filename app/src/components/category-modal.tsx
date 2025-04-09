@@ -53,7 +53,7 @@ function CategoryModalContent({
 	return (
 		<>
 			<Header>
-				<div className="grid w-full grid-cols-[1fr,auto,1fr] items-center gap-4">
+				<div className="grid w-full grid-cols-[1fr_auto_1fr] items-center gap-4">
 					<Dialog.Close asChild>
 						<Button variant="ghost" size="icon">
 							<XIcon />

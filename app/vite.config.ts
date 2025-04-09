@@ -1,16 +1,18 @@
 import path from "node:path";
+import ViteYaml from "@modyfi/vite-plugin-yaml";
 import react from "@vitejs/plugin-react-swc";
+import Info from "unplugin-info/vite";
 import { defineConfig } from "vite";
 import mkcert from "vite-plugin-mkcert";
-import ViteYaml from "@modyfi/vite-plugin-yaml";
 import { VitePWA as vitePwa } from "vite-plugin-pwa";
-import Info from "unplugin-info/vite";
 import { pwaConfig } from "./pwa.config";
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
 	plugins: [
 		ViteYaml(),
 		react(),
+		tailwindcss(),
 		vitePwa(pwaConfig),
 		mkcert(),
 		Info({

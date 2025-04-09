@@ -25,8 +25,8 @@ import type { DialogProps } from "@radix-ui/react-dialog";
 import * as Dialog from "@radix-ui/react-dialog";
 import { Check, Delete, ScrollTextIcon, XIcon } from "lucide-react";
 import React, { useCallback, useEffect, useMemo } from "react";
-import type { Category } from "@/stores/schemas/category";
 import { TimeInput } from "@/components/time-input";
+import type { Category } from "@/stores/schemas/category";
 
 type TransactionModalProps = Readonly<{
 	transaction?: Transaction;
@@ -123,7 +123,7 @@ function TransactionModalContent({
 	const options = useMemo(
 		() =>
 			[...transactions, ...recurrences]
-				.reduce(
+				.reduce<{ value: string; category?: Category }[]>(
 					(uniqueNotes, { categoryId, note }) => {
 						if (note && !uniqueNotes.some((item) => item.value === note)) {
 							uniqueNotes.push({
@@ -133,7 +133,7 @@ function TransactionModalContent({
 						}
 						return uniqueNotes;
 					},
-					[] as { value: string; category?: Category }[],
+					[],
 				)
 				.sort((a, b) => a.value.localeCompare(b.value)),
 		[transactions, recurrences, categoryMap],
@@ -142,7 +142,7 @@ function TransactionModalContent({
 	return (
 		<div className="flex h-full flex-col">
 			<Header>
-				<div className="grid w-full grid-cols-[1fr,auto,1fr] items-center gap-4">
+				<div className="grid w-full grid-cols-[1fr_auto_1fr] items-center gap-4">
 					<Dialog.Close asChild>
 						<Button variant="ghost" size="icon">
 							<XIcon />
@@ -169,7 +169,7 @@ function TransactionModalContent({
 				</div>
 			</Header>
 			<Container className="flex grow flex-col">
-				<div className="grid grow grid-cols-[1fr,auto,1fr] items-center gap-4">
+				<div className="grid grow grid-cols-[1fr_auto_1fr] items-center gap-4">
 					<div />
 					<div className="flex flex-col items-center space-y-4">
 						<button

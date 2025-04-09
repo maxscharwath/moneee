@@ -11,7 +11,7 @@
 		"inlineSources": false,
 		"isolatedModules": true,
 		"skipLibCheck": true,
-		"moduleResolution": "node",
+		"moduleResolution": "bundler",
 		"noUnusedLocals": false,
 		"noUnusedParameters": false,
 		"preserveWatchOutput": true,
