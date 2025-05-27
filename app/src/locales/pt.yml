@@ -1,0 +1,349 @@
+date:
+  today: Hoje
+recurrence:
+  custom: Personalizado
+  daily: Diário
+  monthly: Mensal
+  none: Nenhum
+  yearly: Anual
+  weekly: Semanal
+recurrences:
+  noRecurrence:
+    description: Você não tem transações recorrentes configuradas. Adicione uma para começar.
+    title: Sem Transações Recorrentes
+settings:
+  cache:
+    upToDate: Atualizado
+    newVersionAvailable: Nova versão disponível
+  build: 'Build: {{build}}'
+  root:
+    recurrences: Recorrências
+    erase:
+      alert:
+        cancel: Cancelar
+        confirm: Apagar
+        description: Esta ação não pode ser desfeita. Isso excluirá permanentemente suas transações e removerá os dados do aplicativo.
+        title: Você tem certeza absoluta?
+      title: Apagar Dados
+    data: Dados
+    import: Importar Dados
+    about: Sobre
+    language: Idioma
+    refreshCache: Atualizar Cache
+    title: Configurações
+    synchronisation: Sincronização
+    general: Geral
+    appearance: Aparência
+    currency: Moeda
+    categories: Categorias
+    export: Exportar Dados
+  currency:
+    suggested: Moedas Sugeridas
+    title: Moedas
+  language:
+    title: Idioma
+  category:
+    suggested: Categorias sugeridas
+    noCategory:
+      description: Você não tem categorias configuradas. Adicione uma para começar.
+      title: Sem Categorias
+  version: 'Versão: {{version}}'
+  synchronisation:
+    scanSync: Escanear Código QR
+    enableSync: Meu Código QR
+    title: Sincronização
+period:
+  monthly: Mensal
+  placeholder: Selecionar período
+  yearly: Anual
+  weekly: Semanal
+languages:
+  de: Alemão
+  pirate: Fala Pirata
+  cimode: Depuração
+  en: Inglês
+  it: Italiano
+  zh-CN: Chinês Simplificado
+  es: Espanhol
+  vi: Vietnamita
+  fr-CH: Francês (Suíça)
+  ja: Japonês
+  it-CH: Italiano (Suíça)
+  fr-FR: Francês
+  de-CH: Alemão (Suíça)
+  pt: Português
+insights:
+  title: Insights
+about:
+  reportBug: Reportar um Bug
+  license: Licença
+  buildHash: Build
+  author: Autor
+  repo: Código Fonte
+  details: Detalhes do App
+  buildDate: Data de Build
+  contributors: Contribuidores
+  title: Sobre
+  version: Versão
+categories:
+  insurance: Seguro
+  freelancing: Freelance
+  entertainment: Entretenimento
+  other_income: Outras Rendas
+  money_transfer: Transferência de Dinheiro
+  investment: Investimento
+  allowance: Mesada
+  rent: Aluguel
+  salary: Salário
+  utilities: Serviços Públicos
+  part_time_job: Trabalho Meio Período
+  tips: Gorjetas
+  healthcare: Saúde
+  transportation: Transporte
+  phone: Telefone
+  dining_out: Refeições Fora
+  clothing: Roupas
+  savings: Poupança
+  groceries: Supermercado
+  internet: Internet
+  gifts: Presentes
+category:
+  select: Categoria
+  add: Adicionar Categoria
+  edit: Editar Categoria
+  delete: Excluir Categoria
+  create: Criar categoria
+  name: Nome da Categoria
+  icon: Ícone
+  color: Cor
+  save: Salvar
+  cancel: Cancelar
+  deleteConfirm: Tem certeza que deseja excluir esta categoria?
+  deleteConfirmDescription: Esta ação não pode ser desfeita.
+  deleteConfirmCancel: Cancelar
+  deleteConfirmConfirm: Excluir
+transaction:
+  add: Adicionar Transação
+  edit: Editar Transação
+  delete: Excluir Transação
+  add_note: Adicionar nota
+  averagePerDay: média/dia
+  averagePerMonth: média/mês
+  title: Transações
+  remove: Excluir transação
+  no_notes: Sem notas
+  spentPerDay: gasto/dia
+  incomePerDay: receita/dia
+  spentPerMonth: gasto/mês
+  incomePerMonth: receita/mês
+  amount: Valor
+  date: Data
+  category: Categoria
+  note: Nota
+  save: Salvar
+  cancel: Cancelar
+  deleteConfirm: Tem certeza que deseja excluir esta transação?
+  deleteConfirmDescription: Esta ação não pode ser desfeita.
+  deleteConfirmCancel: Cancelar
+  deleteConfirmConfirm: Excluir
+  income: Receita
+  expense: Despesa
+  recurrence: Recorrência
+  noTransactions: Sem Transações
+  noTransactionsDescription: Você não tem transações. Adicione uma para começar.
+  noTransactionsForPeriod: Sem Transações para este Período
+  noTransactionsForPeriodDescription: Você não tem transações para este período.
+  noTransactionsForCategory: Sem Transações para esta Categoria
+  noTransactionsForCategoryDescription: Você não tem transações para esta categoria.
+  noTransactionsForSearch: Sem Transações para esta Busca
+  noTransactionsForSearchDescription: Você não tem transações que correspondam a esta busca.
+  search: Buscar Transações
+  searchPlaceholder: Buscar por nota, categoria, valor...
+  filter: Filtrar Transações
+  filterAll: Todas
+  filterIncome: Receitas
+  filterExpense: Despesas
+  sort: Ordenar Transações
+  sortDate: Data
+  sortAmount: Valor
+  sortCategory: Categoria
+  sortAsc: Crescente
+  sortDesc: Decrescente
+  total: Total
+  totalIncome: Total de Receitas
+  totalExpense: Total de Despesas
+  balance: Saldo
+  recurrenceEnd: Fim da Recorrência
+  recurrenceEndNever: Nunca
+  recurrenceEndAfter: Após
+  recurrenceEndOn: Em
+  recurrenceEndAfterOccurrences: ocorrências
+  recurrenceStartDate: Data de Início
+  recurrenceInterval: Intervalo
+  recurrenceDay: Dia
+  recurrenceWeek: Semana
+  recurrenceMonth: Mês
+  recurrenceYear: Ano
+  recurrenceCustom: Personalizado
+  recurrenceDaily: Diário
+  recurrenceWeekly: Semanal
+  recurrenceMonthly: Mensal
+  recurrenceYearly: Anual
+  recurrenceNone: Nenhum
+currencies:
+  FJD: Dólar de Fiji
+  MXN: Peso Mexicano
+  LVL: Lats Letão
+  SCR: Rupia das Seychelles
+  CDF: Franco Congolês
+  BBD: Dólar de Barbados
+  GTQ: Quetzal Guatemalteco
+  CLP: Peso Chileno
+  HNL: Lempira Hondurenha
+  UGX: Xelim Ugandês
+  ZAR: Rand Sul-Africano
+  TND: Dinar Tunisiano
+  CUC: Peso Cubano Conversível
+  BSD: Dólar das Bahamas
+  SLL: Leone de Serra Leoa
+  SDG: Libra Sudanesa
+  IQD: Dinar Iraquiano
+  GMD: Dalasi Gambiano
+  TWD: Novo Dólar Taiwanês
+  RSD: Dinar Sérvio
+  DOP: Peso Dominicano
+  KMF: Franco Comoriano
+  MYR: Ringgit Malaio
+  FKP: Libra das Ilhas Malvinas
+  XOF: Franco CFA da África Ocidental
+  GEL: Lari Georgiano
+  UYU: Peso Uruguaio
+  MAD: Dirham Marroquino
+  CVE: Escudo Cabo-verdiano
+  AZN: Manat Azerbaijano
+  OMR: Rial Omanense
+  PGK: Kina Papua-Nova Guiné
+  KES: Xelim Queniano
+  SEK: Coroa Sueca
+  BTN: Ngultrum Butanês
+  UAH: Hryvnia Ucraniano
+  GNF: Franco Guineense
+  ERN: Nakfa Eritreu
+  MZM: Metical Moçambicano
+  ARS: Peso Argentino
+  QAR: Rial Catariano
+  IRR: Rial Iraniano
+  MRO: Ouguiya Mauritana
+  CNY: Yuan Chinês
+  THB: Baht Tailandês
+  UZS: Som Uzbeque
+  XPF: Franco CFP
+  BDT: Taka Bangladeshi
+  LYD: Dinar Líbio
+  BMD: Dólar das Bermudas
+  KWD: Dinar Kuwaitiano
+  PHP: Peso Filipino
+  RUB: Rublo Russo
+  PYG: Guarani Paraguaio
+  ISK: Coroa Islandesa
+  JMD: Dólar Jamaicano
+  COP: Peso Colombiano
+  MKD: Denar Macedônio
+  USD: Dólar Americano
+  DZD: Dinar Argelino
+  PAB: Balboa Panamenho
+  SGD: Dólar de Singapura
+  ETB: Birr Etíope
+  VEB: Bolívar Venezuelano
+  KGS: Som Quirguiz
+  SOS: Xelim Somali
+  VUV: Vatu de Vanuatu
+  LAK: Kip Laosiano
+  BND: Dólar de Brunei
+  ZMK: Kwacha Zambiano
+  XAF: Franco CFA da África Central
+  LRD: Dólar Liberiano
+  CHF: Franco Suíço
+  HRK: Kuna Croata
+  ALL: Lek Albanês
+  DJF: Franco Djibutiano
+  TZS: Xelim Tanzaniano
+  VND: Dong Vietnamita
+  AUD: Dólar Australiano
+  ILS: Novo Shekel Israelense
+  GHS: Cedi Ganês
+  GYD: Dólar da Guiana
+  KPW: Won Norte-Coreano
+  BOB: Boliviano
+  KHR: Riel Cambojano
+  MDL: Leu Moldavo
+  IDR: Rupia Indonésia
+  KYD: Dólar das Ilhas Cayman
+  AMD: Dram Armênio
+  BWP: Pula de Botswana
+  GQE: Ekwele da Guiné Equatorial
+  SHP: Libra de Santa Helena
+  TRY: Lira Turca
+  LBP: Libra Libanesa
+  TJS: Somoni do Tajiquistão
+  JOD: Dinar Jordaniano
+  AED: Dirham dos Emirados Árabes Unidos
+  HKD: Dólar de Hong Kong
+  EUR: Euro
+  LSL: Loti do Lesoto
+  DKK: Coroa Dinamarquesa
+  CAD: Dólar Canadense
+  BGN: Lev Búlgaro
+  EEK: Coroa Estoniana
+  MMK: Kyat de Myanmar
+  MUR: Rupia Mauriciana
+  NOK: Coroa Norueguesa
+  SYP: Libra Síria
+  GIP: Libra de Gibraltar
+  RON: Leu Romeno
+  LKR: Rupia do Sri Lanka
+  NGN: Naira Nigeriana
+  ZWR: Dólar do Zimbábue
+  CRC: Colón Costarriquenho
+  CZK: Coroa Tcheca
+  PKR: Rupia Paquistanesa
+  XCD: Dólar do Caribe Oriental
+  ANG: Florim das Antilhas Holandesas
+  HTG: Gourde Haitiano
+  BHD: Dinar do Bahrein
+  KZT: Tenge Cazaque
+  SRD: Dólar do Suriname
+  SZL: Lilangeni da Suazilândia
+  LTL: Litas Lituano
+  SAR: Riyal Saudita
+  TTD: Dólar de Trinidad e Tobago
+  YER: Rial Iemenita
+  MVR: Rufiyaa Maldiva
+  AFN: Afegane
+  INR: Rupia Indiana
+  AWG: Florim de Aruba
+  KRW: Won Sul-Coreano
+  NPR: Rupia Nepalesa
+  JPY: Iene Japonês
+  MNT: Tugrik Mongol
+  AOA: Kwanza Angolano
+  PLN: Zloty Polonês
+  GBP: Libra Esterlina
+  SBD: Dólar das Ilhas Salomão
+  HUF: Forint Húngaro
+  BYR: Rublo Bielorrusso
+  BIF: Franco Burundiano
+  MWK: Kwacha Malauiano
+  MGA: Ariary Malgaxe
+  XDR: Direitos Especiais de Saque
+  BZD: Dólar de Belize
+  BAM: Marco Conversível da Bósnia e Herzegovina
+  EGP: Libra Egípcia
+  MOP: Pataca de Macau
+  NAD: Dólar Namibiano
+  NIO: Córdoba Nicaraguense
+  PEN: Sol Peruano
+  NZD: Dólar Neozelandês
+  WST: Tala de Samoa
+  TMT: Manat Turcomeno
+  BRL: Real Brasileiro
