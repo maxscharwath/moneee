@@ -73,6 +73,7 @@ languages:
   it-CH: Italian (Switzerland)
   fr-FR: French
   de-CH: German (Switzerland)
+  pt: Portuguese
 insights:
   title: Insights
 about:
